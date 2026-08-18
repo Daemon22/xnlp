@@ -1,0 +1,13 @@
+{
+  "vocab_size": 500,
+  "min_frequency": 1,
+  "special_tokens": {
+    "pad_token": "[PAD]",
+    "bos_token": "[BOS]",
+    "eos_token": "[EOS]",
+    "unk_token": "[UNK]"
+  },
+  "num_merges": 42,
+  "model_type": "xnlp_bpe",
+  "version": "2.0.0"
+}
