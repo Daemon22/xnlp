@@ -1,0 +1,130 @@
+{
+  "benchmark_suite": "XNLP V2 Spelling Benchmark",
+  "version": "1.0",
+  "date": "2026-08-18T09:40:50.503406+00:00",
+  "description": "Tests spelling discrimination: correct vs misspelling vs historical vs foreign",
+  "categories": {
+    "correct_vs_misspelling": {
+      "description": "Distinguish correctly spelled from misspelled words",
+      "examples": [
+        {
+          "correct": "isiXhosa",
+          "misspelling": "isixhosa",
+          "note": "Capital X"
+        },
+        {
+          "correct": "umntu",
+          "misspelling": "umntutu",
+          "note": "Extra letter"
+        },
+        {
+          "correct": "ukuba",
+          "misspelling": "ukuga",
+          "note": "Consonant substitution"
+        },
+        {
+          "correct": "indlela",
+          "misspelling": "indlela",
+          "note": "Correct"
+        },
+        {
+          "correct": "ukuthanda",
+          "misspelling": "ukuthanda",
+          "note": "Correct"
+        }
+      ]
+    },
+    "modern_vs_historical": {
+      "description": "Distinguish modern from historical (traditional) orthography",
+      "examples": [
+        {
+          "modern": "ubunyinchi",
+          "historical": "ubuninchi",
+          "note": "6->bh is historical"
+        },
+        {
+          "modern": "bhalisa",
+          "historical": "6alisa",
+          "note": "6->bh in historical"
+        },
+        {
+          "modern": "hlala",
+          "historical": "5lala",
+          "note": "5->hl in historical"
+        },
+        {
+          "modern": "uxolo",
+          "historical": "uxolo",
+          "note": "Same in both"
+        }
+      ]
+    },
+    "foreign_vs_native": {
+      "description": "Distinguish English/Latin loanwords from native Xhosa",
+      "examples": [
+        {
+          "native": "ukufundisa",
+          "foreign": "education",
+          "note": "Native vs English"
+        },
+        {
+          "native": "isikolo",
+          "foreign": "school",
+          "note": "Native vs English"
+        },
+        {
+          "native": "umbhanga",
+          "foreign": "mango",
+          "note": "Native vs loanword"
+        },
+        {
+          "native": "ikotshi",
+          "foreign": "coach",
+          "note": "Native vs loanword"
+        }
+      ]
+    },
+    "click_consonants": {
+      "description": "Correctly spell words with click consonants",
+      "examples": [
+        {
+          "correct": "xhosa",
+          "incorrect": "xhoza",
+          "note": "Click consonant xh"
+        },
+        {
+          "correct": "qina",
+          "incorrect": "khina",
+          "note": "Click consonant q"
+        },
+        {
+          "correct": "cina",
+          "incorrect": "sina",
+          "note": "Click consonant c"
+        }
+      ]
+    }
+  },
+  "corpus_traditional_orthography_examples": [
+    "u-1925",
+    "16",
+    "u-1925—",
+    "36",
+    "46",
+    "15",
+    "16",
+    "55",
+    "1885,",
+    "ima-45,",
+    "15",
+    "16",
+    "116",
+    "15",
+    "1915",
+    "35",
+    "1915",
+    "15",
+    "26).",
+    "06uthunywe"
+  ]
+}

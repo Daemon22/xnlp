@@ -1,0 +1,34 @@
+{
+  "report_date": "2026-08-18T06:20:45.280941+00:00",
+  "total_records": 332,
+  "authoritative_records": 158,
+  "candidate_records": 174,
+  "total_tokens": 2032,
+  "authoritative_tokens": 1107,
+  "candidate_tokens": 925,
+  "language_distribution": {
+    "TARGET_LANGUAGE": 311,
+    "UNCERTAIN": 21
+  },
+  "source_distribution": {
+    "mqhayi": 202,
+    "masikhanyise": 112,
+    "generated": 18
+  },
+  "confidence_distribution": {
+    "high": 158,
+    "medium": 156,
+    "low": 18
+  },
+  "orthography_distribution": {
+    "modern": 331,
+    "traditional": 1,
+    "mixed": 0,
+    "unknown": 0
+  },
+  "validation_status_distribution": {
+    "authoritative": 158,
+    "candidate": 174
+  },
+  "recommendation": "Corpus extracted from Mqhayi and Masikhanyise sources. English pedagogical overlays stripped. Repetitive/generated content classified as candidate. Authoritative records ready for direct training. Candidate records require validation before training use."
+}

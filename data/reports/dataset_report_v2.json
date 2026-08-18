@@ -1,0 +1,370 @@
+{
+  "report_name": "V2 Dataset Quality Report",
+  "phase": "V2-6/7",
+  "timestamp": "2026-08-18T09:13:36.273603+00:00",
+  "v2_summary": {
+    "total_records": 5719,
+    "total_chars": 750350,
+    "total_words": 99101,
+    "unique_words": 29865,
+    "unique_records_exact_dedup": 5719
+  },
+  "v1_comparison": {
+    "v1_records": 233,
+    "v2_records": 5719,
+    "record_expansion": 24.545064377682404,
+    "v1_words": 1473,
+    "v2_words": 99101,
+    "word_expansion": 67.27834351663272,
+    "v1_unique_words": 770,
+    "v2_unique_words": 29865,
+    "vocab_expansion": 38.785714285714285,
+    "v1_chars": 12223,
+    "v2_chars": 750350,
+    "char_expansion": 61.38836619487851,
+    "v1_vocab": 739,
+    "v2_vocab_note": "To be determined by tokenizer benchmark (V2-8)"
+  },
+  "validation_results": {
+    "language_purity": {
+      "status": "PASS",
+      "classes": {
+        "TARGET_LANGUAGE": 5719
+      }
+    },
+    "contamination_check": {
+      "status": "PASS",
+      "generated_records": 0,
+      "synthetic_records": 0
+    },
+    "provenance_completeness": {
+      "status": "WARNING",
+      "complete_records": 5568,
+      "incomplete_records": 151
+    },
+    "deduplication": {
+      "status": "PASS",
+      "exact_duplicates": 0,
+      "duplication_rate_pct": 0.0,
+      "near_duplicates_sample": 2
+    }
+  },
+  "orthography_distribution": {
+    "traditional": 802,
+    "mixed": 1207,
+    "modern": 3710
+  },
+  "text_length_stats": {
+    "min": 11,
+    "max": 499,
+    "mean": 131,
+    "median": 103
+  },
+  "by_work": {
+    "Izwe": {
+      "records": 2,
+      "chars": 110,
+      "words": 12,
+      "orthography": {
+        "modern": 2
+      },
+      "source": "masikhanyise"
+    },
+    "Usapho": {
+      "records": 1,
+      "chars": 73,
+      "words": 9,
+      "orthography": {
+        "modern": 1
+      },
+      "source": "masikhanyise"
+    },
+    "Imibongo": {
+      "records": 1,
+      "chars": 53,
+      "words": 6,
+      "orthography": {
+        "modern": 1
+      },
+      "source": "masikhanyise"
+    },
+    "Masikhanyise": {
+      "records": 38,
+      "chars": 2467,
+      "words": 317,
+      "orthography": {
+        "modern": 38
+      },
+      "source": "masikhanyise"
+    },
+    "General Mqhayi": {
+      "records": 60,
+      "chars": 3595,
+      "words": 429,
+      "orthography": {
+        "modern": 60
+      },
+      "source": "mqhayi"
+    },
+    "Abantu besizwe": {
+      "records": 1,
+      "chars": 83,
+      "words": 9,
+      "orthography": {
+        "modern": 1
+      },
+      "source": "mqhayi"
+    },
+    "Ityala Lamawele": {
+      "records": 1748,
+      "chars": 232777,
+      "words": 31563,
+      "orthography": {
+        "modern": 537,
+        "mixed": 637,
+        "traditional": 574
+      },
+      "source": "mqhayi"
+    },
+    "U-Don Jadu": {
+      "records": 1172,
+      "chars": 177619,
+      "words": 23330,
+      "orthography": {
+        "modern": 830,
+        "mixed": 190,
+        "traditional": 152
+      },
+      "source": "mqhayi"
+    },
+    "Inzuzo": {
+      "records": 539,
+      "chars": 52847,
+      "words": 7109,
+      "orthography": {
+        "modern": 259,
+        "mixed": 215,
+        "traditional": 65
+      },
+      "source": "mqhayi"
+    },
+    "Iziganeko zesizwe": {
+      "records": 1,
+      "chars": 86,
+      "words": 9,
+      "orthography": {
+        "modern": 1
+      },
+      "source": "mqhayi"
+    },
+    "Izibongo zoogxa": {
+      "records": 1,
+      "chars": 84,
+      "words": 9,
+      "orthography": {
+        "modern": 1
+      },
+      "source": "mqhayi"
+    },
+    "Imihobe nemibongo": {
+      "records": 2,
+      "chars": 128,
+      "words": 14,
+      "orthography": {
+        "modern": 2
+      },
+      "source": "mqhayi"
+    },
+    "Unknown Mqhayi": {
+      "records": 35,
+      "chars": 1853,
+      "words": 210,
+      "orthography": {
+        "modern": 35
+      },
+      "source": "mqhayi"
+    },
+    "Imihobe Nemibongo": {
+      "records": 409,
+      "chars": 36769,
+      "words": 5089,
+      "orthography": {
+        "mixed": 81,
+        "modern": 328
+      },
+      "source": "mqhayi"
+    },
+    "U John Knox Bokwe (Biography)": {
+      "records": 648,
+      "chars": 90418,
+      "words": 11349,
+      "orthography": {
+        "modern": 616,
+        "mixed": 31,
+        "traditional": 1
+      },
+      "source": "mqhayi"
+    },
+    "Umhlekazi u Hintsa": {
+      "records": 70,
+      "chars": 8241,
+      "words": 1098,
+      "orthography": {
+        "modern": 36,
+        "mixed": 24,
+        "traditional": 10
+      },
+      "source": "mqhayi"
+    },
+    "UMqhayi waseNtabozuko": {
+      "records": 792,
+      "chars": 123445,
+      "words": 16140,
+      "orthography": {
+        "modern": 767,
+        "mixed": 25
+      },
+      "source": "mqhayi"
+    },
+    "Masikhanyise isiXhosa Home Language textbook series": {
+      "records": 122,
+      "chars": 14807,
+      "words": 1761,
+      "orthography": {
+        "modern": 118,
+        "mixed": 4
+      },
+      "source": "masikhanyise"
+    },
+    "Mqhayi - Various works (original corpus)": {
+      "records": 77,
+      "chars": 4895,
+      "words": 638,
+      "orthography": {
+        "modern": 77
+      },
+      "source": "mqhayi"
+    }
+  },
+  "by_source": {
+    "mqhayi": 5555,
+    "masikhanyise": 164
+  },
+  "character_set": {
+    "unique_chars": 107,
+    "most_common": {
+      "a": 84095,
+      " ": 82953,
+      "e": 55313,
+      "n": 54047,
+      "i": 52923,
+      "u": 39904,
+      "o": 37629,
+      "k": 35840,
+      "l": 31719,
+      "h": 25042,
+      "w": 19807,
+      "m": 19595,
+      "t": 17430,
+      "y": 15892,
+      "z": 15578,
+      "s": 15478,
+      "g": 15307,
+      "b": 12692,
+      "d": 12512,
+      ",": 11220,
+      "\n": 10743,
+      ".": 6847,
+      "6": 5622,
+      "p": 5023,
+      "f": 4425,
+      "N": 3839,
+      "-": 3601,
+      "q": 3479,
+      "v": 3020,
+      "B": 3014
+    }
+  },
+  "top_words": {
+    "a": 1715,
+    "ke": 1001,
+    "ukuba": 786,
+    "e": 676,
+    "le": 599,
+    "nto": 572,
+    "u": 533,
+    "nje": 500,
+    "na": 475,
+    "lo": 474,
+    "ku": 446,
+    "i": 405,
+    "kuba": 387,
+    "o": 381,
+    "into": 380,
+    "uku": 378,
+    "kwa": 370,
+    "xa": 292,
+    "loo": 291,
+    "ma": 288,
+    "ngoku": 273,
+    "apha": 255,
+    "kuthe": 225,
+    "apho": 211,
+    "kanti": 209,
+    "kakhulu": 201,
+    "lowo": 193,
+    "uthe": 186,
+    "ndawo": 182,
+    "ngoko": 181,
+    "kodwa": 180,
+    "ezi": 175,
+    "se": 175,
+    "umntu": 172,
+    "uya": 172,
+    "ni": 169,
+    "noko": 165,
+    "ukuthi": 144,
+    "oko": 142,
+    "namhla": 139,
+    "wathi": 139,
+    "ithe": 138,
+    "kunye": 136,
+    "wa": 135,
+    "eli": 135,
+    "leyo": 135,
+    "koko": 133,
+    "naye": 132,
+    "izinto": 130,
+    "ini": 129
+  },
+  "source_tier_classification": {
+    "Tier 1": {
+      "mqhayi": "S.E.K. Mqhayi works from Emandulo archive (CC BY-NC-ND)",
+      "masikhanyise": "Masikhanyise textbooks (Maskew Miller/Pearson SA)",
+      "rationale": "Both are explicitly specified authoritative sources"
+    }
+  },
+  "data_sources": {
+    "emandulo_archive": {
+      "url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/index.html",
+      "license": "CC BY-NC-ND 4.0",
+      "works": [
+        "Ityala Lamawele (8th ed, 1930)",
+        "Ityala Lamawele (abridged, 1955)",
+        "U-Don Jadu (1951)",
+        "U-Don Jadu (1967)",
+        "Inzuzo (1943)",
+        "Imihobe Nemibongo",
+        "UMqhayi waseNtabozuko (1964)",
+        "UMqhayi waseNtabozuko (1975)",
+        "U John Knox Bokwe (1972)",
+        "Umhlekazi u Hintsa"
+      ]
+    },
+    "masikhanyise_textbooks": {
+      "publisher": "Maskew Miller Learning / Pearson South Africa",
+      "curriculum": "CAPS-aligned",
+      "grades": "4-12"
+    }
+  }
+}

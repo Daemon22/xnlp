@@ -1,0 +1,167 @@
+{
+  "name": "XNLP V2 Training Corpus",
+  "phase": "V2-2/3/4/5",
+  "total_records": 5719,
+  "total_chars": 750350,
+  "total_words": 99101,
+  "unique_words": 37010,
+  "by_work": {
+    "Izwe": {
+      "records": 2,
+      "chars": 110,
+      "words": 12
+    },
+    "Usapho": {
+      "records": 1,
+      "chars": 73,
+      "words": 9
+    },
+    "Imibongo": {
+      "records": 1,
+      "chars": 53,
+      "words": 6
+    },
+    "Masikhanyise": {
+      "records": 38,
+      "chars": 2467,
+      "words": 317
+    },
+    "General Mqhayi": {
+      "records": 60,
+      "chars": 3595,
+      "words": 429
+    },
+    "Abantu besizwe": {
+      "records": 1,
+      "chars": 83,
+      "words": 9
+    },
+    "Ityala Lamawele": {
+      "records": 1748,
+      "chars": 232777,
+      "words": 31563
+    },
+    "U-Don Jadu": {
+      "records": 1172,
+      "chars": 177619,
+      "words": 23330
+    },
+    "Inzuzo": {
+      "records": 539,
+      "chars": 52847,
+      "words": 7109
+    },
+    "Iziganeko zesizwe": {
+      "records": 1,
+      "chars": 86,
+      "words": 9
+    },
+    "Izibongo zoogxa": {
+      "records": 1,
+      "chars": 84,
+      "words": 9
+    },
+    "Imihobe nemibongo": {
+      "records": 2,
+      "chars": 128,
+      "words": 14
+    },
+    "Unknown Mqhayi": {
+      "records": 35,
+      "chars": 1853,
+      "words": 210
+    },
+    "Imihobe Nemibongo": {
+      "records": 409,
+      "chars": 36769,
+      "words": 5089
+    },
+    "U John Knox Bokwe (Biography)": {
+      "records": 648,
+      "chars": 90418,
+      "words": 11349
+    },
+    "Umhlekazi u Hintsa": {
+      "records": 70,
+      "chars": 8241,
+      "words": 1098
+    },
+    "UMqhayi waseNtabozuko": {
+      "records": 792,
+      "chars": 123445,
+      "words": 16140
+    },
+    "Masikhanyise isiXhosa Home Language textbook series": {
+      "records": 122,
+      "chars": 14807,
+      "words": 1761
+    },
+    "Mqhayi - Various works (original corpus)": {
+      "records": 77,
+      "chars": 4895,
+      "words": 638
+    }
+  },
+  "by_source": {
+    "mqhayi": 5555,
+    "masikhanyise": 164
+  },
+  "by_orthography": {
+    "modern": 3810,
+    "mixed": 1222,
+    "traditional": 802
+  },
+  "source_tiers": {
+    "Tier 1": [
+      {
+        "source": "S.E.K. Mqhayi",
+        "works": [
+          "Abantu besizwe",
+          "General Mqhayi",
+          "Imihobe Nemibongo",
+          "Imihobe nemibongo",
+          "Inzuzo",
+          "Ityala Lamawele",
+          "Izibongo zoogxa",
+          "Iziganeko zesizwe",
+          "Mqhayi - Various works (original corpus)",
+          "U John Knox Bokwe (Biography)",
+          "U-Don Jadu",
+          "UMqhayi waseNtabozuko",
+          "Umhlekazi u Hintsa",
+          "Unknown Mqhayi"
+        ],
+        "archive": "Emandulo (UCT Five Hundred Year Archive)",
+        "rationale": "Authoritative literary works by recognized Xhosa literary master",
+        "license": "CC BY-NC-ND 4.0 (from Emandulo archive)"
+      },
+      {
+        "source": "Masikhanyise Textbook Series",
+        "works": [
+          "Imibongo",
+          "Izwe",
+          "Masikhanyise",
+          "Masikhanyise isiXhosa Home Language textbook series",
+          "Usapho"
+        ],
+        "publisher": "Maskew Miller Learning / Pearson South Africa",
+        "rationale": "CAPs-aligned educational textbooks, authentic isiXhosa content",
+        "license": "Commercial (educational use)"
+      }
+    ],
+    "Tier 2": [],
+    "Tier 3": [],
+    "Tier 4": [],
+    "Tier 5": []
+  },
+  "authentic_texts": 5719,
+  "non_authentic": 115,
+  "comparison_with_v1": {
+    "v1_records": 233,
+    "v2_records": 5719,
+    "expansion_factor": 24.545064377682404,
+    "v1_words": 1473,
+    "v2_words": 99101,
+    "word_expansion_factor": 67.27834351663272
+  }
+}

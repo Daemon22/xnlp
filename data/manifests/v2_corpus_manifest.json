@@ -1,0 +1,90 @@
+{
+  "name": "XNLP V2 Corpus",
+  "phase": "V2-2/3/4/5",
+  "extraction_date": "2026-08-18T09:10:34.826292+00:00",
+  "total_records": 5839,
+  "total_chars": 754257,
+  "total_words": 99654,
+  "by_source": {
+    "masikhanyise": 169,
+    "mqhayi": 5670
+  },
+  "by_orthography": {
+    "modern": 3815,
+    "mixed": 1222,
+    "traditional": 802
+  },
+  "by_language_class": {
+    "TARGET_LANGUAGE": 5719,
+    "UNCERTAIN": 91,
+    "MIXED_LANGUAGE": 24,
+    "FOREIGN_LANGUAGE": 5
+  },
+  "by_source_type": {
+    "cultural_content": 46,
+    "poetry_term": 1,
+    "unclassified": 74,
+    "essay": 2,
+    "literature": 18,
+    "novel_excerpt": 8,
+    "poetry": 994,
+    "praise_poetry": 1,
+    "song": 3,
+    "novel": 2946,
+    "biography": 662,
+    "historical": 71,
+    "autobiography": 800,
+    "educational_text": 127,
+    "literary_excerpt": 86
+  },
+  "sources": {
+    "mqhayi": {
+      "tier": 1,
+      "description": "S.E.K. Mqhayi (1875-1945) - Poet of the Nation All Over",
+      "works": [
+        "Ityala Lamawele (novel, 8th ed + abridged)",
+        "U-Don Jadu (novel, 1951 + 1967 eds)",
+        "UMqhayi waseNtabozuko (autobiography, 1964 + 1975 eds)",
+        "U John Knox Bokwe (biography, 1972)",
+        "Inzuzo (poetry, 1943)",
+        "Imihobe Nemibongo (poetry)",
+        "Umhlekazi u Hintsa (historical)"
+      ],
+      "archive": "Emandulo (UCT Five Hundred Year Archive)",
+      "urls": [
+        "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/index.html"
+      ]
+    },
+    "masikhanyise": {
+      "tier": 1,
+      "description": "Masikhanyise isiXhosa Home Language textbook series",
+      "publisher": "Maskew Miller Learning / Pearson South Africa",
+      "curriculum": "CAPS-aligned",
+      "levels": "Grades 4-12",
+      "isbns": {
+        "grade_4": "9780636167988",
+        "grade_7": "9780636115674",
+        "grade_10": "9780636169920",
+        "grade_11": "9780636174641",
+        "grade_12": "9780636174795"
+      }
+    }
+  },
+  "original_corpus": {
+    "mqhayi_complete": "corpus/mqhayi_complete.txt (236 content lines)",
+    "masikhanyise_complete": "corpus/masikhanyise_complete.txt (273 content lines)"
+  },
+  "downloaded_from_emandulo": {
+    "ityala_lamawele_8th_ed": "1930, 8th edition, enlarged",
+    "ityala_lamawele_abridged": "1955, abridged edition",
+    "u_don_jadu_1951": "1951, first edition",
+    "u_don_jadu_1967": "1967 edition",
+    "in_zuzo_1943": "1943 edition",
+    "imihobe_nemibongo": "Original collection",
+    "umhlekazi_u_hintsa": "Historical work, 1937",
+    "umqhayi_wase_ntabozuko_1964": "1964 edition",
+    "umqhayi_wase_ntabozuko_1975": "1975 edition",
+    "u_john_knox_bokwe_1972": "1972 edition",
+    "amaculo_angokuhla_kuka_moya": "Hymn (scanned, no extractable text)"
+  }
+}

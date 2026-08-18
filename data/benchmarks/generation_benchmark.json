@@ -1,0 +1,95 @@
+{
+  "benchmark_suite": "XNLP V2 Generation Benchmark",
+  "version": "1.0",
+  "date": "2026-08-18T09:40:50.635669+00:00",
+  "description": "Tests generation quality with novel prompts and explicit criteria",
+  "prompts": [
+    {
+      "category": "narrative_continuation",
+      "prompt": "Ngamhlonge waxe umntu omde wayehlala emlonyeni, wayedla iinkcukacha neentombazane...",
+      "criteria": [
+        "grammatical_coherence",
+        "cultural_consistency",
+        "narrative_flow"
+      ],
+      "max_new_tokens": 50,
+      "expected_elements": [
+        "isiXhosa morphology",
+        "coherent continuation",
+        "cultural content"
+      ]
+    },
+    {
+      "category": "creative_writing",
+      "prompt": "Izibongo zomntu omde ngumKhulu...",
+      "criteria": [
+        "poetic_style",
+        "praise_conventions",
+        "isiXhosa_vocabulary"
+      ],
+      "max_new_tokens": 40,
+      "expected_elements": [
+        "izibongo form",
+        "praise poetry structure",
+        "Xhosa idioms"
+      ]
+    },
+    {
+      "category": "dialogue",
+      "prompt": "Molo, ndiyavuya ukuhe wa?",
+      "criteria": [
+        "dialogue_coherence",
+        "natural_flow",
+        "cultural_appropriateness"
+      ],
+      "max_new_tokens": 30,
+      "expected_elements": [
+        "greeting response",
+        "natural Xhosa",
+        "cultural context"
+      ]
+    },
+    {
+      "category": "expository",
+      "prompt": "Inkulungwane yaseNguni iqala njenge:",
+      "criteria": [
+        "factual_accuracy",
+        "linguistic_coherence",
+        "grammatical_correctness"
+      ],
+      "max_new_tokens": 60,
+      "expected_elements": [
+        "historical content",
+        "proper grammar",
+        "isiXhosa structure"
+      ]
+    },
+    {
+      "category": "traditional_story",
+      "prompt": "Kwesilokhu siyavukelwa emva kwemvakalelwe kule ntu...",
+      "criteria": [
+        "folk_narrative_style",
+        "cultural_elements",
+        "language_authenticity"
+      ],
+      "max_new_tokens": 80,
+      "expected_elements": [
+        "traditional storytelling",
+        "cultural references",
+        "isiXhosa idiom"
+      ]
+    }
+  ],
+  "scoring_criteria": {
+    "grammatical_coherence": "Generated text is grammatically correct isiXhosa",
+    "cultural_consistency": "Content aligns with Xhosa cultural context",
+    "narrative_flow": "Text flows naturally as a continuation",
+    "poetic_style": "Follows izibongo/imibongo poetic conventions",
+    "dialogue_coherence": "Natural conversational flow in Xhosa",
+    "factual_accuracy": "Historical/expository claims are plausible",
+    "linguistic_coherence": "Uses correct Xhosa morphological patterns",
+    "folk_narrative_style": "Follows traditional oral storytelling patterns",
+    "language_authenticity": "Uses authentic isiXhosa vocabulary and expressions",
+    "isiXhosa_morphology": "Correct use of noun classes, concords, tense markers"
+  }
+}

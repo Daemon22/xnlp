@@ -1,0 +1,194 @@
+{
+  "extraction_date": "2026-08-18T09:07:38.200099+00:00",
+  "total_records": 5469,
+  "total_chars": 724188,
+  "total_words": 95987,
+  "works": {
+    "Imihobe Nemibongo": {
+      "records": 433,
+      "chars": 37322,
+      "orthography": {
+        "mixed": 84,
+        "modern": 349
+      },
+      "language": {
+        "TARGET_LANGUAGE": 409,
+        "UNCERTAIN": 23,
+        "MIXED_LANGUAGE": 1
+      }
+    },
+    "Inzuzo": {
+      "records": 557,
+      "chars": 53212,
+      "orthography": {
+        "modern": 276,
+        "mixed": 216,
+        "traditional": 65
+      },
+      "language": {
+        "TARGET_LANGUAGE": 537,
+        "UNCERTAIN": 17,
+        "MIXED_LANGUAGE": 3
+      }
+    },
+    "Ityala Lamawele": {
+      "records": 1766,
+      "chars": 233173,
+      "orthography": {
+        "modern": 549,
+        "mixed": 643,
+        "traditional": 574
+      },
+      "language": {
+        "MIXED_LANGUAGE": 6,
+        "TARGET_LANGUAGE": 1745,
+        "UNCERTAIN": 15
+      }
+    },
+    "U-Don Jadu": {
+      "records": 1180,
+      "chars": 177728,
+      "orthography": {
+        "mixed": 193,
+        "modern": 835,
+        "traditional": 152
+      },
+      "language": {
+        "TARGET_LANGUAGE": 1168,
+        "UNCERTAIN": 12
+      }
+    },
+    "U John Knox Bokwe (Biography)": {
+      "records": 662,
+      "chars": 90805,
+      "orthography": {
+        "modern": 630,
+        "mixed": 31,
+        "traditional": 1
+      },
+      "language": {
+        "TARGET_LANGUAGE": 648,
+        "UNCERTAIN": 12,
+        "MIXED_LANGUAGE": 2
+      }
+    },
+    "Umhlekazi u Hintsa": {
+      "records": 71,
+      "chars": 8267,
+      "orthography": {
+        "modern": 36,
+        "mixed": 25,
+        "traditional": 10
+      },
+      "language": {
+        "TARGET_LANGUAGE": 70,
+        "MIXED_LANGUAGE": 1
+      }
+    },
+    "UMqhayi waseNtabozuko": {
+      "records": 800,
+      "chars": 123681,
+      "orthography": {
+        "modern": 774,
+        "mixed": 26
+      },
+      "language": {
+        "TARGET_LANGUAGE": 792,
+        "UNCERTAIN": 6,
+        "MIXED_LANGUAGE": 2
+      }
+    }
+  },
+  "sources": {
+    "imihobe_nemibongo.txt": {
+      "work": "Imihobe Nemibongo",
+      "work_year": "1907/1927",
+      "edition": "Original",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/4817",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "poetry"
+    },
+    "inzuzo_1943.txt": {
+      "work": "Inzuzo",
+      "work_year": "1943",
+      "edition": "1943 edition",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10139",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "poetry"
+    },
+    "ityala_lamawele_8th.txt": {
+      "work": "Ityala Lamawele",
+      "work_year": "1814",
+      "edition": "8th edition (1930)",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10132",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "novel"
+    },
+    "ityala_lamawele_abridged_1955.txt": {
+      "work": "Ityala Lamawele",
+      "work_year": "1814",
+      "edition": "Abridged edition (1955)",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10133",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "novel"
+    },
+    "u_don_jadu_1951.txt": {
+      "work": "U-Don Jadu",
+      "work_year": "1829",
+      "edition": "1st edition (1951)",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/4822",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "novel"
+    },
+    "u_don_jadu_1967.txt": {
+      "work": "U-Don Jadu",
+      "work_year": "1829",
+      "edition": "1967 edition",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10134",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "novel"
+    },
+    "u_john_knox_1972.txt": {
+      "work": "U John Knox Bokwe (Biography)",
+      "work_year": "1829",
+      "edition": "1972 edition",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10137",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "biography"
+    },
+    "umhlekazi_u_hintsa.txt": {
+      "work": "Umhlekazi u Hintsa",
+      "work_year": "1829",
+      "edition": "Original",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10312",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "historical"
+    },
+    "umqhayi_wasen_tabozuko_1964.txt": {
+      "work": "UMqhayi waseNtabozuko",
+      "work_year": "1829",
+      "edition": "1964 edition",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10136",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "autobiography"
+    },
+    "umqhayi_wasen_tabozuko_1975.txt": {
+      "work": "UMqhayi waseNtabozuko",
+      "work_year": "1829",
+      "edition": "1975 edition",
+      "source_url": "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10135",
+      "archive": "Emandulo (UCT/FHYA)",
+      "retrieval_date": "2026-08-18",
+      "source_type": "autobiography"
+    }
+  }
+}

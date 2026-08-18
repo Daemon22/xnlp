@@ -1,0 +1,623 @@
+{
+  "benchmark_suite": "XNLP V2 Memorization Test",
+  "version": "1.0",
+  "date": "2026-08-18T09:40:50.638259+00:00",
+  "description": "Detect whether the model has memorized training data (exact + near-duplicate)",
+  "methodology": {
+    "exact_match": "Check if any test record text appears verbatim in model generations",
+    "near_duplicate": "Check if generated text is >90% similar (character n-gram Jaccard) to any training record",
+    "threshold": 0.9,
+    "ngram_size": 5
+  },
+  "test_set": {
+    "source": "V2 test split (10% of corpus)",
+    "size": 588,
+    "description": "Records held out from training, used to test memorization leakage"
+  },
+  "test_records": [
+    {
+      "record_id": "masikhanyise_000202_91a943d4",
+      "text": "Izwe lakithi lineentylo ezintle nabantu abalungileyo.",
+      "work": "Izwe",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "masikhanyise_000202_3f148fe3",
+      "text": "Ubusi busikeleze abantu bakho Nkosi sikelela thina lusapho lweNtla-langa.",
+      "work": "Usapho",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "masikhanyise_000202_35f3bfc1",
+      "text": "Imibongo yesiXhosa yayinomdla onzulu kubafundi bonke.",
+      "work": "Imibongo",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "masikhanyise_000202_467111ca",
+      "text": "Ethe vu usingise ngeliphantsi kuMbali igofa lasemaMpingeni.",
+      "work": "Masikhanyise",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "masikhanyise_000202_061bce85",
+      "text": "Ityala lamawele yayiyincwadi yokuqala eyaxoxa ngemithetho yamaXhosa ngendlela ecacileyo.",
+      "work": "Masikhanyise",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "masikhanyise_000202_01656fa5",
+      "text": "Kodwa kuthe ngeli xefa waBonakala esiza umfana ethwele ugaga lwempofu.",
+      "work": "Masikhanyise",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "masikhanyise_000202_203fcc13",
+      "text": "Kuuphel' oko ke Ewe kokwam ukwazi.",
+      "work": "Masikhanyise",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "masikhanyise_000202_421ca7b3",
+      "text": "A Sithwalandwe! Col. The Hon. Denys Reitz.",
+      "work": "Masikhanyise",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_000000_8381fa1d",
+      "text": "Isikolo sisindululo esihamba phambili.",
+      "work": "General Mqhayi",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_000000_e33c9a5d",
+      "text": "Ukuthetha kwale ncwadi kwakucacile kwaye kunomdla onzulu kubafundi bonke.",
+      "work": "General Mqhayi",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_000000_703f40e3",
+      "text": "USamson yayiyincwadi yokuqala ebhalwe ngolwimi lwesiXhosa.",
+      "work": "General Mqhayi",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_000000_f5982699",
+      "text": "Izibongo zethu zicacisa ubomi bethu ngamazwi.",
+      "work": "General Mqhayi",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_000000_956ca010",
+      "text": "UMqhayi lowo ngumbongi omninzi imbongi yesizwe jikelele.",
+      "work": "General Mqhayi",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_000000_4b79876f",
+      "text": "Imbongi ngumntu onomdla wokuthetha ngeentloni.",
+      "work": "General Mqhayi",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_000000_7da6b05d",
+      "text": "Abantu besizwe yayiyincwadi exhambisa ubuchule bamaXhosa ngendlela ezintle kakhulu.",
+      "work": "Abantu besizwe",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000973_8995ff3c",
+      "text": "Umninawa wakhe uPeter osemNqhefa, yenye yamadoda",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000858_c38d8604",
+      "text": "wenKosi, 6athi likholwa laBafundisi Bokuqala. Thina ke",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000884_7e6430c9",
+      "text": "Kuthi uQamatha lo u 6emkhulu, kanga ngoku 6a singa 6i\nna 6o u 6unganga no 6ugagu 6okuya ngokwethu e 6usweni\n6aKhe. Nje ngoYohane umBapatizi, 6e singaziva sinakho\nnokuwukhulula umtya wesihlangu saKhe.\n",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000739_32ffacd8",
+      "text": "Imfazwe kaHintsa. —Umfundi uya kuqonda ukuBa\nuHintsa lo noMaqoma Baziintanga. Ngoko ke uHintsa ufe\nngale mfazwe iBizwa ngaye, engumfana okuma40 eminyaka.",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000899_7ec3f00e",
+      "text": "woKumkani.” Kanti naxa umkhosi wonke utjhona\nnenqanawa, yothi phambi koku 6a ithi zozololo, lu 6e se",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000328_27ad3c2a",
+      "text": "kom6ulelo kuWele, ngazo zonke izenzo azenzileyo zoku-\ngcina usapho olungena6ani, nokuthi oku le nto angoyiki\nukuyizisa apha komkhulu, ayi6onelwe, ukuze indlela yakhe\nihlale ieacile. La mazwi ke asingi",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000200_7a3cdc17",
+      "text": "iindle6e—b,u-u-u-u-u-u-u. Kwaye ebungeni apho kuva-\nkala kukhankanywa neenkomo zikaVuyisile, ezimke zaya",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000195_587efbfc",
+      "text": "6ufika 6u6e phi na kunelinye, 6evele ngamini nye nje ?",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000397_161036fd",
+      "text": "kuthetha izinto ezithunyelweyo. Ma ze ningalili, ku6a",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000850_f03ee948",
+      "text": "nto ke olu suku ilusuku lwemiBulelo, nemigco 6o,—kuBule-",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000613_a5406357",
+      "text": "gama lithe lasifwankathela kakuhle. Singaphuma ngalo\nnakwinkcukaca yeenkcuku-nkcuku zo6uhlanga, eziya zisi-\ndo6elela, zisixinzelela ezantsi ngakumbi, sisezantsi kakade.",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000506_c2ad40a1",
+      "text": "uku6a athethe kweso sizwe sakhe, iliZwi elo alizisileyo.\nKwa kamsinya emva kokudlula kukaEo kufike uElefu",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000985_68cba340",
+      "text": "Bizelwe ngowel881 nguSomgxada.\nKuthe kuuphi ngowel884, laphela ixefa awayelicelelwe",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000093_aa3caf8f",
+      "text": "uhambise nje ngoko sel’ ehambise ngakho uTeyase, waya\nwee tyaa. Kuthiwe ke a6afazi 6angakhe 6akhwelele.",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000074_8db1dfbc",
+      "text": "ndawana, yoku6a nada nakhe nayenza na loo mfeketho",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000492_701aafc4",
+      "text": "Ngokuya kuse6enz’ emazi6ukweni,\nNgexeja lalo lokuxakeka.\nBe singoo6ani na thina Bomthina,\nUkuBa singanced’ uKumkani weBritani,\nIngangalal’ engatjhonelwa langa,\nInt’ elawul’ umhlaBa nolwandle—\nKungoku ",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000274_1dfc6a99",
+      "text": "ngelo xeja, eseyinkwenkwana. Unina kaSafili lowo ke\nnguNomsa, intombi kaGambuJe, inkosi yamaEomvana.\nIthe inkosikazi, “ Kha utha6ath’ itaml’ elo, mntwan’ am,\nutamlel’ ooyihlo phaya !\nUyilahle ngelo ph",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000659_2e4a8233",
+      "text": "wada wavela ngamagxa kwaBangaphambi kwakhe, na6a-\nkhoyo, uphume eNcemefa ( Peelton), kwisikolo somfundisi\nuBaliti (uMfu. uR. Birt). Lowo ke ngu—\nMfu.uDr. W. B. ruDusatia. —Ilangalo mfundisi wali6ona\nk",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000446_fe4157fc",
+      "text": "Kwakhal’ uphondo lwenkom’ ukusihlanganisa,\nMhla sayiwela le Nci 6a siqule sagqi 6a ;\nMhla wesuk’ uZanzol’ engenazwi lamlomo,",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_001012_b3a92597",
+      "text": "“ NgumZi waseTiyopiya.” Waza yena wenziwa umVeleli\nINKQUEELA PHAMBILI 135\n(Provincial) wawo. AziBanga ncinane phezu kwakhe\niinkathazo zokusekwakwalo mZi,sekukho nonkwini-nkwini\nwezikhalazo zokuBa iiBi",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000353_b6220ab6",
+      "text": "6a6a nga6antu ngokukhothana; yinja into ezikhotha\nngokwayo. Lo mzi ngumzi omdala walapha ; kungeka6i\nkho 6antu, izizwe zisem6alwa zikaPhalo, lo mzi wawukho\nkwa oko. Ukutjho ndithi, 6ekan’ iindle6e. In",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000579_cb4c0733",
+      "text": "nkosi yabuba se inkulu, yajiya uMdufane, unyana wayo ;\nnoko inguMhala evona nkulu. UMhala uzele uMakinana",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000496_89d5d349",
+      "text": "naluthando lungakanani ngakuwo.\nIthe le mpi ifikayo yakuguda ngoku, yaku6a nezinto\nkancinane, yaBizwa Komkhulu, yaxelelwa uku6a apha ke\nifike ekhaya, ma yonwa6e, ise6enze imise6enzi yayo. Ku-",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_001072_7f9e64c1",
+      "text": "nye, kwa neenzala ezithe zazilahlela emseBenzini, ukuze le",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000633_eced2700",
+      "text": "6esizwe, anyamezele konke ukucukucezeka kwemfundo,\nnje ngoko olu luhlu lulandelayo luya ku6onisa, ayikho",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000689_7f114f2e",
+      "text": "Wagxothwa eNchwenxa. —Isizathu sokugxothwa kwa-",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000065_4c02c2fa",
+      "text": "na e6esithi ma siguqulelane, mna ndi6e ngomnci, uWele",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000140_a6d718c4",
+      "text": "Zachwayitha izikhulu zale ndawo, zathetha zasakasa,\nzaphalaza izimvo ngezimvo zazo ngeli tyala. Ide inkosana",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000477_d7efc340",
+      "text": "Uthe uPhike akaphathanga mntu kakuBi yena, into",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000122_313bba98",
+      "text": "Ngomziki-zikan’ ogqitywe kwa ngaBafazi,\nNguTeyase noSingiswa kwa ngamazolo.",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000240_ea331826",
+      "text": "ingeva kuthuthuzelwa, itvala ili6eka kwimbongi leyo,\nisithi yiyo le intlokothise umntwan’ aBantu eziko. IBe",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000445_9ce13ccd",
+      "text": "Kwa kweli duli uBesel’ ekhe wavakala.\nBathi yinto kaGaba yasemaCifeni ukum 6iza.",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000147_2e122651",
+      "text": "noko ang,atfhoyo ngamlomo. Athi kanjalo akufika kweli",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000012_320e74ba",
+      "text": "Ndiya wa6ulela amaphakathi athe a6onisa iziphene kwe-",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000460_abb89ef0",
+      "text": "umkhosi, 6etyhulu6a, 6egqakadula, 6evuma, 6eduda.\nKuthe kodwa kwesi sithu6a a6a6a nakuthi n i; 6asuka\n6athwala izandla ngoku entloko, 6awujika-jika umzi\nngesikhalo nesijwili.\nImbongi ngokwayo ngeli xe",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000126_010b1a1c",
+      "text": "6ayinikwa ngokukhulu yona imbeko e6afaneleyo.\nBathe 6akuzixela, wa6azi uKhulile, nooyise nooyise-\nmkhulu wa6a6alisela ; kuBa umfo ukhululekile, waye o6u\nBuxhego 6akhe ungeze wa6u6ona nganto, ku6a umfo",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000480_6ed93c8a",
+      "text": "Uthe uPhike loo nto ke ayinaye, watfho wavuthulula\nngumsindo, esithi, “ Utjhe phi na yena lo mntu ankqangi-",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000010_039cad87",
+      "text": "ISINDULULO KU2ICILELO LWESIBOZO.\n(8th Edition.)\nNamhla kolu ficilelo lwesibozo, le ncwadana izalisa\niwaka lamafumi omathathu analinye ( 31,000).",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000123_865f59ca",
+      "text": "6esithi asika6i lithuBa leenda6a eli. Baxelelwe apha uku6a",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000044_0e8bcbe6",
+      "text": "6aye 6ee tyaa. Ancokole la madoda emveni koku, wada\nuLucangwana wa6avelisela nale nto ikhoyo yeli tyala,",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000705_c734ef85",
+      "text": "UNathaniel Cyril Mhala Ndlambe, ozalwa nguMtsekazi,\nintokazi kaMatiwana, udade SoMhlontlo. Wafunda",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000133_c734943e",
+      "text": "Ku6uzwe imi6uzo engephi phofu, kwayekwa. Baye",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000469_c7f5e598",
+      "text": "USilwana Ntame wasemaNka6aneni ngomnye umhla\nu6e nengxa6ano neMfengu yakhe, ngokusuka isiphaale ka-\nkufii isikhumba somkakhe. Uthe uMadliwa iMfengu leyo,\n“ Hayi, nkosi, lizembe aliphaali liya tjhithiz",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000516_55d64b25",
+      "text": "ngamagunya amakliulu ; emka elinani elino6om, ephethe-",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000250_faa4215c",
+      "text": "kaNya6a, wasemajwafeni, ukuya kuchitha loo nto ; koko\nuthe kanti uzili6ele izisele ezidala ezisezantsi komzi apho.\nUva sel’ egongxeka, eya kuwa ngo6uso ; athe amakhwenkwe",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000941_18ab6869",
+      "text": "Kwezi nyanga zikufuphi nje, zalo mnyaka udlulileyo,\nndibe ndimi namadoda amabini angabafumayeli kwii-\nmvaba ngeemvaba, sisalathisana ngandlukazi ithile yenko-\nnzo, sibonisana ngobuhle bavo ngaphakathi",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_001079_515466cc",
+      "text": "kala ilizwi lakhe.\nUbucukubede.\nNtlandlolo.\nNgezagwelo.\nIintwana-ntwana.",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000914_9c17bbea",
+      "text": "ncukacha yeenkcuku-nkcuku zoBuhlanga, ezive zisidoBelela\nzisixinzelela ezantsi ngakumbi, sisezantsi kakade. Omnye\numBuzo oBalulekileyo cma siziBuze vvcna ngulo :",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000781_53773cfe",
+      "text": "UEUKUMKANI EUKA-XHOSA.\nKuzo zonke ezi zizwe, uXhosa akafumanekanga engo-\nmncinane nakwisinye sazo. UTJhaka u 6usekile u 6uku-\nmkani 6akwaZulu ngekfele lakhe, nango 6ugofa 6akhe,\nnamakha 6a akowa 6o, n",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000301_495d5006",
+      "text": "watfho ngesida6ane sehlosi asiphiwe komkhulu.\nUduli lwa6uya luqhu6a iinkomo ezintlanu, phezu\nkwemazi enethole yesivumo, ku6a uso-ntombi wathi ma\nkungagqithiswa.",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000359_c58027c5",
+      "text": "6akowenu, 6asemaNzothweni.”\nUNtJezi Langa, isandla senKosi, umZima, uphakame\nwathi, “ Maninzi athethiweyo, mzi wamaNzothwa, nezi\nziyalo zenziweyo zininzi, ku6a ezona ziyalo zinoncedo zezo\nziya kuvela ",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000759_37b8b706",
+      "text": "inxhe6a le, isisu eso ke, asise\nkomkhulu, adliwe xa angayenza-\nnga loo nto.\nINKCAZELO YAMAGAMA ANQAEILEYO  101\nWawungakhuzwanga Ukukhuza yinkonzo ezukileyo eye\nna ? nziwa yinkosi kwisithu6a somnya\nKua",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000650_926df4fc",
+      "text": "Nisuke nimyaleze kooyise\nNgenkonz’ ephakame kunene :\nNenje nje—nenje nje !\nNenje nje—nenje njeya !\nMa ze nim6amb’ uKeyizare nize naye,\nIphele le mfazwe ngephanyazo ;",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000461_2f97894a",
+      "text": "Ukububa kukaHintsa, eli ziko lalonganyelwe nguDyan,\ninto kaTJhatJhu, kaCiko, kaMbange, kaNgatani, kaNtinde.\nNgumzi owawuse uxu6ene namaLawo. UDyan uzele\nuMthikfakj'a, ozele uDuku, ozele uZiwengu. UMgc",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000419_5700631c",
+      "text": "Ukulwa, ziingwanyalala ezilwa ngezulu ; into leyo esing’athi",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000399_be5e4f9b",
+      "text": "imi6ulelo, yayaleza ukuthi:\n“ Ma ze ni 6agcine aa6o 6antu ; nga6akokwethu, nga6a-\nkokwenu nani. Eapheni into etyiwayo 6atye, niphose",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000513_6473c157",
+      "text": "70 1TYALA LAMAWELE\nNgoku kuthetha ke siyendelisela,",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000572_7cbbe2db",
+      "text": "ngaphezu kwamaXhosa. No6ukumkani 6uya phathwa",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000695_c25764ac",
+      "text": "zwe, ecinga ukuthi uTili usawa6ambele inqala ngendlela",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000441_1ff2c634",
+      "text": "uDumisani, unyana kaZolile, wasemaMpehleni, imbongi",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000883_a72243b8",
+      "text": "nkolo ke siyitha 6athela eku 6eni umntu ofikayo esigqe 6eni,\nukhe angene ngothile, owaziwayo apha ko 6u 6ukhosi\n6asemhla 6eni. Xa umntu acela umthetheleli, akatfho\nukuthi loo mthetheleli sel’ engoyena",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000173_dacd2d3d",
+      "text": "zing,aziwa mntu izici zazo. U6ale intonjane yodade wa6o\nuNozici, awathi uBa6ini akavuma ukuyikhupha inxaxhe6a",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_001101_11ae1ce3",
+      "text": "Ngumthi; yinto engafiyo.\nZizihlangu.",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000773_2653528f",
+      "text": "Ubuthi. U6ugqwi[a ; ukuthakatha.\nWaphothula. Ukuhlamba ngo6ulongo.\nNgephunga. Iphunga sisivatho sesandla",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000344_b2272ddb",
+      "text": "nelo xeja lalathiweyo ngathi liya kulunga.\nKusile ngengomso, 6agodukile a 6athunywa emini yaku-",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000000_47c3b6e3",
+      "text": "Naratnye amaEali akwaXhosa\nNgamazwembe-zwembe akwaGxuhtwe.",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000990_1e736493",
+      "text": "mLungwini waasisitfhatfheli nenkokeli. UBenazo iintja 6a\nkano 6om, ezinga ngaye ngeempembelelo namandla, eza-\nm 6etha waasisigogo, aka 6a nako ukumelana nazo ezintla-\nnganisweni. Unoonyana aBalinani, ",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000330_6b96b029",
+      "text": "UKUKHUZA.\nKuthe emva kwenyanga enye efileyo, inKosi yesusa\nuFuzile Thinga, into yasemaQadini, noMdunywa Hela^\ninto yasemaNyeleni, uku6a 6aye kwaVuyisile, 6aye\nkuxela uku6a inKosi iyeza kwinyanga ezayo",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000265_ab124625",
+      "text": "Uthe ngqo wagoduka uBabini. Efikile ekhaya, ugqithe\nvvaya kukhangela iinkomo edlelweni; uBuye nazo kakuhle,\nwafika waphothula izandla vvasenga, nje ngokungathi Be\nkunga6anga kho nto.\nKuphakiwe kwatyiw",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000260_36641887",
+      "text": "umninawa kaPhekesa, ooyisekazi 6amawele.\nBathe uku6a 6awufiye umzi lo wakomkhulu, Bafika",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000597_c1455479",
+      "text": "woKumkani.” Kanti naxa umkhosi wonke utjhona\nnenqanawa, yothi phambi koku6a ithi zozololo, lu6e se",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_001111_700e0dd3",
+      "text": "Bulu elafika apho lathi igama lalo",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000583_bca62d28",
+      "text": "UEUKUMKANI EUKA-XHOSA 79\nnkolo ke siyitha6athela eku6eni umntu ofikayo esigqe6eni,\nukhe angene ngothile, owaziwayo apha ko6u 6ukhosi\n6asemhla6eni. Xa umntu acela umthetheleli, akatfho\nukuthi loo mthet",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000143_93138b02",
+      "text": "ngeenyawo ityala ngasemva. Wathi lo wathetha okuya,\nwathi Iowa wathetha oku, inxenye yahamba iligwe6a",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_001013_b8251e01",
+      "text": "Kwaza ngowel915,—emva kweminyaka elil5 elindele\nukungcwaliswa kweBifopu yelo hlelo, a 6a6ezenzile zonke\nizinto eBezifuneka,— iSinodi yaseTfhetfhi yeenzaesi sigqiBo\n—“ Akunako ukungcwaliswa iBifopu yas",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000519_dc693ac2",
+      "text": "za6o; nomhla6a kaMfweJwe lowo u6ungengaphezulu\nkokaMaqoma, ithaanga lasemaXhoseni.\nUmEuso.—Ezintweni ezenza u6ukumkani o6u6u6o,",
+      "work": "Ityala Lamawele",
+      "orthography": "traditional"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000177_28a04b1b",
+      "text": "zing,aziwa mntu izici zazo. UBale intonjane yodade waBo\nuNozici, awathi uEa6ini akavuma ukuyikhupha inxaxhe6a",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000163_7bb577e2",
+      "text": "Waye loo mfo kaMajeke uze ku6onwa ekhululekile\nkunene, emnandi nangokuthetha, nangokwazi a6antu;",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000794_8101fc3b",
+      "text": "Nezizwe eziMhlophe. Ngelo xeja iruluneli yayinguLoni",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000502_014e374d",
+      "text": "Bazo.\nKwa kamsinya emva kvvaaBo Bathunywa BakwaNdlambe\nkufike umntu ongaziwayo, omhlophe, Komkhulu, waye",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000120_b46263e5",
+      "text": "“ Ndaza ndalu6on’ uzwathi lwetyala !\nNdaza ndalu6on’ uzwathi lwetyala !\nKwasa saxhinxa, kwasa safak’ ithwathwa.",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000499_d1c82c87",
+      "text": "Njokweni, wee gwiqi weenje njeya nesizwe sakhe.\nKwesi sithu6a kufike aBathunywa a6asuswa nguNdlambe",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000641_b94912b3",
+      "text": "UMKHOSI WEMIDAKA.\n(Y im B ongi  yesi Z we .)\n“  Ndim ; musari ukoyika.”",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000682_479eebaf",
+      "text": "92 IT Y ALA LAM AWE LE\nKuthivva kanjalo u6esithi akoyiswa ngengxoxo entlangani-",
+      "work": "Ityala Lamawele",
+      "orthography": "mixed"
+    },
+    {
+      "record_id": "mqhayi_v2_Ity_000757_fc05bd7f",
+      "text": "Isiqalo sale nto vayingeyiyo mfazvve ; uMlanjeni wafike-",
+      "work": "Ityala Lamawele",
+      "orthography": "modern"
+    }
+  ],
+  "training_records_for_comparison": {
+    "count": 4566,
+    "note": "Full training set used as reference for near-duplicate detection"
+  }
+}

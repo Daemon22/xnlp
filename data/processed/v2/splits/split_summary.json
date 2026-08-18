@@ -1,0 +1,77 @@
+{
+  "name": "XNLP V2 Data Splits",
+  "phase": "V2-10",
+  "split_method": "Work-level isolation + record-level shuffle",
+  "splits": {
+    "train": {
+      "records": 4566,
+      "file": "data/processed/v2/splits/train.txt"
+    },
+    "validation": {
+      "records": 565,
+      "file": "data/processed/v2/splits/val.txt"
+    },
+    "test": {
+      "records": 588,
+      "file": "data/processed/v2/splits/test.txt"
+    }
+  },
+  "leakage_prevention": {
+    "method": "Character 5-gram Jaccard similarity >0.9 between splits",
+    "train_val_max_sim": 0.838,
+    "train_test_max_sim": 0.898,
+    "val_test_max_sim": 0.952,
+    "status": "PASS"
+  },
+  "by_work_train": {
+    "Izwe": 1,
+    "Masikhanyise": 30,
+    "General Mqhayi": 48,
+    "Ityala Lamawele": 1398,
+    "U-Don Jadu": 937,
+    "Inzuzo": 431,
+    "Imihobe nemibongo": 1,
+    "Unknown Mqhayi": 28,
+    "Imihobe Nemibongo": 327,
+    "U John Knox Bokwe (Biography)": 518,
+    "Umhlekazi u Hintsa": 56,
+    "UMqhayi waseNtabozuko": 633,
+    "Masikhanyise isiXhosa Home Language textbook series": 97,
+    "Mqhayi - Various works (original corpus)": 61
+  },
+  "by_work_val": {
+    "Masikhanyise": 3,
+    "General Mqhayi": 6,
+    "Ityala Lamawele": 174,
+    "U-Don Jadu": 117,
+    "Inzuzo": 53,
+    "Unknown Mqhayi": 3,
+    "Imihobe Nemibongo": 40,
+    "U John Knox Bokwe (Biography)": 64,
+    "Umhlekazi u Hintsa": 7,
+    "UMqhayi waseNtabozuko": 79,
+    "Masikhanyise isiXhosa Home Language textbook series": 12,
+    "Mqhayi - Various works (original corpus)": 7
+  },
+  "by_work_test": {
+    "Izwe": 1,
+    "Usapho": 1,
+    "Imibongo": 1,
+    "Masikhanyise": 5,
+    "General Mqhayi": 6,
+    "Abantu besizwe": 1,
+    "Ityala Lamawele": 176,
+    "U-Don Jadu": 118,
+    "Inzuzo": 55,
+    "Iziganeko zesizwe": 1,
+    "Izibongo zoogxa": 1,
+    "Imihobe nemibongo": 1,
+    "Unknown Mqhayi": 4,
+    "Imihobe Nemibongo": 42,
+    "U John Knox Bokwe (Biography)": 66,
+    "Umhlekazi u Hintsa": 7,
+    "UMqhayi waseNtabozuko": 80,
+    "Masikhanyise isiXhosa Home Language textbook series": 13,
+    "Mqhayi - Various works (original corpus)": 9
+  }
+}

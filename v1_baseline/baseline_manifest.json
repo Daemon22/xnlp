@@ -1,0 +1,240 @@
+{
+  "name": "XNLP Baseline V1",
+  "description": "First fully trained XNLP model from authoritative corpus",
+  "model": {
+    "preset": "tiny",
+    "param_count": 4321280,
+    "vocab_size": 739,
+    "val_loss": 4.770127201080323,
+    "best_epoch": 14,
+    "global_step": 336,
+    "python_version": "3.14.5",
+    "torch_version": "2.9.0+cpu",
+    "device": "cpu",
+    "training_start_time": "2026-08-18T07:32:22.820019+00:00",
+    "training_end_time": "2026-08-18T07:56:04.177740+00:00",
+    "perplexity": 117.93424236965278
+  },
+  "dataset": {
+    "total_records": 233,
+    "mqhayi_records": 150,
+    "masikhanyise_records": 83,
+    "generated_records": 0,
+    "authoritative_records": 158,
+    "validated_records": 75,
+    "total_words": 1473,
+    "unique_words": 770
+  },
+  "training_history": {
+    "train_losses": [
+      6.14545061190923,
+      5.3814578255017596,
+      4.937731424967448,
+      4.480520606040955,
+      4.107247442007065,
+      3.6403754154841104,
+      3.3428258200486503,
+      3.0548927187919617,
+      2.759454866250356,
+      2.538848489522934,
+      2.3355906258026757,
+      2.187899356087049,
+      2.0788316229979196,
+      2.05188657840093,
+      2.0208486864964166
+    ],
+    "val_losses": [
+      5.766778659820557,
+      5.455583095550537,
+      5.287642765045166,
+      5.180013179779053,
+      5.0939538955688475,
+      4.982314968109131,
+      4.903130912780762,
+      4.868676853179932,
+      4.804658985137939,
+      4.80859785079956,
+      4.793651676177978,
+      4.779192638397217,
+      4.772938632965088,
+      4.770127201080323,
+      4.77012825012207
+    ],
+    "learning_rates": [
+      0.0002988172051971717,
+      0.0002913587310696052,
+      0.000277365512733329,
+      0.0002574844299515688,
+      0.00023263454721781537,
+      0.00020396462715927105,
+      0.0001728000254341901,
+      0.000140581422070603,
+      0.00010879822157964149,
+      7.89197006290502e-05,
+      5.2327086188463954e-05,
+      3.0249704044094797e-05,
+      1.3708149415068825e-05,
+      3.4671067853028644e-06,
+      0.0
+    ],
+    "epochs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "evaluation": {
+    "checkpoint": "outputs/best_model.pt",
+    "tests": {
+      "spelling": {
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "details": [
+          "PASS: 'Molo' -> 'Moloundim'",
+          "PASS: 'Umntu' -> 'UmntuekuulasaXhosangelazokundlala.'",
+          "PASS: 'Umthetho' -> 'UmthethobamaXhosangelaabasihloboyi.'",
+          "PASS: 'Izibongo' -> 'Izibongo.'",
+          "PASS: 'Inkosi' -> 'Inkosibaleyo.'",
+          "PASS: 'Ndiyavuya' -> 'Ndiyavuyandwetfesenzekaobuncisazinyngeleyo.'",
+          "PASS: 'Ubuntu' -> 'Ubuntusingabantu.'",
+          "PASS: 'Imbongi' -> 'Imbongingendlala.'",
+          "PASS: 'Indlela' -> 'Indlala.'",
+          "PASS: 'Ukuphila' -> 'Ukuphilaebhalwalwangemihla.'"
+        ],
+        "score": 100.0
+      },
+      "vocabulary": {
+        "passed": 2,
+        "failed": 6,
+        "total": 8,
+        "details": [
+          "FAIL: 'Umntu ngumntu' found only 1 Xhosa words",
+          "PASS: 'Umthetho' found 3 Xhosa words: ['indlela', 'ubuhlobo', 'umthetho']",
+          "FAIL: 'Izibongo' found only 1 Xhosa words",
+          "PASS: 'Ubuntu' found 2 Xhosa words: ['abantu', 'ubuntu']",
+          "FAIL: 'Inkosi' found only 1 Xhosa words",
+          "FAIL: 'Isikolo' found only 1 Xhosa words",
+          "FAIL: 'Indlela' found only 0 Xhosa words",
+          "FAIL: 'Amandla' found only 1 Xhosa words"
+        ],
+        "xhosa_words_found": [
+          [
+            "umntu"
+          ],
+          [
+            "indlela",
+            "umthetho",
+            "ubuhlobo"
+          ],
+          [
+            "izibongo"
+          ],
+          [
+            "abantu",
+            "ubuntu"
+          ],
+          [
+            "inkosi"
+          ],
+          [
+            "isikolo"
+          ],
+          [],
+          [
+            "amandla"
+          ]
+        ],
+        "score": 25.0,
+        "unique_xhosa_words": 10
+      },
+      "generation_quality": {
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "details": [
+          "PASS: 3/3 unique generations from same prompt",
+          "PASS: Gen 1 extended prompt (89 > 5 chars)",
+          "PASS: Gen 2 extended prompt (11 > 5 chars)",
+          "PASS: Gen 3 extended prompt (6 > 5 chars)"
+        ],
+        "score": 100
+      },
+      "contamination": {
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "details": [
+          "PASS: 'Molomybonke.' is novel (not in training corpus)",
+          "PASS: 'Umntuyethuigcinaubomibethuuu.' is novel (not in training corpus)",
+          "PASS: 'Umthethoalangela.' is novel (not in training corpus)",
+          "PASS: 'Izibongo' is novel (not in training corpus)",
+          "PASS: 'Inkosiethumntubakhe.' is novel (not in training corpus)",
+          "PASS: 'Ndiyavuyayaboesenzekany.' is novel (not in training corpus)",
+          "PASS: 'UbuntuyesaXhosa.' is novel (not in training corpus)",
+          "PASS: 'Imbongingumzekelokunomdlalwethuubomibethubemihlangemihla.' is novel (not in training corpus)",
+          "PASS: 'Indlalathuonzulu' is novel (not in training corpus)",
+          "PASS: 'Ukuphilabethu.' is novel (not in training corpus)"
+        ],
+        "score": 100.0
+      },
+      "offline_capability": {
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "details": [
+          "PASS: Only best_model.pt in isolated dir",
+          "PASS: Generated 'Molo.' from isolated checkpoint"
+        ],
+        "score": 100.0
+      }
+    },
+    "overall_score": 85.0
+  },
+  "generation_examples": [
+    {
+      "prompt": "Molo",
+      "output": "Molobulala."
+    },
+    {
+      "prompt": "Umntu",
+      "output": "Umntungumyweundindlalale."
+    },
+    {
+      "prompt": "Umthetho",
+      "output": "Umthethouubulungisalantpheubuchulengeyikiki."
+    },
+    {
+      "prompt": "Izibongo",
+      "output": "IzibongozolaabauxhegouWuWkakuinkubeqinisekidalamleyo."
+    },
+    {
+      "prompt": "Inkosi",
+      "output": "Inkosingoengumntulaincwadiku"
+    },
+    {
+      "prompt": "Ndiyavuya",
+      "output": "NdiyavuyakunomdlaSindizandlelaImpumeleImpumelebeqinisekiSithwaReitlineentesenzebeqinisekixheIsichangokunyhobehobe."
+    },
+    {
+      "prompt": "Ubuntu",
+      "output": "Ubuntusibantu."
+    },
+    {
+      "prompt": "Imbongi",
+      "output": "Imbongibuqhawekakhulu."
+    }
+  ]
+}

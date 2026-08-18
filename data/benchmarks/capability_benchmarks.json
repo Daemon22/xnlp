@@ -1,0 +1,26 @@
+{
+  "benchmark_suite": "XNLP V2 Capability Benchmark",
+  "version": "1.0",
+  "date": "2026-08-18T09:40:50.293094+00:00",
+  "categories": {
+    "engineering": {
+      "description": "Tests that verify the model infrastructure works correctly",
+      "tests": [
+        "model_loads_offline",
+        "checkpoint_integrity",
+        "tokenizer_compatibility",
+        "generation_runs_without_crash",
+        "batch_processing"
+      ]
+    },
+    "language": {
+      "description": "Tests that measure linguistic capability",
+      "test_groups": {
+        "spelling": "V2-13",
+        "grammar": "V2-12",
+        "generation": "V2-14",
+        "memorization": "V2-15"
+      }
+    }
+  }
+}

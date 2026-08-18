@@ -1,0 +1,104 @@
+{
+  "benchmark_type": "V2 Tokenizer vs V1 Tokenizer",
+  "v2_corpus": {
+    "total_records": 16462,
+    "total_chars": 756068,
+    "total_words": 99101
+  },
+  "v1_baseline_tokenizer": {
+    "vocab_size": 739,
+    "num_merges": 675,
+    "on_v2_corpus": {
+      "total_tokens": 334743,
+      "compression_ratio": 2.26,
+      "encoding_time_seconds": 3.53
+    },
+    "on_v1_corpus": {
+      "total_tokens": 3280,
+      "compression_ratio": 3.73
+    }
+  },
+  "v2_full_tokenizer": {
+    "vocab_size_actual": 2048,
+    "num_merges": 1936,
+    "training_time_seconds": 23.85,
+    "training_sample": "full corpus (16462 lines)",
+    "on_v2_corpus": {
+      "total_tokens": 240321,
+      "compression_ratio": 3.15,
+      "encoding_time_seconds": 3.78
+    },
+    "on_v1_corpus": {
+      "total_tokens": 3357,
+      "compression_ratio": 3.64
+    }
+  },
+  "vocab_size_table": [
+    {
+      "vocab_size_target": 256,
+      "vocab_size_actual": 256,
+      "num_merges": 159,
+      "total_tokens": 386681,
+      "compression_ratio": 1.96,
+      "delta_pct_vs_v1": -13.4,
+      "training_time_seconds": 2.41
+    },
+    {
+      "vocab_size_target": 512,
+      "vocab_size_actual": 512,
+      "num_merges": 415,
+      "total_tokens": 335055,
+      "compression_ratio": 2.26,
+      "delta_pct_vs_v1": -0.1,
+      "training_time_seconds": 6.04
+    },
+    {
+      "vocab_size_target": 1024,
+      "vocab_size_actual": 1024,
+      "num_merges": 927,
+      "total_tokens": 302083,
+      "compression_ratio": 2.5,
+      "delta_pct_vs_v1": 10.8,
+      "training_time_seconds": 12.56
+    },
+    {
+      "vocab_size_target": 2048,
+      "vocab_size_actual": 2026,
+      "num_merges": 1929,
+      "total_tokens": 284224,
+      "compression_ratio": 2.66,
+      "delta_pct_vs_v1": 17.8,
+      "training_time_seconds": 20.82
+    },
+    {
+      "vocab_size_target": 4096,
+      "vocab_size_actual": 2026,
+      "num_merges": 1929,
+      "total_tokens": 284224,
+      "compression_ratio": 2.66,
+      "delta_pct_vs_v1": 17.8,
+      "training_time_seconds": 20.4
+    },
+    {
+      "vocab_size_target": 8192,
+      "vocab_size_actual": 2026,
+      "num_merges": 1929,
+      "total_tokens": 284224,
+      "compression_ratio": 2.66,
+      "delta_pct_vs_v1": 17.8,
+      "training_time_seconds": 23.85
+    }
+  ],
+  "comparison_summary": {
+    "v1_comp_on_v2": 2.26,
+    "v2_comp_on_v2": 3.15,
+    "improvement_pct": 39.3,
+    "v1_vocab": 739,
+    "v2_vocab": 2048,
+    "vocab_expansion": 2.7713125845737485
+  },
+  "recommendation": {
+    "vocab_size": 2048,
+    "rationale": "V2 tokenizer trained on 16462 lines of expanded corpus, converged at 2048 tokens. Provides 3.15 chars/token compression (vs V1: 2.26), a 39.3% improvement."
+  }
+}

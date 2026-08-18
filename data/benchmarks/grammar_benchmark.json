@@ -1,0 +1,122 @@
+{
+  "benchmark_suite": "XNLP V2 Grammar Benchmark (Minimal Pairs)",
+  "version": "1.0",
+  "date": "2026-08-18T09:40:50.295450+00:00",
+  "description": "Tests specific grammatical phenomena using minimal pairs",
+  "categories": {
+    "noun_class_agreement": {
+      "description": "Testing noun class concordance on adjectives, verbs, and pronouns",
+      "examples": [
+        {
+          "correct": "isiXhosa",
+          "incorrect": "isiXhosa",
+          "phenomenon": "Noun class 7 prefix isi-",
+          "note": "Singular: isiXhosa, Plural: amaxhosa"
+        },
+        {
+          "correct": "amagama",
+          "incorrect": "izigama",
+          "phenomenon": "Noun class 6 is plural of class 1"
+        },
+        {
+          "correct": "abantu",
+          "incorrect": "iintombazana",
+          "phenomenon": "Noun class 2 plural agreement"
+        },
+        {
+          "correct": "intombazana",
+          "incorrect": "abantwana",
+          "phenomenon": "Noun class 9/10"
+        }
+      ]
+    },
+    "relative_markers": {
+      "description": "Testing relative marker selection (who, which, that)",
+      "examples": [
+        {
+          "correct": "lo omde",
+          "incorrect": "le omde",
+          "phenomenon": "Demonstrative + relative marker agreement",
+          "note": "lo (class 1) vs le (class 5)"
+        },
+        {
+          "correct": "owesifundo",
+          "incorrect": "yesifundo",
+          "phenomenon": "Possessive concord agreement"
+        }
+      ]
+    },
+    "verb_conjugation": {
+      "description": "Testing tense and subject concord agreement",
+      "examples": [
+        {
+          "correct": "ndiyakha",
+          "incorrect": "ndiya",
+          "phenomenon": "Present continuous tense marker -kha"
+        },
+        {
+          "correct": "wayethi",
+          "incorrect": "wayethe",
+          "phenomenon": "Past tense marker -thi vs -the"
+        },
+        {
+          "correct": "ngizokuba",
+          "incorrect": "ngizokha",
+          "phenomenon": "Future tense marker -zokuba vs -zokha"
+        }
+      ]
+    },
+    "locative_constructions": {
+      "description": "Testing locative prefix usage",
+      "examples": [
+        {
+          "correct": "kwi",
+          "incorrect": "ku",
+          "phenomenon": "Locative prefix kwi- (at the place of)"
+        },
+        {
+          "correct": "e",
+          "incorrect": "ku",
+          "phenomenon": "Locative prefix e- (in the place of)"
+        }
+      ]
+    },
+    "possessive_constructs": {
+      "description": "Testing possessive concord forms",
+      "examples": [
+        {
+          "correct": "weni",
+          "incorrect": "wena",
+          "phenomenon": "Possessive concord for class 10"
+        },
+        {
+          "correct": "lenu",
+          "incorrect": "len",
+          "phenomenon": "Possessive concord for class 5/6"
+        }
+      ]
+    }
+  },
+  "corpus_derived_examples": {
+    "verb_constructed_forms": [
+      "a6a6eke",
+      "a6elifake",
+      "abanduluke",
+      "abaqeqejeke",
+      "abeke",
+      "aduke",
+      "afike",
+      "afuduke",
+      "agoduke",
+      "agxumeke"
+    ],
+    "noun_class_forms": [
+      "abantu",
+      "amagama",
+      "iintomb",
+      "inkomo",
+      "umntu"
+    ],
+    "note": "These forms were extracted from the V2 training corpus for reference"
+  }
+}
