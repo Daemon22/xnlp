@@ -1,0 +1,116 @@
+{
+  "manifest_version": "1.0",
+  "created": "2026-08-18T06:20:45.280941+00:00",
+  "corpus_source_files": [
+    "corpus/mqhayi_complete.txt",
+    "corpus/masikhanyise_complete.txt",
+    "corpus/mqhayi_basic.txt"
+  ],
+  "sources": {
+    "mqhayi": {
+      "tier": 1,
+      "name": "S.E.K. Mqhayi (Samuel Edward Krune Mqhayi, 1875-1945)",
+      "source_type": "literary_author",
+      "language_relevance": "primary",
+      "authority_level": "tier_1",
+      "urls": [
+        "https://emandulo.apc.uct.ac.za/metadata/Mqhayi/index.html",
+        "http://pzacad.pitzer.edu",
+        "https://open.uct.ac.za",
+        "muse.jhu.edu"
+      ],
+      "described_works": [
+        "Ityala Lamawele (1914)",
+        "U-Don Jadu (1929)",
+        "Izibongo zoogxa (praise poems)",
+        "Iziganeko zesizwe (occasional poems, 1900-1943)",
+        "Abantu besizwe (biographical essays, 1902-1944)",
+        "Imihobe nemibongo (1907/1927)",
+        "Inzuzo (1942)",
+        "Ubombo Mfundisi uJohn Knox Bokwe (1925)",
+        "UMqhayi waseNtab'ozuko (autobiography, 1939)",
+        "Newspaper contributions (Izwi Labantu, Imvo Zabantsundu, Umteteli wa Bantu, The Bantu World)"
+      ],
+      "publishers": [
+        "Lovedale Press",
+        "Oxford University Press",
+        "Boydell & Brewer",
+        "UKZN Press",
+        "Wits University Press"
+      ]
+    },
+    "masikhanyise": {
+      "tier": 1,
+      "name": "Masikhanyise isiXhosa Home Language textbook series",
+      "source_type": "educational_textbook",
+      "language_relevance": "primary",
+      "authority_level": "tier_1",
+      "urls": [
+        "shop.snapplify.com",
+        "ebooks.unisaenterprise.ac.za",
+        "dcebooks.co.za",
+        "amazon.co.za"
+      ],
+      "described_works": [
+        "Grade 4 Learner's Book (ISBN 9780636167988, 2014)",
+        "Grade 5 Learner's Book (ISBN 9780636175389, 2014)",
+        "Grade 6 Learner's Book (ISBN 9780636175457, 2014)",
+        "Grade 7 Learner's Book (ISBN 9780636115674, 2013)",
+        "Grade 7 Reader (ISBN 9780636168053, 2014)",
+        "Grade 8 Learner's Book (ISBN 9780636168126, 2014)",
+        "Grade 8 Reader (ISBN 9780636168206, 2014)",
+        "Grade 9 Learner's Book (ISBN 9780636169912, 2014)",
+        "Grade 9 Reader (ISBN 9780636162426, 2015)",
+        "Grade 10 Learner's Book (ISBN 9780636169920, 2015)",
+        "Grade 11 Learner's Book (ISBN 9780636174641, 2015)",
+        "Grade 12 Learner's Book (ISBN 9780636174795, 2015)"
+      ],
+      "publisher": "Maskew Miller Learning / Pearson South Africa"
+    },
+    "autshumato": {
+      "tier": 2,
+      "name": "Autshumato parallel corpus",
+      "source_type": "government_parallel",
+      "language_relevance": "secondary",
+      "authority_level": "tier_2",
+      "urls": [
+        "http://autshumato.org.za"
+      ],
+      "described_works": [
+        "Government documents, legal texts, administrative translations"
+      ]
+    }
+  },
+  "record_counts": {
+    "authoritative": 158,
+    "candidate": 174,
+    "total_unique": 332,
+    "total_lines_processed": 3
+  },
+  "source_distribution": {
+    "mqhayi": 202,
+    "masikhanyise": 112,
+    "generated": 18
+  },
+  "language_distribution": {
+    "TARGET_LANGUAGE": 311,
+    "UNCERTAIN": 21
+  },
+  "confidence_distribution": {
+    "high": 158,
+    "medium": 156,
+    "low": 18
+  },
+  "orthography_distribution": {
+    "modern": 331,
+    "traditional": 1,
+    "mixed": 0,
+    "unknown": 0
+  },
+  "extraction_metadata": {
+    "deduplication": "case-insensitive text dedup on stripped English overlay",
+    "english_stripping": "Pedagogical English translations removed; Xhosa portion preserved",
+    "repetitive_pattern_detection": "Lines with repeated bigrams classified as generated/candidate",
+    "provenance": "Full source work + section + title tracking for every record"
+  }
+}

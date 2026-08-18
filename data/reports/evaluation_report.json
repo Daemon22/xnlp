@@ -1,0 +1,108 @@
+{
+  "checkpoint": "outputs/best_model.pt",
+  "tests": {
+    "spelling": {
+      "passed": 10,
+      "failed": 0,
+      "total": 10,
+      "details": [
+        "PASS: 'Molo' -> 'Moloundim'",
+        "PASS: 'Umntu' -> 'UmntuekuulasaXhosangelazokundlala.'",
+        "PASS: 'Umthetho' -> 'UmthethobamaXhosangelaabasihloboyi.'",
+        "PASS: 'Izibongo' -> 'Izibongo.'",
+        "PASS: 'Inkosi' -> 'Inkosibaleyo.'",
+        "PASS: 'Ndiyavuya' -> 'Ndiyavuyandwetfesenzekaobuncisazinyngeleyo.'",
+        "PASS: 'Ubuntu' -> 'Ubuntusingabantu.'",
+        "PASS: 'Imbongi' -> 'Imbongingendlala.'",
+        "PASS: 'Indlela' -> 'Indlala.'",
+        "PASS: 'Ukuphila' -> 'Ukuphilaebhalwalwangemihla.'"
+      ],
+      "score": 100.0
+    },
+    "vocabulary": {
+      "passed": 2,
+      "failed": 6,
+      "total": 8,
+      "details": [
+        "FAIL: 'Umntu ngumntu' found only 1 Xhosa words",
+        "PASS: 'Umthetho' found 3 Xhosa words: ['indlela', 'ubuhlobo', 'umthetho']",
+        "FAIL: 'Izibongo' found only 1 Xhosa words",
+        "PASS: 'Ubuntu' found 2 Xhosa words: ['abantu', 'ubuntu']",
+        "FAIL: 'Inkosi' found only 1 Xhosa words",
+        "FAIL: 'Isikolo' found only 1 Xhosa words",
+        "FAIL: 'Indlela' found only 0 Xhosa words",
+        "FAIL: 'Amandla' found only 1 Xhosa words"
+      ],
+      "xhosa_words_found": [
+        [
+          "umntu"
+        ],
+        [
+          "indlela",
+          "umthetho",
+          "ubuhlobo"
+        ],
+        [
+          "izibongo"
+        ],
+        [
+          "abantu",
+          "ubuntu"
+        ],
+        [
+          "inkosi"
+        ],
+        [
+          "isikolo"
+        ],
+        [],
+        [
+          "amandla"
+        ]
+      ],
+      "score": 25.0,
+      "unique_xhosa_words": 10
+    },
+    "generation_quality": {
+      "passed": 6,
+      "failed": 0,
+      "total": 6,
+      "details": [
+        "PASS: 3/3 unique generations from same prompt",
+        "PASS: Gen 1 extended prompt (89 > 5 chars)",
+        "PASS: Gen 2 extended prompt (11 > 5 chars)",
+        "PASS: Gen 3 extended prompt (6 > 5 chars)"
+      ],
+      "score": 100
+    },
+    "contamination": {
+      "passed": 10,
+      "failed": 0,
+      "total": 10,
+      "details": [
+        "PASS: 'Molomybonke.' is novel (not in training corpus)",
+        "PASS: 'Umntuyethuigcinaubomibethuuu.' is novel (not in training corpus)",
+        "PASS: 'Umthethoalangela.' is novel (not in training corpus)",
+        "PASS: 'Izibongo' is novel (not in training corpus)",
+        "PASS: 'Inkosiethumntubakhe.' is novel (not in training corpus)",
+        "PASS: 'Ndiyavuyayaboesenzekany.' is novel (not in training corpus)",
+        "PASS: 'UbuntuyesaXhosa.' is novel (not in training corpus)",
+        "PASS: 'Imbongingumzekelokunomdlalwethuubomibethubemihlangemihla.' is novel (not in training corpus)",
+        "PASS: 'Indlalathuonzulu' is novel (not in training corpus)",
+        "PASS: 'Ukuphilabethu.' is novel (not in training corpus)"
+      ],
+      "score": 100.0
+    },
+    "offline_capability": {
+      "passed": 2,
+      "failed": 0,
+      "total": 2,
+      "details": [
+        "PASS: Only best_model.pt in isolated dir",
+        "PASS: Generated 'Molo.' from isolated checkpoint"
+      ],
+      "score": 100.0
+    }
+  },
+  "overall_score": 85.0
+}
