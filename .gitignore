@@ -29,3 +29,9 @@ Thumbs.db
 # Training outputs (regenerated)
 outputs/
 outputs_*/
+# Legacy model artifacts (replaced by outputs/best_model.pt)
+/best_model.pt
+/best_model_v2.pt
+/trained_model/
+/tokenizer/
+/tokenizer_v2/
