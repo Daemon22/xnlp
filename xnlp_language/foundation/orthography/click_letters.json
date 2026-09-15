@@ -1,0 +1,60 @@
+{
+  "orthography_id": "ORT_CLICK_001",
+  "category": "letter",
+  "form": "c x q",
+  "description": "Click consonant letters - fundamental to isiXhosa orthography",
+  "phonological_value": "Dental click /ǀ/, Lateral click /ǁ/, Alveolar click /ǃ/",
+  "allophonic_variants": [],
+  "position": "any",
+  "constraints": ["Cannot occur word-initially without prefix", "Can occur in clusters with nasals"],
+  "examples": [
+    {
+      "example": "Incwadi",
+      "context": "Word with dental click",
+      "source_record_id": "mqhayi_000000_5b36856a6"
+    },
+    {
+      "example": "isiXhosa",
+      "context": "Word with lateral click",
+      "source_record_id": "mqhayi_v2_Imi_000003_4c07b591"
+    },
+    {
+      "example": "Qongqotwane",
+      "context": "Word with alveolar click",
+      "source_record_id": "mqhayi_v2_Imi_000004_92bf5bac"
+    }
+  ],
+  "variants": [],
+  "normalization": {
+    "normalized_form": "c x q",
+    "normalization_rule": "standard click letters",
+    "reversible": true
+  },
+  "source_evidence": [
+    {
+      "record_id": "mqhayi_000000_5b36856a6",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_v2_Imi_000003_4c07b591",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_v2_Imi_000004_92bf5bac",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 245,
+    "distribution": {
+      "mqhayi_v2": 200,
+      "masikhanyise": 45
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "historical_status": "shared",
+  "notes": "Three basic click letters are fundamental to isiXhosa. OCR errors in historical texts sometimes substitute '6' for 'q', but standard modern orthography uses c, x, q."
+}

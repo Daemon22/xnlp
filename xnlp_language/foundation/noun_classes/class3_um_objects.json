@@ -1,0 +1,103 @@
+{
+  "class_id": "NC_003",
+  "class_number": 3,
+  "prefix": {
+    "singular": "um-",
+    "plural": "imi-",
+    "variants": ["umu-"]
+  },
+  "pairing": {
+    "singular_class": "NC_003",
+    "plural_class": "NC_004",
+    "pairing_type": "regular"
+  },
+  "semantic_tendencies": [
+    "objects",
+    "tools",
+    "plants",
+    "natural phenomena",
+    "body parts",
+    "abstract concepts"
+  ],
+  "agreement_prefixes": {
+    "subject_concord": {
+      "singular": "u-",
+      "plural": "i-"
+    },
+    "object_concord": {
+      "singular": "-m-",
+      "plural": "-mi-"
+    },
+    "possessive_concord": {
+      "singular": "wa-",
+      "plural": "ya-"
+    },
+    "adjective_concord": {
+      "singular": "om-",
+      "plural": "imi-"
+    },
+    "demonstrative_concord": {
+      "singular": "lo-",
+      "plural": "ezi-"
+    }
+  },
+  "stem_behavior": {
+    "stem_initial": "various",
+    "nasal_assimilation": true,
+    "vowel_changes": []
+  },
+  "examples": [
+    {
+      "noun": "umzi",
+      "stem": "-zi",
+      "meaning": "home/household",
+      "plural_form": "imizi",
+      "source_record_id": "mqhayi_000000_f48bc5f0"
+    },
+    {
+      "noun": "umthombo",
+      "stem": "-thombo",
+      "meaning": "source/fountain",
+      "plural_form": "imithombo",
+      "source_record_id": "mqhayi_000000_40803744"
+    },
+    {
+      "noun": "umkhonto",
+      "stem": "-khonto",
+      "meaning": "spear",
+      "plural_form": "imikhonto",
+      "source_record_id": "mqhayi_000000_743c6333"
+    },
+    {
+      "noun": "umhlahlu",
+      "stem": "-hlahlu",
+      "meaning": "problem",
+      "plural_form": "imihlahlu",
+      "source_record_id": "mqhayi_000000_89ae7576"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "mqhayi_000000_f48bc5f0",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_000000_40803744",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_000000_743c6333",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 345,
+    "representative_nouns": 32
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Class 3 prefix um- for singular objects, regular pairing with Class 4 imi- for plural. Distinguished from Class 1 by semantic category (objects vs persons)."
+}

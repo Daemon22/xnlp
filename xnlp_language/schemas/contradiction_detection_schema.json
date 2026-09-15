@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Contradiction Detection Schema",
+  "description": "Schema for recording contradictions in linguistic analysis",
+  "type": "object",
+  "properties": {
+    "contradiction_id": {
+      "type": "string",
+      "description": "Unique identifier for the contradiction"
+    },
+    "contradiction_type": {
+      "type": "string",
+      "enum": [
+        "conflicting_grammatical_rules",
+        "conflicting_noun_class_assignments",
+        "conflicting_agreement_rules",
+        "contradictory_morphological_parses",
+        "duplicated_lexical_entries",
+        "impossible_feature_combinations",
+        "incompatible_tam_combinations",
+        "unexplained_orthographic_variants",
+        "evidence_vs_rule_conflict"
+      ]
+    },
+    "conflicting_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item_id": {
+            "type": "string"
+          },
+          "item_type": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the contradiction"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "major", "minor", "informational"]
+    },
+    "evidence_for_conflict": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "proposed_resolution": {
+      "type": "string",
+      "description": "Suggested resolution if any"
+    },
+    "resolution_status": {
+      "type": "string",
+      "enum": ["unresolved", "under_review", "resolved", "deferred"]
+    },
+    "detected_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["contradiction_id", "contradiction_type", "conflicting_items", "description"],
+  "additionalProperties": false
+}

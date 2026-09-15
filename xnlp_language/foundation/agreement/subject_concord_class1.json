@@ -1,0 +1,58 @@
+{
+  "agreement_id": "AGR_SUBJ_NC1",
+  "agreement_type": "subject_concord",
+  "noun_class": "NC_001",
+  "number": "singular",
+  "concord_forms": {
+    "prefix": "u-",
+    "variants": [],
+    "allomorphs": {
+      "before_vowel": "w-",
+      "before_consonant": "u-"
+    }
+  },
+  "target_category": "verb",
+  "position": "pre-verbal",
+  "phonological_rules": [
+    "u- becomes w- before vowel-initial stems",
+    "maintains u- before consonant-initial stems"
+  ],
+  "examples": [
+    {
+      "noun": "umntu",
+      "concord_form": "u-",
+      "target": "ya",
+      "full_construction": "umntu uya",
+      "translation": "the person goes",
+      "source_record_id": "masikhanyise_000202_221eb708"
+    },
+    {
+      "noun": "umfana",
+      "concord_form": "u-",
+      "target": "funda",
+      "full_construction": "umfana ufunda",
+      "translation": "the boy studies",
+      "source_record_id": "mqhayi_000000_284838bf"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_221eb708",
+      "source_work": "masikhanyise"
+    },
+    {
+      "record_id": "mqhayi_000000_284838bf",
+      "source_work": "mqhayi"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 234,
+    "variant_distribution": {
+      "u-": 200,
+      "w-": 34
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Subject concord u- for Class 1 singular nouns. Allomorph w- before vowels is phonologically conditioned."
+}

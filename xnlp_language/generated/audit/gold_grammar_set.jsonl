@@ -1,0 +1,24 @@
+{
+  "gold_set_id": "GOLD_V1",
+  "generation_date": "2026-09-15",
+  "gold_examples": [
+    {
+      "gold_id": "G_001",
+      "domain": "noun_classes",
+      "text": "umntu abantu",
+      "record_id": "masikhanyise_000202_221eb708",
+      "review_status": "PENDING"
+    },
+    {
+      "gold_id": "G_002",
+      "domain": "agreement",
+      "text": "umntu uya",
+      "record_id": "masikhanyise_000202_221eb708",
+      "review_status": "PENDING"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "pending": 2
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Discourse Schema",
+  "description": "Schema for discourse-level structures in isiXhosa",
+  "type": "object",
+  "properties": {
+    "discourse_id": {
+      "type": "string",
+      "description": "Unique identifier for the discourse structure"
+    },
+    "discourse_type": {
+      "type": "string",
+      "enum": [
+        "narrative_structure",
+        "dialogue",
+        "reported_speech",
+        "reference_anaphora",
+        "discourse_connective",
+        "paragraph_cohesion",
+        "repetition",
+        "emphasis",
+        "rhetorical_structure",
+        "idiomatic_construction",
+        "cultural_expression"
+      ]
+    },
+    "structure": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "markers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "marker": {
+            "type": "string"
+          },
+          "function": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Recurring discourse patterns"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "example": {
+            "type": "string"
+          },
+          "analysis": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["discourse_id", "discourse_type", "confidence"],
+  "additionalProperties": false
+}

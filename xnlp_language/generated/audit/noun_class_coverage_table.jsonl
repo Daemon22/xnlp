@@ -1,0 +1,163 @@
+{
+  "table_id": "NC_COVERAGE_V1",
+  "generation_date": "2026-09-15",
+  "resolution": "7 classes with direct entries (NC_001-NC_009), 3 additional classes referenced in pairings (NC_004, NC_008, NC_010). Total: 10 noun classes documented, 7 corpus-attested.",
+  "classes": [
+    {
+      "class_number": 1,
+      "identifier": "NC_001",
+      "prefixes": {
+        "singular": [
+          "um-"
+        ],
+        "plural": [
+          "aba-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    },
+    {
+      "class_number": 2,
+      "identifier": "NC_002",
+      "prefixes": {
+        "singular": [
+          "aba-"
+        ],
+        "plural": [
+          "aba-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    },
+    {
+      "class_number": 3,
+      "identifier": "NC_003",
+      "prefixes": {
+        "singular": [
+          "um-"
+        ],
+        "plural": [
+          "imi-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    },
+    {
+      "class_number": 4,
+      "identifier": "NC_004",
+      "prefixes": {
+        "singular": [
+          "imi-"
+        ],
+        "plural": [
+          "imi-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "NOT_CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    },
+    {
+      "class_number": 5,
+      "identifier": "NC_005",
+      "prefixes": {
+        "singular": [
+          "i-"
+        ],
+        "plural": [
+          "ama-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    },
+    {
+      "class_number": 6,
+      "identifier": "NC_006",
+      "prefixes": {
+        "singular": [
+          "ama-"
+        ],
+        "plural": [
+          "ama-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    },
+    {
+      "class_number": 7,
+      "identifier": "NC_007",
+      "prefixes": {
+        "singular": [
+          "isi-"
+        ],
+        "plural": [
+          "izi-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    },
+    {
+      "class_number": 8,
+      "identifier": "NC_008",
+      "prefixes": {
+        "singular": [
+          "izi-"
+        ],
+        "plural": [
+          "izi-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "NOT_CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    },
+    {
+      "class_number": 9,
+      "identifier": "NC_009",
+      "prefixes": {
+        "singular": [
+          "u-"
+        ],
+        "plural": [
+          "o-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    },
+    {
+      "class_number": 10,
+      "identifier": "NC_010",
+      "prefixes": {
+        "singular": [
+          "o-"
+        ],
+        "plural": [
+          "o-"
+        ]
+      },
+      "documentation_status": "DOCUMENTED",
+      "corpus_attestation_status": "NOT_CORPUS-ATTESTED",
+      "established_status": "NOT_ESTABLISHED"
+    }
+  ],
+  "summary": {
+    "total_classes": 10,
+    "documented": 10,
+    "corpus_attested": 7,
+    "established": 0
+  }
+}

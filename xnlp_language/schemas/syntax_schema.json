@@ -1,0 +1,160 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Syntax Schema",
+  "description": "Schema for isiXhosa syntactic structures",
+  "type": "object",
+  "properties": {
+    "syntax_id": {
+      "type": "string",
+      "description": "Unique identifier for the syntactic pattern"
+    },
+    "construction_type": {
+      "type": "string",
+      "enum": [
+        "basic_clause",
+        "relative_clause",
+        "subordinate_clause",
+        "coordinate_clause",
+        "question",
+        "negation",
+        "focus",
+        "emphasis",
+        "topicalization",
+        "reported_speech",
+        "quotation",
+        "conditional",
+        "temporal_clause",
+        "causal_clause",
+        "purpose_clause",
+        "discourse_structure"
+      ]
+    },
+    "constituent_order": {
+      "type": "string",
+      "description": "Basic constituent ordering pattern"
+    },
+    "structure": {
+      "type": "object",
+      "properties": {
+        "constituents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "constituent": {
+                "type": "string"
+              },
+              "grammatical_function": {
+                "type": "string"
+              },
+              "realization": {
+                "type": "string"
+              },
+              "obligatory": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+                              },
+              "relation_type": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "example": {
+            "type": "string"
+          },
+          "analysis": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "variant": {
+            "type": "string"
+          },
+          "condition": {
+            "type": "string"
+          },
+          "distribution": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["syntax_id", "construction_type", "confidence"],
+  "additionalProperties": false
+}

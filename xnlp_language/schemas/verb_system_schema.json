@@ -1,0 +1,250 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Verb System Schema",
+  "description": "Schema for representing isiXhosa verb system",
+  "type": "object",
+  "properties": {
+    "verb_id": {
+      "type": "string",
+      "description": "Unique identifier for the verb entry"
+    },
+    "verb_root": {
+      "type": "string",
+      "description": "The underlying verb root"
+    },
+    "stem": {
+      "type": "string",
+      "description": "Verb stem (root + extensions)"
+    },
+    "subject_marker": {
+      "type": "object",
+      "properties": {
+        "form": {
+          "type": "string"
+        },
+        "person": {
+          "type": "string"
+        },
+        "noun_class": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        }
+      }
+    },
+    "object_marker": {
+      "type": "object",
+      "properties": {
+        "form": {
+          "type": "string"
+        },
+        "person": {
+          "type": "string"
+        },
+        "noun_class": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        }
+      }
+    },
+    "tense": {
+      "type": "object",
+      "properties": {
+        "tense_category": {
+          "type": "string",
+          "enum": [
+            "present",
+            "past",
+            "future",
+            "remote_past",
+            "immediate_future",
+            "perfect",
+            "stative"
+          ]
+        },
+        "marker": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        }
+      }
+    },
+    "aspect": {
+      "type": "object",
+      "properties": {
+        "aspect_category": {
+          "type": "string",
+          "enum": [
+            "perfective",
+            "imperfective",
+            "progressive",
+            "habitual",
+            "iterative"
+          ]
+        },
+        "marker": {
+          "type": "string"
+        }
+      }
+    },
+    "mood": {
+      "type": "object",
+      "properties": {
+        "mood_category": {
+          "type": "string",
+          "enum": [
+            "indicative",
+            "subjunctive",
+            "imperative",
+            "potential",
+            "conditional"
+          ]
+        },
+        "marker": {
+          "type": "string"
+        }
+      }
+    },
+    "negation": {
+      "type": "object",
+      "properties": {
+        "polarity": {
+          "type": "string",
+          "enum": ["affirmative", "negative"]
+        },
+        "marker": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        }
+      }
+    },
+    "extensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "extension_type": {
+            "type": "string",
+            "enum": [
+              "causative",
+              "applicative",
+              "reciprocal",
+              "passive", 
+              "stative",
+              "neuter",
+              "associative"
+            ]
+          },
+          "form": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "derivation": {
+      "type": "object",
+      "properties": {
+        "derivational_type": {
+          "type": "string"
+        },
+        "base_verb": {
+          "type": "string"
+        },
+        "derivational_marker": {
+          "type": "string"
+        }
+      }
+    },
+    "final_vowel": {
+      "type": "object",
+      "properties": {
+        "form": {
+          "type": "string"
+        },
+        "variant": {
+          "type": "string"
+        },
+        "function": {
+          "type": "string"
+        }
+      }
+    },
+    "surface_form": {
+      "type": "string",
+      "description": "Complete surface form of the verb"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "surface_form": {
+            "type": "string"
+          },
+          "full_analysis": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        },
+        "variant_count": {
+          "type": "integer"
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["verb_id", "verb_root", "surface_form", "confidence"],
+  "additionalProperties": false
+}

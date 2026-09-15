@@ -1,0 +1,91 @@
+{
+  "class_id": "NC_009",
+  "class_number": 9,
+  "prefix": {
+    "singular": "u-",
+    "plural": "o-",
+    "variants": []
+  },
+  "pairing": {
+    "singular_class": "NC_009",
+    "plural_class": "NC_010",
+    "pairing_type": "regular"
+  },
+  "semantic_tendencies": [
+    "proper names",
+    "kinship terms",
+    "animals",
+    "some abstract concepts"
+  ],
+  "agreement_prefixes": {
+    "subject_concord": {
+      "singular": "u-",
+      "plural": "o-"
+    },
+    "object_concord": {
+      "singular": "-",
+      "plural": "-"
+    },
+    "possessive_concord": {
+      "singular": "ka-",
+      "plural": "ka-"
+    },
+    "adjective_concord": {
+      "singular": "o-",
+      "plural": "o-"
+    },
+    "demonstrative_concord": {
+      "singular": "lo-",
+      "plural": "lo-"
+    }
+  },
+  "stem_behavior": {
+    "stem_initial": "various",
+    "nasal_assimilation": false,
+    "vowel_changes": []
+  },
+  "examples": [
+    {
+      "noun": "uHintsa",
+      "stem": "-Hintsa",
+      "meaning": "Hintsa (proper name)",
+      "plural_form": "oHintsa",
+      "source_record_id": "masikhanyise_000202_7cf4a5e7"
+    },
+    {
+      "noun": "uMqhayi",
+      "stem": "-Mqhayi",
+      "meaning": "Mqhayi (proper name)",
+      "plural_form": "oMqhayi",
+      "source_record_id": "masikhanyise_000202_7cf4a5e7"
+    },
+    {
+      "noun": "uGcaleka",
+      "stem": "-Gcaleka",
+      "meaning": "Gcaleka (proper name)",
+      "plural_form": "oGcaleka",
+      "source_record_id": "masikhanyise_000202_7cf4a5e7"
+    },
+    {
+      "noun": "uKhawuta",
+      "stem": "-Khawuta",
+      "meaning": "Khawuta (proper name)",
+      "plural_form": "oKhawuta",
+      "source_record_id": "masikhanyise_000202_7cf4a5e7"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_7cf4a5e7",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 123,
+    "representative_nouns": 15
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Class 9 prefix u- for singular proper names and kinship terms, regular pairing with Class 10 o- for plural. Extensively used for personal names in corpus."
+}

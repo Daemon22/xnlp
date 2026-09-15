@@ -1,0 +1,50 @@
+{
+  "orthography_id": "ORT_TRIG_001",
+  "category": "trigraph",
+  "form": "ngc ngq ngx",
+  "description": "Click-nasal trigraphs representing prenasalized click consonants with velar nasal",
+  "phonological_value": "Pre-nasalized dental click with velar nasal, pre-nasalized alveolar click with velar nasal, pre-nasalized lateral click with velar nasal",
+  "allophonic_variants": [],
+  "position": "any",
+  "constraints": ["Cannot occur word-initially without prefix", "Represent complex prenasalized clicks"],
+  "examples": [
+    {
+      "example": "Ngcwangu",
+      "context": "Velar nasal + dental click",
+      "source_record_id": "masikhanyise_000202_658d3419"
+    },
+    {
+      "example": "ngqangi",
+      "context": "Velar nasal + alveolar click",
+      "source_record_id": "mqhayi_v2_Imi_000004_92bf5bac"
+    }
+  ],
+  "variants": [],
+  "normalization": {
+    "normalized_form": "ngc ngq ngx",
+    "normalization_rule": "standard click-nasal trigraphs",
+    "reversible": true
+  },
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_658d3419",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "mqhayi_v2_Imi_000004_92bf5bac",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 234,
+    "distribution": {
+      "mqhayi_v2": 200,
+      "masikhanyise": 34
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "historical_status": "shared",
+  "notes": "Click-nasal trigraphs represent complex consonant clusters. 'ngx' pattern suggested but requires more specific examples for confirmation."
+}

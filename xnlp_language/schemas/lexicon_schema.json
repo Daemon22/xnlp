@@ -1,0 +1,227 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Lexicon Schema",
+  "description": "Schema for isiXhosa lexical database",
+  "type": "object",
+  "properties": {
+    "lexeme_id": {
+      "type": "string",
+      "description": "Unique identifier for the lexeme"
+    },
+    "lemma": {
+      "type": "string",
+      "description": "Citation form or dictionary form"
+    },
+    "surface_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "All observed surface forms"
+    },
+    "part_of_speech": {
+      "type": "string",
+      "enum": [
+        "noun",
+        "verb",
+        "adjective",
+        "adverb",
+        "pronoun",
+        "demonstrative",
+        "copulative",
+        "relative",
+        "conjunction",
+        "preposition",
+        "interjection",
+        "ideophone",
+        "particle"
+      ]
+    },
+    "root": {
+      "type": "string",
+      "description": "Underlying root"
+    },
+    "morphological_family": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Related morphological forms"
+    },
+    "noun_class": {
+      "type": "string",
+      "description": "Noun class if applicable"
+    },
+    "semantic_domain": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Semantic domains or categories"
+    },
+    "gloss": {
+      "type": "string",
+      "description": "Basic meaning or gloss"
+    },
+    "detailed_meaning": {
+      "type": "string",
+      "description": "Extended semantic description"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "example": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "form": {
+            "type": "string"
+          },
+          "variant_type": {
+            "type": "string",
+            "enum": [
+              "dialectal",
+              "historical",
+              "orthographic",
+              "register",
+              "stylistic"
+            ]
+          },
+          "distribution": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "historical_forms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "form": {
+            "type": "string"
+          },
+          "period": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        },
+        "normalized_frequency": {
+          "type": "number"
+        },
+        "register_distribution": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "source_records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          },
+          "source_type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "semantic_relations": {
+      "type": "object",
+      "properties": {
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "antonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hypernyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hyponyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "derivations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "historical_status": {
+      "type": "string",
+      "enum": [
+        "historical",
+        "modern",
+        "shared",
+        "variant",
+        "uncertain"
+      ]
+    }
+  },
+  "required": ["lexeme_id", "lemma", "part_of_speech", "confidence"],
+  "additionalProperties": false
+}

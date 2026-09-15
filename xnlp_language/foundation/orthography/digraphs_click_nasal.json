@@ -1,0 +1,60 @@
+{
+  "orthography_id": "ORT_DIG_CLICK_001",
+  "category": "digraph",
+  "form": "nc nq nx",
+  "description": "Nasal-click digraphs - prenasalized click consonants",
+  "phonological_value": "Pre-nasalized dental click, pre-nasalized alveolar click, pre-nasalized lateral click",
+  "allophonic_variants": [],
+  "position": "any",
+  "constraints": ["Cannot occur word-initially without prefix", "Represent prenasalized clicks"],
+  "examples": [
+    {
+      "example": "Incwadi",
+      "context": "Nasal-dental click",
+      "source_record_id": "mqhayi_000000_5b36856a6"
+    },
+    {
+      "example": "umnqamlezo",
+      "context": "Nasal-alveolar click",
+      "source_record_id": "masikhanyise_000202_e86c1d3f"
+    },
+    {
+      "example": "Unxweme",
+      "context": "Nasal-lateral click",
+      "source_record_id": "mqhayi_000000_3c6b7105"
+    }
+  ],
+  "variants": [],
+  "normalization": {
+    "normalized_form": "nc nq nx",
+    "normalization_rule": "standard nasal-click digraphs",
+    "reversible": true
+  },
+  "source_evidence": [
+    {
+      "record_id": "mqhayi_000000_5b36856a6",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "masikhanyise_000202_e86c1d3f",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "mqhayi_000000_3c6b7105",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 567,
+    "distribution": {
+      "mqhayi_v2": 450,
+      "masikhanyise": 117
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "historical_status": "shared",
+  "notes": "Nasal-click digraphs are fundamental to isiXhosa phonology. Each represents a prenasalized click consonant."
+}

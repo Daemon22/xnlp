@@ -1,0 +1,94 @@
+{
+  "class_id": "NC_002",
+  "class_number": 2,
+  "prefix": {
+    "singular": "aba-",
+    "plural": "aba-",
+    "variants": []
+  },
+  "pairing": {
+    "singular_class": "NC_001",
+    "plural_class": "NC_002",
+    "pairing_type": "regular"
+  },
+  "semantic_tendencies": [
+    "people (plural)",
+    "persons (plural)",
+    "human beings (plural)",
+    "groups of people"
+  ],
+  "agreement_prefixes": {
+    "subject_concord": {
+      "singular": "ba-",
+      "plural": "ba-"
+    },
+    "object_concord": {
+      "singular": "-ba-",
+      "plural": "-ba-"
+    },
+    "possessive_concord": {
+      "singular": "ba-",
+      "plural": "ba-"
+    },
+    "adjective_concord": {
+      "singular": "aba-",
+      "plural": "aba-"
+    },
+    "demonstrative_concord": {
+      "singular": "aba-",
+      "plural": "aba-"
+    }
+  },
+  "stem_behavior": {
+    "stem_initial": "various",
+    "nasal_assimilation": false,
+    "vowel_changes": []
+  },
+  "examples": [
+    {
+      "noun": "abantu",
+      "stem": "-ntu",
+      "meaning": "people",
+      "plural_form": "abantu",
+      "source_record_id": "masikhanyise_000202_221eb708"
+    },
+    {
+      "noun": "abafundi",
+      "stem": "-fundi",
+      "meaning": "students/learners",
+      "plural_form": "abafundi",
+      "source_record_id": "masikhanyise_000202_076b213c"
+    },
+    {
+      "noun": "abatwana",
+      "stem": "-ntwana",
+      "meaning": "children",
+      "plural_form": "abantwana",
+      "source_record_id": "mqhayi_000000_803b5851"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_221eb708",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_076b213c",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "mqhayi_000000_803b5851",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 234,
+    "representative_nouns": 28
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Class 2 prefix aba- for plural persons, regular pairing with Class 1 um- for singular. Extensively observed in corpus for groups of people."
+}

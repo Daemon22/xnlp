@@ -8,6 +8,23 @@ This project contains the **XNLP Core Large Language Model**, a custom LLaMA-sty
 
 Every model artifact is a **single self-contained `.pt` file** — model weights, model configuration, tokenizer state, optimizer state, scheduler state, and training metadata are all bundled together. There are no scattered tokenizer `vocab.json`, `merges.json`, or `config.json` files to manage. Simply copy one `best_model.pt` and it works anywhere.
 
+## Current Foundation Gate
+
+**Model training, tokenizer benchmarking, scaling, and generation optimization are frozen.** XNLP now establishes an evidence-first isiXhosa linguistic foundation before progressing to the neural-model layer.
+
+The foundation is built reproducibly from reconciled authoritative Mqhayi and Masikhanyise records. It preserves historical and modern source forms, links every generated observation to record-level provenance, and distinguishes `OBSERVED`, `SUPPORTED`, `PROVISIONAL`, and `INSUFFICIENT_EVIDENCE` rather than treating corpus absence as a linguistic rule.
+
+### Language integrity and preservation
+
+Language integrity is a highest-priority requirement. Original corpus text is immutable: historical spellings, borrowed forms, code-mixed passages, and uncertain passages are retained rather than silently corrected or deleted. Only records already classified `TARGET_LANGUAGE` feed automated linguistic observations; `MIXED_LANGUAGE`, `FOREIGN_LANGUAGE`, and `UNCERTAIN` records remain traceable in a human-review queue. This protects isiXhosa evidence without imposing a false or externally defined standard of purity.
+
+```bash
+python xnlp_language/build_foundation.py
+python xnlp_language/validation/validate_foundation.py
+```
+
+Generated artifacts and the release-gate report are under `xnlp_language/generated/`. The present gate decision is intentionally **FOUNDATION INCOMPLETE — CONTINUE LINGUISTIC ANALYSIS**: corpus text provides reliable orthographic and lexical observations, but reviewed corpus annotation is still required before asserting structural analyses of agreement, morphology, verbs, syntax, and related domains.
+
 ## Package Architecture
 
 ```

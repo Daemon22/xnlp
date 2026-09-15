@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Agreement System Schema",
+  "description": "Schema for isiXhosa agreement/concord system",
+  "type": "object",
+  "properties": {
+    "agreement_id": {
+      "type": "string",
+      "description": "Unique identifier for the agreement pattern"
+    },
+    "agreement_type": {
+      "type": "string",
+      "enum": [
+        "subject_concord",
+        "object_concord",
+        "possessive_concord",
+        "adjective_concord",
+        "demonstrative_concord",
+        "relative_concord",
+        "enumerative_concord",
+        "copulative_concord"
+      ]
+    },
+    "noun_class": {
+      "type": "string",
+      "description": "Source noun class"
+    },
+    "number": {
+      "type": "string",
+      "enum": ["singular", "plural"]
+    },
+    "concord_forms": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "string"
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allomorphs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Context-dependent allomorphs"
+        }
+      }
+    },
+    "target_category": {
+      "type": "string",
+      "description": "What this agreement marks (verb, adjective, etc.)"
+    },
+    "position": {
+      "type": "string",
+      "description": "Position relative to target"
+    },
+    "phonological_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Sound changes affecting the concord"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "noun": {
+            "type": "string"
+          },
+          "concord_form": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "full_construction": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "exception_type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        },
+        "variant_distribution": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["agreement_id", "agreement_type", "noun_class", "concord_forms", "confidence"],
+  "additionalProperties": false
+}

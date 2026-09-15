@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Morphology Schema",
+  "description": "Schema for morphological analysis of isiXhosa words",
+  "type": "object",
+  "properties": {
+    "analysis_id": {
+      "type": "string",
+      "description": "Unique identifier for the morphological analysis"
+    },
+    "surface_form": {
+      "type": "string",
+      "description": "The actual orthographic word as it appears"
+    },
+    "morphological_segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "segment": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "prefix",
+              "subject_marker",
+              "object_marker", 
+              "tense_marker",
+              "aspect_marker",
+              "mood_marker",
+              "negation_marker",
+              "extension",
+              "stem",
+              "root",
+              "suffix",
+              "final_vowel",
+              "enclitic",
+              "proclitic"
+            ]
+          },
+          "function": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "grammatical_features": {
+      "type": "object",
+      "properties": {
+        "part_of_speech": {
+          "type": "string"
+        },
+        "noun_class": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string",
+          "enum": ["singular", "plural", "uncertain"]
+        },
+        "tense": {
+          "type": "string"
+        },
+        "aspect": {
+          "type": "string"
+        },
+        "mood": {
+          "type": "string"
+        },
+        "polarity": {
+          "type": "string",
+          "enum": ["affirmative", "negative"]
+        },
+        "person": {
+          "type": "string"
+        },
+        "voice": {
+          "type": "string"
+        },
+        "derivational_type": {
+          "type": "string"
+        }
+      }
+    },
+    "lemma": {
+      "type": "string",
+      "description": "Dictionary form or citation form"
+    },
+    "root": {
+      "type": "string",
+      "description": "Underlying root"
+    },
+    "derivational_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "process": {
+            "type": "string",
+            "enum": [
+              "prefixation",
+              "suffixation",
+              "extension",
+              "reduplication",
+              "compounding",
+              "borrowing",
+              "sound_change"
+            ]
+          },
+          "input": {
+            "type": "string"
+          },
+          "output": {
+            "type": "string"
+          },
+          "affix": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "extensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "extension_type": {
+            "type": "string",
+            "enum": [
+              "causative",
+              "applicative",
+              "reciprocal", 
+              "passive",
+              "stative",
+              "neuter",
+              "associative",
+              " positional"
+            ]
+          },
+          "form": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL", 
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "analysis_method": {
+      "type": "string",
+      "description": "How this analysis was derived"
+    },
+    "alternative_analyses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of alternative morphological analyses"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["analysis_id", "surface_form", "morphological_segments", "confidence"],
+  "additionalProperties": false
+}

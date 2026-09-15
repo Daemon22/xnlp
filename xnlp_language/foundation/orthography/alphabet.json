@@ -1,0 +1,50 @@
+{
+  "orthography_id": "ORT_ALPH_001",
+  "category": "alphabet",
+  "form": "a e i o u",
+  "description": "Basic vowel system of isiXhosa - five vowel phonemes",
+  "phonological_value": "/a/, /e/, /i/, /o/, /u/",
+  "allophonic_variants": [],
+  "position": "any",
+  "constraints": [],
+  "examples": [
+    {
+      "example": "Izwe lakithi",
+      "context": "Beginning of sentence",
+      "source_record_id": "mqhayi_v2_Imi_000001_085aaf08"
+    },
+    {
+      "example": "Ubusi",
+      "context": "Word-initial",
+      "source_record_id": "mqhayi_v2_Imi_000002_f1469fa3"
+    }
+  ],
+  "variants": [],
+  "normalization": {
+    "normalized_form": "a e i o u",
+    "normalization_rule": "standard vowel inventory",
+    "reversible": true
+  },
+  "source_evidence": [
+    {
+      "record_id": "mqhayi_v2_Imi_000001_085aaf08",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_v2_Imi_000002_f1469fa3",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 8819,
+    "distribution": {
+      "mqhayi_v2": 8819,
+      "masikhanyise": 33
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "historical_status": "shared",
+  "notes": "Standard five-vowel system observed throughout corpus. No vowel reduction or harmony patterns identified in current analysis."
+}

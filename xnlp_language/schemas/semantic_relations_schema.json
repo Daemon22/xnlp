@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Semantic Relations Schema",
+  "description": "Schema for semantic relationships in isiXhosa",
+  "type": "object",
+  "properties": {
+    "relation_id": {
+      "type": "string",
+      "description": "Unique identifier for the semantic relation"
+    },
+    "relation_type": {
+      "type": "string",
+      "enum": [
+        "synonymy",
+        "antonymy",
+        "hypernymy",
+        "hyponymy",
+        "meronymy",
+        "holonymy",
+        "derivational_relation",
+        "semantic_family",
+        "polysemy",
+        "metaphorical_use",
+        "idiomatic_expression",
+        "cultural_expression",
+        "domain_terminology"
+      ]
+    },
+    "source_lexeme": {
+      "type": "string",
+      "description": "ID of the source lexeme"
+    },
+    "target_lexeme": {
+      "type": "string",
+      "description": "ID of the target lexeme"
+    },
+    "relation_direction": {
+      "type": "string",
+      "enum": ["bidirectional", "unidirectional"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the semantic relationship"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Semantic domain if applicable"
+    },
+    "register": {
+      "type": "string",
+      "description": "Register or style level"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "example": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["relation_id", "relation_type", "source_lexeme", "target_lexeme", "confidence"],
+  "additionalProperties": false
+}

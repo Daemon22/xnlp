@@ -1,0 +1,80 @@
+{
+  "orthography_id": "ORT_PROP_001",
+  "category": "proper_name",
+  "form": "u- ama- ka- kwa-",
+  "description": "Proper name prefixes used in isiXhosa orthography",
+  "phonological_value": "Various prefix markers",
+  "allophonic_variants": [],
+  "position": "word-initial",
+  "constraints": ["Attached without spaces (conjunctive writing)", "Capitalized first letter"],
+  "examples": [
+    {
+      "example": "UHintsa",
+      "context": "Male proper name prefix",
+      "source_record_id": "masikhanyise_000202_7cf4a5e7"
+    },
+    {
+      "example": "UMqhayi",
+      "context": "Male proper name prefix",
+      "source_record_id": "masikhanyise_000202_7cf4a5e7"
+    },
+    {
+      "example": "amaXhosa",
+      "context": "Plural/ethnic group prefix",
+      "source_record_id": "masikhanyise_000202_658aec54"
+    },
+    {
+      "example": "kaMalangana",
+      "context": "Patronymic prefix",
+      "source_record_id": "masikhanyise_000202_e86c1d3f"
+    },
+    {
+      "example": "kaKhawuta",
+      "context": "Patronymic prefix",
+      "source_record_id": "masikhanyise_000202_7cf4a5e7"
+    },
+    {
+      "example": "kwindlela",
+      "context": "Locative prefix",
+      "source_record_id": "masikhanyise_000202_076b213c"
+    }
+  ],
+  "variants": [],
+  "normalization": {
+    "normalized_form": "u- ama- ka- kwa-",
+    "normalization_rule": "standard proper name prefixes",
+    "reversible": true
+  },
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_7cf4a5e7",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_658aec54",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_e86c1d3f",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_076b213c",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 345,
+    "distribution": {
+      "mqhayi_v2": 280,
+      "masikhanyise": 65
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "historical_status": "shared",
+  "notes": "Proper name prefixes are attached without spaces (conjunctive writing). 'u-' for male names, 'ama-' for plural/ethnic groups, 'ka-' for patronymics, 'kwa-' for locatives."
+}

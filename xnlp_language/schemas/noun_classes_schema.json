@@ -1,0 +1,214 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Noun Class System Schema",
+  "description": "Schema for representing isiXhosa noun class system",
+  "type": "object",
+  "properties": {
+    "class_id": {
+      "type": "string",
+      "description": "Noun class identifier (e.g., 1, 2, 1a, 2a, etc.)"
+    },
+    "class_number": {
+      "type": "integer",
+      "description": "Traditional class number"
+    },
+    "prefix": {
+      "type": "object",
+      "properties": {
+        "singular": {
+          "type": "string"
+        },
+        "plural": {
+          "type": "string"
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pairing": {
+      "type": "object",
+      "properties": {
+        "singular_class": {
+          "type": "string"
+        },
+        "plural_class": {
+          "type": "string"
+        },
+        "pairing_type": {
+          "type": "string",
+          "enum": ["regular", "irregular", "no_plural", "no_singular"]
+        }
+      }
+    },
+    "semantic_tendencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Semantic categories typically found in this class"
+    },
+    "agreement_prefixes": {
+      "type": "object",
+      "properties": {
+        "subject_concord": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "object_concord": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "possessive_concord": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "adjective_concord": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "demonstrative_concord": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "relative_concord": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "enumerative_concord": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stem_behavior": {
+      "type": "object",
+      "properties": {
+        "stem_initial": {
+          "type": "string",
+          "description": "Expected stem-initial sound"
+        },
+        "nasal_assimilation": {
+          "type": "boolean"
+        },
+        "vowel_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "noun": {
+            "type": "string"
+          },
+          "stem": {
+            "type": "string"
+          },
+          "meaning": {
+            "type": "string"
+          },
+          "plural_form": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "noun": {
+            "type": "string"
+          },
+          "exception_type": {
+            "type": "string"
+          },
+          "explanation": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          },
+          "source_type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        },
+        "representative_nouns": {
+          "type": "integer"
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED", 
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    },
+    "historical_status": {
+      "type": "string",
+      "enum": [
+        "historical",
+        "modern",
+        "shared", 
+        "variant",
+        "uncertain"
+      ]
+    }
+  },
+  "required": ["class_id", "class_number", "confidence"],
+  "additionalProperties": false
+}

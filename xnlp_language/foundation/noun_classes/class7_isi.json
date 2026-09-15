@@ -1,0 +1,110 @@
+{
+  "class_id": "NC_007",
+  "class_number": 7,
+  "prefix": {
+    "singular": "isi-",
+    "plural": "izi-",
+    "variants": []
+  },
+  "pairing": {
+    "singular_class": "NC_007",
+    "plural_class": "NC_008",
+    "pairing_type": "regular"
+  },
+  "semantic_tendencies": [
+    "abstract concepts",
+    "languages",
+    "tools",
+    "body parts",
+    "diseases",
+    "institutions"
+  ],
+  "agreement_prefixes": {
+    "subject_concord": {
+      "singular": "si-",
+      "plural": "zi-"
+    },
+    "object_concord": {
+      "singular": "-si-",
+      "plural": "-zi-"
+    },
+    "possessive_concord": {
+      "singular": "sa-",
+      "plural": "za-"
+    },
+    "adjective_concord": {
+      "singular": "esi-",
+      "plural": "ezi-"
+    },
+    "demonstrative_concord": {
+      "singular": "esi-",
+      "plural": "ezi-"
+    }
+  },
+  "stem_behavior": {
+    "stem_initial": "various",
+    "nasal_assimilation": false,
+    "vowel_changes": []
+  },
+  "examples": [
+    {
+      "noun": "isizwe",
+      "stem": "-zwe",
+      "meaning": "nation",
+      "plural_form": "izizwe",
+      "source_record_id": "mqhayi_000000_0f564a9c"
+    },
+    {
+      "noun": "isilwimi",
+      "stem": "-lwimi",
+      "meaning": "language",
+      "plural_form": "izilwimi",
+      "source_record_id": "mqhayi_000000_52b7ec16"
+    },
+    {
+      "noun": "isifundisi",
+      "stem": "-fundisi",
+      "meaning": "teacher/preacher",
+      "plural_form": "izifundisi",
+      "source_record_id": "mqhayi_000000_5dfb2a40"
+    },
+    {
+      "noun": "isikhulisa",
+      "stem": "-khulisa",
+      "meaning": "elevator/raising",
+      "plural_form": "izikhulisa",
+      "source_record_id": "mqhayi_000000_06fb9ce4"
+    },
+    {
+      "noun": "isixhobo",
+      "stem": "-xhobo",
+      "meaning": "tool/equipment",
+      "plural_form": "izixhobo",
+      "source_record_id": "mqhayi_000000_3093e65d"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "mqhayi_000000_0f564a9c",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_000000_52b7ec16",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_000000_5dfb2a40",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 456,
+    "representative_nouns": 38
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Class 7 prefix isi- for singular abstract concepts and tools, regular pairing with Class 8 izi- for plural. Highly productive class for abstract nouns and institutions."
+}

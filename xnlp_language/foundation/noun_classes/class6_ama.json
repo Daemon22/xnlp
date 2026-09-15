@@ -1,0 +1,93 @@
+{
+  "class_id": "NC_006",
+  "class_number": 6,
+  "prefix": {
+    "singular": "ama-",
+    "plural": "ama-",
+    "variants": []
+  },
+  "pairing": {
+    "singular_class": "NC_005",
+    "plural_class": "NC_006",
+    "pairing_type": "regular"
+  },
+  "semantic_tendencies": [
+    "objects (plural)",
+    "natural phenomena (plural)",
+    "groups of things"
+  ],
+  "agreement_prefixes": {
+    "subject_concord": {
+      "singular": "a-",
+      "plural": "a-"
+    },
+    "object_concord": {
+      "singular": "-ma-",
+      "plural": "-ma-"
+    },
+    "possessive_concord": {
+      "singular": "a-",
+      "plural": "a-"
+    },
+    "adjective_concord": {
+      "singular": "ama-",
+      "plural": "ama-"
+    },
+    "demonstrative_concord": {
+      "singular": "a-",
+      "plural": "a-"
+    }
+  },
+  "stem_behavior": {
+    "stem_initial": "various",
+    "nasal_assimilation": false,
+    "vowel_changes": []
+  },
+  "examples": [
+    {
+      "noun": "amaXhosa",
+      "stem": "-Xhosa",
+      "meaning": "Xhosa people",
+      "plural_form": "amaXhosa",
+      "source_record_id": "masikhanyise_000202_658aec54"
+    },
+    {
+      "noun": "amagama",
+      "stem": "-gama",
+      "meaning": "words",
+      "plural_form": "amagama",
+      "source_record_id": "mqhayi_000000_5368a55c"
+    },
+    {
+      "noun": "amakamu",
+      "stem": "-kamu",
+      "meaning": "times/occasions",
+      "plural_form": "amakamu",
+      "source_record_id": "mqhayi_000000_731c8209"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_658aec54",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "mqhayi_000000_5368a55c",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_000000_731c8209",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 234,
+    "representative_nouns": 19
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Class 6 prefix ama- for plural objects, regular pairing with Class 5 i- for singular. Also used for ethnic groups like amaXhosa."
+}

@@ -1,0 +1,109 @@
+{
+  "class_id": "NC_001",
+  "class_number": 1,
+  "prefix": {
+    "singular": "um-",
+    "plural": "aba-",
+    "variants": ["umu-"]
+  },
+  "pairing": {
+    "singular_class": "NC_001",
+    "plural_class": "NC_002",
+    "pairing_type": "regular"
+  },
+  "semantic_tendencies": [
+    "people",
+    "persons",
+    "human beings",
+    "agents",
+    "family relationships"
+  ],
+  "agreement_prefixes": {
+    "subject_concord": {
+      "singular": "u-",
+      "plural": "ba-"
+    },
+    "object_concord": {
+      "singular": "-m-",
+      "plural": "-ba-"
+    },
+    "possessive_concord": {
+      "singular": "wa-",
+      "plural": "ba-"
+    },
+    "adjective_concord": {
+      "singular": "om-",
+      "plural": "aba-"
+    },
+    "demonstrative_concord": {
+      "singular": "lo-",
+      "plural": "aba-"
+    }
+  },
+  "stem_behavior": {
+    "stem_initial": "various",
+    "nasal_assimilation": true,
+    "vowel_changes": []
+  },
+  "examples": [
+    {
+      "noun": "umntu",
+      "stem": "-ntu",
+      "meaning": "person",
+      "plural_form": "abantu",
+      "source_record_id": "masikhanyise_000202_221eb708"
+    },
+    {
+      "noun": "umthetho",
+      "stem": "-thetho",
+      "meaning": "law",
+      "plural_form": "imithetho",
+      "source_record_id": "mqhayi_000000_8f6849f1"
+    },
+    {
+      "noun": "umfana",
+      "stem": "-fana",
+      "meaning": "boy/young man",
+      "plural_form": "abafana",
+      "source_record_id": "mqhayi_000000_284838bf"
+    },
+    {
+      "noun": "umsebenzi",
+      "stem": "-sebenzi",
+      "meaning": "work",
+      "plural_form": "imisebenzi",
+      "source_record_id": "mqhayi_000000_3093e65d"
+    },
+    {
+      "noun": "unina",
+      "stem": "-nina",
+      "meaning": "mother",
+      "plural_form": "anina",
+      "source_record_id": "mqhayi_000000_2296b2cf"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_221eb708",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "mqhayi_000000_8f6849f1",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_000000_284838bf",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 567,
+    "representative_nouns": 45
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Class 1 prefix um- for singular persons, regular pairing with Class 2 aba- for plural. Observed extensive use in corpus for people, agents, and some abstract concepts."
+}

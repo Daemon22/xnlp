@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Phonology Schema",
+  "description": "Schema for isiXhosa phonological system",
+  "type": "object",
+  "properties": {
+    "phonology_id": {
+      "type": "string",
+      "description": "Unique identifier for the phonological entry"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "vowel",
+        "consonant",
+        "click",
+        "syllable_structure",
+        "phonotactic_pattern",
+        "sound_alternation",
+        "orthography_sound_correspondence",
+        "morphophonological_alternation"
+      ]
+    },
+    "symbol": {
+      "type": "string",
+      "description": "IPA or phonemic symbol"
+    },
+    "orthographic_realization": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "How this sound is represented orthographically"
+    },
+    "description": {
+      "type": "string",
+      "description": "Phonological description"
+    },
+    "features": {
+      "type": "object",
+      "description": "Distinctive features",
+      "properties": {
+        "place": {
+          "type": "string"
+        },
+        "manner": {
+          "type": "string"
+        },
+        "voicing": {
+          "type": "string"
+        },
+        "nasality": {
+          "type": "string"
+        },
+        "advanced_tongue_root": {
+          "type": "string"
+        }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "properties": {
+        "word_initial": {
+          "type": "boolean"
+        },
+        "word_medial": {
+          "type": "boolean"
+        },
+        "word_final": {
+          "type": "boolean"
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "alternations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "alternation_type": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          },
+          "input": {
+            "type": "string"
+          },
+          "output": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "word": {
+            "type": "string"
+          },
+          "phonemic_transcription": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["phonology_id", "category", "confidence"],
+  "additionalProperties": false
+}

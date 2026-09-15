@@ -1,0 +1,33 @@
+{
+  "tam_id": "TAM_STRUCTURAL_V1",
+  "generation_date": "2026-09-15",
+  "entries": [
+    {
+      "form": "nga-",
+      "category": "TAM",
+      "function": "present_habitual",
+      "status": "OBSERVED"
+    },
+    {
+      "form": "se-",
+      "category": "TAM",
+      "function": "past_relative",
+      "status": "OBSERVED"
+    },
+    {
+      "form": "ha-",
+      "category": "negation",
+      "status": "OBSERVED"
+    },
+    {
+      "form": "aku-",
+      "category": "negation",
+      "status": "OBSERVED"
+    }
+  ],
+  "summary": {
+    "actual_tam_markers": 2,
+    "negation_misclassified": 2,
+    "structural_analysis": "INSUFFICIENT"
+  }
+}

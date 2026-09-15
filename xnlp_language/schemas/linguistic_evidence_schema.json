@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Linguistic Evidence Schema",
+  "description": "Schema for linking linguistic rules to corpus evidence",
+  "type": "object",
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "description": "Unique identifier for the evidence record"
+    },
+    "rule_id": {
+      "type": "string",
+      "description": "ID of the grammatical rule this evidence supports"
+    },
+    "record_id": {
+      "type": "string",
+      "description": "ID of the corpus record containing the evidence"
+    },
+    "source_work": {
+      "type": "string",
+      "description": "Source work (e.g., 'mqhayi', 'masikhanyise')"
+    },
+    "source_type": {
+      "type": "string",
+      "description": "Type of source material"
+    },
+    "extracted_form": {
+      "type": "string",
+      "description": "The exact linguistic form extracted"
+    },
+    "context": {
+      "type": "string",
+      "description": "Surrounding context"
+    },
+    "analysis": {
+      "type": "string",
+      "description": "Linguistic analysis of the evidence"
+    },
+    "extraction_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validator": {
+      "type": "string",
+      "description": "Method or system that validated this evidence"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "contradicting_rule_id": {
+            "type": "string"
+          },
+          "contradicting_evidence_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["evidence_id", "rule_id", "record_id", "extracted_form", "confidence"],
+  "additionalProperties": false
+}

@@ -1,0 +1,30 @@
+{
+  "analysis_records": 5719,
+  "authoritative_records": 5839,
+  "conflicts_open": 1,
+  "corpus": "data\\authoritative\\v2_authoritative_all.jsonl",
+  "corpus_sha256": "3fcec2c0c9dac47942fe164889601423d69226e9456108f4156f6ec3231f752c",
+  "decision": "FOUNDATION INCOMPLETE — CONTINUE STRUCTURAL ANALYSIS",
+  "foundation_release": "XNLP_ISIXHOSA_FOUNDATION_V1",
+  "generation_mode": "deterministic_from_corpus_hash",
+  "generator": "xnlp_language.build_foundation",
+  "language_integrity_counts": {
+    "FOREIGN_LANGUAGE": 5,
+    "MIXED_LANGUAGE": 24,
+    "TARGET_LANGUAGE": 5719,
+    "UNCERTAIN": 91
+  },
+  "model_training": "FROZEN",
+  "observation_count": 153,
+  "review_tasks_total": 1544,
+  "sources": [
+    "masikhanyise",
+    "mqhayi"
+  ],
+  "structured_entries": {
+    "agreement": 3,
+    "derivational": 4,
+    "noun_classes": 7,
+    "verbs": 666
+  }
+}

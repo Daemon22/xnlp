@@ -1,0 +1,70 @@
+{
+  "orthography_id": "ORT_DIG_FRIC_001",
+  "category": "digraph",
+  "form": "hl ph kh sh",
+  "description": "Fricative and aspirate digraphs representing various fricative and aspirated consonants",
+  "phonological_value": "Voiceless lateral fricative /ɬ/, aspirated bilabial /pʰ/ or bilabial fricative /ɸ/, aspirated velar /kʰ/ or ejective /k'/, postalveolar fricative /ʃ/",
+  "allophonic_variants": [],
+  "position": "any",
+  "constraints": ["Can occur word-initially", "Can occur medially"],
+  "examples": [
+    {
+      "example": "hlala",
+      "context": "Voiceless lateral fricative",
+      "source_record_id": "mqhayi_000000_d172b5d6"
+    },
+    {
+      "example": "phandle",
+      "context": "Aspirated bilabial",
+      "source_record_id": "masikhanyise_000202_184959d0"
+    },
+    {
+      "example": "khaya",
+      "context": "Aspirated velar",
+      "source_record_id": "masikhanyise_000202_658aec54"
+    },
+    {
+      "example": "tshala",
+      "context": "Postalveolar fricative cluster",
+      "source_record_id": "mqhayi_000000_587d884b"
+    }
+  ],
+  "variants": [],
+  "normalization": {
+    "normalized_form": "hl ph kh sh",
+    "normalization_rule": "standard fricative digraphs",
+    "reversible": true
+  },
+  "source_evidence": [
+    {
+      "record_id": "mqhayi_000000_d172b5d6",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "masikhanyise_000202_184959d0",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_658aec54",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "mqhayi_000000_587d884b",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 892,
+    "distribution": {
+      "mqhayi_v2": 750,
+      "masikhanyise": 142
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "historical_status": "shared",
+  "notes": "Standard fricative digraphs consistent across corpus. 'hl' is particularly characteristic of Bantu languages."
+}

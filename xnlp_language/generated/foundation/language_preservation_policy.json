@@ -1,0 +1,23 @@
+{
+  "analysis_boundary": "Only records pre-classified TARGET_LANGUAGE feed automated linguistic observations.",
+  "confidence": "HIGH_CONFIDENCE",
+  "counts": {
+    "FOREIGN_LANGUAGE": 5,
+    "MIXED_LANGUAGE": 24,
+    "TARGET_LANGUAGE": 5719,
+    "UNCERTAIN": 91
+  },
+  "normalization_policy": "identity_only",
+  "policy_id": "XNLP_LANGUAGE_PRESERVATION_V1",
+  "principle": "Protect isiXhosa corpus integrity without erasing historical, borrowed, mixed, or uncertain source material.",
+  "prohibited_actions": [
+    "silent deletion",
+    "silent translation",
+    "automatic spelling replacement",
+    "automatic language relabelling",
+    "using excluded records as grammar evidence"
+  ],
+  "review_boundary": "MIXED_LANGUAGE, FOREIGN_LANGUAGE, and UNCERTAIN records are retained unchanged and surfaced for human linguistic review.",
+  "source_text_policy": "immutable_original_surface",
+  "status": "SUPPORTED"
+}

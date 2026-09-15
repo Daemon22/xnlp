@@ -1,0 +1,30 @@
+{
+  "id": "MORPH_V1",
+  "morphemes": [
+    {
+      "id": "M_NC001",
+      "forms": [
+        "um-"
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "id": "M_AGR_SUBJ",
+      "forms": [
+        "u-",
+        "ba-"
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "id": "M_TAM",
+      "forms": [
+        "nga-"
+      ],
+      "status": "OBSERVED"
+    }
+  ],
+  "summary": {
+    "total": 3
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "orthography_id": "ORT_CAP_001",
+  "category": "capitalization",
+  "form": "Capitalization conventions",
+  "description": "Capitalization rules for proper names, place names, and special entities",
+  "phonological_value": "N/A",
+  "allophonic_variants": [],
+  "position": "word-initial",
+  "constraints": ["First letter of proper names capitalized", "First letter of sentences capitalized"],
+  "examples": [
+    {
+      "example": "Nkosiyamntu",
+      "context": "Proper name (person)",
+      "source_record_id": "masikhanyise_000202_e86c1d3f"
+    },
+    {
+      "example": "UHintsa",
+      "context": "Proper name with prefix",
+      "source_record_id": "masikhanyise_000202_7cf4a5e7"
+    },
+    {
+      "example": "amaXhosa",
+      "context": "Place name/ethnic group",
+      "source_record_id": "masikhanyise_000202_658aec54"
+    },
+    {
+      "example": "Nkosi",
+      "context": "Deity title",
+      "source_record_id": "masikhanyise_000202_3f148fe3"
+    }
+  ],
+  "variants": [],
+  "normalization": {
+    "normalized_form": "Standard capitalization",
+    "normalization_rule": "Capitalize proper names and sentence-initial words",
+    "reversible": false
+  },
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_e86c1d3f",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_7cf4a5e7",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_658aec54",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_3f148fe3",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 567,
+    "distribution": {
+      "mqhayi_v2": 400,
+      "masikhanyise": 167
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "historical_status": "shared",
+  "notes": "Standard capitalization conventions observed. Proper names with prefixes (u-, i-, ama-) show capitalization of the prefix first letter."
+}

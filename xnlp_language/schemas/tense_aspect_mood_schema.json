@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Tense-Aspect-Mood Schema",
+  "description": "Schema for isiXhosa tense, aspect, mood, and polarity",
+  "type": "object",
+  "properties": {
+    "tam_id": {
+      "type": "string",
+      "description": "Unique identifier for the TAM category"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["tense", "aspect", "mood", "polarity"]
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "Specific subcategory (e.g., present, past, progressive, subjunctive)"
+    },
+    "marker_forms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "form": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          },
+          "allomorphs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Functional description"
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "compatible_tenses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compatible_aspects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compatible_moods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "incompatible_combinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "example": {
+            "type": "string"
+          },
+          "analysis": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["tam_id", "category", "subcategory", "confidence"],
+  "additionalProperties": false
+}

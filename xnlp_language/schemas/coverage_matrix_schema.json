@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Coverage Matrix Schema",
+  "description": "Schema for tracking linguistic foundation coverage",
+  "type": "object",
+  "properties": {
+    "coverage_id": {
+      "type": "string",
+      "description": "Unique identifier for the coverage report"
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "orthography",
+        "phonology",
+        "noun_classes",
+        "agreement",
+        "morphology",
+        "verbs",
+        "tense_aspect_mood",
+        "negation",
+        "pronouns",
+        "modifiers",
+        "syntax",
+        "word_formation",
+        "lexicon",
+        "semantics",
+        "discourse",
+        "historical_language",
+        "modern_language"
+      ]
+    },
+    "evidence_count": {
+      "type": "integer",
+      "description": "Number of corpus evidence records"
+    },
+    "coverage_percentage": {
+      "type": "number",
+      "description": "Estimated coverage of domain"
+    },
+    "confidence_level": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "rules_established": {
+      "type": "integer",
+      "description": "Number of grammatical rules established"
+    },
+    "examples_collected": {
+      "type": "integer",
+      "description": "Number of examples collected"
+    },
+    "exceptions_documented": {
+      "type": "integer",
+      "description": "Number of exceptions documented"
+    },
+    "contradictions_found": {
+      "type": "integer",
+      "description": "Number of contradictions found"
+    },
+    "gaps_identified": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Identified gaps in coverage"
+    },
+    "source_distribution": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "Distribution of evidence by source"
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": ["validated", "partially_validated", "unvalidated"]
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["coverage_id", "domain", "evidence_count", "coverage_percentage", "confidence_level"],
+  "additionalProperties": false
+}

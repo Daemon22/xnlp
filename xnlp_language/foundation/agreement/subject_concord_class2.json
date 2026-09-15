@@ -1,0 +1,53 @@
+{
+  "agreement_id": "AGR_SUBJ_NC2",
+  "agreement_type": "subject_concord",
+  "noun_class": "NC_002",
+  "number": "plural",
+  "concord_forms": {
+    "prefix": "ba-",
+    "variants": [],
+    "allomorphs": {}
+  },
+  "target_category": "verb",
+  "position": "pre-verbal",
+  "phonological_rules": [
+    "maintains ba- in all environments"
+  ],
+  "examples": [
+    {
+      "noun": "abantu",
+      "concord_form": "ba-",
+      "target": "ya",
+      "full_construction": "abantu baya",
+      "translation": "the people go",
+      "source_record_id": "masikhanyise_000202_221eb708"
+    },
+    {
+      "noun": "abafundi",
+      "concord_form": "ba-",
+      "target": "funda",
+      "full_construction": "abafundi bafunda",
+      "translation": "the students study",
+      "source_record_id": "masikhanyise_000202_076b213c"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_221eb708",
+      "source_work": "masikhanyise"
+    },
+    {
+      "record_id": "masikhanyise_000202_076b213c",
+      "source_work": "masikhanyise"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 156,
+    "variant_distribution": {
+      "ba-": 156
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Subject concord ba- for Class 2 plural nouns. Consistent form without allomorphic variation."
+}

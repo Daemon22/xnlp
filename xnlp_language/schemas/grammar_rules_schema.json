@@ -1,0 +1,207 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Grammar Rules Schema",
+  "description": "Schema for representing grammatical rules with evidence links",
+  "type": "object",
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "description": "Unique identifier for the rule (e.g., MORPH_NOUN_CLASS_001)"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "orthography",
+        "phonology", 
+        "noun_class",
+        "agreement",
+        "morphology",
+        "verb",
+        "tense_aspect_mood",
+        "negation",
+        "pronoun",
+        "demonstrative",
+        "copulative",
+        "adjective",
+        "adverb",
+        "relative",
+        "conjunction",
+        "preposition",
+        "syntax",
+        "word_formation",
+        "reduplication",
+        "borrowing",
+        "semantic",
+        "discourse",
+        "punctuation",
+        "exception"
+      ]
+    },
+    "phenomenon": {
+      "type": "string",
+      "description": "The specific grammatical phenomenon described"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the rule"
+    },
+    "rule_structure": {
+      "type": "object",
+      "description": "Formal representation of the rule structure",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "Pattern or formula"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Component parts of the rule"
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Constraints on rule application"
+        }
+      }
+    },
+    "observed_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Observed surface forms in corpus"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "surface_form": {
+            "type": "string"
+          },
+          "analysis": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "counterexamples": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Forms that violate or don't follow the rule"
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          },
+          "source_type": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "extraction_date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "absolute_count": {
+          "type": "integer"
+        },
+        "corpus_percentage": {
+          "type": "number"
+        },
+        "distribution": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE", 
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "variant_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Known variants of the rule"
+    },
+    "orthographic_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Different orthographic representations"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or observations"
+    },
+    "related_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of related grammatical rules"
+    },
+    "historical_status": {
+      "type": "string",
+      "enum": [
+        "historical",
+        "modern", 
+        "shared",
+        "variant",
+        "uncertain"
+      ]
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validated": {
+      "type": "boolean"
+    }
+  },
+  "required": ["rule_id", "category", "phenomenon", "description", "confidence"],
+  "additionalProperties": false
+}

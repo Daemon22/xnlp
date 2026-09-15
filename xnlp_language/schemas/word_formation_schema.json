@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Word Formation Schema",
+  "description": "Schema for isiXhosa word formation patterns",
+  "type": "object",
+  "properties": {
+    "formation_id": {
+      "type": "string",
+      "description": "Unique identifier for the word formation pattern"
+    },
+    "formation_type": {
+      "type": "string",
+      "enum": [
+        "derivation",
+        "compounding",
+        "nominalization",
+        "verbal_derivation",
+        "reduplication",
+        "borrowing",
+        "semantic_extension",
+        "proper_name_formation",
+        "technical_terminology",
+        "affixation"
+      ]
+    },
+    "pattern": {
+      "type": "string",
+      "description": "Formation pattern or formula"
+    },
+    "productivity": {
+      "type": "string",
+      "enum": [
+        "productive",
+        "semi_productive",
+        "lexicalized",
+        "historical",
+        "uncertain"
+      ]
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "component": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "function": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "affixes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "affix": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["prefix", "suffix", "infix", "circumfix"]
+          },
+          "function": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "semantic_change": {
+      "type": "object",
+      "properties": {
+        "input_meaning": {
+          "type": "string"
+        },
+        "output_meaning": {
+          "type": "string"
+        },
+        "change_type": {
+          "type": "string",
+          "enum": [
+            "metaphor",
+            "metonymy",
+            "specialization",
+            "generalization",
+            "amelioration",
+            "pejoration"
+          ]
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "string"
+          },
+          "output": {
+            "type": "string"
+          },
+          "process": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        },
+        "type_frequency": {
+          "type": "integer"
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "historical_status": {
+      "type": "string",
+      "enum": [
+        "historical",
+        "modern",
+        "shared",
+        "variant",
+        "uncertain"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["formation_id", "formation_type", "pattern", "productivity", "confidence"],
+  "additionalProperties": false
+}

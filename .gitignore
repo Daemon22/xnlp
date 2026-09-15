@@ -26,6 +26,9 @@ env/
 .DS_Store
 Thumbs.db
 
+# Supabase CLI local cache (machine-specific)
+supabase/.temp/
+
 # Training outputs (regenerated)
 outputs/
 outputs_*/

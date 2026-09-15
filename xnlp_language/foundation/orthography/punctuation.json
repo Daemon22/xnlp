@@ -1,0 +1,100 @@
+{
+  "orthography_id": "ORT_PUNC_001",
+  "category": "punctuation",
+  "form": ". , ! ? ' - \" \"",
+  "description": "Standard punctuation marks used in isiXhosa orthography",
+  "phonological_value": "N/A",
+  "allophonic_variants": [],
+  "position": "sentence-level and word-level",
+  "constraints": ["Sentence-final punctuation marks", "Word-internal apostrophes for contractions", "Hyphens for compound words"],
+  "examples": [
+    {
+      "example": "A Sithwalandwe!",
+      "context": "Exclamation mark usage",
+      "source_record_id": "masikhanyise_000202_c309b085"
+    },
+    {
+      "example": "Ngubani Io ?",
+      "context": "Question mark usage",
+      "source_record_id": "mqhayi_v2_Imi_000013_8f7a339a"
+    },
+    {
+      "example": "bath'",
+      "context": "Apostrophe for contraction",
+      "source_record_id": "masikhanyise_000202_b62cda0f"
+    },
+    {
+      "example": "wasel'",
+      "context": "Apostrophe for contraction",
+      "source_record_id": "masikhanyise_000202_466d2763"
+    },
+    {
+      "example": "lweNtla-langa",
+      "context": "Hyphen in compound word",
+      "source_record_id": "masikhanyise_000202_3f148fe3"
+    },
+    {
+      "example": "ka-Gocini",
+      "context": "Hyphen with prefix",
+      "source_record_id": "mqhayi_v2_Imi_000021_19893b83"
+    },
+    {
+      "example": "\" U-Kawulezis'Amaxesha \"",
+      "context": "Quotation marks",
+      "source_record_id": "mqhayi_v2_Imi_000006_55765530"
+    }
+  ],
+  "variants": [],
+  "normalization": {
+    "normalized_form": "Standard punctuation",
+    "normalization_rule": "Standard punctuation conventions",
+    "reversible": false
+  },
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_c309b085",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "mqhayi_v2_Imi_000013_8f7a339a",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "masikhanyise_000202_b62cda0f",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_466d2763",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "masikhanyise_000202_3f148fe3",
+      "source_work": "masikhanyise",
+      "source_type": "cultural_content"
+    },
+    {
+      "record_id": "mqhayi_v2_Imi_000021_19893b83",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_v2_Imi_000006_55765530",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 2345,
+    "distribution": {
+      "mqhayi_v2": 2100,
+      "masikhanyise": 245
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "historical_status": "shared",
+  "notes": "Standard punctuation conventions. Apostrophes mark word-internal contractions, hyphens used for compound words and prefix separation."
+}

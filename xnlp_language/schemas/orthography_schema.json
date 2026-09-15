@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Orthography Schema",
+  "description": "Schema for isiXhosa orthographic conventions",
+  "type": "object",
+  "properties": {
+    "orthography_id": {
+      "type": "string",
+      "description": "Unique identifier for the orthographic entry"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "alphabet",
+        "letter",
+        "digraph",
+        "trigraph",
+        "convention",
+        "punctuation",
+        "capitalization",
+        "word_boundary",
+        "contraction",
+        "compound",
+        "hyphenation",
+        "borrowed_form",
+        "proper_name",
+        "historical_form"
+      ]
+    },
+    "form": {
+      "type": "string",
+      "description": "The orthographic form"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the orthographic element"
+    },
+    "phonological_value": {
+      "type": "string",
+      "description": "Corresponding phonological value"
+    },
+    "allophonic_variants": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "position": {
+      "type": "string",
+      "description": "Positional constraints (word-initial, medial, final, etc.)"
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Orthographic constraints"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "example": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "variant": {
+            "type": "string"
+          },
+          "variant_type": {
+            "type": "string",
+            "enum": [
+              "historical",
+              "modern",
+              "dialectal",
+              "stylistic",
+              "alternative"
+            ]
+          },
+          "period": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "normalization": {
+      "type": "object",
+      "properties": {
+        "normalized_form": {
+          "type": "string"
+        },
+        "normalization_rule": {
+          "type": "string"
+        },
+        "reversible": {
+          "type": "boolean"
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          },
+          "source_type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        },
+        "distribution": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "historical_status": {
+      "type": "string",
+      "enum": [
+        "historical",
+        "modern",
+        "shared",
+        "variant",
+        "uncertain"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["orthography_id", "category", "form", "confidence"],
+  "additionalProperties": false
+}

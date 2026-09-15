@@ -1,0 +1,50 @@
+{
+  "orthography_id": "ORT_DIG_NAS_001",
+  "category": "digraph",
+  "form": "ng ny",
+  "description": "Nasal digraphs representing velar and palatal nasal consonants",
+  "phonological_value": "/ŋ/, /ɲ/",
+  "allophonic_variants": [],
+  "position": "any",
+  "constraints": ["Can occur word-initially", "Can occur medially", "Can occur in consonant clusters"],
+  "examples": [
+    {
+      "example": "ngumntu",
+      "context": "Word-initial velar nasal",
+      "source_record_id": "mqhayi_v2_Imi_000013_8f7a339a"
+    },
+    {
+      "example": "ninyani",
+      "context": "Palatal nasal in historical text",
+      "source_record_id": "mqhayi_v2_Imi_000022_710548a0"
+    }
+  ],
+  "variants": [],
+  "normalization": {
+    "normalized_form": "ng ny",
+    "normalization_rule": "standard nasal digraphs",
+    "reversible": true
+  },
+  "source_evidence": [
+    {
+      "record_id": "mqhayi_v2_Imi_000013_8f7a339a",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_v2_Imi_000022_710548a0",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 1234,
+    "distribution": {
+      "mqhayi_v2": 1100,
+      "masikhanyise": 134
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "historical_status": "shared",
+  "notes": "Standard nasal digraphs consistent across historical and modern texts. 'ng' represents velar nasal, 'ny' represents palatal nasal."
+}

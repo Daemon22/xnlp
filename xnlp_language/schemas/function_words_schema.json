@@ -1,0 +1,187 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Function Words Schema",
+  "description": "Schema for isiXhosa function words (pronouns, demonstratives, etc.)",
+  "type": "object",
+  "properties": {
+    "function_word_id": {
+      "type": "string",
+      "description": "Unique identifier for the function word"
+    },
+    "word": {
+      "type": "string",
+      "description": "The function word form"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "personal_pronoun",
+        "demonstrative",
+        "possessive",
+        "interrogative",
+        "relative",
+        "quantifier",
+        "conjunction",
+        "adverb",
+        "locative_expression",
+        "prepositional_construction",
+        "particle",
+        "copulative_form"
+      ]
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "Specific subcategory"
+    },
+    "forms": {
+      "type": "object",
+      "properties": {
+        "base_form": {
+          "type": "string"
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "form": {
+                "type": "string"
+              },
+              "context": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "allomorphs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "grammatical_features": {
+      "type": "object",
+      "properties": {
+        "person": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "noun_class": {
+          "type": "string"
+        },
+        "case": {
+          "type": "string"
+        },
+        "distance": {
+          "type": "string"
+        }
+      }
+    },
+    "agreement_behavior": {
+      "type": "object",
+      "properties": {
+        "triggers_agreement": {
+          "type": "boolean"
+        },
+        "shows_agreement": {
+          "type": "boolean"
+        },
+        "agreement_class": {
+          "type": "string"
+        }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "properties": {
+        "position": {
+          "type": "string"
+        },
+        "syntactic_environment": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "example": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "source_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "frequency": {
+      "type": "object",
+      "properties": {
+        "corpus_count": {
+          "type": "integer"
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "HIGH_CONFIDENCE",
+        "SUPPORTED",
+        "PROVISIONAL",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE"
+      ]
+    },
+    "historical_status": {
+      "type": "string",
+      "enum": [
+        "historical",
+        "modern",
+        "shared",
+        "variant",
+        "uncertain"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": ["function_word_id", "word", "category", "confidence"],
+  "additionalProperties": false
+}

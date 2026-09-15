@@ -1,0 +1,110 @@
+{
+  "class_id": "NC_005",
+  "class_number": 5,
+  "prefix": {
+    "singular": "i-",
+    "plural": "ama-",
+    "variants": ["ili-", "isi-"]
+  },
+  "pairing": {
+    "singular_class": "NC_005",
+    "plural_class": "NC_006",
+    "pairing_type": "regular"
+  },
+  "semantic_tendencies": [
+    "natural phenomena",
+    "objects",
+    "animals",
+    "fruits",
+    "plants",
+    "abstract concepts"
+  ],
+  "agreement_prefixes": {
+    "subject_concord": {
+      "singular": "li-",
+      "plural": "a-"
+    },
+    "object_concord": {
+      "singular": "-li-",
+      "plural": "-ma-"
+    },
+    "possessive_concord": {
+      "singular": "la-",
+      "plural": "a-"
+    },
+    "adjective_concord": {
+      "singular": "eli-",
+      "plural": "ama-"
+    },
+    "demonstrative_concord": {
+      "singular": "eli-",
+      "plural": "a-"
+    }
+  },
+  "stem_behavior": {
+    "stem_initial": "various",
+    "nasal_assimilation": false,
+    "vowel_changes": []
+  },
+  "examples": [
+    {
+      "noun": "izwe",
+      "stem": "-zwe",
+      "meaning": "country/land",
+      "plural_form": "amazwe",
+      "source_record_id": "mqhayi_v2_Imi_000001_085aaf08"
+    },
+    {
+      "noun": "ityala",
+      "stem": "-tyala",
+      "meaning": "case/story",
+      "plural_form": "iityala",
+      "source_record_id": "mqhayi_000000_97e37256"
+    },
+    {
+      "noun": "inkosi",
+      "stem": "-kosi",
+      "meaning": "chief/king",
+      "plural_form": "iinkosi",
+      "source_record_id": "mqhayi_000000_519529ab"
+    },
+    {
+      "noun": "indlela",
+      "stem": "-dlela",
+      "meaning": "way/path",
+      "plural_form": "iindlela",
+      "source_record_id": "mqhayi_000000_586bee97"
+    },
+    {
+      "noun": "intsapho",
+      "stem": "-tsapho",
+      "meaning": "family",
+      "plural_form": "iintsapho",
+      "source_record_id": "mqhayi_000000_37a7628c"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "mqhayi_v2_Imi_000001_085aaf08",
+      "source_work": "mqhayi_v2",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_000000_97e37256",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    },
+    {
+      "record_id": "mqhayi_000000_519529ab",
+      "source_work": "mqhayi",
+      "source_type": "historical_poetry"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 789,
+    "representative_nouns": 67
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Class 5 prefix i- for singular objects and concepts, regular pairing with Class 6 ama- for plural. One of the most productive classes in the corpus."
+}

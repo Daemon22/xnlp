@@ -1,0 +1,58 @@
+{
+  "agreement_id": "AGR_POSS_NC9",
+  "agreement_type": "possessive_concord",
+  "noun_class": "NC_009",
+  "number": "singular",
+  "concord_forms": {
+    "prefix": "ka-",
+    "variants": ["kwa-"],
+    "allomorphs": {
+      "before_vowel": "kw-",
+      "before_consonant": "ka-"
+    }
+  },
+  "target_category": "noun",
+  "position": "pre-nominal",
+  "phonological_rules": [
+    "ka- becomes kwa- before vowel-initial nouns",
+    "maintains ka- before consonant-initial nouns"
+  ],
+  "examples": [
+    {
+      "noun": "uHintsa",
+      "concord_form": "ka-",
+      "target": "Malangana",
+      "full_construction": "kaMalangana",
+      "translation": "of Malangana",
+      "source_record_id": "masikhanyise_000202_e86c1d3f"
+    },
+    {
+      "noun": "uMqhayi",
+      "concord_form": "kwa-",
+      "target": "Gompo",
+      "full_construction": "kwaGompo",
+      "translation": "of Gompo",
+      "source_record_id": "masikhanyise_000202_7cf4a5e7"
+    }
+  ],
+  "exceptions": [],
+  "source_evidence": [
+    {
+      "record_id": "masikhanyise_000202_e86c1d3f",
+      "source_work": "masikhanyise"
+    },
+    {
+      "record_id": "masikhanyise_000202_7cf4a5e7",
+      "source_work": "masikhanyise"
+    }
+  ],
+  "frequency": {
+    "corpus_count": 89,
+    "variant_distribution": {
+      "ka-": 67,
+      "kwa-": 22
+    }
+  },
+  "confidence": "HIGH_CONFIDENCE",
+  "notes": "Possessive concord ka- for Class 9 singular nouns (proper names). Allomorph kwa- before vowels is phonologically conditioned. This is the patronymic prefix pattern extensively observed in corpus."
+}

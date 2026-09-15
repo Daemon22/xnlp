@@ -1,0 +1,406 @@
+{
+  "artifact_id": "WORD_ANALYZER_DATA_V1",
+  "notes": "Deterministic lookup data derived from corpus evidence and hand-curated foundation. The analyzer returns UNKNOWN for any form not matched here.",
+  "noun_class_prefixes": {
+    "NC_001": {
+      "class_number": 1,
+      "plural_prefix": "aba-",
+      "singular_prefix": "um-"
+    },
+    "NC_002": {
+      "class_number": 2,
+      "plural_prefix": "aba-",
+      "singular_prefix": "aba-"
+    },
+    "NC_003": {
+      "class_number": 3,
+      "plural_prefix": "imi-",
+      "singular_prefix": "um-"
+    },
+    "NC_005": {
+      "class_number": 5,
+      "plural_prefix": "ama-",
+      "singular_prefix": "i-"
+    },
+    "NC_006": {
+      "class_number": 6,
+      "plural_prefix": "ama-",
+      "singular_prefix": "ama-"
+    },
+    "NC_007": {
+      "class_number": 7,
+      "plural_prefix": "izi-",
+      "singular_prefix": "isi-"
+    },
+    "NC_009": {
+      "class_number": 9,
+      "plural_prefix": "o-",
+      "singular_prefix": "u-"
+    }
+  },
+  "status": "OBSERVED",
+  "subject_concord_map": {
+    "AGR_SUBJ_NC1": {
+      "noun_class": "NC_001",
+      "prefix": "u-"
+    },
+    "AGR_SUBJ_NC2": {
+      "noun_class": "NC_002",
+      "prefix": "ba-"
+    }
+  },
+  "verb_patterns": [
+    {
+      "candidate_segments": [
+        "a",
+        "babephila"
+      ],
+      "surface_form": "ababephila"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "bafazi"
+      ],
+      "surface_form": "abafazi"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "bafo"
+      ],
+      "surface_form": "abafo"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "bafundi"
+      ],
+      "surface_form": "abafundi"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "bafundisi"
+      ],
+      "surface_form": "abafundisi"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "bakhulu"
+      ],
+      "surface_form": "abakhulu"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "bamhlophe"
+      ],
+      "surface_form": "abamhlophe"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "baninzi"
+      ],
+      "surface_form": "abaninzi"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "bantsundu"
+      ],
+      "surface_form": "abantsundu"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "bantu"
+      ],
+      "surface_form": "abantu"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "bantw",
+        "ana"
+      ],
+      "surface_form": "abantwana"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "banye"
+      ],
+      "surface_form": "abanye"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "baya"
+      ],
+      "surface_form": "abaya"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "befundisi"
+      ],
+      "surface_form": "abefundisi"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "buye"
+      ],
+      "surface_form": "abuye"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "buze"
+      ],
+      "surface_form": "abuze"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "dala"
+      ],
+      "surface_form": "adala"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "f",
+        "ana"
+      ],
+      "surface_form": "afana"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "fazi"
+      ],
+      "surface_form": "afazi"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "fike"
+      ],
+      "surface_form": "afike"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "fileyo"
+      ],
+      "surface_form": "afileyo"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "frika"
+      ],
+      "surface_form": "afrika"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "fumane"
+      ],
+      "surface_form": "afumane"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "funa"
+      ],
+      "surface_form": "afuna"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "fundisi"
+      ],
+      "surface_form": "afundisi"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "goduke"
+      ],
+      "surface_form": "agoduke"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "hamba"
+      ],
+      "surface_form": "ahamba"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "hambe"
+      ],
+      "surface_form": "ahambe"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "hlale"
+      ],
+      "surface_form": "ahlale"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kaba"
+      ],
+      "surface_form": "akaba"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kala"
+      ],
+      "surface_form": "akala"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kayi"
+      ],
+      "surface_form": "akayi"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kazanga"
+      ],
+      "surface_form": "akazanga"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kazi"
+      ],
+      "surface_form": "akazi"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kha"
+      ],
+      "surface_form": "akha"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "khe"
+      ],
+      "surface_form": "akhe"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kho"
+      ],
+      "surface_form": "akho"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "khulu"
+      ],
+      "surface_form": "akhulu"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kokwethu"
+      ],
+      "surface_form": "akokwethu"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "komkhulu"
+      ],
+      "surface_form": "akomkhulu"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kowa"
+      ],
+      "surface_form": "akowa"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kowethu"
+      ],
+      "surface_form": "akowethu"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kuba"
+      ],
+      "surface_form": "akuba"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kufika"
+      ],
+      "surface_form": "akufika"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kukho"
+      ],
+      "surface_form": "akukho"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kuma"
+      ],
+      "surface_form": "akuma"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kuva"
+      ],
+      "surface_form": "akuva"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kwa"
+      ],
+      "surface_form": "akwa"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "kwaba"
+      ],
+      "surface_form": "akwaba"
+    },
+    {
+      "candidate_segments": [
+        "a",
+        "lala"
+      ],
+      "surface_form": "alala"
+    }
+  ]
+}
