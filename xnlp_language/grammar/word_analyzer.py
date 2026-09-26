@@ -150,6 +150,39 @@ def tokenize(text: str) -> list[str]:
     return [m.group(0) for m in _WORD.finditer(text)]
 
 
+def analyze_text(text: str) -> dict[str, Any]:
+    """Return word analyses with offsets while preserving every input character."""
+    tokens: list[dict[str, Any]] = []
+    cursor = 0
+
+    for match in _WORD.finditer(text):
+        if cursor < match.start():
+            tokens.append({
+                "kind": "separator",
+                "surface": text[cursor:match.start()],
+                "start": cursor,
+                "end": match.start(),
+            })
+        tokens.append({
+            "kind": "word",
+            "surface": match.group(0),
+            "start": match.start(),
+            "end": match.end(),
+            "analysis": analyze_word(match.group(0)),
+        })
+        cursor = match.end()
+
+    if cursor < len(text):
+        tokens.append({
+            "kind": "separator",
+            "surface": text[cursor:],
+            "start": cursor,
+            "end": len(text),
+        })
+
+    return {"schema_version": 1, "text": text, "tokens": tokens}
+
+
 if __name__ == "__main__":
     import sys
     for w in sys.argv[1:]:

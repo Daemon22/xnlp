@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xnlp-isixhosa"
+version = "0.1.0"
+description = "Evidence-bound isiXhosa language analysis and generation tools"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+model = ["torch>=2.0"]
+training = ["torch>=2.0"]
+
+[project.scripts]
+xnlp-serve = "xnlp_language.server:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["xnlp_language*", "core_llm*", "xnlp_trainer*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+"xnlp_language.grammar" = ["analyzer_data.json"]

@@ -1723,8 +1723,8 @@ def _build_word_analyzer_module(destination: Path, noun_classes: list[dict],
         '"""XNLP isiXhosa deterministic grammar modules.\n\n'
         'This package provides a deterministic word-analysis engine and\n'
         'structured grammatical system builders. No neural models are used.\n"""\n'
-        'from .word_analyzer import analyze_word, analyze_words, UNKNOWN_STATUS\n\n'
-        '__all__ = ["analyze_word", "analyze_words", "UNKNOWN_STATUS"]\n',
+        'from .word_analyzer import analyze_text, analyze_word, analyze_words, UNKNOWN_STATUS\n\n'
+        '__all__ = ["analyze_text", "analyze_word", "analyze_words", "UNKNOWN_STATUS"]\n',
         encoding="utf-8",
     )
 
@@ -1914,6 +1914,39 @@ def analyze_words(words: list[str]) -> list[dict[str, Any]]:
 def tokenize(text: str) -> list[str]:
     """Tokenize text into word tokens (deterministic, no model)."""
     return [m.group(0) for m in _WORD.finditer(text)]
+
+
+def analyze_text(text: str) -> dict[str, Any]:
+    """Return word analyses with offsets while preserving every input character."""
+    tokens: list[dict[str, Any]] = []
+    cursor = 0
+
+    for match in _WORD.finditer(text):
+        if cursor < match.start():
+            tokens.append({
+                "kind": "separator",
+                "surface": text[cursor:match.start()],
+                "start": cursor,
+                "end": match.start(),
+            })
+        tokens.append({
+            "kind": "word",
+            "surface": match.group(0),
+            "start": match.start(),
+            "end": match.end(),
+            "analysis": analyze_word(match.group(0)),
+        })
+        cursor = match.end()
+
+    if cursor < len(text):
+        tokens.append({
+            "kind": "separator",
+            "surface": text[cursor:],
+            "start": cursor,
+            "end": len(text),
+        })
+
+    return {"schema_version": 1, "text": text, "tokens": tokens}
 
 
 if __name__ == "__main__":

@@ -224,6 +224,15 @@ def test_conflict_detection_exists():
     assert contradictions["status"] == "OPEN"
 
 
+def test_source_gate_restricts_to_approved_sources():
+    """Only the approved Mqhayi and Masikhanyise sources may be treated as authoritative."""
+    corpus_path = ROOT / "data" / "authoritative" / "v2_authoritative_all.jsonl"
+    records = [json.loads(line) for line in corpus_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    assert {r["source"] for r in records}.issubset({"mqhayi", "masikhanyise"})
+    assert all(r.get("source") in {"mqhayi", "masikhanyise"} for r in records)
+    assert not any(r.get("source") not in {"mqhayi", "masikhanyise"} for r in records)
+
+
 def test_coverage_report_per_domain():
     """Coverage report must cover all structural domains."""
     report = json.loads((GENERATED / "reports" / "structural_coverage.json").read_text(encoding="utf-8"))
@@ -257,6 +266,22 @@ def test_unknown_analysis_is_safe():
         result = analyze_word(w)
         assert result["surface_form"] == w
         assert result["status"] in ("UNKNOWN", "ANALYZED")
+
+
+def test_text_analysis_preserves_exact_surface_and_offsets():
+    sys.path.insert(0, str(ROOT / "xnlp_language"))
+    from grammar import analyze_text, UNKNOWN_STATUS
+
+    text = "Qaphelisisa  upelo lwakho, xyzqwerty.\n"
+    result = analyze_text(text)
+    tokens = result["tokens"]
+
+    assert result["schema_version"] == 1
+    assert result["text"] == text
+    assert "".join(token["surface"] for token in tokens) == text
+    assert all(text[token["start"]:token["end"]] == token["surface"] for token in tokens)
+    unknown = next(token for token in tokens if token["surface"] == "xyzqwerty")
+    assert unknown["analysis"]["status"] == UNKNOWN_STATUS
 
 
 def test_grammar_report_readable():
