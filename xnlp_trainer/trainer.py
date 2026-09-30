@@ -400,6 +400,7 @@ class XNLPTrainer:
             test_loss = evaluate(self.model, self.test_loader, cfg.device)
             test_ppl = compute_perplexity(test_loss)
             self.history["test_loss"].append(test_loss)
+            self._save_history()
             print(f"  Held-out test loss : {test_loss:.4f}")
             print(f"  Held-out test ppl  : {test_ppl:.1f}")
 
