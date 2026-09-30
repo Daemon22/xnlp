@@ -6,6 +6,10 @@ from xnlp_trainer.data import build_split_indices
 
 def test_bpe_merges_the_selected_occurrence_not_first_symbol():
     tokenizer = XNLPTokenizer(vocab_size=32, min_frequency=1)
+    tokenizer.token2id["a"] = 5
+    tokenizer.id2token[5] = "a"
+    tokenizer.token2id["b"] = 6
+    tokenizer.id2token[6] = "b"
     tokenizer.token2id["ab"] = 7
     tokenizer.id2token[7] = "ab"
     tokenizer.merges = [("a", "b")]
