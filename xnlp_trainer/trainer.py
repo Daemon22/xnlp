@@ -77,6 +77,7 @@ class XNLPTrainer:
         self.scheduler: Optional[torch.optim.lr_scheduler.LambdaLR] = None
         self.train_loader = None
         self.val_loader = None
+        self.test_loader = None
         self.global_step = 0
         self.start_epoch = 0
         self.best_val_loss = float("inf")
@@ -84,7 +85,7 @@ class XNLPTrainer:
         self._max_steps = 1
         self._training_start_time: str = ""
         self.history: Dict[str, list] = {
-            "train_loss": [], "val_loss": [], "lr": [], "epoch": [],
+            "train_loss": [], "val_loss": [], "test_loss": [], "lr": [], "epoch": [],
         }
         self.early_stop_counter = 0
 
@@ -163,15 +164,15 @@ class XNLPTrainer:
             self.tokenizer = tokenizer_from_state_dict(tok_state)
             print(f"[load] Restored tokenizer (vocab={self.tokenizer.vocab_size_actual})")
             # Rebuild data loaders with the restored tokenizer (no retraining)
-            self.train_loader, self.val_loader, _ = prepare_data(
-                cfg, tokenizer=self.tokenizer, verbose=True,
+            self.train_loader, self.val_loader, self.test_loader, _ = prepare_data(
+                cfg, tokenizer=self.tokenizer, verbose=True, include_test=True,
             )
             # Restore training start time from checkpoint
             meta = ckpt.get("training_metadata", {})
             self._training_start_time = meta.get("training_start_time", "")
         else:
-            self.train_loader, self.val_loader, self.tokenizer = prepare_data(
-                cfg, tokenizer=None, verbose=True,
+            self.train_loader, self.val_loader, self.test_loader, self.tokenizer = prepare_data(
+                cfg, tokenizer=None, verbose=True, include_test=True,
             )
             self._training_start_time = datetime.now(timezone.utc).isoformat()
 
@@ -375,6 +376,17 @@ class XNLPTrainer:
                 self._save_history()
                 if not os.path.exists(self.best_path):
                     self._save_checkpoint_atomic(self.best_path, final_epoch)
+
+        # Evaluate the final held-out test split exactly once after model
+        # selection. The test set must not influence early stopping or tuning.
+        if self.test_loader is not None and os.path.exists(self.best_path):
+            best_ckpt = torch.load(self.best_path, map_location=cfg.device, weights_only=False)
+            self.model.load_state_dict(best_ckpt["model_state_dict"])
+            test_loss = evaluate(self.model, self.test_loader, cfg.device)
+            test_ppl = compute_perplexity(test_loss)
+            self.history["test_loss"].append(test_loss)
+            print(f"  Held-out test loss : {test_loss:.4f}")
+            print(f"  Held-out test ppl  : {test_ppl:.1f}")
 
         # Restore best model state for final sample generation
         best_exists = os.path.exists(self.best_path)
