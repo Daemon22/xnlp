@@ -12,6 +12,7 @@ can be embedded inside the single self-contained checkpoint file.
 from __future__ import annotations
 
 import random
+import hashlib
 from pathlib import Path
 from typing import List, Tuple, Dict, Any, Optional
 
@@ -23,6 +24,7 @@ from core_llm.tokenizer import XNLPTokenizer, SpecialTokens
 # Re-export for convenience
 __all__ = [
     "load_corpus",
+    "corpus_fingerprint",
     "train_tokenizer",
     "tokenize_texts",
     "build_split_indices",
@@ -61,6 +63,27 @@ def load_corpus(corpus_dir: str) -> List[str]:
             unique.append(s)
 
     return unique
+
+
+def corpus_fingerprint(corpus_dir: str) -> str:
+    """Return a stable SHA-256 fingerprint of the corpus inputs.
+
+    File names and raw UTF-8 bytes are hashed in sorted path order. This makes
+    the fingerprint independent of filesystem enumeration order and lets
+    checkpoints detect accidental resume against a changed corpus.
+    """
+    corpus_path = Path(corpus_dir)
+    if not corpus_path.exists():
+        raise FileNotFoundError(f"Corpus directory not found: {corpus_dir}")
+
+    digest = hashlib.sha256()
+    files = sorted(corpus_path.glob("*.txt"))
+    for path in files:
+        digest.update(path.name.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
 
 
 # ─── Tokenizer training ────────────────────────────────────────────────────
