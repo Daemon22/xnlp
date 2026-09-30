@@ -59,12 +59,11 @@ class XNLPConfig:
     @property
     def total_params(self) -> int:
         params = self.vocab_size * self.hidden_size
-        per_layer = (
-            3 * self.hidden_size * (self.num_key_value_heads * self.head_dim) +
-            self.hidden_size * self.hidden_size +
-            3 * self.hidden_size * self.intermediate_size +
-            2 * self.hidden_size
-        )
+        q_params = self.hidden_size * self.hidden_size
+        kv_params = 2 * self.hidden_size * (self.num_key_value_heads * self.head_dim)
+        attention_output_params = self.hidden_size * self.hidden_size
+        ffn_params = 3 * self.hidden_size * self.intermediate_size
+        per_layer = q_params + kv_params + attention_output_params + ffn_params + 2 * self.hidden_size
         params += per_layer * self.num_hidden_layers
         params += self.hidden_size + self.vocab_size * self.hidden_size
         return params
@@ -153,13 +152,13 @@ class GroupedQueryAttention(nn.Module):
             seq_len += past_key_value[0].shape[-2]
         
         cos, sin = self.rotary_emb(seq_len, device=hidden_states.device, dtype=hidden_states.dtype)
-        
+
         if position_ids is not None:
-            cos = cos[position_ids.unsqueeze(0).unsqueeze(0)].squeeze(0)
-            sin = sin[position_ids.unsqueeze(0).unsqueeze(0)].squeeze(0)
-        elif past_key_value is not None:
-            cos = cos[:, -q_len:, :]
-            sin = sin[:, -q_len:, :]
+            cos = cos[position_ids].unsqueeze(1)
+            sin = sin[position_ids].unsqueeze(1)
+        else:
+            cos = cos[-q_len:].unsqueeze(0).unsqueeze(0)
+            sin = sin[-q_len:].unsqueeze(0).unsqueeze(0)
         
         query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin)
         
@@ -248,10 +247,17 @@ class XNLPCoreLLM(nn.Module):
                 module.weight.data[module.padding_idx].zero_()
     
     def _prepare_decoder_attention_mask(self, input_shape, device, dtype, past_key_values_length=0):
-        batch_size, seq_len = input_shape
+        """Build a causal mask for full-sequence and cached decoding."""
+        _, query_len = input_shape
+        total_key_len = past_key_values_length + query_len
         mask = torch.triu(
-            torch.full((seq_len, seq_len), torch.finfo(dtype).min, device=device, dtype=dtype),
-            diagonal=past_key_values_length + 1
+            torch.full(
+                (query_len, total_key_len),
+                torch.finfo(dtype).min,
+                device=device,
+                dtype=dtype,
+            ),
+            diagonal=past_key_values_length + 1,
         )
         return mask.unsqueeze(0)
     
@@ -264,7 +270,11 @@ class XNLPCoreLLM(nn.Module):
         batch_size, seq_len, _ = inputs_embeds.shape
         
         if position_ids is None:
-            position_ids = torch.arange(seq_len, device=input_ids.device).unsqueeze(0)
+            position_ids = torch.arange(
+                past_key_values_length,
+                past_key_values_length + seq_len,
+                device=input_ids.device,
+            ).unsqueeze(0)
         
         past_key_values_length = 0
         if past_key_values is not None:
@@ -327,13 +337,36 @@ class XNLPCoreLLM(nn.Module):
                 top_p=0.9, repetition_penalty=1.1, do_sample=True,
                 pad_token_id=None, eos_token_id=None, streamer=None):
         self.eval()
-        
+
+        if max_new_tokens < 0:
+            raise ValueError("max_new_tokens must be >= 0")
+        if temperature <= 0:
+            raise ValueError("temperature must be > 0")
+        if top_k < 0:
+            raise ValueError("top_k must be >= 0")
+        if not 0 < top_p <= 1:
+            raise ValueError("top_p must be in (0, 1]")
+
         if pad_token_id is None:
             pad_token_id = self.config.pad_token_id
         if eos_token_id is None:
             eos_token_id = self.config.eos_token_id
         
         batch_size, seq_len = input_ids.shape
+        if seq_len == 0:
+            raise ValueError("input_ids must contain at least one token")
+        if seq_len > self.config.max_position_embeddings:
+            raise ValueError(
+                f"Prompt length ({seq_len}) exceeds the model context window "
+                f"({self.config.max_position_embeddings})."
+            )
+        if seq_len + max_new_tokens > self.config.max_position_embeddings:
+            raise ValueError(
+                f"Requested generation needs {seq_len + max_new_tokens} positions, "
+                f"but the model supports only {self.config.max_position_embeddings}. "
+                "Reduce max_new_tokens or shorten the prompt."
+            )
+
         generated_ids = input_ids.clone()
         past_key_values = None
         finished = torch.zeros(batch_size, dtype=torch.bool, device=input_ids.device)
@@ -355,11 +388,14 @@ class XNLPCoreLLM(nn.Module):
             next_token_logits = logits[:, -1, :]
             
             if repetition_penalty != 1.0:
-                for prev_token in generated_ids[0].unique():
-                    if next_token_logits[0, prev_token] > 0:
-                        next_token_logits[0, prev_token] /= repetition_penalty
-                    else:
-                        next_token_logits[0, prev_token] *= repetition_penalty
+                if repetition_penalty <= 0:
+                    raise ValueError("repetition_penalty must be > 0")
+                for batch_idx in range(batch_size):
+                    for prev_token in generated_ids[batch_idx].unique():
+                        if next_token_logits[batch_idx, prev_token] > 0:
+                            next_token_logits[batch_idx, prev_token] /= repetition_penalty
+                        else:
+                            next_token_logits[batch_idx, prev_token] *= repetition_penalty
             
             if temperature != 1.0:
                 next_token_logits = next_token_logits / temperature
