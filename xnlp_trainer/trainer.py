@@ -45,6 +45,7 @@ from .data import (
     prepare_data,
     tokenizer_to_state_dict,
     tokenizer_from_state_dict,
+    corpus_fingerprint,
 )
 from .evaluate import evaluate, compute_perplexity, generate_samples
 
@@ -77,14 +78,17 @@ class XNLPTrainer:
         self.scheduler: Optional[torch.optim.lr_scheduler.LambdaLR] = None
         self.train_loader = None
         self.val_loader = None
+        self.test_loader = None
         self.global_step = 0
         self.start_epoch = 0
         self.best_val_loss = float("inf")
         self._steps_per_epoch = 1
         self._max_steps = 1
         self._training_start_time: str = ""
+        self.corpus_fingerprint = ""
+
         self.history: Dict[str, list] = {
-            "train_loss": [], "val_loss": [], "lr": [], "epoch": [],
+            "train_loss": [], "val_loss": [], "test_loss": [], "lr": [], "epoch": [],
         }
         self.early_stop_counter = 0
 
@@ -152,6 +156,10 @@ class XNLPTrainer:
         print(f"  Output dir:      {cfg.output_dir}")
         print("=" * 64)
 
+        # Fingerprint the exact corpus inputs before any training state is
+        # constructed. This is recorded in every new checkpoint.
+        self.corpus_fingerprint = corpus_fingerprint(cfg.corpus_dir)
+
         # -- Data + tokenizer ------------------------------------------------
         ckpt = None
         if cfg.resume_from and os.path.isfile(cfg.resume_from):
@@ -163,15 +171,22 @@ class XNLPTrainer:
             self.tokenizer = tokenizer_from_state_dict(tok_state)
             print(f"[load] Restored tokenizer (vocab={self.tokenizer.vocab_size_actual})")
             # Rebuild data loaders with the restored tokenizer (no retraining)
-            self.train_loader, self.val_loader, _ = prepare_data(
-                cfg, tokenizer=self.tokenizer, verbose=True,
+            self.train_loader, self.val_loader, self.test_loader, _ = prepare_data(
+                cfg, tokenizer=self.tokenizer, verbose=True, include_test=True,
             )
             # Restore training start time from checkpoint
             meta = ckpt.get("training_metadata", {})
+            previous_fingerprint = meta.get("corpus_fingerprint")
+            if previous_fingerprint and previous_fingerprint != self.corpus_fingerprint:
+                raise ValueError(
+                    "Corpus fingerprint mismatch: the resume checkpoint was "
+                    "created from different corpus inputs. Refusing to resume "
+                    "against changed training data."
+                )
             self._training_start_time = meta.get("training_start_time", "")
         else:
-            self.train_loader, self.val_loader, self.tokenizer = prepare_data(
-                cfg, tokenizer=None, verbose=True,
+            self.train_loader, self.val_loader, self.test_loader, self.tokenizer = prepare_data(
+                cfg, tokenizer=None, verbose=True, include_test=True,
             )
             self._training_start_time = datetime.now(timezone.utc).isoformat()
 
@@ -251,6 +266,7 @@ class XNLPTrainer:
             "steps_per_epoch": self._steps_per_epoch,
             "training_start_time": self._training_start_time,
             "training_end_time": datetime.now(timezone.utc).isoformat(),
+            "corpus_fingerprint": self.corpus_fingerprint,
             "rng_state": rng_state,
         }
 
@@ -375,6 +391,18 @@ class XNLPTrainer:
                 self._save_history()
                 if not os.path.exists(self.best_path):
                     self._save_checkpoint_atomic(self.best_path, final_epoch)
+
+        # Evaluate the final held-out test split exactly once after model
+        # selection. The test set must not influence early stopping or tuning.
+        if self.test_loader is not None and os.path.exists(self.best_path):
+            best_ckpt = torch.load(self.best_path, map_location=cfg.device, weights_only=False)
+            self.model.load_state_dict(best_ckpt["model_state_dict"])
+            test_loss = evaluate(self.model, self.test_loader, cfg.device)
+            test_ppl = compute_perplexity(test_loss)
+            self.history["test_loss"].append(test_loss)
+            self._save_history()
+            print(f"  Held-out test loss : {test_loss:.4f}")
+            print(f"  Held-out test ppl  : {test_ppl:.1f}")
 
         # Restore best model state for final sample generation
         best_exists = os.path.exists(self.best_path)

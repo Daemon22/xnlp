@@ -12,6 +12,7 @@ can be embedded inside the single self-contained checkpoint file.
 from __future__ import annotations
 
 import random
+import hashlib
 from pathlib import Path
 from typing import List, Tuple, Dict, Any, Optional
 
@@ -23,6 +24,7 @@ from core_llm.tokenizer import XNLPTokenizer, SpecialTokens
 # Re-export for convenience
 __all__ = [
     "load_corpus",
+    "corpus_fingerprint",
     "train_tokenizer",
     "tokenize_texts",
     "build_split_indices",
@@ -61,6 +63,27 @@ def load_corpus(corpus_dir: str) -> List[str]:
             unique.append(s)
 
     return unique
+
+
+def corpus_fingerprint(corpus_dir: str) -> str:
+    """Return a stable SHA-256 fingerprint of the corpus inputs.
+
+    File names and raw UTF-8 bytes are hashed in sorted path order. This makes
+    the fingerprint independent of filesystem enumeration order and lets
+    checkpoints detect accidental resume against a changed corpus.
+    """
+    corpus_path = Path(corpus_dir)
+    if not corpus_path.exists():
+        raise FileNotFoundError(f"Corpus directory not found: {corpus_dir}")
+
+    digest = hashlib.sha256()
+    files = sorted(corpus_path.glob("*.txt"))
+    for path in files:
+        digest.update(path.name.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
 
 
 # ─── Tokenizer training ────────────────────────────────────────────────────
@@ -224,7 +247,8 @@ def prepare_data(
     config,
     tokenizer: Optional[XNLPTokenizer] = None,
     verbose: bool = True,
-) -> Tuple[DataLoader, DataLoader, XNLPTokenizer]:
+    include_test: bool = False,
+) -> Tuple:
     """
     Load corpus → train/load tokenizer → build train & val loaders.
 
@@ -276,20 +300,22 @@ def prepare_data(
     )
     train_sents = [sentences[i] for i in train_idx]
     val_sents = [sentences[i] for i in val_idx]
-    # test_sents = [sentences[i] for i in test_idx]  # reserved for future use
+    test_sents = [sentences[i] for i in test_idx]
 
     # ── Tokenise ───────────────────────────────────────────────────────
     if verbose:
         print("[data] Tokenising splits ...")
     train_ids = tokenize_texts(train_sents, tokenizer, cfg.max_seq_len)
     val_ids = tokenize_texts(val_sents, tokenizer, cfg.max_seq_len)
+    test_ids = tokenize_texts(test_sents, tokenizer, cfg.max_seq_len)
 
     # ── Datasets ───────────────────────────────────────────────────────
     train_ds = XhosaTextDataset(train_ids, cfg.max_seq_len)
     val_ds = XhosaTextDataset(val_ids, cfg.max_seq_len)
+    test_ds = XhosaTextDataset(test_ids, cfg.max_seq_len)
     if verbose:
         print(f"[data] Train examples: {len(train_ds)} | "
-              f"Val examples: {len(val_ds)}")
+              f"Val examples: {len(val_ds)} | Test examples: {len(test_ds)}")
 
     # ── DataLoader ─────────────────────────────────────────────────────
     collate = make_collate_fn(pad_id, cfg.max_seq_len)
@@ -302,4 +328,10 @@ def prepare_data(
         collate_fn=collate, num_workers=cfg.num_workers,
     )
 
+    test_loader = DataLoader(
+        test_ds, batch_size=cfg.batch_size, shuffle=False,
+        collate_fn=collate, num_workers=cfg.num_workers,
+    )
+    if include_test:
+        return train_loader, val_loader, test_loader, tokenizer
     return train_loader, val_loader, tokenizer
