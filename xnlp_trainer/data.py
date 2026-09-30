@@ -224,7 +224,8 @@ def prepare_data(
     config,
     tokenizer: Optional[XNLPTokenizer] = None,
     verbose: bool = True,
-) -> Tuple[DataLoader, DataLoader, XNLPTokenizer]:
+    include_test: bool = False,
+) -> Tuple:
     """
     Load corpus → train/load tokenizer → build train & val loaders.
 
@@ -276,20 +277,22 @@ def prepare_data(
     )
     train_sents = [sentences[i] for i in train_idx]
     val_sents = [sentences[i] for i in val_idx]
-    # test_sents = [sentences[i] for i in test_idx]  # reserved for future use
+    test_sents = [sentences[i] for i in test_idx]
 
     # ── Tokenise ───────────────────────────────────────────────────────
     if verbose:
         print("[data] Tokenising splits ...")
     train_ids = tokenize_texts(train_sents, tokenizer, cfg.max_seq_len)
     val_ids = tokenize_texts(val_sents, tokenizer, cfg.max_seq_len)
+    test_ids = tokenize_texts(test_sents, tokenizer, cfg.max_seq_len)
 
     # ── Datasets ───────────────────────────────────────────────────────
     train_ds = XhosaTextDataset(train_ids, cfg.max_seq_len)
     val_ds = XhosaTextDataset(val_ids, cfg.max_seq_len)
+    test_ds = XhosaTextDataset(test_ids, cfg.max_seq_len)
     if verbose:
         print(f"[data] Train examples: {len(train_ds)} | "
-              f"Val examples: {len(val_ds)}")
+              f"Val examples: {len(val_ds)} | Test examples: {len(test_ds)}")
 
     # ── DataLoader ─────────────────────────────────────────────────────
     collate = make_collate_fn(pad_id, cfg.max_seq_len)
@@ -302,4 +305,10 @@ def prepare_data(
         collate_fn=collate, num_workers=cfg.num_workers,
     )
 
+    test_loader = DataLoader(
+        test_ds, batch_size=cfg.batch_size, shuffle=False,
+        collate_fn=collate, num_workers=cfg.num_workers,
+    )
+    if include_test:
+        return train_loader, val_loader, test_loader, tokenizer
     return train_loader, val_loader, tokenizer
