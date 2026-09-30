@@ -328,6 +328,20 @@ The BPE tokenizer is implemented in pure Python. For large corpora, consider:
 - Using `--preset tiny` for quick iteration
 - Pre-training the tokenizer separately and passing it to `prepare_data()`
 
+## Professional training safeguards
+
+The training pipeline now treats evaluation and reproducibility as first-class
+concerns:
+
+- the corpus is split deterministically into train/validation/test partitions;
+- the tokenizer is trained only from the training partition;
+- the held-out test partition is evaluated only after model selection;
+- tokenizer BPE application is occurrence-safe and deterministic;
+- checkpoints carry a SHA-256 fingerprint of the corpus inputs;
+- resuming against a changed corpus is rejected rather than silently mixing
+  training states;
+- regression tests cover tokenizer merge correctness and split reproducibility.
+
 ## License
 
 This model is part of the XNLP project for isiXhosa natural language processing.
