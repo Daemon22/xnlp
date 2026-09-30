@@ -85,7 +85,7 @@ class XNLPTrainer:
         self._steps_per_epoch = 1
         self._max_steps = 1
         self._training_start_time: str = ""
-        self.corpus_fingerprint = corpus_fingerprint(config.corpus_dir)
+        self.corpus_fingerprint = ""
 
         self.history: Dict[str, list] = {
             "train_loss": [], "val_loss": [], "test_loss": [], "lr": [], "epoch": [],
@@ -155,6 +155,10 @@ class XNLPTrainer:
         print(f"  Early stopping:  {cfg.early_stopping}  (patience={cfg.patience})")
         print(f"  Output dir:      {cfg.output_dir}")
         print("=" * 64)
+
+        # Fingerprint the exact corpus inputs before any training state is
+        # constructed. This is recorded in every new checkpoint.
+        self.corpus_fingerprint = corpus_fingerprint(cfg.corpus_dir)
 
         # -- Data + tokenizer ------------------------------------------------
         ckpt = None
