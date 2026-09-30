@@ -45,6 +45,7 @@ from .data import (
     prepare_data,
     tokenizer_to_state_dict,
     tokenizer_from_state_dict,
+    corpus_fingerprint,
 )
 from .evaluate import evaluate, compute_perplexity, generate_samples
 
@@ -84,6 +85,8 @@ class XNLPTrainer:
         self._steps_per_epoch = 1
         self._max_steps = 1
         self._training_start_time: str = ""
+        self.corpus_fingerprint = corpus_fingerprint(config.corpus_dir)
+
         self.history: Dict[str, list] = {
             "train_loss": [], "val_loss": [], "test_loss": [], "lr": [], "epoch": [],
         }
@@ -169,6 +172,13 @@ class XNLPTrainer:
             )
             # Restore training start time from checkpoint
             meta = ckpt.get("training_metadata", {})
+            previous_fingerprint = meta.get("corpus_fingerprint")
+            if previous_fingerprint and previous_fingerprint != self.corpus_fingerprint:
+                raise ValueError(
+                    "Corpus fingerprint mismatch: the resume checkpoint was "
+                    "created from different corpus inputs. Refusing to resume "
+                    "against changed training data."
+                )
             self._training_start_time = meta.get("training_start_time", "")
         else:
             self.train_loader, self.val_loader, self.test_loader, self.tokenizer = prepare_data(
@@ -252,6 +262,7 @@ class XNLPTrainer:
             "steps_per_epoch": self._steps_per_epoch,
             "training_start_time": self._training_start_time,
             "training_end_time": datetime.now(timezone.utc).isoformat(),
+            "corpus_fingerprint": self.corpus_fingerprint,
             "rng_state": rng_state,
         }
 
