@@ -1,0 +1,23 @@
+name: XNLP Professional Training Checks
+
+on:
+  push:
+    branches: ["main", "professional-nlp-foundation"]
+  pull_request:
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+      - name: Install test dependencies
+        run: python -m pip install --upgrade pip pytest torch
+      - name: Run regression tests
+        env:
+          PYTHONPATH: .
+        run: python -m pytest -q tests/test_professional_training.py
