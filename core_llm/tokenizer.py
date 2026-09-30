@@ -216,41 +216,38 @@ class XNLPTokenizer:
         return tokens
     
     def _encode_word(self, word):
-        if len(word) == 0:
+        """Encode one word using deterministic, occurrence-safe BPE merges."""
+        if not word:
             return []
-        
+
         tokens = list(word)
-        
         while len(tokens) > 1:
             best_pair = None
-            best_rank = float('inf')
-            
+            best_index = -1
+            best_rank = float("inf")
+
             for i in range(len(tokens) - 1):
                 pair = (tokens[i], tokens[i + 1])
-                rank = self.merge_ranks.get(pair, float('inf'))
+                rank = self.merge_ranks.get(pair, float("inf"))
                 if rank < best_rank:
                     best_rank = rank
                     best_pair = pair
-            
-            if best_rank == float('inf'):
+                    best_index = i
+
+            if best_pair is None:
                 break
-            
-            tokens = (
-                tokens[:tokens.index(best_pair[0])] +
-                [best_pair[0] + best_pair[1]] +
-                tokens[tokens.index(best_pair[0]) + 2:]
-            )
-        
+
+            merged = best_pair[0] + best_pair[1]
+            tokens = tokens[:best_index] + [merged] + tokens[best_index + 2:]
+
         ids = []
         for token in tokens:
             if token in self.token2id:
                 ids.append(self.token2id[token])
             else:
-                sub_ids = self._fallback_encode(token)
-                ids.extend(sub_ids)
-        
+                ids.extend(self._fallback_encode(token))
         return ids
-    
+
     def _fallback_encode(self, token):
         ids = []
         for char in token:
