@@ -269,16 +269,16 @@ class XNLPCoreLLM(nn.Module):
         
         batch_size, seq_len, _ = inputs_embeds.shape
         
+        past_key_values_length = 0
+        if past_key_values is not None:
+            past_key_values_length = past_key_values[0][0].shape[2]
+        
         if position_ids is None:
             position_ids = torch.arange(
                 past_key_values_length,
                 past_key_values_length + seq_len,
                 device=input_ids.device,
             ).unsqueeze(0)
-        
-        past_key_values_length = 0
-        if past_key_values is not None:
-            past_key_values_length = past_key_values[0][0].shape[2]
         
         if attention_mask is not None:
             combined_attention_mask = self._prepare_decoder_attention_mask(
