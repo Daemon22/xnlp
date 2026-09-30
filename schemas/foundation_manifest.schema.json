@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "XNLP isiXhosa foundation manifest",
+  "type": "object",
+  "required": ["foundation_id", "records", "words", "unique_words", "source_distribution", "record_sha256", "authoritative_only", "status"],
+  "properties": {
+    "foundation_id": {"const": "XNLP_ISIXHOSA_FOUNDATION_V1"},
+    "records": {"type": "integer", "minimum": 1},
+    "words": {"type": "integer", "minimum": 1},
+    "unique_words": {"type": "integer", "minimum": 1},
+    "source_distribution": {"type": "object"},
+    "record_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "authoritative_only": {"const": true},
+    "status": {"type": "string"}
+  }
+}
