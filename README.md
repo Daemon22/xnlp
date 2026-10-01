@@ -385,11 +385,31 @@ runs/
 ```bash
 # Run comprehensive evaluation on a checkpoint
 python evaluate_checkpoint.py artifacts/xnlp_v2_tiny_tokenizer_fixed/model/best_model.pt
+
+# Watch for checkpoint updates and auto-evaluate
+python watch_and_eval.py
 ```
 
 Produces a machine-readable JSON report in `data/reports/evaluation_*.json`
 covering: tokenizer round-trip, generation quality, morphology/orthography,
-and contamination detection.
+contamination detection, context retention, comprehension, and robustness.
+
+### Evaluation Ladder
+
+The evaluation framework (7 categories) measures progressively more
+demanding capabilities:
+
+| # | Category | Metric | Quick checkpoint | Target |
+|---|----------|--------|:-:|:-:|
+| 1 | Tokenizer Round-Trip | Exact encode→decode on 5 canonical prompts | 100% | 100% |
+| 2 | Generation Quality | Diversity (3 samples), length, no repetition | 17% | ≥50% |
+| 3 | Morphology & Orthography | Valid Xhosa chars, no English, Xhosa words present | 50% | ≥80% |
+| 4 | Contamination | No verbatim training data reproduction | 100% | ≥90% |
+| 5 | Context Retention | Continuation length, relevant Xhosa vocab | 0% | ≥50% |
+| 6 | Comprehension | Coherent continuation, no English, novel output | 0% | ≥50% |
+| 7 | Robustness | Handles empty/char/long/special/mixed-case prompts | 100% | ≥80% |
+
+**Overall target**: ≥70% across all 7 categories after full-corpus training.
 
 ## Technical Requirements
 
