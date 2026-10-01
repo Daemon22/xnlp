@@ -89,6 +89,7 @@ class TrainingConfig:
     preset: str = "tiny"                 # tiny / small / medium / large / xlarge
     vocab_size: int = 8000               # target vocab (tokenizer capped at this)
     tokenizer_min_freq: int = 2
+    tokenizer_path: Optional[str] = None # path to a pre-trained tokenizer dir
 
     # ── Training ─────────────────────────────────────────────────────────────
     max_epochs: int = 50

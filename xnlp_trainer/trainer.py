@@ -185,8 +185,16 @@ class XNLPTrainer:
                 )
             self._training_start_time = meta.get("training_start_time", "")
         else:
+            # Check for a pre-trained tokenizer path (e.g. from V2 benchmark)
+            if getattr(cfg, 'tokenizer_path', None):
+                self.tokenizer = XNLPTokenizer.load_pretrained(cfg.tokenizer_path)
+                print(f"[load] Loaded pre-trained tokenizer from "
+                      f"{cfg.tokenizer_path} (vocab={self.tokenizer.vocab_size_actual})")
+            else:
+                self.tokenizer = None
+
             self.train_loader, self.val_loader, self.test_loader, self.tokenizer = prepare_data(
-                cfg, tokenizer=None, verbose=True, include_test=True,
+                cfg, tokenizer=self.tokenizer, verbose=True, include_test=True,
             )
             self._training_start_time = datetime.now(timezone.utc).isoformat()
 
