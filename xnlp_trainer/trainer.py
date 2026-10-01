@@ -70,6 +70,9 @@ class XNLPTrainer:
         torch.manual_seed(config.seed)
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(config.seed)
+        else:
+            # Maximise CPU utilization on dedicated training machines
+            torch.set_num_threads(2)
 
         # State containers
         self.model: Optional[XNLPCoreLLM] = None
@@ -453,8 +456,15 @@ class XNLPTrainer:
         for batch in self.train_loader:
             input_ids = batch["input_ids"].to(cfg.device)
             labels = batch["labels"].to(cfg.device)
+            attention_mask = batch.get("attention_mask")
+            if attention_mask is not None:
+                attention_mask = attention_mask.to(cfg.device)
 
-            outputs = self.model(input_ids=input_ids, labels=labels)
+            outputs = self.model(
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+                labels=labels,
+            )
             loss = outputs["loss"]
 
             self.optimizer.zero_grad()

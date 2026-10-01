@@ -59,8 +59,27 @@ xnlp/
 │   ├── manifests/             # Corpus manifests
 │   ├── processed/             # Final clean training corpus
 │   └── reports/               # Dataset quality & evaluation reports
-└── outputs/                   # Trained model checkpoints (gitignored)
-    └── best_model.pt          # Final single-file model artifact
+├── pyproject.toml
+├── start_v2_training.py        # V2 durable training launcher
+├── launch_training.py          # V2 detached process launcher
+├── resume_v2_training.py       # V2 resume from checkpoint
+├── monitor_training.py         # V2 training monitor
+├── evaluate_checkpoint.py      # V2 comprehensive evaluation
+├── train_v2_tokenizer_fixed.py # V2 full training script (30 epochs)
+├── train_v2_quick.py           # V2 quick pipeline-validation (300 sentences)
+├── release_gate_v2_tokenizer_fixed.py  # V2 release gate
+├── benchmark_v2_tokenizer_fixed.py     # V2 tokenizer benchmark
+├── _train_v2_all.py            # V2 pipeline orchestration
+├── xnlp_language/              # Linguistic foundation (isiXhosa grammar/evidence)
+├── artifacts/                  # V2 model & tokenizer artifacts (gitignored)
+│   └── xnlp_v2_tiny_tokenizer_fixed/
+│       ├── config.json
+│       ├── vocab.json
+│       ├── merges.json
+│       └── model/
+│           ├── best_model.pt
+│           └── last_model.pt
+└── runs/                       # Training run logs (gitignored)
 ```
 
 ## Model Specifications
@@ -287,6 +306,90 @@ Options:
 | **Overall** | **85%** |
 
 The model generates novel isiXhosa language content from learned parameters - verified by the offline capability test where `best_model.pt` is loaded in an isolated directory with no network, no source corpus, and no retrieval system.
+
+### Training Time
+
+| Property | Value |
+|----------|-------|
+| **Preset** | tiny |
+| **Parameters** | 5,180,672 |
+| **Vocab Size** | 4096 (BPE, V2 whitespace-preserving) |
+| **Training Corpus** | 12,051 sentences (V2 full corpus, 16,462 lines) |
+| **Max Seq Len** | 64 (captures 100% of V2 corpus sentences; avg 18 tokens) |
+| **Hardware** | 2 CPU cores, PyTorch CPU, no GPU |
+| **Est. Time / Epoch** | ~120 minutes |
+
+## V2 Pipeline (Full-Corpus Training)
+
+The V2 pipeline trains on the full authoritative isiXhosa corpus with the
+whitespace-preserving BPE tokenizer, dynamic padding for CPU efficiency, and
+attention masking for proper padding handling.
+
+### Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `start_v2_training.py` | Durable training launcher (creates run dir, PID file, log) |
+| `launch_training.py` | Detached process launcher (survives shell expiry) |
+| `resume_v2_training.py` | Resume from `last_model.pt` with full state |
+| `monitor_training.py` | Check training progress from log files |
+| `evaluate_checkpoint.py` | Comprehensive evaluation report (generation, morphology, contamination) |
+| `benchmark_v2_tokenizer_fixed.py` | Tokenizer benchmark across vocab sizes |
+| `release_gate_v2_tokenizer_fixed.py` | Release-gate verification |
+| `train_v2_tokenizer_fixed.py` | Full training script (30 epochs, seq_len=256) |
+| `train_v2_quick.py` | Quick pipeline-validation run (300 sentences, 3 epochs) |
+
+### V2 Training on CPU
+
+For CPU-only training, the following configuration is recommended:
+
+```bash
+# Full-corpus V2 training (detached, survives shell expiry)
+python launch_training.py --epochs 20 --batch-size 8 --max-seq-len 64 --patience 5
+
+# Monitor progress
+python monitor_training.py
+
+# Resume if interrupted
+python resume_v2_training.py --epochs 30
+```
+
+**Key optimizations:**
+- `max_seq_len=64`: The V2 corpus averages 18 tokens/sentence (max 62), so 64
+  captures 100% of sentences without truncation while halving compute vs 128.
+- Dynamic padding: batches are padded to the longest sequence in the batch
+  (avg ~29 tokens), not to `max_seq_len` (64), giving ~2x speedup.
+- Attention masking: padding tokens are properly excluded from attention.
+- `CREATE_NEW_PROCESS_GROUP`: training runs as a detached process.
+
+### V2 Artifacts
+
+```
+artifacts/xnlp_v2_tiny_tokenizer_fixed/
+  config.json              # tokenizer config (vocab=4096)
+  vocab.json               # 4096-token vocabulary
+  merges.json              # BPE merge table
+  training_config.json     # training configuration
+  model/
+    best_model.pt          # best checkpoint (62.5 MB)
+    last_model.pt          # resumable checkpoint
+    training_history.json  # per-epoch loss/LR history
+runs/
+  v2_full_<timestamp>/     # run metadata, logs
+  v2_run_<timestamp>/      # detached training logs
+  v2_resume_<timestamp>/   # resume run logs
+```
+
+### V2 Evaluation
+
+```bash
+# Run comprehensive evaluation on a checkpoint
+python evaluate_checkpoint.py artifacts/xnlp_v2_tiny_tokenizer_fixed/model/best_model.pt
+```
+
+Produces a machine-readable JSON report in `data/reports/evaluation_*.json`
+covering: tokenizer round-trip, generation quality, morphology/orthography,
+and contamination detection.
 
 ## Technical Requirements
 

@@ -225,17 +225,30 @@ class XhosaTextDataset(Dataset):
 
 
 def make_collate_fn(pad_token_id: int, max_len: int):
-    """Return a collate function that pads every batch to *max_len*."""
+    """Return a collate function using **dynamic padding**.
+
+    Each batch is padded to the length of the longest sequence in that
+    batch (capped at *max_len*), not to *max_len* unconditionally.  This
+    avoids wasting compute on padding tokens — critical on a CPU-only
+    machine where the average V2 sentence is ~18 tokens but the cap is
+    64.  Returns an ``attention_mask`` so the model can skip padding
+    positions during attention.
+    """
 
     def collate(batch: List[Dict[str, torch.Tensor]]) -> Dict[str, torch.Tensor]:
+        # Dynamic padding: pad to the longest sequence in the batch
+        actual_max = min(max(len(b["input_ids"]) for b in batch), max_len)
         n = len(batch)
-        input_ids = torch.full((n, max_len), pad_token_id, dtype=torch.long)
-        labels = torch.full((n, max_len), -100, dtype=torch.long)
+        input_ids = torch.full((n, actual_max), pad_token_id, dtype=torch.long)
+        labels = torch.full((n, actual_max), -100, dtype=torch.long)
+        attention_mask = torch.zeros((n, actual_max), dtype=torch.long)
         for i, b in enumerate(batch):
-            length = min(len(b["input_ids"]), max_len)
+            length = min(len(b["input_ids"]), actual_max)
             input_ids[i, :length] = b["input_ids"][:length]
             labels[i, :length] = b["labels"][:length]
-        return {"input_ids": input_ids, "labels": labels}
+            attention_mask[i, :length] = 1
+        return {"input_ids": input_ids, "labels": labels,
+                "attention_mask": attention_mask}
 
     return collate
 

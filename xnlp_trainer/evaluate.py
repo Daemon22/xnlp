@@ -30,7 +30,10 @@ def evaluate(model: XNLPCoreLLM, val_loader, device: str = "cpu") -> float:
     for batch in val_loader:
         input_ids = batch["input_ids"].to(device)
         labels = batch["labels"].to(device)
-        outputs = model(input_ids=input_ids, labels=labels)
+        attention_mask = batch.get("attention_mask")
+        if attention_mask is not None:
+            attention_mask = attention_mask.to(device)
+        outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
         total_loss += outputs["loss"].item()
         n_batches += 1
     avg_loss = total_loss / max(n_batches, 1)
