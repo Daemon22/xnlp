@@ -363,7 +363,8 @@ class XNLPCoreLLM(nn.Module):
         if seq_len + max_new_tokens > self.config.max_position_embeddings:
             raise ValueError(
                 f"Requested generation needs {seq_len + max_new_tokens} positions, "
-                f"but the model supports only {self.config.max_position_embeddings}. "
+                f"but the model context window supports only "
+                f"{self.config.max_position_embeddings}. "
                 "Reduce max_new_tokens or shorten the prompt."
             )
 
