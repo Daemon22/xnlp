@@ -253,6 +253,177 @@ def eval_contamination(predictor, prompts, training_records):
     return results
 
 
+# ─── Additional evaluation prompt sets ─────────────────────────────────────
+
+# Context retention: short passages + follow-up questions
+CONTEXT_PROMPTS = [
+    ("Umthetho wamaXhosa", "context"),
+    ("Izibongo zethu", "context"),
+    ("Inkosi yethu", "context"),
+    ("UMemeso ophiqo", "context"),
+]
+
+# Comprehension: questions about given context
+COMPREHENSION_PROMPTS = [
+    ("Bhala ngokuba", "comprehension"),
+    ("Xhumana ke", "comprehension"),
+    ("Molo", "comprehension"),
+    ("Ndiyavuya", "comprehension"),
+]
+
+# Robustness: edge cases
+ROBUSTNESS_PROMPTS = [
+    ("", "empty_prompt"),          # empty prompt
+    ("X", "single_char"),          # single character
+    ("a" * 100, "long_prompt"),    # long prompt
+    ("!@#$%", "special_chars"),    # special characters
+    ("UMntu", "mixed_case"),       # mixed case Xhosa
+]
+
+
+def eval_context_retention(predictor, prompts):
+    """Evaluate context retention: does the model reference prompt context?"""
+    results = {"total": 0, "passed": 0, "failed": 0, "details": [], "score": 0.0}
+    
+    for prompt_text, _ in prompts:
+        gen = predictor.generate(
+            prompt_text, max_new_tokens=40, temperature=0.7,
+            top_k=40, top_p=0.9, repetition_penalty=1.1,
+        )
+        
+        # Check if the continuation contains Xhosa words
+        gen_lower = gen.lower()
+        xhosa_count = sum(1 for w in EXPECTED_XHOSA_WORDS if w in gen_lower)
+        
+        # Check continuation length (not just echoing the prompt)
+        continuation_len = len(gen) - len(prompt_text)
+        
+        entry = {
+            "prompt": prompt_text,
+            "generation": gen[:100],
+            "continuation_length": continuation_len,
+            "xhosa_words_in_continuation": xhosa_count,
+        }
+        results["details"].append(entry)
+        results["total"] += 1
+        
+        score = 0
+        if continuation_len > 5:
+            score += 5
+        if xhosa_count >= 1:
+            score += 5
+        
+        if score >= 10:
+            results["passed"] += 1
+        else:
+            results["failed"] += 1
+        entry["score"] = score
+    
+    results["score"] = round(results["passed"] / max(results["total"], 1) * 100, 1)
+    return results
+
+
+def eval_comprehension(predictor, prompts):
+    """Evaluate comprehension: does the model respond coherently to open prompts?"""
+    results = {"total": 0, "passed": 0, "failed": 0, "details": [], "score": 0.0}
+    
+    for prompt_text, _ in prompts:
+        try:
+            gen = predictor.generate(
+                prompt_text, max_new_tokens=50, temperature=0.8,
+                top_k=40, top_p=0.9, repetition_penalty=1.1,
+            )
+        except Exception as e:
+            results["details"].append({
+                "prompt": prompt_text,
+                "error": str(e),
+                "passed": False,
+            })
+            results["total"] += 1
+            results["failed"] += 1
+            continue
+        
+        # Check the model produced meaningful output beyond the prompt
+        continuation = gen[len(prompt_text):].strip()
+        has_xhosa = any(w in gen.lower() for w in EXPECTED_XHOSA_WORDS)
+        no_english = not any(
+            w in gen.lower().split() for w in ["the", "and", "of", "to", "in"]
+        )
+        
+        entry = {
+            "prompt": prompt_text,
+            "generation": gen[:100],
+            "continuation": continuation[:80],
+            "continuation_length": len(continuation),
+            "has_xhosa_vocab": has_xhosa,
+            "no_english": no_english,
+        }
+        results["details"].append(entry)
+        results["total"] += 1
+        
+        score = 0
+        if len(continuation) > 5:
+            score += 5
+        if has_xhosa:
+            score += 3
+        if no_english:
+            score += 2
+        
+        if score >= 7:
+            results["passed"] += 1
+        else:
+            results["failed"] += 1
+        entry["score"] = score
+    
+    results["score"] = round(results["passed"] / max(results["total"], 1) * 100, 1)
+    return results
+
+
+def eval_robustness(predictor, prompts):
+    """Evaluate robustness: edge cases, special characters, short/long prompts."""
+    results = {"total": 0, "passed": 0, "failed": 0, "details": [], "score": 0.0}
+    
+    for prompt_text, category in prompts:
+        try:
+            gen = predictor.generate(
+                prompt_text, max_new_tokens=20, temperature=0.8,
+                top_k=40, top_p=0.9, repetition_penalty=1.1,
+            )
+            error = None
+            output_len = len(gen)
+        except Exception as e:
+            gen = ""
+            error = str(e)
+            output_len = 0
+        
+        entry = {
+            "prompt": prompt_text[:50],
+            "category": category,
+            "generation": gen[:80],
+            "output_length": output_len,
+            "error": error,
+        }
+        results["details"].append(entry)
+        results["total"] += 1
+        
+        score = 0
+        if error is None:
+            score += 3
+        if output_len > 0:
+            score += 2
+        if output_len > len(prompt_text):
+            score += 5
+        
+        if score >= 7:
+            results["passed"] += 1
+        else:
+            results["failed"] += 1
+        entry["score"] = score
+    
+    results["score"] = round(results["passed"] / max(results["total"], 1) * 100, 1)
+    return results
+
+
 def main():
     # Find the checkpoint
     ckpt_path = sys.argv[1] if len(sys.argv) > 1 else \
@@ -319,6 +490,30 @@ def main():
         status = "PASS" if d["novel"] else "FAIL"
         print(f"  {status}: {d['generation'][:60]}")
     report["tests"]["contamination"] = contam_report
+
+    # 5. Context retention
+    print("\n=== Test 5: Context Retention ===")
+    ctx_report = eval_context_retention(predictor, CONTEXT_PROMPTS)
+    print(f"  Passed: {ctx_report['passed']}/{ctx_report['total']} ({ctx_report['score']}%)")
+    for d in ctx_report["details"]:
+        print(f"  {d['prompt'][:30]:30s} → {d['generation'][:60]}")
+    report["tests"]["context_retention"] = ctx_report
+
+    # 6. Comprehension
+    print("\n=== Test 6: Comprehension ===")
+    comp_report = eval_comprehension(predictor, COMPREHENSION_PROMPTS)
+    print(f"  Passed: {comp_report['passed']}/{comp_report['total']} ({comp_report['score']}%)")
+    for d in comp_report["details"]:
+        print(f"  {d['prompt'][:30]:30s} → {d['generation'][:60]}")
+    report["tests"]["comprehension"] = comp_report
+
+    # 7. Robustness
+    print("\n=== Test 7: Robustness ===")
+    rob_report = eval_robustness(predictor, ROBUSTNESS_PROMPTS)
+    print(f"  Passed: {rob_report['passed']}/{rob_report['total']} ({rob_report['score']}%)")
+    for d in rob_report["details"]:
+        print(f"  {d['category']:15s} → {d['generation'][:60]}")
+    report["tests"]["robustness"] = rob_report
     
     # Summary
     print("\n" + "=" * 60)
