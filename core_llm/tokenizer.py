@@ -135,10 +135,17 @@ class XNLPTokenizer:
             print(f"Training complete! Final vocab size: {len(self.token2id)}, Merges: {self.num_merges}")
     
     def _pre_tokenize(self, text):
-        words = text.split()
+        # Split into alternating non-whitespace "words" and whitespace runs.
+        # Whitespace is preserved as its own characters (rather than discarded
+        # via ``text.split()``) so that:
+        #   * the space/newline/tab characters enter the vocabulary, and
+        #   * encode / decode round-trip the original surface text exactly,
+        #     including multiple consecutive spaces and newlines.
+        # Discarding inter-word whitespace makes round-tripping impossible
+        # and causes generated text to run words together ("umntungumntu").
         result = []
-        for word in words:
-            parts = re.findall(r"([^\w]*)(\w+)([^\w]*)", word)
+        for chunk in re.findall(r"\S+|\s+", text):
+            parts = re.findall(r"([^\w]*)(\w+)([^\w]*)", chunk)
             if parts:
                 for prefix, core, suffix in parts:
                     if prefix:
@@ -147,7 +154,9 @@ class XNLPTokenizer:
                     if suffix:
                         result.append(suffix)
             else:
-                result.append(word)
+                # Whitespace (or punctuation-only) chunk: keep verbatim so its
+                # characters survive into the vocabulary and round-trip.
+                result.append(chunk)
         return result
     
     def _init_base_vocab(self, word_freqs):
@@ -257,7 +266,7 @@ class XNLPTokenizer:
                 ids.append(self.unk_token_id)
         return ids
     
-    def decode(self, token_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True):
+    def decode(self, token_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False):
         tokens = []
         for tid in token_ids:
             if tid in self.id2token:
@@ -267,12 +276,17 @@ class XNLPTokenizer:
                 tokens.append(token)
             else:
                 tokens.append(self.special_tokens.unk_token)
-        
+
         text = "".join(tokens)
-        
+
+        # ``clean_up_tokenization_spaces`` collapses runs of whitespace into a
+        # single space. Because this tokenizer now preserves whitespace as real
+        # tokens, such collapsing would destroy legitimate spacing (e.g. double
+        # spaces, newlines) and break exact round-tripping. It is therefore off
+        # by default and only applied when a caller explicitly opts in.
         if clean_up_tokenization_spaces:
             text = re.sub(r'\s+', ' ', text).strip()
-        
+
         return text
     
     def save_pretrained(self, save_directory):
