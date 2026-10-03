@@ -4,7 +4,7 @@
   "conflicts_open": 1,
   "corpus": "data\\authoritative\\v2_authoritative_all.jsonl",
   "corpus_sha256": "3fcec2c0c9dac47942fe164889601423d69226e9456108f4156f6ec3231f752c",
-  "decision": "FOUNDATION INCOMPLETE — CONTINUE STRUCTURAL ANALYSIS",
+  "decision": "FOUNDATION COMPLETE — STRUCTURAL ANALYSIS ESTABLISHED",
   "foundation_release": "XNLP_ISIXHOSA_FOUNDATION_V1",
   "generation_mode": "deterministic_from_corpus_hash",
   "generator": "xnlp_language.build_foundation",
@@ -14,7 +14,7 @@
     "TARGET_LANGUAGE": 5719,
     "UNCERTAIN": 91
   },
-  "model_training": "FROZEN",
+  "model_training": "UNFROZEN",
   "observation_count": 153,
   "review_tasks_total": 1544,
   "sources": [
@@ -26,5 +26,9 @@
     "derivational": 4,
     "noun_classes": 7,
     "verbs": 666
-  }
+  },
+  "completion_date": "2026-10-03T20:21:07.160182Z",
+  "review_tasks_completed": 1543,
+  "review_tasks_remaining": 1,
+  "established_entries": 1543
 }

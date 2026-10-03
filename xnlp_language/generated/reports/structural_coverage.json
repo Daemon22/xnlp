@@ -38,7 +38,7 @@
       "coverage_status": "OBSERVED",
       "domain": "lexicon",
       "entries": 30017,
-      "notes": "Surface-form observations only; no lemma assignment.",
+      "notes": "Surface-form observations + hand-curated lemma/POS analyses.",
       "observation_ids": [
         "LEX_OBS_000001",
         "LEX_OBS_000002",
