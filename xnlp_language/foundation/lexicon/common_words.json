@@ -1,0 +1,673 @@
+[
+  {
+    "surface_form": "ukuthi",
+    "lemma": "ukuthi",
+    "part_of_speech": "complementizer",
+    "gloss": "that / in order that",
+    "morphological_analysis": "u-ku-thi (u- copula prefix variant, -ku- infinitive marker, -thi complementizer suffix)",
+    "noun_class": null,
+    "syntactic_function": "introduces complement clauses",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"},
+      {"record_id": "masikhanyise_000202_221eb708", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "High-frequency complementizer in corpus. Well-established grammatical word in isiXhosa."
+  },
+  {
+    "surface_form": "ukuba",
+    "lemma": "ukuba",
+    "part_of_speech": "complementizer",
+    "gloss": "that / whether",
+    "morphological_analysis": "u-ku-ba (u- copula prefix, -ku- infinitive marker, -ba nominalizer/complementizer)",
+    "noun_class": null,
+    "syntactic_function": "introduces subordinate clauses (declarative and interrogative)",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Variant form of ukuthi; well-established complementizer."
+  },
+  {
+    "surface_form": "kuba",
+    "lemma": "kuba",
+    "part_of_speech": "complementizer",
+    "gloss": "that / whether",
+    "morphological_analysis": "ku-ba (ku- locative/copula prefix, -ba complementizer suffix)",
+    "noun_class": null,
+    "syntactic_function": "introduces complement clauses; variant of ukuba",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Variant of ukuba; used in subordinate clause subordination."
+  },
+  {
+    "surface_form": "xa",
+    "lemma": "xa",
+    "part_of_speech": "complementizer",
+    "gloss": "when / if",
+    "morphological_analysis": "bare form (no affixation)",
+    "noun_class": null,
+    "syntactic_function": "introduces temporal or conditional subordinate clauses",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Multi-functional complementizer/subordinator; well-attested in corpus."
+  },
+  {
+    "surface_form": "ngoba",
+    "lemma": "ngoba",
+    "part_of_speech": "complementizer",
+    "gloss": "because",
+    "morphological_analysis": "ngo-ba (ngo- locative/comitative prefix, -ba complementizer suffix)",
+    "noun_class": null,
+    "syntactic_function": "causal subordinator",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Causal complementizer; well-established in corpus."
+  },
+  {
+    "surface_form": "mna",
+    "lemma": "mna",
+    "part_of_speech": "personal_pronoun",
+    "gloss": "I / me",
+    "morphological_analysis": "bare pronoun form",
+    "noun_class": null,
+    "person": 1,
+    "number": "singular",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "First person singular subject/object pronoun."
+  },
+  {
+    "surface_form": "wena",
+    "lemma": "wena",
+    "part_of_speech": "personal_pronoun",
+    "gloss": "you (singular)",
+    "morphological_analysis": "bare pronoun form",
+    "noun_class": null,
+    "person": 2,
+    "number": "singular",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Second person singular pronoun."
+  },
+  {
+    "surface_form": "thina",
+    "lemma": "thina",
+    "part_of_speech": "personal_pronoun",
+    "gloss": "we / us",
+    "morphological_analysis": "bare pronoun form",
+    "noun_class": null,
+    "person": 1,
+    "number": "plural",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "First person plural pronoun."
+  },
+  {
+    "surface_form": "yena",
+    "lemma": "yena",
+    "part_of_speech": "personal_pronoun",
+    "gloss": "he/she/they (with pejorative/confirmative tone)",
+    "morphological_analysis": "-y- copula + -ena emphatic suffix",
+    "noun_class": null,
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Emphatic/personal pronoun; variant of 'ena' (he/she/it/him/her/them)."
+  },
+  {
+    "surface_form": "lo",
+    "lemma": "lo",
+    "part_of_speech": "demonstrative_determiner",
+    "gloss": "this (singular, class 1/2)",
+    "morphological_analysis": "demonstrative concord prefix",
+    "noun_class": "NC_001/NC_002",
+    "syntactic_function": "demonstrative determiner or subject concord",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Demonstrative concord for class 1/2."
+  },
+  {
+    "surface_form": "loo",
+    "lemma": "loo",
+    "part_of_speech": "demonstrative_determiner",
+    "gloss": "those (singular, class 3/4)",
+    "morphological_analysis": "demonstrative concord prefix (variant of 'lo')",
+    "noun_class": "NC_003/NC_004",
+    "syntactic_function": "demonstrative determiner or subject concord",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Demonstrative concord for class 3/4."
+  },
+  {
+    "surface_form": "lowo",
+    "lemma": "lowo",
+    "part_of_speech": "demonstrative_determiner",
+    "gloss": "that one (singular, class 6)",
+    "morphological_analysis": "lo- demonstrative + -wo (class 6 variant)",
+    "noun_class": "NC_006",
+    "syntactic_function": "demonstrative determiner or subject concord",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Demonstrative for class 6."
+  },
+  {
+    "surface_form": "laa",
+    "lemma": "laa",
+    "part_of_speech": "demonstrative_determiner",
+    "gloss": "that one (remote, singular)",
+    "morphological_analysis": "demonstrative concord prefix (remote form)",
+    "noun_class": null,
+    "syntactic_function": "demonstrative determiner or subject concord",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Remote demonstrative form."
+  },
+  {
+    "surface_form": "len",
+    "lemma": "len",
+    "part_of_speech": "demonstrative_determiner",
+    "gloss": "this/that one (class 9)",
+    "morphological_analysis": "demonstrative concord prefix (class 9)",
+    "noun_class": "NC_009",
+    "syntactic_function": "demonstrative determiner or subject concord",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Demonstrative for class 9/10."
+  },
+  {
+    "surface_form": "le",
+    "lemma": "le",
+    "part_of_speech": "demonstrative_determiner",
+    "gloss": "this/that one (class 5)",
+    "morphological_analysis": "demonstrative concord prefix (class 5)",
+    "noun_class": "NC_005",
+    "syntactic_function": "demonstrative determiner or subject concord",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Demonstrative for class 5/6."
+  },
+  {
+    "surface_form": "kodwa",
+    "lemma": "kodwa",
+    "part_of_speech": "conjunction",
+    "gloss": "but / however",
+    "morphological_analysis": "ko-dwa (ko- locative prefix, -dwa adversative)",
+    "noun_class": null,
+    "syntactic_function": "adversative conjunction",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Common adversative conjunction."
+  },
+  {
+    "surface_form": "kuphi",
+    "lemma": "kuphi",
+    "part_of_speech": "interrogative_adverb",
+    "gloss": "where?",
+    "morphological_analysis": "ku-pi (ku- locative prefix, -pi interrogative suffix)",
+    "noun_class": null,
+    "syntactic_function": "interrogative adverb of place",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Interrogative adverb for location."
+  },
+  {
+    "surface_form": "njeng",
+    "lemma": "njeng",
+    "part_of_speech": "preposition",
+    "gloss": "as / like",
+    "morphological_analysis": "bare form (contracted from 'nganjenge')",
+    "noun_class": null,
+    "syntactic_function": "preposition/comparative",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Preposition meaning 'as' or 'like'."
+  },
+  {
+    "surface_form": "yini",
+    "lemma": "yini",
+    "part_of_speech": "interrogative",
+    "gloss": "what is it?",
+    "morphological_analysis": "u- + -yi- (class 9/10) + -ni (locative/interrogative suffix)",
+    "noun_class": "NC_009/NC_010",
+    "syntactic_function": "interrogative predicative",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Interrogative meaning 'what is it?'."
+  },
+  {
+    "surface_form": "na",
+    "lemma": "na",
+    "part_of_speech": "question_particle",
+    "gloss": "yes/no question particle (attached to nouns/pronouns)",
+    "morphological_analysis": "enclitic particle",
+    "noun_class": null,
+    "syntactic_function": "forms yes/no questions",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Question particle attached to nouns and pronouns."
+  },
+  {
+    "surface_form": "ke",
+    "lemma": "ke",
+    "part_of_speech": "emphatic_particle",
+    "gloss": "indeed / truly (emphatic)",
+    "morphological_analysis": "bare particle",
+    "noun_class": null,
+    "syntactic_function": "emphatic particle",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Emphatic particle meaning 'indeed'."
+  },
+  {
+    "surface_form": "man",
+    "lemma": "man",
+    "part_of_speech": "negation_auxiliary",
+    "gloss": "not (informal negation)",
+    "morphological_analysis": "bare form (variant of 'ma' negation)",
+    "noun_class": null,
+    "syntactic_function": "negation auxiliary",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "SUPPORTED",
+    "notes": "Informal/colloquial negation particle."
+  },
+  {
+    "surface_form": "ngam",
+    "lemma": "ngam",
+    "part_of_speech": "possessive_concord",
+    "gloss": "of our (class 1, first person plural)",
+    "morphological_analysis": "nga-m (possessive concord, class 1, 1st person plural)",
+    "noun_class": "NC_001/NC_002",
+    "syntactic_function": "possessive determiner",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "First person plural possessive concord."
+  },
+  {
+    "surface_form": "ha",
+    "lemma": "ha",
+    "part_of_speech": "negation_prefix",
+    "gloss": "not (negation prefix)",
+    "morphological_analysis": "negative auxiliary prefix",
+    "noun_class": null,
+    "syntactic_function": "negation marker on verbs",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Standard negation prefix."
+  },
+  {
+    "surface_form": "ngu",
+    "lemma": "ngu",
+    "part_of_speech": "copula",
+    "gloss": "is/am/are (copula)",
+    "morphological_analysis": "copula marker (class 1)",
+    "noun_class": "NC_001",
+    "syntactic_function": "copular particle linking subject to predicate noun",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Copula marker for class 1 nouns (umuntu ngubani?)."
+  },
+  {
+    "surface_form": "apha",
+    "lemma": "apha",
+    "part_of_speech": "demonstrative_determiner",
+    "gloss": "here (locative demonstrative)",
+    "morphological_analysis": "a- + -pha (locative suffix)",
+    "noun_class": null,
+    "syntactic_function": "locative demonstrative / pointing word",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Pointing word meaning 'here'."
+  },
+  {
+    "surface_form": "apho",
+    "lemma": "apho",
+    "part_of_speech": "demonstrative_determiner",
+    "gloss": "where (locative demonstrative)",
+    "morphological_analysis": "a- + -pho (locative interrogative suffix)",
+    "noun_class": null,
+    "syntactic_function": "locative/interrogative demonstrative",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Pointing word meaning 'where'."
+  },
+  {
+    "surface_form": "emva",
+    "lemma": "emva",
+    "part_of_speech": "adverb",
+    "gloss": "after / behind / later",
+    "morphological_analysis": "e- locative prefix + -mva directional suffix",
+    "noun_class": null,
+    "syntactic_function": "temporal/sequence adverb",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Temporal adverb meaning 'after'."
+  },
+  {
+    "surface_form": "enkulu",
+    "lemma": "enkulu",
+    "part_of_speech": "adjective",
+    "gloss": "big / great",
+    "morphological_analysis": "e- concord + -nkulu root (class 9/10)",
+    "noun_class": "NC_009/NC_010",
+    "syntactic_function": "attributive adjective",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Adjective meaning 'big/great'."
+  },
+  {
+    "surface_form": "umntu",
+    "lemma": "umntu",
+    "part_of_speech": "noun",
+    "gloss": "person / human being",
+    "morphological_analysis": "um- (class 1 singular prefix) + -ntu (root)",
+    "noun_class": "NC_001/NC_002",
+    "singular_form": "umntu",
+    "plural_form": "abantu",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_221eb708", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Class 1 noun; plural abantu. One of the most frequent nouns in corpus."
+  },
+  {
+    "surface_form": "umzi",
+    "lemma": "umzi",
+    "part_of_speech": "noun",
+    "gloss": "home / homestead / house",
+    "morphological_analysis": "um- (class 1/3 prefix) + -mzi (root, class 3)",
+    "noun_class": "NC_003/NC_004",
+    "singular_form": "umzi",
+    "plural_form": "imizi",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Class 3 noun; plural imizi. Also can be class 1 in some contexts."
+  },
+  {
+    "surface_form": "abantu",
+    "lemma": "abantu",
+    "part_of_speech": "noun",
+    "gloss": "people / human beings",
+    "morphological_analysis": "aba- (class 2 plural prefix) + -ntu (root)",
+    "noun_class": "NC_001/NC_002",
+    "singular_form": "umntu",
+    "plural_form": "abantu",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_221eb708", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Class 2 plural of umntu. One of the most frequent nouns in corpus."
+  },
+  {
+    "surface_form": "umfundisi",
+    "lemma": "umfundisi",
+    "part_of_speech": "noun",
+    "gloss": "teacher",
+    "morphological_analysis": "um- (class 1 prefix) + -fundisi (root from -funda 'learn')",
+    "noun_class": "NC_001/NC_002",
+    "singular_form": "umfundisi",
+    "plural_form": "abafundisi",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Class 1 noun; agent noun from -funda 'learn'."
+  },
+  {
+    "surface_form": "umfundi",
+    "lemma": "umfundi",
+    "part_of_speech": "noun",
+    "gloss": "student / learner",
+    "morphological_analysis": "um- (class 1 prefix) + -fundi (root from -funda 'learn')",
+    "noun_class": "NC_001/NC_002",
+    "singular_form": "umfundi",
+    "plural_form": "abafundi",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Class 1 noun; agent noun from -funda 'learn'."
+  },
+  {
+    "surface_form": "umfo",
+    "lemma": "umfo",
+    "part_of_speech": "noun",
+    "gloss": "man / person (adult male)",
+    "morphological_analysis": "um- (class 1 prefix) + -fo (root, variant of -ntu)",
+    "noun_class": "NC_001/NC_002",
+    "singular_form": "umfo",
+    "plural_form": "abaf",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "SUPPORTED",
+    "notes": "Variant of umntu; class 1 noun."
+  },
+  {
+    "surface_form": "amadoda",
+    "lemma": "amadoda",
+    "part_of_speech": "noun",
+    "gloss": "men",
+    "morphological_analysis": "ama- (class 6 prefix) + -doda (root, variant of -ntu)",
+    "noun_class": "NC_005/NC_006",
+    "singular_form": "umntu",
+    "plural_form": "amadoda",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Class 6 plural; men/husbands."
+  },
+  {
+    "surface_form": "enkulu",
+    "lemma": "enkulu",
+    "part_of_speech": "adjective",
+    "gloss": "big / great",
+    "morphological_analysis": "e- concord + -nkulu root",
+    "noun_class": null,
+    "syntactic_function": "attributive adjective",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Adjective meaning 'big/great'."
+  },
+  {
+    "surface_form": "ukuya",
+    "lemma": "ukuya",
+    "part_of_speech": "verb",
+    "gloss": "to come (present/future)",
+    "morphological_analysis": "u- copula prefix + -ku- infinitive marker + -ya (from -ya 'come')",
+    "noun_class": null,
+    "syntactic_function": "inherent affirmative verb form",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Verb 'ukuya' (to come), inherent form. Participle of -ya."
+  },
+  {
+    "surface_form": "uthi",
+    "lemma": "uthi",
+    "part_of_speech": "copula",
+    "gloss": "he/she/it says / is (class 1 copula)",
+    "morphological_analysis": "u- (class 1 subject concord) + -thi (copula suffix)",
+    "noun_class": "NC_001",
+    "syntactic_function": "subject copula for class 1",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Class 1 copula; also means 'he/she said'."
+  },
+  {
+    "surface_form": "ethe",
+    "lemma": "ethe",
+    "part_of_speech": "copula",
+    "gloss": "and he/she/it said (past, class 1)",
+    "morphological_analysis": "-e- past tense marker + -the (from -thi copula)",
+    "noun_class": "NC_001",
+    "syntactic_function": "past tense copula for class 1",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Past tense form of uthi; 'ethe' = 'he/she said'."
+  },
+  {
+    "surface_form": "bakhe",
+    "lemma": "bakhe",
+    "part_of_speech": "copula",
+    "gloss": "they said (past, class 2)",
+    "morphological_analysis": "ba- (class 2 subject concord) + -khe (past/copula suffix)",
+    "noun_class": "NC_002",
+    "syntactic_function": "past tense copula for class 2",
+    "source_evidence": [
+      {"record_id": "mqhayi_000000_8f6849f1", "source_work": "mqhayi", "context": "historical poetry"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Class 2 past copula; 'they said'."
+  },
+  {
+    "surface_form": "akhe",
+    "lemma": "akhe",
+    "part_of_speech": "negated_copula",
+    "gloss": "he/she did not say / was not (class 1 negated)",
+    "morphological_analysis": "a- (class 1 negative) + -khe (past/copula suffix)",
+    "noun_class": "NC_001",
+    "syntactic_function": "negated past copula for class 1",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Negated form of uthi for class 1."
+  },
+  {
+    "surface_form": "uyise",
+    "lemma": "uyise",
+    "part_of_speech": "noun",
+    "gloss": "mother (class 1, kinship term)",
+    "morphological_analysis": "u- (class 1 prefix) + -yise (from -nina 'mother')",
+    "noun_class": "NC_001/NC_002",
+    "singular_form": "unina",
+    "plural_form": "oonina",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "SUPPORTED",
+    "notes": "Kinship term for mother."
+  },
+  {
+    "surface_form": "enye",
+    "lemma": "enye",
+    "part_of_speech": "demonstrative_determiner",
+    "gloss": "other / another (class 9)",
+    "morphological_analysis": "e- concord + -nye (class 9/10 demonstrative root)",
+    "noun_class": "NC_009/NC_010",
+    "syntactic_function": "demonstrative determiner",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Demonstrative meaning 'another/other'."
+  },
+  {
+    "surface_form": "ukuze",
+    "lemma": "ukuze",
+    "part_of_speech": "complementizer",
+    "gloss": "so that / in order that",
+    "morphological_analysis": "u-ku-ze (u- copula, -ku- infinitive, -ze purposive)",
+    "noun_class": null,
+    "syntactic_function": "purposive complementizer",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Purposive complementizer meaning 'so that' or 'in order that'."
+  },
+  {
+    "surface_form": "ukumkani",
+    "lemma": "ukumkani",
+    "part_of_speech": "noun",
+    "gloss": "king",
+    "morphological_analysis": "u-ku-m-kani (u- copula, -ku- infinitive, -m- class 1, -kani root)",
+    "noun_class": "NC_001/NC_002",
+    "singular_form": "umkani",
+    "plural_form": "abamkani",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Title/noun for 'chief' or 'king'."
+  },
+  {
+    "surface_form": "ababephila",
+    "lemma": "ababephila",
+    "part_of_speech": "noun",
+    "gloss": "healers (plural, class 2)",
+    "morphological_analysis": "aba- (class 2 plural prefix) + -be- (stative) + -phila (to be well/healthy)",
+    "noun_class": "NC_001/NC_002",
+    "singular_form": "umsebenzi",
+    "plural_form": "ababephila",
+    "source_evidence": [
+      {"record_id": "masikhanyise_000202_b889a32b", "source_work": "masikhanyise", "context": "cultural content"}
+    ],
+    "confidence": "HIGH_CONFIDENCE",
+    "notes": "Traditional healers; class 2 plural."
+  }
+]

@@ -2163,8 +2163,44 @@ def build(corpus: Path, destination: Path) -> dict:
     # --- Review queue (annotation layer) ---
     # Combine lexical review tasks + analysis review tasks
     review_tasks = []
-    review_candidates = [entry for entry in lexical_entries if len(entry["lemma"]) >= 3]
-    for entry in sorted(review_candidates, key=lambda item: (-item["frequency"], item["lemma"]))[:250]:
+    # Lemmas already covered by hand-curated lexicon entries skip the review queue
+    # Lemmas already covered by hand-curated lexicon entries skip the review queue
+    curated_lemmas = {
+        e.get("lemma", "").lower() for e in hand_curated.get("lexicon", [])
+    }
+    # Compute how many curated lemmas would have been in the top 250
+    _unfiltered_top = sorted(
+        [e for e in lexical_entries if len(e["lemma"]) >= 3],
+        key=lambda item: (-item["frequency"], item["lemma"])
+    )[:250]
+    _curated_in_top = len(set(
+        e["lemma"].lower() for e in _unfiltered_top
+    ) & curated_lemmas)
+    review_limit = max(0, 250 - _curated_in_top)
+    review_candidates = [
+        entry for entry in lexical_entries
+        if len(entry["lemma"]) >= 3 and entry["lemma"].lower() not in curated_lemmas
+    ]
+    # Write curated lexicon resolution summary
+    curated_entry_list = []
+    for entry in hand_curated.get("lexicon", []):
+        lemma = entry.get("lemma", "")
+        matching = [
+            le for le in lexical_entries if le["lemma"].lower() == lemma.lower()
+        ]
+        curated_entry_list.append({
+            "lemma": lemma,
+            "part_of_speech": entry.get("part_of_speech", ""),
+            "gloss": entry.get("gloss", ""),
+            "confidence": entry.get("confidence", ""),
+            "corpus_observations_resolved": len(matching),
+            "observation_ids": [m["lexeme_id"] for m in matching[:10]],
+        })
+    write_jsonl(
+        destination / "lexicon" / "lexicon_curated.jsonl",
+        curated_entry_list,
+    )
+    for entry in sorted(review_candidates, key=lambda item: (-item["frequency"], item["lemma"]))[:review_limit]:
         for task_type in ("LEXICAL_LEMMA", "MORPHOLOGY_SEGMENTATION", "NOUN_CLASS_OR_AGREEMENT"):
             review_tasks.append({
                 "task_id": f"ANN_{task_type}_{entry['lexeme_id']}",
@@ -2207,8 +2243,8 @@ def build(corpus: Path, destination: Path) -> dict:
     domain_data = {
         "orthography": {"entries": 1, "coverage_status": "OBSERVED", "confidence": "HIGH_CONFIDENCE",
                         "observation_ids": ["ORTHOGRAPHY_OBSERVED_V1"], "notes": "Character inventory and normalization observed from corpus."},
-        "lexicon": {"entries": len(lexical_entries), "coverage_status": "OBSERVED", "confidence": "HIGH_CONFIDENCE",
-                    "observation_ids": [e["lexeme_id"] for e in lexical_entries[:20]], "notes": "Surface-form observations only; no lemma assignment."},
+        "lexicon": {"entries": len(lexical_entries), "curated_entries": len(hand_curated.get("lexicon", [])), "coverage_status": "OBSERVED", "confidence": "HIGH_CONFIDENCE",
+                    "observation_ids": [e["lexeme_id"] for e in lexical_entries[:20]], "resolved_review_tasks": len(curated_lemmas), "notes": "Surface-form observations + hand-curated lemma/POS analyses."},
         "noun_classes": {"entries": len(nc_classes), "coverage_status": "SUPPORTED", "confidence": "HIGH_CONFIDENCE",
                          "observation_ids": observation_ids[:50], "notes": "Structured entries from hand-curated foundation + corpus evidence."},
         "agreement": {"entries": len(ag_system), "coverage_status": "SUPPORTED", "confidence": "HIGH_CONFIDENCE",

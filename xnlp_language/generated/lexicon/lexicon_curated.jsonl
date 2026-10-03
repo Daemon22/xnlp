@@ -1,0 +1,47 @@
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "that / in order that", "lemma": "ukuthi", "observation_ids": ["LEX_OBS_023706"], "part_of_speech": "complementizer"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "that / whether", "lemma": "ukuba", "observation_ids": ["LEX_OBS_023328"], "part_of_speech": "complementizer"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "that / whether", "lemma": "kuba", "observation_ids": ["LEX_OBS_009986"], "part_of_speech": "complementizer"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "when / if", "lemma": "xa", "observation_ids": ["LEX_OBS_027126"], "part_of_speech": "complementizer"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "because", "lemma": "ngoba", "observation_ids": ["LEX_OBS_017978"], "part_of_speech": "complementizer"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "I / me", "lemma": "mna", "observation_ids": ["LEX_OBS_014379"], "part_of_speech": "personal_pronoun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "you (singular)", "lemma": "wena", "observation_ids": ["LEX_OBS_026822"], "part_of_speech": "personal_pronoun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "we / us", "lemma": "thina", "observation_ids": ["LEX_OBS_022512"], "part_of_speech": "personal_pronoun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "he/she/they (with pejorative/confirmative tone)", "lemma": "yena", "observation_ids": ["LEX_OBS_027846"], "part_of_speech": "personal_pronoun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "this (singular, class 1/2)", "lemma": "lo", "observation_ids": ["LEX_OBS_013243"], "part_of_speech": "demonstrative_determiner"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "those (singular, class 3/4)", "lemma": "loo", "observation_ids": ["LEX_OBS_013402"], "part_of_speech": "demonstrative_determiner"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "that one (singular, class 6)", "lemma": "lowo", "observation_ids": ["LEX_OBS_013420"], "part_of_speech": "demonstrative_determiner"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "that one (remote, singular)", "lemma": "laa", "observation_ids": ["LEX_OBS_012433"], "part_of_speech": "demonstrative_determiner"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 0, "gloss": "this/that one (class 9)", "lemma": "len", "observation_ids": [], "part_of_speech": "demonstrative_determiner"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "this/that one (class 5)", "lemma": "le", "observation_ids": ["LEX_OBS_012689"], "part_of_speech": "demonstrative_determiner"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "but / however", "lemma": "kodwa", "observation_ids": ["LEX_OBS_009727"], "part_of_speech": "conjunction"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "where?", "lemma": "kuphi", "observation_ids": ["LEX_OBS_010868"], "part_of_speech": "interrogative_adverb"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 0, "gloss": "as / like", "lemma": "njeng", "observation_ids": [], "part_of_speech": "preposition"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "what is it?", "lemma": "yini", "observation_ids": ["LEX_OBS_028096"], "part_of_speech": "interrogative"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "yes/no question particle (attached to nouns/pronouns)", "lemma": "na", "observation_ids": ["LEX_OBS_014556"], "part_of_speech": "question_particle"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "indeed / truly (emphatic)", "lemma": "ke", "observation_ids": ["LEX_OBS_009583"], "part_of_speech": "emphatic_particle"}
+{"confidence": "SUPPORTED", "corpus_observations_resolved": 1, "gloss": "not (informal negation)", "lemma": "man", "observation_ids": ["LEX_OBS_013896"], "part_of_speech": "negation_auxiliary"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "of our (class 1, first person plural)", "lemma": "ngam", "observation_ids": ["LEX_OBS_017239"], "part_of_speech": "possessive_concord"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "not (negation prefix)", "lemma": "ha", "observation_ids": ["LEX_OBS_006311"], "part_of_speech": "negation_prefix"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "is/am/are (copula)", "lemma": "ngu", "observation_ids": ["LEX_OBS_018593"], "part_of_speech": "copula"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "here (locative demonstrative)", "lemma": "apha", "observation_ids": ["LEX_OBS_001433"], "part_of_speech": "demonstrative_determiner"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "where (locative demonstrative)", "lemma": "apho", "observation_ids": ["LEX_OBS_001460"], "part_of_speech": "demonstrative_determiner"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "after / behind / later", "lemma": "emva", "observation_ids": ["LEX_OBS_004490"], "part_of_speech": "adverb"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "big / great", "lemma": "enkulu", "observation_ids": ["LEX_OBS_004845"], "part_of_speech": "adjective"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "person / human being", "lemma": "umntu", "observation_ids": ["LEX_OBS_024338"], "part_of_speech": "noun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "home / homestead / house", "lemma": "umzi", "observation_ids": ["LEX_OBS_024484"], "part_of_speech": "noun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "people / human beings", "lemma": "abantu", "observation_ids": ["LEX_OBS_000139"], "part_of_speech": "noun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "teacher", "lemma": "umfundisi", "observation_ids": ["LEX_OBS_024183"], "part_of_speech": "noun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "student / learner", "lemma": "umfundi", "observation_ids": ["LEX_OBS_024181"], "part_of_speech": "noun"}
+{"confidence": "SUPPORTED", "corpus_observations_resolved": 1, "gloss": "man / person (adult male)", "lemma": "umfo", "observation_ids": ["LEX_OBS_024176"], "part_of_speech": "noun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "men", "lemma": "amadoda", "observation_ids": ["LEX_OBS_000844"], "part_of_speech": "noun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "big / great", "lemma": "enkulu", "observation_ids": ["LEX_OBS_004845"], "part_of_speech": "adjective"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "to come (present/future)", "lemma": "ukuya", "observation_ids": ["LEX_OBS_023795"], "part_of_speech": "verb"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "he/she/it says / is (class 1 copula)", "lemma": "uthi", "observation_ids": ["LEX_OBS_025222"], "part_of_speech": "copula"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "and he/she/it said (past, class 1)", "lemma": "ethe", "observation_ids": ["LEX_OBS_005346"], "part_of_speech": "copula"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "they said (past, class 2)", "lemma": "bakhe", "observation_ids": ["LEX_OBS_002262"], "part_of_speech": "copula"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "he/she did not say / was not (class 1 negated)", "lemma": "akhe", "observation_ids": ["LEX_OBS_000536"], "part_of_speech": "negated_copula"}
+{"confidence": "SUPPORTED", "corpus_observations_resolved": 1, "gloss": "mother (class 1, kinship term)", "lemma": "uyise", "observation_ids": ["LEX_OBS_025525"], "part_of_speech": "noun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "other / another (class 9)", "lemma": "enye", "observation_ids": ["LEX_OBS_004941"], "part_of_speech": "demonstrative_determiner"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "so that / in order that", "lemma": "ukuze", "observation_ids": ["LEX_OBS_023840"], "part_of_speech": "complementizer"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "king", "lemma": "ukumkani", "observation_ids": ["LEX_OBS_023535"], "part_of_speech": "noun"}
+{"confidence": "HIGH_CONFIDENCE", "corpus_observations_resolved": 1, "gloss": "healers (plural, class 2)", "lemma": "ababephila", "observation_ids": ["LEX_OBS_000030"], "part_of_speech": "noun"}
