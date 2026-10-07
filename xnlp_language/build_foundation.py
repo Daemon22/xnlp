@@ -1400,6 +1400,7 @@ def _build_semantic_coverage(
     destination: Path,
     analysis_records: list[dict],
     lexical_entries: list[dict],
+    corpus_hash: str,
 ) -> dict:
     """Materialize reviewed noun senses with evidence and an honest coverage report.
 
@@ -1497,9 +1498,7 @@ def _build_semantic_coverage(
         "artifact_id": "XNLP_SEMANTIC_COVERAGE_V1",
         "status": "PARTIAL" if senses else "INSUFFICIENT_EVIDENCE",
         "review_basis": "Human-reviewed glosses in xnlp_language/foundation/noun_classes/",
-        "corpus_sha256": hashlib.sha256(
-            (ROOT / "data" / "authoritative" / "v2_authoritative_all.jsonl").read_bytes()
-        ).hexdigest(),
+        "corpus_sha256": corpus_hash,
         "observed_lexicon_entries": lexical_count,
         "verified_sense_entries": len(unique_senses),
         "unique_glossed_lexemes": len(unique_lexemes),
@@ -2352,6 +2351,11 @@ def build(corpus: Path, destination: Path) -> dict:
     # --- Conflict detection ---
     conflict_summary, conflict_list = _build_conflict_detection(destination, analysis_records)
 
+    # --- Human-reviewed semantic coverage ---
+    semantic_report = _build_semantic_coverage(
+        destination, analysis_records, lexical_entries, corpus_hash
+    )
+
     # --- Coverage report ---
     domain_data = {
         "orthography": {"entries": 1, "coverage_status": "OBSERVED", "confidence": "HIGH_CONFIDENCE",
@@ -2380,8 +2384,13 @@ def build(corpus: Path, destination: Path) -> dict:
                    "observation_ids": [obs["observation_id"] for obs in syn_obs], "notes": "Syntactic patterns observed."},
         "word_formation": {"entries": len(der_entries), "coverage_status": "UNDER_REVIEW", "confidence": "SUPPORTED",
                            "observation_ids": [obs["observation_id"] for obs in wf_obs], "notes": "Derivational patterns from corpus evidence."},
-        "semantics": {"entries": 0, "coverage_status": "INSUFFICIENT_EVIDENCE", "confidence": "INSUFFICIENT_EVIDENCE",
-                      "observation_ids": [], "notes": "No automated semantic claims; requires human review."},
+        "semantics": {
+            "entries": semantic_report["verified_sense_entries"],
+            "coverage_status": "PARTIAL" if semantic_report["verified_sense_entries"] else "INSUFFICIENT_EVIDENCE",
+            "confidence": "SUPPORTED" if semantic_report["verified_sense_entries"] else "INSUFFICIENT_EVIDENCE",
+            "observation_ids": [],
+            "notes": "Human-reviewed, evidence-linked noun glosses; coverage is partial and does not encode compositional meaning.",
+        },
         "discourse": {"entries": 0, "coverage_status": "INSUFFICIENT_EVIDENCE", "confidence": "INSUFFICIENT_EVIDENCE",
                       "observation_ids": [], "notes": "No automated discourse claims; requires human review."},
     }
