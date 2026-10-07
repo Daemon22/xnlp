@@ -83,6 +83,37 @@ def validate_generated_text(text: str) -> dict[str, Any]:
     lexical_pass = bool(word_matches) and not unknown
     orthographic_pass = not unsupported_letters and not digit_offsets
 
+    semantic_path = _GENERATED / "semantics" / "lexical_senses.jsonl"
+    try:
+        semantic_rows = [
+            json.loads(line)
+            for line in semantic_path.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+    except (OSError, json.JSONDecodeError) as exc:
+        raise FoundationUnavailableError(
+            "Reviewed semantic sense data is unavailable; rebuild the foundation."
+        ) from exc
+    semantic_index: dict[str, list[dict[str, str]]] = {}
+    for sense in semantic_rows:
+        semantic_index.setdefault(sense["lemma"].casefold(), []).append({
+            "sense_id": sense["sense_id"],
+            "gloss": sense["gloss"],
+        })
+    grounded_forms = []
+    ungrounded_forms = []
+    for match in word_matches:
+        senses = semantic_index.get(match.group(0).casefold(), [])
+        item = {
+            "surface": match.group(0),
+            "start": match.start(),
+            "end": match.end(),
+        }
+        if senses:
+            grounded_forms.append({**item, "senses": senses})
+        else:
+            ungrounded_forms.append(item)
+
     return {
         "schema_version": 1,
         "status": "LEXICALLY_SUPPORTED" if lexical_pass and orthographic_pass else "REJECTED",
@@ -97,6 +128,12 @@ def validate_generated_text(text: str) -> dict[str, Any]:
                 "status": "PASS" if orthographic_pass else "FAIL",
                 "unsupported_letters": unsupported_letters,
                 "digit_offsets": digit_offsets,
+            },
+            "lexical_semantics": {
+                "status": "PARTIAL" if ungrounded_forms else "LEXICAL_SENSES_AVAILABLE",
+                "grounded_forms": grounded_forms,
+                "ungrounded_forms": ungrounded_forms,
+                "note": "Word glosses are not a sentence-level meaning or coherence check.",
             },
             "grammar_and_meaning": {
                 "status": "NOT_ASSESSED",
