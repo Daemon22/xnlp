@@ -24,3 +24,4 @@ namespaces = true
 
 [tool.setuptools.package-data]
 "xnlp_language.grammar" = ["analyzer_data.json"]
+"xnlp_language" = ["generated/foundation/observed_lexicon.json", "generated/foundation/orthography.json"]
