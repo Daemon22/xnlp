@@ -1414,6 +1414,7 @@ def _build_semantic_coverage(
     senses: list[dict] = []
     profiles: list[dict] = []
     rejected_examples: list[dict] = []
+    noun_class_consistency_findings: list[dict] = []
     curated_examples = 0
     accepted_by_class: collections.Counter[str] = collections.Counter()
     source_work_counts: collections.Counter[str] = collections.Counter()
@@ -1442,9 +1443,22 @@ def _build_semantic_coverage(
                 "scope_note": "Class-level tendencies do not entail the meaning of every member noun.",
             })
 
+        expected_plural_prefix = foundation_entry.get("prefix", {}).get("plural", "").strip("-").casefold()
         for example in foundation_entry.get("examples", []):
             curated_examples += 1
             form = example.get("noun", "").strip()
+            plural_form = example.get("plural_form", "").strip()
+            if expected_plural_prefix and plural_form and not plural_form.casefold().startswith(expected_plural_prefix):
+                noun_class_consistency_findings.append({
+                    "noun": form,
+                    "recorded_plural_form": plural_form,
+                    "expected_plural_prefix": expected_plural_prefix,
+                    "noun_class_id": class_id,
+                    "source_record_id": example.get("source_record_id"),
+                    "source_foundation_file": source_path.relative_to(ROOT).as_posix(),
+                    "finding": "recorded_plural_form_does_not_match_class_pairing_prefix",
+                    "interpretation": "Internal foundation mismatch; requires source review and was not auto-corrected.",
+                })
             gloss = example.get("meaning", "").strip()
             record_id = example.get("source_record_id")
             record = records_by_id.get(record_id)
@@ -1602,6 +1616,7 @@ def _build_semantic_coverage(
             100 * len(unique_lexemes) / lexical_count, 4
         ) if lexical_count else 0.0,
         "rejected_foundation_examples": rejected_examples,
+        "noun_class_consistency_findings": noun_class_consistency_findings,
         "gaps": [
             "Meaning coverage is limited to glossed noun examples in the reviewed foundation.",
             "No verified synonym, antonym, entailment, or semantic-role relations are encoded.",
