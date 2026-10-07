@@ -1447,11 +1447,69 @@ def _build_conflict_detection(
     return conflict_summary, linguistic_conflicts
 
 
+def _build_semantic_annotation_queue(
+    destination: Path,
+    analysis_records: list[dict],
+) -> int:
+    """Create exact corpus spans for future semantic annotation; infer no labels."""
+    candidates: list[dict] = []
+    for record in analysis_records:
+        text = record["text"]
+        spans: list[tuple[int, int]] = []
+        cursor = 0
+        for boundary in re.finditer(r"[.!?]+(?:[\\"')\\]]*)?(?=\\s|$)", text):
+            spans.append((cursor, boundary.end()))
+            cursor = boundary.end()
+        if cursor < len(text):
+            spans.append((cursor, len(text)))
+
+        for raw_start, raw_end in spans:
+            start, end = raw_start, raw_end
+            while start < end and text[start].isspace():
+                start += 1
+            while end > start and text[end - 1].isspace():
+                end -= 1
+            surface = text[start:end]
+            token_count = len(WORD.findall(surface))
+            if token_count < 3 or token_count > 120:
+                continue
+            identity = f"{record['record_id']}\\0{start}\\0{end}\\0{surface}"
+            candidate_id = "SEM_ANNOTATION_" + hashlib.sha256(
+                identity.encode("utf-8")
+            ).hexdigest()[:16].upper()
+            candidates.append({
+                "candidate_id": candidate_id,
+                "record_id": record["record_id"],
+                "source": record["source"],
+                "source_title": record.get("source_title", ""),
+                "source_url": record.get("source_url", ""),
+                "edition": record.get("edition", record.get("source_section", "")),
+                "character_span": [start, end],
+                "line_number": text.count("\\n", 0, start) + 1,
+                "surface_text": surface,
+                "token_count": token_count,
+                "annotation_status": "UNANNOTATED",
+                "review_status": "PENDING_HUMAN_REVIEW",
+                "translation": None,
+                "predicate_lemma": None,
+                "predicate_sense": None,
+                "arguments": [],
+                "semantic_roles": [],
+                "composition_notes": None,
+                "ambiguity_notes": None,
+                "policy": "Source-attested candidate only; no semantic interpretation has been inferred.",
+            })
+    candidates.sort(key=lambda item: (item["record_id"], item["character_span"][0], item["candidate_id"]))
+    write_jsonl(destination / "annotation" / "semantic_review_queue.jsonl", candidates)
+    return len(candidates)
+
+
 def _build_semantic_coverage(
     destination: Path,
     analysis_records: list[dict],
     lexical_entries: list[dict],
     corpus_hash: str,
+    annotation_candidate_count: int = 0,
 ) -> dict:
     """Materialize reviewed noun senses with evidence and an honest coverage report.
 
@@ -1675,6 +1733,12 @@ def _build_semantic_coverage(
             "scope": "Reviewed class-level tendencies; never deterministic meanings for individual nouns.",
         },
         {
+            "domain": "corpus_annotation_candidates",
+            "status": "ANNOTATION_CANDIDATES_ONLY" if annotation_candidate_count else "INSUFFICIENT_EVIDENCE",
+            "evidence_count": annotation_candidate_count,
+            "scope": "Sentence-like source spans queued for human annotation; candidates carry no semantic labels.",
+        },
+        {
             "domain": "attested_agreement_constructions",
             "status": "ATTESTED_EXAMPLES" if constructions else "INSUFFICIENT_EVIDENCE",
             "evidence_count": len(constructions),
@@ -1702,6 +1766,7 @@ def _build_semantic_coverage(
     report = {
         "artifact_id": "XNLP_SEMANTIC_COVERAGE_V1",
         "coverage_matrix": coverage_matrix,
+        "annotation_queue_candidates": annotation_candidate_count,
         "status": "PARTIAL" if senses or constructions else "INSUFFICIENT_EVIDENCE",
         "review_basis": "Human-reviewed noun glosses and agreement constructions in xnlp_language/foundation/; emitted evidence must pass exact source-record checks.",
         "corpus_sha256": corpus_hash,
@@ -2568,9 +2633,13 @@ def build(corpus: Path, destination: Path) -> dict:
     # --- Conflict detection ---
     conflict_summary, conflict_list = _build_conflict_detection(destination, analysis_records)
 
+    # --- Corpus-grounded semantic annotation candidates (unlabelled) ---
+    semantic_candidate_count = _build_semantic_annotation_queue(destination, analysis_records)
+
     # --- Human-reviewed semantic coverage ---
     semantic_report = _build_semantic_coverage(
-        destination, analysis_records, lexical_entries, corpus_hash
+        destination, analysis_records, lexical_entries, corpus_hash,
+        semantic_candidate_count,
     )
 
     # --- Coverage report ---
