@@ -82,6 +82,7 @@ def main() -> None:
     assert semantic_report["semantic_relation_entries"] == len(semantic_relations)
     assert semantic_report["verified_construction_entries"] == len(semantic_constructions)
     assert semantic_report["reviewed_construction_candidates"] >= len(semantic_constructions)
+    assert len(semantic_report["rejected_construction_examples"]) >= semantic_report["reviewed_construction_candidates"] - len(semantic_constructions)
     assert semantic_report["noun_class_profiles"] == len(semantic_profiles)
     assert semantic_report["status"] in {"PARTIAL", "INSUFFICIENT_EVIDENCE"}
     assert semantic_report["accepted_examples"] == len(semantic_senses)
@@ -142,8 +143,8 @@ def main() -> None:
             (GENERATED / "reports" / "structural_coverage.json").read_text(encoding="utf-8")
         )["domains"]
     }
-    assert coverage_domains["semantics"]["entries"] == len(semantic_senses)
-    expected_semantic_status = "PARTIAL" if semantic_senses else "INSUFFICIENT_EVIDENCE"
+    assert coverage_domains["semantics"]["entries"] == len(semantic_senses) + len(semantic_constructions)
+    expected_semantic_status = "PARTIAL" if semantic_senses or semantic_constructions else "INSUFFICIENT_EVIDENCE"
     assert coverage_domains["semantics"]["coverage_status"] == expected_semantic_status
     assert manifest["analysis_records"] == len(analysis_ids)
     assert manifest["decision"].startswith("FOUNDATION INCOMPLETE")
