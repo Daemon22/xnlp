@@ -1661,8 +1661,47 @@ def _build_semantic_coverage(
     unique_senses = {item["sense_id"] for item in senses}
     unique_lexemes = {item["lemma"].casefold() for item in senses}
     lexical_count = len(observed_forms)
+    coverage_matrix = [
+        {
+            "domain": "lexical_sense_glosses",
+            "status": "PARTIAL" if senses else "INSUFFICIENT_EVIDENCE",
+            "evidence_count": len(senses),
+            "scope": "Human-reviewed noun glosses linked to exact observed forms and cited records.",
+        },
+        {
+            "domain": "noun_class_semantic_tendencies",
+            "status": "PARTIAL" if profiles else "INSUFFICIENT_EVIDENCE",
+            "evidence_count": len(profiles),
+            "scope": "Reviewed class-level tendencies; never deterministic meanings for individual nouns.",
+        },
+        {
+            "domain": "attested_agreement_constructions",
+            "status": "ATTESTED_EXAMPLES" if constructions else "INSUFFICIENT_EVIDENCE",
+            "evidence_count": len(constructions),
+            "scope": "Exact source-attested examples; examples do not establish productive semantic rules.",
+        },
+        *[
+            {
+                "domain": domain,
+                "status": "INSUFFICIENT_EVIDENCE",
+                "evidence_count": 0,
+                "scope": "No reviewed semantic analysis is encoded in the verified foundation.",
+            }
+            for domain in (
+                "predicate_senses_and_argument_frames",
+                "semantic_roles",
+                "selectional_restrictions",
+                "compositional_sentence_meaning",
+                "tense_aspect_modality_interpretation",
+                "negation_scope_and_quantification",
+                "reference_and_anaphora",
+                "discourse_and_pragmatics",
+            )
+        ],
+    ]
     report = {
         "artifact_id": "XNLP_SEMANTIC_COVERAGE_V1",
+        "coverage_matrix": coverage_matrix,
         "status": "PARTIAL" if senses or constructions else "INSUFFICIENT_EVIDENCE",
         "review_basis": "Human-reviewed noun glosses and agreement constructions in xnlp_language/foundation/; emitted evidence must pass exact source-record checks.",
         "corpus_sha256": corpus_hash,
