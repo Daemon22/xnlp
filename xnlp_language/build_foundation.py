@@ -1457,7 +1457,7 @@ def _build_semantic_annotation_queue(
         text = record["text"]
         spans: list[tuple[int, int]] = []
         cursor = 0
-        for boundary in re.finditer(r"[.!?]+(?:[\\"')\\]]*)?(?=\\s|$)", text):
+        for boundary in re.finditer(r"[.!?]+(?=\\s|$)", text):
             spans.append((cursor, boundary.end()))
             cursor = boundary.end()
         if cursor < len(text):
