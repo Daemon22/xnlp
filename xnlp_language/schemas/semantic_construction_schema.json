@@ -78,6 +78,15 @@
           },
           "context": {
             "type": "string"
+          },
+          "source_title": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string"
           }
         },
         "required": [
