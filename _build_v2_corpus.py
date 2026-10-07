@@ -5,8 +5,28 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', write_through
 
 # Load V2 corpus
 v2_file = 'data/authoritative/v2_authoritative_all.jsonl'
-with open(v2_file, 'r', encoding='utf-8') as f:
-    records = [json.loads(line) for line in f]
+def has_traceable_publication(record):
+    """Require a direct publication citation before corpus records enter the clean set."""
+    if record.get("provenance_type") != "authoritative" or record.get("validation_status") != "authoritative":
+        return False
+    if record.get("generator"):
+        return False
+    if not record.get("source_title") or not (record.get("edition") or record.get("source_section")):
+        return False
+    if record.get("original_text") != record.get("text"):
+        return False
+    source_url = record.get("source_url", "")
+    if record.get("source") == "mqhayi":
+        return source_url.startswith("https://emandulo.apc.uct.ac.za/metadata/Mqhayi/")
+    if record.get("source") == "masikhanyise":
+        return bool(source_url and (record.get("isbn") or record.get("book_isbn")))
+    return False
+
+with open(v2_file, "r", encoding="utf-8") as f:
+    all_records = [json.loads(line) for line in f if line.strip()]
+records = [record for record in all_records if has_traceable_publication(record)]
+excluded_untraceable = len(all_records) - len(records)
+print(f"Excluded {excluded_untraceable} records without traceable publication metadata")
 
 # Check FOREIGN_LANGUAGE and MIXED_LANGUAGE records
 print("=== FOREIGN_LANGUAGE records ===")
@@ -139,6 +159,7 @@ manifest = {
     'name': 'XNLP V2 Training Corpus',
     'phase': 'V2-2/3/4/5',
     'total_records': len(unique_final),
+    'excluded_untraceable_records': excluded_untraceable,
     'total_chars': total_chars,
     'total_words': total_words,
     'unique_words': unique_words,
