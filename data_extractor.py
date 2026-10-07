@@ -282,7 +282,7 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for text, title, section in ityala_passages:
         records.append(DataRecord(
-            text=text, source="generated", source_type="novel_excerpt",
+            text=text, source="generated", source_type="synthetic_illustration",
             source_title=f"Unverified XNLP illustration ({title})", source_section=section,
             confidence="low", validation_status="candidate",
             orthography="traditional",
@@ -309,7 +309,7 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for text, title, section in izibongo:
         records.append(DataRecord(
-            text=text, source="generated", source_type="praise_poetry",
+            text=text, source="generated", source_type="synthetic_illustration",
             source_title=f"Unverified XNLP illustration ({title})", source_section=section,
             confidence="low", validation_status="candidate",
             orthography="mixed", language_class=detect_language(text, "mqhayi"),
@@ -326,11 +326,11 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for line in nkosi_lines:
         records.append(DataRecord(
-            text=line, source="generated", source_type="traditional_song",
-            source_title="Nkosi Sikelel' iAfrika", source_section="Verse",
+            text=line, source="generated", source_type="synthetic_illustration",
+            source_title="Unverified XNLP song illustration", source_section="Verse",
             confidence="low", validation_status="candidate",
             orthography="modern",
-            retrieval_date=now, generator="data_extractor.py", original_text=text,
+            retrieval_date=now, generator="data_extractor.py", original_text=line,
         ))
 
     # ── Autobiography: UMqhayi waseNtab'ozuko ──
@@ -344,7 +344,7 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for text, title, section in autobio:
         records.append(DataRecord(
-            text=text, source="generated", source_type="autobiography",
+            text=text, source="generated", source_type="synthetic_illustration",
             source_title=f"Unverified XNLP illustration ({title})", source_section=section,
             confidence="low", validation_status="candidate",
             orthography="mixed", language_class=detect_language(text, "mqhayi"),
@@ -361,7 +361,7 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for text, title, section in don_jadu:
         records.append(DataRecord(
-            text=text, source="generated", source_type="novel_excerpt",
+            text=text, source="generated", source_type="synthetic_illustration",
             source_title=f"Unverified XNLP illustration ({title})", source_section=section,
             confidence="low", validation_status="candidate",
             orthography="modern", language_class="TARGET_LANGUAGE",
@@ -517,7 +517,7 @@ def extract_conversational_xhosa() -> List[DataRecord]:
     records: List[DataRecord] = []
     now = datetime.now(timezone.utc).isoformat()
 
-    # Authentic isiXhosa sentences (without English translations)
+    # Illustrative sentences (not directly cited from a source book)
     # These come from the corpus files but are stripped of English overlays
     authentic_xhosa = [
         ("Molo, ndiyabulela kuye wonke umntu onceda kweli xhaphakazi.", "Conversational Xhosa", "Greetings"),
