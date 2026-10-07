@@ -28,16 +28,7 @@
     "constituents": {
       "type": "object",
       "properties": {
-        "subject": {
-          "type": "string"
-        },
-        "subject_noun_class": {
-          "type": "string"
-        },
         "concord": {
-          "type": "string"
-        },
-        "predicate": {
           "type": "string"
         },
         "relation": {
@@ -50,13 +41,22 @@
             "noun_demonstrative",
             "agreement_relation"
           ]
+        },
+        "controller": {
+          "type": "string"
+        },
+        "controller_noun_class": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
         }
       },
       "required": [
-        "subject",
-        "subject_noun_class",
+        "controller",
+        "controller_noun_class",
         "concord",
-        "predicate",
+        "target",
         "relation"
       ],
       "additionalProperties": false
