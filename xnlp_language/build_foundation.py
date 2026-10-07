@@ -1658,7 +1658,7 @@ def _build_semantic_coverage(
     report = {
         "artifact_id": "XNLP_SEMANTIC_COVERAGE_V1",
         "status": "PARTIAL" if senses or constructions else "INSUFFICIENT_EVIDENCE",
-        "review_basis": "Human-reviewed glosses in xnlp_language/foundation/noun_classes/",
+        "review_basis": "Human-reviewed noun glosses and agreement constructions in xnlp_language/foundation/; emitted evidence must pass exact source-record checks.",
         "corpus_sha256": corpus_hash,
         "observed_lexicon_entries": lexical_count,
         "verified_sense_entries": len(unique_senses),
