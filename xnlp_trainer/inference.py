@@ -26,8 +26,24 @@ from typing import Optional, Dict, Any
 from core_llm.architecture import XNLPCoreLLM, XNLPConfig
 from core_llm.tokenizer import XNLPTokenizer
 
+from xnlp_language.grammar import validate_generated_text
+
 from .config import validate_checkpoint
 from .data import tokenizer_from_state_dict
+
+
+class GeneratedTextRejected(ValueError):
+    """Raised when generated text contains forms unsupported by the foundation."""
+
+    def __init__(self, report: Dict[str, Any]):
+        self.validation_report = report
+        failed = report.get("checks", {}).get("observed_word_forms", {}).get("unknown_forms", [])
+        forms = ", ".join(item["surface"] for item in failed[:8])
+        super().__init__(
+            "Generated text was blocked by the XNLP evidence gate."
+            + (f" Unsupported forms: {forms}" if forms else "")
+            + " Grammar and meaning are not certified by this gate."
+        )
 
 
 class XNLPPredictor:
@@ -184,11 +200,14 @@ class XNLPPredictor:
         top_p: float = 0.9,
         repetition_penalty: float = 1.1,
         do_sample: bool = True,
+        quality_gate: bool = True,
     ) -> str:
         """
         Generate text continuation for *prompt*.
 
-        Returns the decoded text (prompt + continuation).
+        By default, reject a continuation containing word forms absent from
+        the evidence-backed lexicon or letters outside the foundation
+        orthography. This is a lexical check, not a grammar or meaning proof.
         """
         self.model.eval()
         ids = self.tokenizer.encode(prompt, add_special_tokens=False)
@@ -205,7 +224,16 @@ class XNLPPredictor:
             repetition_penalty=repetition_penalty,
             do_sample=do_sample,
         )
-        return self.tokenizer.decode(out[0].tolist(), skip_special_tokens=True)
+        decoded = self.tokenizer.decode(out[0].tolist(), skip_special_tokens=True)
+        if quality_gate:
+            continuation_ids = out[0][len(ids):].tolist()
+            continuation = self.tokenizer.decode(
+                continuation_ids, skip_special_tokens=True
+            )
+            report = validate_generated_text(continuation)
+            if report["status"] != "SUPPORTED":
+                raise GeneratedTextRejected(report)
+        return decoded
 
     def __call__(self, prompt: str, **kwargs) -> str:
         """Shortcut: ``predictor(prompt, temperature=0.7)``."""
