@@ -225,7 +225,7 @@ def classify_orthography(text: str) -> str:
 class DataRecord:
     """A single training/validation record with full provenance."""
     text: str
-    source: str                          # "mqhayi" or "masikhanyise"
+    source: str                          # "mqhayi", "masikhanyise", or "generated"
     source_type: str                     # "literary", "poetry", "prose", etc.
     source_title: str
     source_section: str
@@ -259,7 +259,7 @@ def generate_record_id(text: str, source: str, idx: int) -> str:
 
 def extract_mqhayi_records() -> List[DataRecord]:
     """
-    Deep extraction of S.E.K. Mqhayi's works from the corpus files.
+    Illustrative Mqhayi-like examples authored in this file, not book excerpts.
 
     Authentic Mqhayi text is separated from pedagogical/generated overlays.
     Each text snippet is traced to its specific work and section.
@@ -282,11 +282,11 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for text, title, section in ityala_passages:
         records.append(DataRecord(
-            text=text, source="mqhayi", source_type="novel_excerpt",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="novel_excerpt",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="traditional",
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     # ── Traditional praise poetry (izibongo) ──
@@ -309,11 +309,11 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for text, title, section in izibongo:
         records.append(DataRecord(
-            text=text, source="mqhayi", source_type="praise_poetry",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="praise_poetry",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="mixed", language_class=detect_language(text, "mqhayi"),
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     # ── Nkosi Sikelel' iAfrika (traditional song/prayer) ──
@@ -326,11 +326,11 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for line in nkosi_lines:
         records.append(DataRecord(
-            text=line, source="mqhayi", source_type="traditional_song",
+            text=line, source="generated", source_type="traditional_song",
             source_title="Nkosi Sikelel' iAfrika", source_section="Verse",
-            confidence="high", validation_status="authoritative",
+            confidence="low", validation_status="candidate",
             orthography="modern",
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     # ── Autobiography: UMqhayi waseNtab'ozuko ──
@@ -344,11 +344,11 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for text, title, section in autobio:
         records.append(DataRecord(
-            text=text, source="mqhayi", source_type="autobiography",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="autobiography",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="mixed", language_class=detect_language(text, "mqhayi"),
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     # ── U-Don Jadu (1929) — novel excerpt ──
@@ -361,11 +361,11 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for text, title, section in don_jadu:
         records.append(DataRecord(
-            text=text, source="mqhayi", source_type="novel_excerpt",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="novel_excerpt",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="modern", language_class="TARGET_LANGUAGE",
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     # ── Other Mqhayi works (from resource documentation) ──
@@ -388,11 +388,11 @@ def extract_mqhayi_records() -> List[DataRecord]:
     ]
     for text, title, section in other_works:
         records.append(DataRecord(
-            text=text, source="mqhayi", source_type="literary_excerpt",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="synthetic_illustration",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="mixed", language_class=detect_language(text, "mqhayi"),
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     return records
@@ -400,7 +400,7 @@ def extract_mqhayi_records() -> List[DataRecord]:
 
 def extract_masikhanyise_records() -> List[DataRecord]:
     """
-    Deep extraction of Masikhanyise textbook content.
+    Illustrative textbook-style examples authored in this file, not sourced textbook text.
 
     Extracts poetry terminology, grammar structures, cultural content,
     and literary analysis terms from the textbook series.
@@ -428,11 +428,11 @@ def extract_masikhanyise_records() -> List[DataRecord]:
     ]
     for text, title, section in poetry_terms:
         records.append(DataRecord(
-            text=text, source="masikhanyise", source_type="poetry_terminology",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="synthetic_illustration",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="mixed", language_class=detect_language(text, "masikhanyise"),
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     # ── Grammar structures ──
@@ -452,11 +452,11 @@ def extract_masikhanyise_records() -> List[DataRecord]:
     ]
     for text, title, section in grammar:
         records.append(DataRecord(
-            text=text, source="masikhanyise", source_type="grammar_terminology",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="synthetic_illustration",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="mixed", language_class=detect_language(text, "masikhanyise"),
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     # ── Cultural content ──
@@ -476,11 +476,11 @@ def extract_masikhanyise_records() -> List[DataRecord]:
     ]
     for text, title, section in culture:
         records.append(DataRecord(
-            text=text, source="masikhanyise", source_type="cultural_content",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="synthetic_illustration",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="mixed", language_class=detect_language(text, "masikhanyise"),
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     # ── Literature analysis terms ──
@@ -499,11 +499,11 @@ def extract_masikhanyise_records() -> List[DataRecord]:
     ]
     for text, title, section in lit_analysis:
         records.append(DataRecord(
-            text=text, source="masikhanyise", source_type="literature_analysis",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="synthetic_illustration",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="mixed", language_class=detect_language(text, "masikhanyise"),
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     return records
@@ -512,7 +512,7 @@ def extract_masikhanyise_records() -> List[DataRecord]:
 def extract_conversational_xhosa() -> List[DataRecord]:
     """
     Extract conversational Xhosa from Masikhanyise-style material.
-    These are the authentic, naturally-occurring Xhosa sentences (not
+    These are illustrative sentences authored in this file (not
     the English-translation versions that were embedded in the original
     corpus for pedagogical purposes).
     """
@@ -600,12 +600,12 @@ def extract_conversational_xhosa() -> List[DataRecord]:
     ]
     for text, title, section in authentic_xhosa:
         records.append(DataRecord(
-            text=text, source="masikhanyise", source_type="conversational",
-            source_title=title, source_section=section,
-            confidence="high", validation_status="authoritative",
+            text=text, source="generated", source_type="synthetic_illustration",
+            source_title=f"Unverified XNLP illustration ({title})", source_section=section,
+            confidence="low", validation_status="candidate",
             orthography="mixed",
             language_class=detect_language(text, "masikhanyise"),
-            retrieval_date=now,
+            retrieval_date=now, generator="data_extractor.py", original_text=text,
         ))
 
     return records
