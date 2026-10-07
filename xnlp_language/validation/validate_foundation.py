@@ -70,6 +70,7 @@ def main() -> None:
     assert manifest["model_training"] == "FROZEN"
     semantic_senses = rows(GENERATED / "semantics" / "lexical_senses.jsonl")
     semantic_relations = rows(GENERATED / "semantics" / "semantic_relations.jsonl")
+    semantic_constructions = rows(GENERATED / "semantics" / "verified_constructions.jsonl")
     semantic_profiles = json.loads(
         (GENERATED / "semantics" / "noun_class_profiles.json").read_text(encoding="utf-8")
     )["profiles"]
@@ -79,6 +80,8 @@ def main() -> None:
     assert semantic_report["corpus_sha256"] == manifest["corpus_sha256"]
     assert semantic_report["verified_sense_entries"] == len(semantic_senses)
     assert semantic_report["semantic_relation_entries"] == len(semantic_relations)
+    assert semantic_report["verified_construction_entries"] == len(semantic_constructions)
+    assert semantic_report["reviewed_construction_candidates"] >= len(semantic_constructions)
     assert semantic_report["noun_class_profiles"] == len(semantic_profiles)
     assert semantic_report["status"] in {"PARTIAL", "INSUFFICIENT_EVIDENCE"}
     assert semantic_report["accepted_examples"] == len(semantic_senses)
@@ -107,6 +110,29 @@ def main() -> None:
                 match.group(0).casefold()
                 for match in re.finditer(r"[^\W\d_]+(?:[-'][^\W\d_]+)*", record["text"])
             }
+    construction_ids = {item["construction_id"] for item in semantic_constructions}
+    assert len(construction_ids) == len(semantic_constructions), "duplicate semantic construction ID"
+    for construction in semantic_constructions:
+        assert construction["review_status"] == "HUMAN_REVIEWED"
+        assert construction["translation"] and construction["evidence"]
+        construction_tokens = [
+            match.group(0).casefold()
+            for match in re.finditer(r"[^\\W\\d_]+(?:[-'][^\\W\\d_]+)*", construction["surface_text"])
+        ]
+        assert construction_tokens, "empty semantic construction"
+        for evidence_item in construction["evidence"]:
+            record = source_by_id[evidence_item["record_id"]]
+            assert record["record_id"] in analysis_ids
+            assert evidence_item["source_work"] == record["source"]
+            source_tokens = [
+                match.group(0).casefold()
+                for match in re.finditer(r"[^\\W\\d_]+(?:[-'][^\\W\\d_]+)*", record["text"])
+            ]
+            width = len(construction_tokens)
+            assert any(
+                source_tokens[index:index + width] == construction_tokens
+                for index in range(len(source_tokens) - width + 1)
+            ), "semantic construction is not attested in its cited record"
     for profile in semantic_profiles:
         assert profile["review_status"] == "HUMAN_REVIEWED"
         assert profile["semantic_tendencies"]
