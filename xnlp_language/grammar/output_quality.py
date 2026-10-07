@@ -14,7 +14,7 @@ from typing import Any
 
 _LANGUAGE_ROOT = Path(__file__).resolve().parents[1]
 _GENERATED = _LANGUAGE_ROOT / "generated"
-_WORD = re.compile(r"[^\\W\\d_]+(?:[-'][^\\W\\d_]+)*", re.UNICODE)
+_WORD = re.compile(r"[^\W\d_]+(?:[-'][^\W\d_]+)*", re.UNICODE)
 
 
 class FoundationUnavailableError(RuntimeError):
