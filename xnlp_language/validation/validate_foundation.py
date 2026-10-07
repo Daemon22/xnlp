@@ -117,7 +117,7 @@ def main() -> None:
         assert construction["translation"] and construction["evidence"]
         construction_tokens = [
             match.group(0).casefold()
-            for match in re.finditer(r"[^\\W\\d_]+(?:[-'][^\\W\\d_]+)*", construction["surface_text"])
+            for match in re.finditer(r"[^\W\d_]+(?:[-'][^\W\d_]+)*", construction["surface_text"])
         ]
         assert construction_tokens, "empty semantic construction"
         for evidence_item in construction["evidence"]:
@@ -126,7 +126,7 @@ def main() -> None:
             assert evidence_item["source_work"] == record["source"]
             source_tokens = [
                 match.group(0).casefold()
-                for match in re.finditer(r"[^\\W\\d_]+(?:[-'][^\\W\\d_]+)*", record["text"])
+                for match in re.finditer(r"[^\W\d_]+(?:[-'][^\W\d_]+)*", record["text"])
             ]
             width = len(construction_tokens)
             assert any(
