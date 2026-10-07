@@ -2,6 +2,7 @@
 """Dependency-free integrity and provenance checks for generated foundation data."""
 from __future__ import annotations
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -92,7 +93,7 @@ def main() -> None:
             assert evidence_item["surface_form"].casefold() == sense["lemma"].casefold()
             assert evidence_item["surface_form"].casefold() in {
                 match.group(0).casefold()
-                for match in __import__("re").finditer(r"[^\\W\\d_]+(?:[-'][^\\W\\d_]+)*", record["text"])
+                for match in re.finditer(r"[^\W\d_]+(?:[-'][^\W\d_]+)*", record["text"])
             }
     for profile in semantic_profiles:
         assert profile["review_status"] == "HUMAN_REVIEWED"
@@ -104,7 +105,8 @@ def main() -> None:
         )["domains"]
     }
     assert coverage_domains["semantics"]["entries"] == len(semantic_senses)
-    assert coverage_domains["semantics"]["coverage_status"] == "PARTIAL"
+    expected_semantic_status = "PARTIAL" if semantic_senses else "INSUFFICIENT_EVIDENCE"
+    assert coverage_domains["semantics"]["coverage_status"] == expected_semantic_status
     assert manifest["analysis_records"] == len(analysis_ids)
     assert manifest["decision"].startswith("FOUNDATION INCOMPLETE")
 
