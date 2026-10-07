@@ -133,7 +133,7 @@ def source_provenance_rejection(row: dict[str, Any]) -> str | None:
     if row.get("generator"):
         return "generated_or_transformed_record"
     if row.get("original_text") != row.get("text"):
-        return "original_text_missing_or_changed"
+        return "record_text_fields_disagree"
     if not row.get("source_title") or not (row.get("edition") or row.get("source_section")):
         return "missing_work_or_edition"
     source_url = row.get("source_url", "")
@@ -144,8 +144,14 @@ def source_provenance_rejection(row: dict[str, Any]) -> str | None:
             return "unknown_source_work"
         return None
     if row.get("source") == "masikhanyise":
-        if not source_url or not (row.get("isbn") or row.get("book_isbn")):
-            return "textbook_record_missing_book_url_or_isbn"
+        approved_domains = (
+            "shop.snapplify.com", "ebooks.unisaenterprise.ac.za",
+            "dcebooks.co.za", "amazon.co.za", "pearson.com",
+        )
+        has_publication_url = any(domain in source_url for domain in approved_domains)
+        has_isbn = bool(row.get("isbn") or row.get("book_isbn"))
+        if not has_publication_url or not has_isbn:
+            return "textbook_record_missing_approved_book_url_or_isbn"
         return None
     return "source_not_in_authorized_publication_set"
 
@@ -184,7 +190,7 @@ def read_records_with_audit(path: Path) -> tuple[list[dict[str, Any]], dict[str,
         "accepted_records": len(records),
         "excluded_records": sum(excluded.values()),
         "excluded_records_by_reason": dict(sorted(excluded.items())),
-        "policy": "Only source records with preserved text and direct, work-level publication metadata are eligible for semantic or grammatical analysis.",
+        "policy": "Only records with matching recorded-text fields and direct, work-level publication metadata are eligible for semantic or grammatical analysis. These checks do not certify OCR accuracy or page-level localization.",
     }
 
 
