@@ -83,6 +83,23 @@ def main() -> None:
     semantic_report = json.loads(
         (GENERATED / "reports" / "semantic_coverage.json").read_text(encoding="utf-8")
     )
+    semantic_queue = rows(GENERATED / "annotation" / "semantic_review_queue.jsonl")
+    assert semantic_report["annotation_queue_candidates"] == len(semantic_queue)
+    for candidate in semantic_queue:
+        record = source_by_id[candidate["record_id"]]
+        start, end = candidate["character_span"]
+        assert record["record_id"] in analysis_ids
+        assert record["text"][start:end] == candidate["surface_text"]
+        assert candidate["token_count"] >= 3
+        assert candidate["annotation_status"] == "UNANNOTATED"
+        assert candidate["review_status"] == "PENDING_HUMAN_REVIEW"
+        assert candidate["translation"] is None
+        assert candidate["predicate_lemma"] is None
+        assert candidate["predicate_sense"] is None
+        assert candidate["arguments"] == []
+        assert candidate["semantic_roles"] == []
+        assert candidate["composition_notes"] is None
+        assert candidate["ambiguity_notes"] is None
     assert semantic_report["corpus_sha256"] == manifest["corpus_sha256"]
     assert semantic_report["verified_sense_entries"] == len(semantic_senses)
     assert semantic_report["semantic_relation_entries"] == len(semantic_relations)
@@ -98,6 +115,7 @@ def main() -> None:
         "lexical_sense_glosses",
         "noun_class_semantic_tendencies",
         "attested_agreement_constructions",
+        "corpus_annotation_candidates",
         "predicate_senses_and_argument_frames",
         "semantic_roles",
         "selectional_restrictions",
@@ -115,6 +133,10 @@ def main() -> None:
     assert semantic_domains["attested_agreement_constructions"]["status"] in {
         "ATTESTED_EXAMPLES", "INSUFFICIENT_EVIDENCE"
     }
+    assert semantic_domains["corpus_annotation_candidates"]["status"] in {
+        "ANNOTATION_CANDIDATES_ONLY", "INSUFFICIENT_EVIDENCE"
+    }
+    assert semantic_domains["corpus_annotation_candidates"]["evidence_count"] == len(semantic_queue)
     assert semantic_report["semantic_relation_entries"] == len(semantic_relations) == 0
     assert semantic_report["accepted_examples"] == len(semantic_senses)
     assert semantic_report["rejected_examples"] == len(semantic_report["rejected_foundation_examples"])
