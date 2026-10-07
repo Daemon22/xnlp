@@ -94,6 +94,12 @@ def validate_generated_text(text: str) -> dict[str, Any]:
         raise FoundationUnavailableError(
             "Reviewed semantic sense data is unavailable; rebuild the foundation."
         ) from exc
+    semantic_report = _load_json(_GENERATED / "reports" / "semantic_coverage.json")
+    if semantic_report.get("corpus_sha256") != lexicon_hash:
+        raise FoundationUnavailableError("Semantic and lexical artifacts use different corpora")
+    if semantic_report.get("verified_sense_entries") != len(semantic_rows):
+        raise FoundationUnavailableError("Semantic coverage report does not match the sense inventory")
+
     semantic_index: dict[str, list[dict[str, str]]] = {}
     for sense in semantic_rows:
         semantic_index.setdefault(sense["lemma"].casefold(), []).append({
@@ -134,6 +140,16 @@ def validate_generated_text(text: str) -> dict[str, Any]:
                 "grounded_forms": grounded_forms,
                 "ungrounded_forms": ungrounded_forms,
                 "note": "Word glosses are not a sentence-level meaning or coherence check.",
+                "coverage_summary": {
+                    "status": semantic_report.get("status"),
+                    "observed_lexicon_entries": semantic_report.get("observed_lexicon_entries"),
+                    "verified_sense_entries": semantic_report.get("verified_sense_entries"),
+                    "unique_glossed_lexemes": semantic_report.get("unique_glossed_lexemes"),
+                    "coverage_percent_of_observed_lexemes": semantic_report.get(
+                        "coverage_percent_of_observed_lexemes"
+                    ),
+                    "gaps": semantic_report.get("gaps", []),
+                },
             },
             "grammar_and_meaning": {
                 "status": "NOT_ASSESSED",
