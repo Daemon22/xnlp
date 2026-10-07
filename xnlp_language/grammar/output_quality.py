@@ -49,6 +49,8 @@ def validate_generated_text(text: str) -> dict[str, Any]:
     alphabet = orthography.get("alphabetic_characters")
     if not isinstance(forms, dict) or not isinstance(alphabet, dict):
         raise FoundationUnavailableError("XNLP foundation artifacts have an invalid format")
+    if lexicon.get("corpus_sha256") != orthography.get("corpus_sha256"):
+        raise FoundationUnavailableError("XNLP lexical and orthographic artifacts use different corpora")
 
     allowed_letters = set(alphabet)
     unsupported_letters = sorted({
