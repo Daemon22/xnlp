@@ -169,7 +169,9 @@ def validate_generated_text(text: str) -> dict[str, Any]:
                 "coverage_summary": {
                     "status": semantic_report.get("status"),
                     "observed_lexicon_entries": semantic_report.get("observed_lexicon_entries"),
-                    "verified_sense_entries": semantic_report.get("verified_sense_entries"),
+                                        "verified_sense_entries": semantic_report.get("verified_sense_entries"),
+                    "verified_construction_entries": semantic_report.get("verified_construction_entries"),
+                    "noun_class_consistency_findings": semantic_report.get("noun_class_consistency_findings", []),
                     "unique_glossed_lexemes": semantic_report.get("unique_glossed_lexemes"),
                     "coverage_percent_of_observed_lexemes": semantic_report.get(
                         "coverage_percent_of_observed_lexemes"
