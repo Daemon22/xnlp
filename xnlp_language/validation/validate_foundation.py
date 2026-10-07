@@ -81,6 +81,18 @@ def main() -> None:
     assert semantic_report["semantic_relation_entries"] == len(semantic_relations)
     assert semantic_report["noun_class_profiles"] == len(semantic_profiles)
     assert semantic_report["status"] in {"PARTIAL", "INSUFFICIENT_EVIDENCE"}
+    assert semantic_report["accepted_examples"] == len(semantic_senses)
+    assert semantic_report["rejected_examples"] == len(semantic_report["rejected_foundation_examples"])
+    assert semantic_report["curated_examples"] >= semantic_report["accepted_examples"]
+    assert sum(semantic_report["accepted_examples_by_noun_class"].values()) == len(semantic_senses)
+    assert sum(semantic_report["accepted_examples_by_source_work"].values()) == len(semantic_senses)
+    semantic_lexemes = {sense["lemma"].casefold() for sense in semantic_senses}
+    expected_coverage = round(
+        100 * len(semantic_lexemes) / semantic_report["observed_lexicon_entries"],
+        4,
+    ) if semantic_report["observed_lexicon_entries"] else 0.0
+    assert semantic_report["coverage_percent_of_observed_lexemes"] == expected_coverage
+    assert semantic_report["unique_glossed_lexemes"] == len(semantic_lexemes)
     sense_ids = {sense["sense_id"] for sense in semantic_senses}
     assert len(sense_ids) == len(semantic_senses), "duplicate semantic sense ID"
     for sense in semantic_senses:
