@@ -17,6 +17,8 @@ This directory contains JSON schemas for the XNLP IsiXhosa Language Foundation. 
 ### Lexical and Semantic Schemas
 - `lexicon_schema.json` - Lexical database entries
 - `semantic_relations_schema.json` - Semantic relationships
+- `semantic_sense_schema.json` - Evidence-linked lexical senses
+- `semantic_construction_schema.json` - Source-attested agreement constructions
 - `function_words_schema.json` - Function words (pronouns, demonstratives, etc.)
 
 ### Structural and Discourse Schemas
