@@ -67,6 +67,12 @@ def main() -> None:
         assert item["status"] == "OPEN"
         assert all(record_id in record_ids for record_id in item["record_ids"])
     manifest = json.loads((GENERATED / "foundation_manifest.json").read_text(encoding="utf-8"))
+    source_audit = json.loads(
+        (GENERATED / "reports" / "source_provenance_audit.json").read_text(encoding="utf-8")
+    )
+    assert source_audit["corpus_sha256"] == manifest["corpus_sha256"]
+    assert source_audit["accepted_records"] == len(records)
+    assert manifest["source_provenance_audit"] == source_audit
     assert manifest["model_training"] == "FROZEN"
     semantic_senses = rows(GENERATED / "semantics" / "lexical_senses.jsonl")
     semantic_relations = rows(GENERATED / "semantics" / "semantic_relations.jsonl")
