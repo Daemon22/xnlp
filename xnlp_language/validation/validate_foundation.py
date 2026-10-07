@@ -36,6 +36,19 @@ def main() -> None:
     for entry in lexicon:
         assert entry["analysis_status"] == "UNANALYZED"
         assert entry["evidence"] and all(e["record_id"] in analysis_ids for e in entry["evidence"])
+    observed_lexicon = json.loads(
+        (GENERATED / "foundation" / "observed_lexicon.json").read_text(encoding="utf-8")
+    )
+    observed_forms = observed_lexicon["forms"]
+    assert observed_lexicon["analysis_records"] == len(analysis_ids)
+    assert observed_lexicon["form_count"] == len(observed_forms)
+    for entry in lexicon:
+        entry_record_ids = {e["record_id"] for e in entry["evidence"]}
+        for surface in {entry["lemma"], *entry["surface_forms"]}:
+            indexed = observed_forms[surface.casefold()]
+            assert indexed["lexeme_id"] == entry["lexeme_id"]
+            assert set(indexed["evidence_record_ids"]).issubset(analysis_ids)
+            assert set(indexed["evidence_record_ids"]).issubset(entry_record_ids)
     noun = json.loads((GENERATED / "foundation" / "noun_class_observations.json").read_text(encoding="utf-8"))
     for entry in noun:
         assert entry["analysis_status"] == "PROVISIONAL"
