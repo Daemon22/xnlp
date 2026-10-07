@@ -69,7 +69,7 @@ def validate_generated_text(text: str) -> dict[str, Any]:
 
     return {
         "schema_version": 1,
-        "status": "SUPPORTED" if lexical_pass and orthographic_pass else "REJECTED",
+        "status": "LEXICALLY_SUPPORTED" if lexical_pass and orthographic_pass else "REJECTED",
         "checks": {
             "observed_word_forms": {
                 "status": "PASS" if lexical_pass else "FAIL",
