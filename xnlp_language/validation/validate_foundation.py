@@ -97,6 +97,14 @@ def main() -> None:
     ) if semantic_report["observed_lexicon_entries"] else 0.0
     assert semantic_report["coverage_percent_of_observed_lexemes"] == expected_coverage
     assert semantic_report["unique_glossed_lexemes"] == len(semantic_lexemes)
+    assert "noun_class_consistency_findings" in semantic_report
+    for finding in semantic_report["noun_class_consistency_findings"]:
+        source_path = ROOT / finding["source_foundation_file"]
+        foundation_entry = json.loads(source_path.read_text(encoding="utf-8"))
+        expected_prefix = foundation_entry["prefix"]["plural"].strip("-").casefold()
+        assert expected_prefix == finding["expected_plural_prefix"]
+        assert not finding["recorded_plural_form"].casefold().startswith(expected_prefix)
+        assert finding["finding"] == "recorded_plural_form_does_not_match_class_pairing_prefix"
     sense_ids = {sense["sense_id"] for sense in semantic_senses}
     assert len(sense_ids) == len(semantic_senses), "duplicate semantic sense ID"
     for sense in semantic_senses:
