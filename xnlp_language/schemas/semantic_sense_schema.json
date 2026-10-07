@@ -4,34 +4,87 @@
   "description": "A human-reviewed lexical sense grounded in an eligible source record.",
   "type": "object",
   "properties": {
-    "sense_id": { "type": "string" },
-    "lemma": { "type": "string" },
-    "gloss": { "type": "string" },
-    "noun_class_id": { "type": "string" },
-    "review_status": { "type": "string", "enum": ["HUMAN_REVIEWED"] },
+    "sense_id": {
+      "type": "string"
+    },
+    "lemma": {
+      "type": "string"
+    },
+    "gloss": {
+      "type": "string"
+    },
+    "noun_class_id": {
+      "type": "string"
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "HUMAN_REVIEWED"
+      ]
+    },
     "confidence": {
       "type": "string",
-      "enum": ["OBSERVED", "SUPPORTED", "HIGH_CONFIDENCE"]
+      "enum": [
+        "OBSERVED",
+        "SUPPORTED",
+        "HIGH_CONFIDENCE"
+      ]
     },
-    "source_foundation_file": { "type": "string" },
+    "source_foundation_file": {
+      "type": "string"
+    },
     "evidence": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
         "properties": {
-          "record_id": { "type": "string" },
-          "source_work": { "type": "string" },
-          "surface_form": { "type": "string" }
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          },
+          "surface_form": {
+            "type": "string"
+          },
+          "character_span": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "source_title": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string"
+          }
         },
-        "required": ["record_id", "source_work", "surface_form"],
+        "required": [
+          "record_id",
+          "source_work",
+          "surface_form",
+          "character_span"
+        ],
         "additionalProperties": false
       }
     }
   },
   "required": [
-    "sense_id", "lemma", "gloss", "noun_class_id", "review_status",
-    "confidence", "source_foundation_file", "evidence"
+    "sense_id",
+    "lemma",
+    "gloss",
+    "noun_class_id",
+    "review_status",
+    "confidence",
+    "source_foundation_file",
+    "evidence"
   ],
   "additionalProperties": false
 }
