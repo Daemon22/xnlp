@@ -1514,6 +1514,13 @@ def _build_semantic_coverage(
     constructions: list[dict] = []
     rejected_constructions: list[dict] = []
     reviewed_construction_candidates = 0
+    relation_by_agreement_type = {
+        "subject_concord": "subject_predicate",
+        "object_concord": "object_verb",
+        "possessive_concord": "possessor_possessed",
+        "adjective_concord": "noun_adjective",
+        "demonstrative_concord": "noun_demonstrative",
+    }
     agreement_dir = FOUNDATION_DIR / "agreement"
     for source_path in sorted(agreement_dir.glob("*.json")):
         try:
@@ -1573,7 +1580,7 @@ def _build_semantic_coverage(
                     "subject_noun_class": foundation_entry.get("noun_class", ""),
                     "concord": example.get("concord_form", ""),
                     "predicate": example.get("target", ""),
-                    "relation": "subject_predicate",
+                    "relation": relation_by_agreement_type.get(foundation_entry.get("agreement_type"), "agreement_relation"),
                 },
                 "evidence": [{
                     "record_id": record_id,
