@@ -1414,6 +1414,9 @@ def _build_semantic_coverage(
     senses: list[dict] = []
     profiles: list[dict] = []
     rejected_examples: list[dict] = []
+    curated_examples = 0
+    accepted_by_class: collections.Counter[str] = collections.Counter()
+    source_work_counts: collections.Counter[str] = collections.Counter()
     noun_class_dir = FOUNDATION_DIR / "noun_classes"
 
     for source_path in sorted(noun_class_dir.glob("*.json")):
@@ -1421,7 +1424,7 @@ def _build_semantic_coverage(
             foundation_entry = json.loads(source_path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             rejected_examples.append({
-                "source_foundation_file": str(source_path.relative_to(ROOT)),
+                "source_foundation_file": source_path.relative_to(ROOT).as_posix(),
                 "reason": "invalid_foundation_json",
             })
             continue
@@ -1435,11 +1438,12 @@ def _build_semantic_coverage(
                 "semantic_tendencies": tendencies,
                 "confidence": foundation_entry.get("confidence", "OBSERVED"),
                 "review_status": "HUMAN_REVIEWED",
-                "source_foundation_file": str(source_path.relative_to(ROOT)),
+                "source_foundation_file": source_path.relative_to(ROOT).as_posix(),
                 "scope_note": "Class-level tendencies do not entail the meaning of every member noun.",
             })
 
         for example in foundation_entry.get("examples", []):
+            curated_examples += 1
             form = example.get("noun", "").strip()
             gloss = example.get("meaning", "").strip()
             record_id = example.get("source_record_id")
@@ -1460,12 +1464,14 @@ def _build_semantic_coverage(
                 rejected_examples.append({
                     "form": form,
                     "source_record_id": record_id,
-                    "source_foundation_file": str(source_path.relative_to(ROOT)),
+                    "source_foundation_file": source_path.relative_to(ROOT).as_posix(),
                     "reason": reason,
                 })
                 continue
 
             source_work = record["source"]
+            accepted_by_class[class_id] += 1
+            source_work_counts[source_work] += 1
             identity = f"{class_id}\\0{form.casefold()}\\0{gloss}\\0{record_id}"
             sense_id = "SENSE_" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:16].upper()
             senses.append({
@@ -1475,7 +1481,7 @@ def _build_semantic_coverage(
                 "noun_class_id": class_id,
                 "review_status": "HUMAN_REVIEWED",
                 "confidence": foundation_entry.get("confidence", "OBSERVED"),
-                "source_foundation_file": str(source_path.relative_to(ROOT)),
+                "source_foundation_file": source_path.relative_to(ROOT).as_posix(),
                 "evidence": [{
                     "record_id": record_id,
                     "source_work": source_work,
@@ -1505,6 +1511,11 @@ def _build_semantic_coverage(
         "unique_glossed_lexemes": len(unique_lexemes),
         "noun_class_profiles": len(profiles),
         "semantic_relation_entries": 0,
+        "curated_examples": curated_examples,
+        "accepted_examples": len(senses),
+        "rejected_examples": len(rejected_examples),
+        "accepted_examples_by_noun_class": dict(sorted(accepted_by_class.items())),
+        "accepted_examples_by_source_work": dict(sorted(source_work_counts.items())),
         "coverage_percent_of_observed_lexemes": round(
             100 * len(unique_lexemes) / lexical_count, 4
         ) if lexical_count else 0.0,
