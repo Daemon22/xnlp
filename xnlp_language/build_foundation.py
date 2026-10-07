@@ -1582,7 +1582,7 @@ def _build_semantic_coverage(
     lexical_count = len(observed_forms)
     report = {
         "artifact_id": "XNLP_SEMANTIC_COVERAGE_V1",
-        "status": "PARTIAL" if senses else "INSUFFICIENT_EVIDENCE",
+        "status": "PARTIAL" if senses or constructions else "INSUFFICIENT_EVIDENCE",
         "review_basis": "Human-reviewed glosses in xnlp_language/foundation/noun_classes/",
         "corpus_sha256": corpus_hash,
         "observed_lexicon_entries": lexical_count,
@@ -2479,11 +2479,11 @@ def build(corpus: Path, destination: Path) -> dict:
         "word_formation": {"entries": len(der_entries), "coverage_status": "UNDER_REVIEW", "confidence": "SUPPORTED",
                            "observation_ids": [obs["observation_id"] for obs in wf_obs], "notes": "Derivational patterns from corpus evidence."},
         "semantics": {
-            "entries": semantic_report["verified_sense_entries"],
-            "coverage_status": "PARTIAL" if semantic_report["verified_sense_entries"] else "INSUFFICIENT_EVIDENCE",
-            "confidence": "SUPPORTED" if semantic_report["verified_sense_entries"] else "INSUFFICIENT_EVIDENCE",
+            "entries": semantic_report["verified_sense_entries"] + semantic_report["verified_construction_entries"],
+            "coverage_status": "PARTIAL" if semantic_report["verified_sense_entries"] or semantic_report["verified_construction_entries"] else "INSUFFICIENT_EVIDENCE",
+            "confidence": "SUPPORTED" if semantic_report["verified_sense_entries"] or semantic_report["verified_construction_entries"] else "INSUFFICIENT_EVIDENCE",
             "observation_ids": [],
-            "notes": "Human-reviewed, evidence-linked noun glosses; coverage is partial and does not encode compositional meaning.",
+            "notes": "Evidence-linked noun glosses and exact reviewed construction attestations; no productive compositional sentence grammar is claimed.",
         },
         "discourse": {"entries": 0, "coverage_status": "INSUFFICIENT_EVIDENCE", "confidence": "INSUFFICIENT_EVIDENCE",
                       "observation_ids": [], "notes": "No automated discourse claims; requires human review."},
