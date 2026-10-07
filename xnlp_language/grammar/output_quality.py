@@ -59,11 +59,24 @@ def validate_generated_text(text: str) -> dict[str, Any]:
     })
     digit_offsets = [index for index, char in enumerate(text) if char.isdigit()]
     word_matches = list(_WORD.finditer(text))
-    unknown = [
-        {"surface": match.group(0), "start": match.start(), "end": match.end()}
-        for match in word_matches
-        if match.group(0).casefold() not in forms
-    ]
+    supported_forms = []
+    unknown = []
+    for match in word_matches:
+        evidence = forms.get(match.group(0).casefold())
+        if evidence is None:
+            unknown.append({
+                "surface": match.group(0),
+                "start": match.start(),
+                "end": match.end(),
+            })
+        else:
+            supported_forms.append({
+                "surface": match.group(0),
+                "start": match.start(),
+                "end": match.end(),
+                "lexeme_id": evidence["lexeme_id"],
+                "evidence_record_ids": evidence["evidence_record_ids"],
+            })
     lexical_pass = bool(word_matches) and not unknown
     orthographic_pass = not unsupported_letters and not digit_offsets
 
@@ -74,6 +87,7 @@ def validate_generated_text(text: str) -> dict[str, Any]:
             "observed_word_forms": {
                 "status": "PASS" if lexical_pass else "FAIL",
                 "word_count": len(word_matches),
+                "supported_forms": supported_forms,
                 "unknown_forms": unknown,
             },
             "orthographic_inventory": {
