@@ -115,6 +115,8 @@ def main() -> None:
             assert record["record_id"] in analysis_ids
             assert evidence_item["source_work"] == record["source"]
             assert evidence_item["surface_form"].casefold() == sense["lemma"].casefold()
+            start, end = evidence_item["character_span"]
+            assert record["text"][start:end].casefold() == evidence_item["surface_form"].casefold()
             assert evidence_item["surface_form"].casefold() in {
                 match.group(0).casefold()
                 for match in re.finditer(r"[^\W\d_]+(?:[-'][^\W\d_]+)*", record["text"])
@@ -133,6 +135,11 @@ def main() -> None:
             record = source_by_id[evidence_item["record_id"]]
             assert record["record_id"] in analysis_ids
             assert evidence_item["source_work"] == record["source"]
+            start, end = evidence_item["character_span"]
+            assert [
+                match.group(0).casefold()
+                for match in re.finditer(r"[^\W\d_]+(?:[-'][^\W\d_]+)*", record["text"][start:end])
+            ] == construction_tokens
             source_tokens = [
                 match.group(0).casefold()
                 for match in re.finditer(r"[^\W\d_]+(?:[-'][^\W\d_]+)*", record["text"])
