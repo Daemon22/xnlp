@@ -37,11 +37,21 @@ class GeneratedTextRejected(ValueError):
 
     def __init__(self, report: Dict[str, Any]):
         self.validation_report = report
-        failed = report.get("checks", {}).get("observed_word_forms", {}).get("unknown_forms", [])
+        checks = report.get("checks", {})
+        failed = checks.get("observed_word_forms", {}).get("unknown_forms", [])
         forms = ", ".join(item["surface"] for item in failed[:8])
+        orthography = checks.get("orthographic_inventory", {})
+        letters = ", ".join(orthography.get("unsupported_letters", []))
+        details = []
+        if forms:
+            details.append(f"unsupported forms: {forms}")
+        if letters:
+            details.append(f"unsupported letters: {letters}")
+        if orthography.get("digit_offsets"):
+            details.append("digits are not allowed")
         super().__init__(
             "Generated text was blocked by the XNLP evidence gate."
-            + (f" Unsupported forms: {forms}" if forms else "")
+            + (f" ({'; '.join(details)})" if details else "")
             + " Grammar and meaning are not certified by this gate."
         )
 
