@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Evidence-Checked Semantic Construction",
+  "description": "A reviewed construction example included only when its token sequence is attested in the cited target-language record. It is an attestation, not a productive grammar rule.",
+  "type": "object",
+  "properties": {
+    "construction_id": {
+      "type": "string"
+    },
+    "construction_type": {
+      "type": "string"
+    },
+    "surface_text": {
+      "type": "string"
+    },
+    "translation": {
+      "type": "string"
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "HUMAN_REVIEWED"
+      ]
+    },
+    "source_foundation_file": {
+      "type": "string"
+    },
+    "constituents": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "subject_noun_class": {
+          "type": "string"
+        },
+        "concord": {
+          "type": "string"
+        },
+        "predicate": {
+          "type": "string"
+        },
+        "relation": {
+          "type": "string",
+          "enum": [
+            "subject_predicate"
+          ]
+        }
+      },
+      "required": [
+        "subject",
+        "subject_noun_class",
+        "concord",
+        "predicate",
+        "relation"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_work": {
+            "type": "string"
+          },
+          "character_span": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "context": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "record_id",
+          "source_work",
+          "character_span",
+          "context"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "construction_id",
+    "construction_type",
+    "surface_text",
+    "translation",
+    "review_status",
+    "source_foundation_file",
+    "constituents",
+    "evidence"
+  ],
+  "additionalProperties": false
+}
