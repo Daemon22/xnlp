@@ -1469,9 +1469,11 @@ def _build_semantic_coverage(
                 reason = "source_record_not_in_target_language_analysis"
             elif form.casefold() not in observed_forms:
                 reason = "form_not_in_observed_target_language_lexicon"
-            elif form.casefold() not in {
-                match.group(0).casefold() for match in WORD.finditer(record["text"])
-            }:
+            exact_matches = [
+                match for match in WORD.finditer(record["text"])
+                if match.group(0).casefold() == form.casefold()
+            ] if record is not None else []
+            if record is not None and not reason and not exact_matches:
                 reason = "exact_form_not_present_in_cited_record"
 
             if reason:
@@ -1500,6 +1502,10 @@ def _build_semantic_coverage(
                     "record_id": record_id,
                     "source_work": source_work,
                     "surface_form": form,
+                    "character_span": [exact_matches[0].start(), exact_matches[0].end()],
+                    "source_title": record.get("source_title", ""),
+                    "source_url": record.get("source_url", ""),
+                    "edition": record.get("edition", record.get("source_section", "")),
                 }],
             })
 
@@ -1572,6 +1578,9 @@ def _build_semantic_coverage(
                 "evidence": [{
                     "record_id": record_id,
                     "source_work": record["source"],
+                    "source_title": record.get("source_title", ""),
+                    "source_url": record.get("source_url", ""),
+                    "edition": record.get("edition", record.get("source_section", "")),
                     "character_span": [first_match.start(), last_match.end()],
                     "context": record["text"][max(0, first_match.start() - 80):min(
                         len(record["text"]), last_match.end() + 80
