@@ -11,6 +11,29 @@ The generator preserves source spelling, provides record-level provenance, and d
 
 `generated/annotation/linguistic_review_queue.jsonl` is the next analysis interface. Its tasks are deliberately unanalysed and corpus-linked: a reviewer must supply evidence before a grammatical assertion can be promoted into the foundation.
 
+## Model-output quality gate
+
+The optional PyTorch inference package calls a deterministic foundation gate
+on every generated continuation by default. Build the language artifacts
+before generating:
+
+```sh
+python xnlp_language/build_foundation.py
+```
+
+The gate blocks a continuation if it contains a word form absent from the
+exact-form lexicon extracted from records classified `TARGET_LANGUAGE`, or
+a letter outside the foundation's observed orthographic inventory. A blocked
+candidate raises `GeneratedTextRejected` and exposes a structured
+`validation_report`. A valid isiXhosa form not present in the corpus can be
+rejected, so this gate favors evidence over coverage.
+
+A pass means only that the continuation is lexically observed and uses
+supported letters. The current foundation does not encode complete grammar,
+semantics, or discourse rules; the gate cannot certify that a sentence is
+grammatical or sensible. It does not rewrite or normalize generated text.
+
+
 ## JSON/HTTP API
 
 The deterministic analyzer can be exposed through a versioned JSON API. It uses only the Python standard library; clients in any language can call it over HTTP. It preserves original text, spelling, punctuation, whitespace, and character offsets. `UNKNOWN` means the available structured evidence did not support an analysis; it is not a spelling judgment.
