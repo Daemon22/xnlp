@@ -1486,6 +1486,7 @@ def _build_semantic_coverage(
     senses.sort(key=lambda item: (item["lemma"].casefold(), item["sense_id"]))
     profiles.sort(key=lambda item: item["profile_id"])
     write_jsonl(destination / "semantics" / "lexical_senses.jsonl", senses)
+    write_jsonl(destination / "semantics" / "semantic_relations.jsonl", [])
     write_json(destination / "semantics" / "noun_class_profiles.json", {
         "artifact_id": "XNLP_SEMANTIC_NOUN_CLASS_PROFILES_V1",
         "profiles": profiles,
@@ -1545,7 +1546,7 @@ def _build_coverage_report(
         "total_entries": sum(d["entries"] for d in coverage),
         "coverage_summary": {
             "fully_covered": sum(1 for d in coverage if d["entries"] > 0 and d["coverage_status"] in ("OBSERVED", "SUPPORTED", "HIGH_CONFIDENCE")),
-            "partially_covered": sum(1 for d in coverage if d["coverage_status"] in ("PROVISIONAL", "UNDER_REVIEW", "OBSERVED")),
+            "partially_covered": sum(1 for d in coverage if d["coverage_status"] in ("PARTIAL", "PROVISIONAL", "UNDER_REVIEW", "OBSERVED")),
             "insufficient": sum(1 for d in coverage if d["coverage_status"] == "INSUFFICIENT_EVIDENCE"),
         },
         "notes": "Coverage is measured against corpus evidence and hand-curated foundation entries. No domain is marked ESTABLISHED without human review.",
