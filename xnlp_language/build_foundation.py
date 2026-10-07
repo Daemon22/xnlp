@@ -2072,10 +2072,35 @@ def build(corpus: Path, destination: Path) -> dict:
         })
     write_jsonl(destination / "lexicon" / "lexicon_observed.jsonl", lexical_entries)
 
+    # Compact exact-form index for generation-time evidence checks. Every form
+    # originates in analysis_records, which are pre-classified TARGET_LANGUAGE.
+    observed_forms = {}
+    for entry in lexical_entries:
+        record_ids = sorted({item["record_id"] for item in entry["evidence"]})
+        for form in {entry["lemma"], *entry["surface_forms"]}:
+            observed_forms[form.casefold()] = {
+                "lexeme_id": entry["lexeme_id"],
+                "frequency": entry["frequency"],
+                "evidence_record_ids": record_ids,
+            }
+    write_json(destination / "foundation" / "observed_lexicon.json", {
+        "artifact_id": "XNLP_OBSERVED_LEXICON_V1",
+        "status": "OBSERVED",
+        "corpus_sha256": corpus_hash,
+        "analysis_records": len(analysis_records),
+        "form_count": len(observed_forms),
+        "forms": dict(sorted(observed_forms.items())),
+        "limitations": [
+            "Forms are corpus observations, not lemmas or grammatical approvals.",
+            "Exact-form support does not establish sentence meaning or grammaticality.",
+        ],
+    })
+
     # Orthographic observations
     orthography = {
         "artifact_id": "ORTHOGRAPHY_OBSERVED_V1",
         "status": "OBSERVED",
+        "corpus_sha256": corpus_hash,
         "corpus_records": len(records),
         "alphabetic_characters": dict(sorted(chars.items())),
         "punctuation": dict(sorted(punctuation.items())),
