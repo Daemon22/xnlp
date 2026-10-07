@@ -67,6 +67,44 @@ def main() -> None:
         assert all(record_id in record_ids for record_id in item["record_ids"])
     manifest = json.loads((GENERATED / "foundation_manifest.json").read_text(encoding="utf-8"))
     assert manifest["model_training"] == "FROZEN"
+    semantic_senses = rows(GENERATED / "semantics" / "lexical_senses.jsonl")
+    semantic_relations = rows(GENERATED / "semantics" / "semantic_relations.jsonl")
+    semantic_profiles = json.loads(
+        (GENERATED / "semantics" / "noun_class_profiles.json").read_text(encoding="utf-8")
+    )["profiles"]
+    semantic_report = json.loads(
+        (GENERATED / "reports" / "semantic_coverage.json").read_text(encoding="utf-8")
+    )
+    assert semantic_report["corpus_sha256"] == manifest["corpus_sha256"]
+    assert semantic_report["verified_sense_entries"] == len(semantic_senses)
+    assert semantic_report["semantic_relation_entries"] == len(semantic_relations)
+    assert semantic_report["noun_class_profiles"] == len(semantic_profiles)
+    assert semantic_report["status"] in {"PARTIAL", "INSUFFICIENT_EVIDENCE"}
+    sense_ids = {sense["sense_id"] for sense in semantic_senses}
+    assert len(sense_ids) == len(semantic_senses), "duplicate semantic sense ID"
+    for sense in semantic_senses:
+        assert sense["review_status"] == "HUMAN_REVIEWED"
+        assert sense["gloss"] and sense["evidence"]
+        for evidence_item in sense["evidence"]:
+            record = source_by_id[evidence_item["record_id"]]
+            assert record["record_id"] in analysis_ids
+            assert evidence_item["source_work"] == record["source"]
+            assert evidence_item["surface_form"].casefold() == sense["lemma"].casefold()
+            assert evidence_item["surface_form"].casefold() in {
+                match.group(0).casefold()
+                for match in __import__("re").finditer(r"[^\\W\\d_]+(?:[-'][^\\W\\d_]+)*", record["text"])
+            }
+    for profile in semantic_profiles:
+        assert profile["review_status"] == "HUMAN_REVIEWED"
+        assert profile["semantic_tendencies"]
+        assert "do not entail" in profile["scope_note"]
+    coverage_domains = {
+        item["domain"]: item for item in json.loads(
+            (GENERATED / "reports" / "structural_coverage.json").read_text(encoding="utf-8")
+        )["domains"]
+    }
+    assert coverage_domains["semantics"]["entries"] == len(semantic_senses)
+    assert coverage_domains["semantics"]["coverage_status"] == "PARTIAL"
     assert manifest["analysis_records"] == len(analysis_ids)
     assert manifest["decision"].startswith("FOUNDATION INCOMPLETE")
 
