@@ -110,6 +110,12 @@ def validate_generated_text(text: str) -> dict[str, Any]:
     if semantic_report.get("verified_sense_entries") != len(semantic_rows):
         raise FoundationUnavailableError("Semantic coverage report does not match the sense inventory")
 
+    source_audit = _load_json(_GENERATED / "reports" / "source_provenance_audit.json")
+    manifest = _load_json(_GENERATED / "foundation_manifest.json")
+    if source_audit.get("corpus_sha256") != lexicon_hash:
+        raise FoundationUnavailableError("Source audit and lexical artifacts use different corpora")
+    if source_audit.get("accepted_records") != manifest.get("authoritative_records"):
+        raise FoundationUnavailableError("Source provenance audit does not match the foundation manifest")
     semantic_index: dict[str, list[dict[str, str]]] = {}
     for sense in semantic_rows:
         semantic_index.setdefault(sense["lemma"].casefold(), []).append({
@@ -187,6 +193,11 @@ def validate_generated_text(text: str) -> dict[str, Any]:
             },
         },
         "foundation": {
+            "source_provenance": {
+                "eligible_records": source_audit.get("accepted_records"),
+                "excluded_records": source_audit.get("excluded_records"),
+                "excluded_records_by_reason": source_audit.get("excluded_records_by_reason", {}),
+            },
             "lexicon_corpus_sha256": lexicon.get("corpus_sha256"),
             "orthography_corpus_sha256": orthography.get("corpus_sha256"),
         },
