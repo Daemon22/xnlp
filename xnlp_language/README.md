@@ -11,12 +11,13 @@ The generator preserves source spelling and record-level provenance. It does not
 
 Semantic outputs:
 
-- `generated/semantics/lexical_senses.jsonl`: verified noun glosses linked to target-language source records containing the exact form.
+- `generated/semantics/lexical_senses.jsonl`: reviewed noun glosses linked to exact forms in cited target-language records.
+- `generated/semantics/verified_constructions.jsonl`: reviewed agreement examples with translations, emitted only when the exact token sequence occurs in its cited record.
 - `generated/semantics/noun_class_profiles.json`: reviewed class-level semantic tendencies, explicitly marked as tendencies rather than per-word meaning rules.
-- `generated/reports/semantic_coverage.json`: counts, source coverage, rejected examples, and gaps.
-- `generated/reports/structural_coverage.json`: semantics is reported as partial when reviewed senses are available.
+- `generated/reports/semantic_coverage.json`: accepted/rejected examples, source and noun-class counts, construction coverage, and known gaps.
+- `generated/reports/structural_coverage.json`: semantics remains partial; exact example attestations are not promoted to productive rules.
 
-The semantic layer does not invent glosses from context. It does not yet encode verified synonymy, semantic roles, compositional sentence meaning, or discourse interpretation. The corpus-linked structural review queue remains available at `generated/annotation/linguistic_review_queue.jsonl`.
+This is a small evidence-backed semantic grammar inventory, not a complete sentence validator. It does not yet encode verified semantic roles, lexical relations, productive composition, selectional restrictions, or discourse interpretation. Exact construction matches returned by the output-quality analyzer are source attestations; unmatched text remains unassessed. The corpus-linked structural review queue remains available at `generated/annotation/linguistic_review_queue.jsonl`.
 
 
 ## Model-output quality gate
