@@ -7,9 +7,17 @@ python xnlp_language/build_foundation.py
 python xnlp_language/validation/validate_foundation.py
 ```
 
-The generator preserves source spelling, provides record-level provenance, and does not infer grammar from orthography. It consequently reports the first release gate as incomplete until reviewed corpus annotation supplies evidence for morphology, agreement, verbs, syntax, and related domains.
+The generator preserves source spelling and record-level provenance. It does not infer grammar from orthography. It also materializes a partial semantic layer from glosses already present in the human-reviewed noun-class foundation.
 
-`generated/annotation/linguistic_review_queue.jsonl` is the next analysis interface. Its tasks are deliberately unanalysed and corpus-linked: a reviewer must supply evidence before a grammatical assertion can be promoted into the foundation.
+Semantic outputs:
+
+- `generated/semantics/lexical_senses.jsonl`: verified noun glosses linked to target-language source records containing the exact form.
+- `generated/semantics/noun_class_profiles.json`: reviewed class-level semantic tendencies, explicitly marked as tendencies rather than per-word meaning rules.
+- `generated/reports/semantic_coverage.json`: counts, source coverage, rejected examples, and gaps.
+- `generated/reports/structural_coverage.json`: semantics is reported as partial when reviewed senses are available.
+
+The semantic layer does not invent glosses from context. It does not yet encode verified synonymy, semantic roles, compositional sentence meaning, or discourse interpretation. The corpus-linked structural review queue remains available at `generated/annotation/linguistic_review_queue.jsonl`.
+
 
 ## Model-output quality gate
 
