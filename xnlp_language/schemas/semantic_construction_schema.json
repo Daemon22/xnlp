@@ -43,7 +43,12 @@
         "relation": {
           "type": "string",
           "enum": [
-            "subject_predicate"
+            "subject_predicate",
+            "object_verb",
+            "possessor_possessed",
+            "noun_adjective",
+            "noun_demonstrative",
+            "agreement_relation"
           ]
         }
       },
