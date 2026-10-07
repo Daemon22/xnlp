@@ -231,7 +231,7 @@ class XNLPPredictor:
                 continuation_ids, skip_special_tokens=True
             )
             report = validate_generated_text(continuation)
-            if report["status"] != "SUPPORTED":
+            if report["status"] != "LEXICALLY_SUPPORTED":
                 raise GeneratedTextRejected(report)
         return decoded
 
