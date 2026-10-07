@@ -1396,6 +1396,130 @@ def _build_conflict_detection(
     return conflict_summary, linguistic_conflicts
 
 
+def _build_semantic_coverage(
+    destination: Path,
+    analysis_records: list[dict],
+    lexical_entries: list[dict],
+) -> dict:
+    """Materialize reviewed noun senses with evidence and an honest coverage report.
+
+    Only glosses already present in the human-curated foundation are emitted.
+    Each gloss must be linked to a TARGET_LANGUAGE record that contains the
+    exact noun form. Class-level semantic tendencies remain tendencies and are
+    never copied onto individual lexical senses.
+    """
+    records_by_id = {record["record_id"]: record for record in analysis_records}
+    observed_forms = {entry["lemma"].casefold() for entry in lexical_entries}
+    senses: list[dict] = []
+    profiles: list[dict] = []
+    rejected_examples: list[dict] = []
+    noun_class_dir = FOUNDATION_DIR / "noun_classes"
+
+    for source_path in sorted(noun_class_dir.glob("*.json")):
+        try:
+            foundation_entry = json.loads(source_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            rejected_examples.append({
+                "source_foundation_file": str(source_path.relative_to(ROOT)),
+                "reason": "invalid_foundation_json",
+            })
+            continue
+
+        class_id = foundation_entry.get("class_id")
+        tendencies = foundation_entry.get("semantic_tendencies", [])
+        if class_id and tendencies:
+            profiles.append({
+                "profile_id": f"SEM_PROFILE_{class_id}",
+                "noun_class_id": class_id,
+                "semantic_tendencies": tendencies,
+                "confidence": foundation_entry.get("confidence", "OBSERVED"),
+                "review_status": "HUMAN_REVIEWED",
+                "source_foundation_file": str(source_path.relative_to(ROOT)),
+                "scope_note": "Class-level tendencies do not entail the meaning of every member noun.",
+            })
+
+        for example in foundation_entry.get("examples", []):
+            form = example.get("noun", "").strip()
+            gloss = example.get("meaning", "").strip()
+            record_id = example.get("source_record_id")
+            record = records_by_id.get(record_id)
+            reason = None
+            if not form or not gloss or not record_id:
+                reason = "missing_form_gloss_or_record_id"
+            elif record is None:
+                reason = "source_record_not_in_target_language_analysis"
+            elif form.casefold() not in observed_forms:
+                reason = "form_not_in_observed_target_language_lexicon"
+            elif form.casefold() not in {
+                match.group(0).casefold() for match in WORD.finditer(record["text"])
+            }:
+                reason = "exact_form_not_present_in_cited_record"
+
+            if reason:
+                rejected_examples.append({
+                    "form": form,
+                    "source_record_id": record_id,
+                    "source_foundation_file": str(source_path.relative_to(ROOT)),
+                    "reason": reason,
+                })
+                continue
+
+            source_work = record["source"]
+            identity = f"{class_id}\\0{form.casefold()}\\0{gloss}\\0{record_id}"
+            sense_id = "SENSE_" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:16].upper()
+            senses.append({
+                "sense_id": sense_id,
+                "lemma": form,
+                "gloss": gloss,
+                "noun_class_id": class_id,
+                "review_status": "HUMAN_REVIEWED",
+                "confidence": foundation_entry.get("confidence", "OBSERVED"),
+                "source_foundation_file": str(source_path.relative_to(ROOT)),
+                "evidence": [{
+                    "record_id": record_id,
+                    "source_work": source_work,
+                    "surface_form": form,
+                }],
+            })
+
+    senses.sort(key=lambda item: (item["lemma"].casefold(), item["sense_id"]))
+    profiles.sort(key=lambda item: item["profile_id"])
+    write_jsonl(destination / "semantics" / "lexical_senses.jsonl", senses)
+    write_json(destination / "semantics" / "noun_class_profiles.json", {
+        "artifact_id": "XNLP_SEMANTIC_NOUN_CLASS_PROFILES_V1",
+        "profiles": profiles,
+    })
+
+    unique_senses = {item["sense_id"] for item in senses}
+    unique_lexemes = {item["lemma"].casefold() for item in senses}
+    lexical_count = len(observed_forms)
+    report = {
+        "artifact_id": "XNLP_SEMANTIC_COVERAGE_V1",
+        "status": "PARTIAL" if senses else "INSUFFICIENT_EVIDENCE",
+        "review_basis": "Human-reviewed glosses in xnlp_language/foundation/noun_classes/",
+        "corpus_sha256": hashlib.sha256(
+            (ROOT / "data" / "authoritative" / "v2_authoritative_all.jsonl").read_bytes()
+        ).hexdigest(),
+        "observed_lexicon_entries": lexical_count,
+        "verified_sense_entries": len(unique_senses),
+        "unique_glossed_lexemes": len(unique_lexemes),
+        "noun_class_profiles": len(profiles),
+        "semantic_relation_entries": 0,
+        "coverage_percent_of_observed_lexemes": round(
+            100 * len(unique_lexemes) / lexical_count, 4
+        ) if lexical_count else 0.0,
+        "rejected_foundation_examples": rejected_examples,
+        "gaps": [
+            "Meaning coverage is limited to glossed noun examples in the reviewed foundation.",
+            "No verified synonym, antonym, entailment, or semantic-role relations are encoded.",
+            "No compositional sentence-meaning or discourse interpretation is encoded.",
+            "Unreviewed corpus lexicon entries remain without a meaning.",
+        ],
+    }
+    write_json(destination / "reports" / "semantic_coverage.json", report)
+    return report
+
+
 def _build_coverage_report(
     destination: Path,
     domain_data: dict[str, dict],
