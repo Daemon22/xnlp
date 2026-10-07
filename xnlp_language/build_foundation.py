@@ -128,24 +128,69 @@ def write_jsonl(path: Path, values: Iterable[dict[str, Any]]) -> None:
             handle.write(json.dumps(value, ensure_ascii=False, sort_keys=True) + "\n")
 
 
-def read_records(path: Path) -> list[dict[str, Any]]:
-    """Read authoritative corpus records, deduplicating by record_id."""
-    records, seen = [], set()
+def source_provenance_rejection(row: dict[str, Any]) -> str | None:
+    """Require direct, edition-level evidence that a record came from a named source."""
+    if row.get("generator"):
+        return "generated_or_transformed_record"
+    if row.get("original_text") != row.get("text"):
+        return "original_text_missing_or_changed"
+    if not row.get("source_title") or not (row.get("edition") or row.get("source_section")):
+        return "missing_work_or_edition"
+    source_url = row.get("source_url", "")
+    if row.get("source") == "mqhayi":
+        if not source_url.startswith("https://emandulo.apc.uct.ac.za/metadata/Mqhayi/"):
+            return "missing_or_unapproved_mqhayi_archive_url"
+        if row.get("source_title", "").strip().casefold() in {"unknown", "unknown mqhayi"}:
+            return "unknown_source_work"
+        return None
+    if row.get("source") == "masikhanyise":
+        if not source_url or not (row.get("isbn") or row.get("book_isbn")):
+            return "textbook_record_missing_book_url_or_isbn"
+        return None
+    return "source_not_in_authorized_publication_set"
+
+
+def read_records_with_audit(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Read eligible records and count every exclusion reason for auditability."""
+    records: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    excluded: collections.Counter[str] = collections.Counter()
     for line in path.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
-        row = json.loads(line)
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            excluded["invalid_json"] += 1
+            continue
         required = ("record_id", "text", "source", "provenance_type", "validation_status")
         if any(not row.get(key) for key in required):
+            excluded["missing_required_fields"] += 1
             continue
-        if row["record_id"] in seen or row["source"] not in {"mqhayi", "masikhanyise"}:
+        if row["record_id"] in seen:
+            excluded["duplicate_record_id"] += 1
             continue
         if row["provenance_type"] != "authoritative" or row["validation_status"] != "authoritative":
+            excluded["not_marked_authoritative"] += 1
+            continue
+        reason = source_provenance_rejection(row)
+        if reason:
+            excluded[reason] += 1
             continue
         seen.add(row["record_id"])
         records.append(row)
-    return records
+    return records, {
+        "artifact_id": "XNLP_SOURCE_PROVENANCE_AUDIT_V1",
+        "accepted_records": len(records),
+        "excluded_records": sum(excluded.values()),
+        "excluded_records_by_reason": dict(sorted(excluded.items())),
+        "policy": "Only source records with preserved text and direct, work-level publication metadata are eligible for semantic or grammatical analysis.",
+    }
 
+
+def read_records(path: Path) -> list[dict[str, Any]]:
+    """Read eligible authoritative records, deduplicating by record_id."""
+    return read_records_with_audit(path)[0]
 
 def evidence(record: dict[str, Any], form: str, start: int, end: int) -> dict[str, Any]:
     """Build a provenance-bearing evidence snippet."""
@@ -2223,7 +2268,7 @@ def build(corpus: Path, destination: Path) -> dict:
 
     Returns the foundation manifest dict.
     """
-    records = read_records(corpus)
+    records, source_audit = read_records_with_audit(corpus)
     if not records:
         raise ValueError("No authoritative Mqhayi/Masikhanyise records found")
     if destination.exists():
@@ -2231,6 +2276,8 @@ def build(corpus: Path, destination: Path) -> dict:
     destination.mkdir(parents=True)
 
     corpus_hash = hashlib.sha256(corpus.read_bytes()).hexdigest()
+    source_audit["corpus_sha256"] = corpus_hash
+    write_json(destination / "reports" / "source_provenance_audit.json", source_audit)
     analysis_records = [r for r in records if r.get("language_class") == "TARGET_LANGUAGE"]
     if not analysis_records:
         raise ValueError("No authoritative TARGET_LANGUAGE records found")
@@ -2582,6 +2629,7 @@ def build(corpus: Path, destination: Path) -> dict:
         "language_integrity_counts": dict(sorted(purity_counts.items())),
         "sources": sorted({r["source"] for r in records}),
         "model_training": "FROZEN",
+        "source_provenance_audit": source_audit,
         "decision": "FOUNDATION INCOMPLETE — CONTINUE STRUCTURAL ANALYSIS",
         "structured_entries": {
             "noun_classes": len(nc_classes),
