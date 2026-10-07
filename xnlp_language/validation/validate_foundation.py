@@ -91,6 +91,31 @@ def main() -> None:
     assert len(semantic_report["rejected_construction_examples"]) >= semantic_report["reviewed_construction_candidates"] - len(semantic_constructions)
     assert semantic_report["noun_class_profiles"] == len(semantic_profiles)
     assert semantic_report["status"] in {"PARTIAL", "INSUFFICIENT_EVIDENCE"}
+    semantic_domains = {
+        item["domain"]: item for item in semantic_report["coverage_matrix"]
+    }
+    expected_semantic_domains = {
+        "lexical_sense_glosses",
+        "noun_class_semantic_tendencies",
+        "attested_agreement_constructions",
+        "predicate_senses_and_argument_frames",
+        "semantic_roles",
+        "selectional_restrictions",
+        "compositional_sentence_meaning",
+        "tense_aspect_modality_interpretation",
+        "negation_scope_and_quantification",
+        "reference_and_anaphora",
+        "discourse_and_pragmatics",
+    }
+    assert set(semantic_domains) == expected_semantic_domains
+    assert semantic_domains["predicate_senses_and_argument_frames"]["status"] == "INSUFFICIENT_EVIDENCE"
+    assert semantic_domains["semantic_roles"]["status"] == "INSUFFICIENT_EVIDENCE"
+    assert semantic_domains["compositional_sentence_meaning"]["status"] == "INSUFFICIENT_EVIDENCE"
+    assert semantic_domains["discourse_and_pragmatics"]["status"] == "INSUFFICIENT_EVIDENCE"
+    assert semantic_domains["attested_agreement_constructions"]["status"] in {
+        "ATTESTED_EXAMPLES", "INSUFFICIENT_EVIDENCE"
+    }
+    assert semantic_report["semantic_relation_entries"] == len(semantic_relations) == 0
     assert semantic_report["accepted_examples"] == len(semantic_senses)
     assert semantic_report["rejected_examples"] == len(semantic_report["rejected_foundation_examples"])
     assert semantic_report["curated_examples"] >= semantic_report["accepted_examples"]
