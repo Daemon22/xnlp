@@ -261,8 +261,8 @@ def extract_mqhayi_records() -> List[DataRecord]:
     """
     Illustrative Mqhayi-like examples authored in this file, not book excerpts.
 
-    Authentic Mqhayi text is separated from pedagogical/generated overlays.
-    Each text snippet is traced to its specific work and section.
+    These records are candidate-only. The actual source texts are separately
+    extracted from corpus_sources/ by _extract_v2_corpus.py with archive URLs.
     """
     records: List[DataRecord] = []
     now = datetime.now(timezone.utc).isoformat()
@@ -402,8 +402,8 @@ def extract_masikhanyise_records() -> List[DataRecord]:
     """
     Illustrative textbook-style examples authored in this file, not sourced textbook text.
 
-    Extracts poetry terminology, grammar structures, cultural content,
-    and literary analysis terms from the textbook series.
+    These records are candidate-only. The underlying commercial textbooks are
+    not present here with page-level source citations.
     """
     records: List[DataRecord] = []
     now = datetime.now(timezone.utc).isoformat()
@@ -511,10 +511,8 @@ def extract_masikhanyise_records() -> List[DataRecord]:
 
 def extract_conversational_xhosa() -> List[DataRecord]:
     """
-    Extract conversational Xhosa from Masikhanyise-style material.
-    These are illustrative sentences authored in this file (not
-    the English-translation versions that were embedded in the original
-    corpus for pedagogical purposes).
+    These are illustrative sentences authored in this file, not verified
+    textbook text or naturally occurring excerpts. They are candidate-only.
     """
     records: List[DataRecord] = []
     now = datetime.now(timezone.utc).isoformat()
