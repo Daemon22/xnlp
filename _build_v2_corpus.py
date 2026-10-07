@@ -19,7 +19,13 @@ def has_traceable_publication(record):
     if record.get("source") == "mqhayi":
         return source_url.startswith("https://emandulo.apc.uct.ac.za/metadata/Mqhayi/")
     if record.get("source") == "masikhanyise":
-        return bool(source_url and (record.get("isbn") or record.get("book_isbn")))
+        approved_domains = (
+            "shop.snapplify.com", "ebooks.unisaenterprise.ac.za",
+            "dcebooks.co.za", "amazon.co.za", "pearson.com",
+        )
+        has_publication_url = any(domain in source_url for domain in approved_domains)
+        has_isbn = bool(record.get("isbn") or record.get("book_isbn"))
+        return has_publication_url and has_isbn
     return False
 
 with open(v2_file, "r", encoding="utf-8") as f:
