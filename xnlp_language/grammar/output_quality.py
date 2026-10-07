@@ -94,7 +94,17 @@ def validate_generated_text(text: str) -> dict[str, Any]:
         raise FoundationUnavailableError(
             "Reviewed semantic sense data is unavailable; rebuild the foundation."
         ) from exc
+    try:
+        construction_rows = [
+            json.loads(line)
+            for line in (_GENERATED / "semantics" / "verified_constructions.jsonl").read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+    except (OSError, json.JSONDecodeError) as exc:
+        raise FoundationUnavailableError("Verified construction data is unavailable; rebuild the foundation.") from exc
     semantic_report = _load_json(_GENERATED / "reports" / "semantic_coverage.json")
+    if semantic_report.get("verified_construction_entries") != len(construction_rows):
+        raise FoundationUnavailableError("Semantic coverage report does not match the construction inventory")
     if semantic_report.get("corpus_sha256") != lexicon_hash:
         raise FoundationUnavailableError("Semantic and lexical artifacts use different corpora")
     if semantic_report.get("verified_sense_entries") != len(semantic_rows):
@@ -120,6 +130,22 @@ def validate_generated_text(text: str) -> dict[str, Any]:
         else:
             ungrounded_forms.append(item)
 
+    attested_constructions = []
+    text_tokens = list(_WORD.finditer(text))
+    text_forms = [match.group(0).casefold() for match in text_tokens]
+    for construction in construction_rows:
+        construction_forms = [match.group(0).casefold() for match in _WORD.finditer(construction["surface_text"])]
+        width = len(construction_forms)
+        for start_index in range(len(text_forms) - width + 1):
+            if text_forms[start_index:start_index + width] == construction_forms:
+                attested_constructions.append({
+                    "construction_id": construction["construction_id"],
+                    "surface": text[text_tokens[start_index].start():text_tokens[start_index + width - 1].end()],
+                    "start": text_tokens[start_index].start(),
+                    "end": text_tokens[start_index + width - 1].end(),
+                    "reviewed_translation": construction["translation"],
+                    "evidence_record_ids": [item["record_id"] for item in construction["evidence"]],
+                })
     return {
         "schema_version": 1,
         "status": "LEXICALLY_SUPPORTED" if lexical_pass and orthographic_pass else "REJECTED",
@@ -153,6 +179,8 @@ def validate_generated_text(text: str) -> dict[str, Any]:
             },
             "grammar_and_meaning": {
                 "status": "NOT_ASSESSED",
+                "attested_construction_status": "EXACT_SPANS_FOUND" if attested_constructions else "NO_EXACT_SPAN_FOUND",
+                "attested_constructions": attested_constructions,
                 "reason": "The current foundation does not encode a complete semantic or grammatical validator.",
             },
         },
