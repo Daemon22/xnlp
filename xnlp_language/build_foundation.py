@@ -1489,6 +1489,85 @@ def _build_semantic_coverage(
                 }],
             })
 
+    # Materialize only human-reviewed constructions that occur verbatim, token-for-token,
+    # in their cited TARGET_LANGUAGE record. These are attestations, not productive rules.
+    constructions: list[dict] = []
+    rejected_constructions: list[dict] = []
+    reviewed_construction_candidates = 0
+    agreement_dir = FOUNDATION_DIR / "agreement"
+    for source_path in sorted(agreement_dir.glob("*.json")):
+        try:
+            foundation_entry = json.loads(source_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            rejected_constructions.append({
+                "source_foundation_file": source_path.relative_to(ROOT).as_posix(),
+                "reason": "invalid_foundation_json",
+            })
+            continue
+        for example in foundation_entry.get("examples", []):
+            reviewed_construction_candidates += 1
+            surface_text = example.get("full_construction", "").strip()
+            translation = example.get("translation", "").strip()
+            record_id = example.get("source_record_id")
+            record = records_by_id.get(record_id)
+            reason = None
+            construction_tokens = [match.group(0).casefold() for match in WORD.finditer(surface_text)]
+            if not surface_text or not translation or not record_id or not construction_tokens:
+                reason = "missing_construction_translation_or_record_id"
+            elif record is None:
+                reason = "source_record_not_in_target_language_analysis"
+            else:
+                source_matches = list(WORD.finditer(record["text"]))
+                source_tokens = [match.group(0).casefold() for match in source_matches]
+                width = len(construction_tokens)
+                token_start = next((
+                    index for index in range(len(source_tokens) - width + 1)
+                    if source_tokens[index:index + width] == construction_tokens
+                ), None)
+                if token_start is None:
+                    reason = "exact_construction_not_present_in_cited_record"
+            if reason:
+                rejected_constructions.append({
+                    "surface_text": surface_text,
+                    "source_record_id": record_id,
+                    "source_foundation_file": source_path.relative_to(ROOT).as_posix(),
+                    "reason": reason,
+                })
+                continue
+
+            first_match = source_matches[token_start]
+            last_match = source_matches[token_start + width - 1]
+            identity = f"{source_path.name}\\0{surface_text.casefold()}\\0{record_id}"
+            construction_id = "CONSTRUCTION_" + hashlib.sha256(
+                identity.encode("utf-8")
+            ).hexdigest()[:16].upper()
+            constructions.append({
+                "construction_id": construction_id,
+                "construction_type": foundation_entry.get("agreement_type", "agreement_construction"),
+                "surface_text": surface_text,
+                "translation": translation,
+                "review_status": "HUMAN_REVIEWED",
+                "source_foundation_file": source_path.relative_to(ROOT).as_posix(),
+                "constituents": {
+                    "subject": example.get("noun", ""),
+                    "subject_noun_class": foundation_entry.get("noun_class", ""),
+                    "concord": example.get("concord_form", ""),
+                    "predicate": example.get("target", ""),
+                    "relation": "subject_predicate",
+                },
+                "evidence": [{
+                    "record_id": record_id,
+                    "source_work": record["source"],
+                    "character_span": [first_match.start(), last_match.end()],
+                    "context": record["text"][max(0, first_match.start() - 80):min(
+                        len(record["text"]), last_match.end() + 80
+                    )],
+                }],
+            })
+
+    constructions.sort(key=lambda item: (item["surface_text"].casefold(), item["construction_id"]))
+    write_jsonl(destination / "semantics" / "verified_constructions.jsonl", constructions)
+
     senses.sort(key=lambda item: (item["lemma"].casefold(), item["sense_id"]))
     profiles.sort(key=lambda item: item["profile_id"])
     write_jsonl(destination / "semantics" / "lexical_senses.jsonl", senses)
@@ -1511,6 +1590,9 @@ def _build_semantic_coverage(
         "unique_glossed_lexemes": len(unique_lexemes),
         "noun_class_profiles": len(profiles),
         "semantic_relation_entries": 0,
+        "reviewed_construction_candidates": reviewed_construction_candidates,
+        "verified_construction_entries": len(constructions),
+        "rejected_construction_examples": rejected_constructions,
         "curated_examples": curated_examples,
         "accepted_examples": len(senses),
         "rejected_examples": len(rejected_examples),
