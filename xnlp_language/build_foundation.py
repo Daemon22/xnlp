@@ -1457,7 +1457,7 @@ def _build_semantic_annotation_queue(
         text = record["text"]
         spans: list[tuple[int, int]] = []
         cursor = 0
-        for boundary in re.finditer(r"[.!?]+(?=\\s|$)", text):
+        for boundary in re.finditer(r"[.!?]+(?=\s|$)", text):
             spans.append((cursor, boundary.end()))
             cursor = boundary.end()
         if cursor < len(text):
@@ -1485,7 +1485,7 @@ def _build_semantic_annotation_queue(
                 "source_url": record.get("source_url", ""),
                 "edition": record.get("edition", record.get("source_section", "")),
                 "character_span": [start, end],
-                "line_number": text.count("\\n", 0, start) + 1,
+                "line_number": text.count("\n", 0, start) + 1,
                 "surface_text": surface,
                 "token_count": token_count,
                 "annotation_status": "UNANNOTATED",
