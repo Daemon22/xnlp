@@ -1576,10 +1576,10 @@ def _build_semantic_coverage(
                 "review_status": "HUMAN_REVIEWED",
                 "source_foundation_file": source_path.relative_to(ROOT).as_posix(),
                 "constituents": {
-                    "subject": example.get("noun", ""),
-                    "subject_noun_class": foundation_entry.get("noun_class", ""),
+                    "controller": example.get("noun", ""),
+                    "controller_noun_class": foundation_entry.get("noun_class", ""),
                     "concord": example.get("concord_form", ""),
-                    "predicate": example.get("target", ""),
+                    "target": example.get("target", ""),
                     "relation": relation_by_agreement_type.get(foundation_entry.get("agreement_type"), "agreement_relation"),
                 },
                 "evidence": [{
