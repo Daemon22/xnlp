@@ -29,7 +29,7 @@ SOURCE_PROVENANCE = {
     },
     'inzuzo_1943.txt': {
         'work': 'Inzuzo',
-        'work_year': '1943',
+        'work_year': 'before 1942',
         'edition': '1943 edition',
         'source_url': 'https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10139',
         'archive': 'Emandulo (UCT/FHYA)',
@@ -38,7 +38,7 @@ SOURCE_PROVENANCE = {
     },
     'ityala_lamawele_8th.txt': {
         'work': 'Ityala Lamawele',
-        'work_year': '1814',
+        'work_year': 'before 1914',
         'edition': '8th edition (1930)',
         'source_url': 'https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10132',
         'archive': 'Emandulo (UCT/FHYA)',
@@ -47,7 +47,7 @@ SOURCE_PROVENANCE = {
     },
     'ityala_lamawele_abridged_1955.txt': {
         'work': 'Ityala Lamawele',
-        'work_year': '1814',
+        'work_year': 'before 1914',
         'edition': 'Abridged edition (1955)',
         'source_url': 'https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10133',
         'archive': 'Emandulo (UCT/FHYA)',
@@ -56,7 +56,7 @@ SOURCE_PROVENANCE = {
     },
     'u_don_jadu_1951.txt': {
         'work': 'U-Don Jadu',
-        'work_year': '1829',
+        'work_year': 'before 1929',
         'edition': '1st edition (1951)',
         'source_url': 'https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/4822',
         'archive': 'Emandulo (UCT/FHYA)',
@@ -65,7 +65,7 @@ SOURCE_PROVENANCE = {
     },
     'u_don_jadu_1967.txt': {
         'work': 'U-Don Jadu',
-        'work_year': '1829',
+        'work_year': 'before 1929',
         'edition': '1967 edition',
         'source_url': 'https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10134',
         'archive': 'Emandulo (UCT/FHYA)',
@@ -74,7 +74,7 @@ SOURCE_PROVENANCE = {
     },
     'u_john_knox_1972.txt': {
         'work': 'U John Knox Bokwe (Biography)',
-        'work_year': '1829',
+        'work_year': 'unknown',
         'edition': '1972 edition',
         'source_url': 'https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10137',
         'archive': 'Emandulo (UCT/FHYA)',
@@ -83,7 +83,7 @@ SOURCE_PROVENANCE = {
     },
     'umhlekazi_u_hintsa.txt': {
         'work': 'Umhlekazi u Hintsa',
-        'work_year': '1829',
+        'work_year': 'unknown',
         'edition': 'Original',
         'source_url': 'https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10312',
         'archive': 'Emandulo (UCT/FHYA)',
@@ -92,7 +92,7 @@ SOURCE_PROVENANCE = {
     },
     'umqhayi_wasen_tabozuko_1964.txt': {
         'work': 'UMqhayi waseNtabozuko',
-        'work_year': '1829',
+        'work_year': 'before 1939',
         'edition': '1964 edition',
         'source_url': 'https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10136',
         'archive': 'Emandulo (UCT/FHYA)',
@@ -101,7 +101,7 @@ SOURCE_PROVENANCE = {
     },
     'umqhayi_wasen_tabozuko_1975.txt': {
         'work': 'UMqhayi waseNtabozuko',
-        'work_year': '1829',
+        'work_year': 'before 1939',
         'edition': '1975 edition',
         'source_url': 'https://emandulo.apc.uct.ac.za/metadata/Mqhayi/10130/10135',
         'archive': 'Emandulo (UCT/FHYA)',
