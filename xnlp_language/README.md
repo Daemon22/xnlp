@@ -1,6 +1,6 @@
 # XNLP isiXhosa Linguistic Foundation
 
-This layer is separate from raw evidence, neural-model code, and model outputs. `generated/` is reproducibly created only from records with preserved text and traceable publication metadata. Mqhayi records require an Emandulo work URL and edition; textbook records require a publication URL and ISBN. Authored illustrations in `data_extractor.py` are candidates, not authoritative source text. The build emits `generated/reports/source_provenance_audit.json` so excluded records and reasons are visible:
+This layer is separate from raw evidence, neural-model code, and model outputs. `generated/` is reproducibly created only from records with matching stored text fields and traceable publication metadata. This source gate does not certify OCR accuracy or page-level localization. Mqhayi records require an Emandulo work URL and edition; textbook records require a publication URL and ISBN. Authored illustrations in `data_extractor.py` are candidates, not authoritative source text. The build emits `generated/reports/source_provenance_audit.json` so excluded records and reasons are visible:
 
 ```powershell
 python xnlp_language/build_foundation.py
