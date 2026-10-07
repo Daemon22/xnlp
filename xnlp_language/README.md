@@ -13,9 +13,11 @@ Semantic outputs:
 
 - `generated/semantics/lexical_senses.jsonl`: reviewed noun glosses linked to exact forms in cited target-language records.
 - `generated/semantics/verified_constructions.jsonl`: reviewed agreement examples with translations, emitted only when the exact token sequence occurs in its cited record.
-- `generated/reports/semantic_coverage.json` also reports internal noun-class pairing mismatches in reviewed entries; these are surfaced for source review and never auto-corrected.
 - `generated/semantics/noun_class_profiles.json`: reviewed class-level semantic tendencies, explicitly marked as tendencies rather than per-word meaning rules.
-- `generated/reports/semantic_coverage.json`: accepted/rejected examples, source and noun-class counts, construction coverage, and known gaps.
+- `generated/reports/semantic_coverage.json`: accepted/rejected examples, source and noun-class counts, construction coverage, known gaps, and an explicit status for each semantic domain.
+- Internal noun-class pairing mismatches in reviewed entries are surfaced for source review and never auto-corrected.
+
+The coverage matrix distinguishes partial evidence from unassessed areas. In particular, predicate frames, semantic roles, selectional restrictions, compositional sentence meaning, tense/aspect/modality interpretation, scope, reference, and discourse/pragmatics remain `INSUFFICIENT_EVIDENCE`. An attested agreement example is reported as an example, not as proof of a productive rule.
 - `generated/reports/structural_coverage.json`: semantics remains partial; exact example attestations are not promoted to productive rules.
 
 This is a small evidence-backed semantic grammar inventory, not a complete sentence validator. It does not yet encode verified semantic roles, lexical relations, productive composition, selectional restrictions, or discourse interpretation. Exact construction matches returned by the output-quality analyzer are source attestations; unmatched text remains unassessed. The corpus-linked structural review queue remains available at `generated/annotation/linguistic_review_queue.jsonl`.
