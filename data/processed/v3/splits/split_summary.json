@@ -1,0 +1,14 @@
+{
+  "total_sentences": 11758,
+  "train_size": 9406,
+  "val_size": 1176,
+  "test_size": 1176,
+  "split_ratio": [
+    0.8,
+    0.1,
+    0.1
+  ],
+  "random_seed": 42,
+  "source": "v2_training_corpus_clean_final.txt",
+  "processing": "OCR_error_removal_and_deduplication"
+}
