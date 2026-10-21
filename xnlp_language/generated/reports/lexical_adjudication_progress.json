@@ -1,0 +1,14 @@
+{
+  "adjudicated": 29,
+  "auto_adjudicated_this_run": 29,
+  "disputed": 25,
+  "pending": 29963,
+  "queue_path": "C:\\Users\\Uviwe\\Downloads\\xnlp\\xnlp_language\\generated\\annotation\\lexical_analysis_queue.jsonl",
+  "queue_tasks": 30017,
+  "rule_definition": {
+    "AUTO_PROPER_NOUN_CAPITALIZED_MULTIWORK_V1": "A form must occur only capitalized in attested records and have at least two mid-sentence capitalized occurrences in each of at least two independent work references. No lemma or meaning is inferred."
+  },
+  "rule_firing_histogram": {
+    "AUTO_PROPER_NOUN_CAPITALIZED_MULTIWORK_V1": 29
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Evidence-Linked Lexical Analysis Task",
+  "description": "A review task that keeps corpus surface forms separate from proposed lemma, category, and sense.",
+  "type": "object",
+  "properties": {
+    "task_id": { "type": "string", "minLength": 1 },
+    "lexeme_observation_id": { "type": "string", "minLength": 1 },
+    "surface_form": { "type": "string" },
+    "observed_surface_forms": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "normalized_form": { "type": ["string", "null"] },
+    "lemma": { "type": ["string", "null"] },
+    "lexical_category": { "type": ["string", "null"] },
+    "possible_variants": { "type": "array", "items": { "type": "string" } },
+    "source_occurrence_count": { "type": "integer", "minimum": 1 },
+    "source_work_references": { "type": "array", "items": { "type": "string" } },
+    "source_collection_references": { "type": "array", "items": { "type": "string" } },
+    "source_record_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } },
+    "semantic_status": { "type": "string", "enum": ["UNRESOLVED", "CANDIDATE", "VALIDATED", "REJECTED"] },
+    "morphology_status": { "type": "string", "enum": ["UNRESOLVED", "CANDIDATE", "VALIDATED", "REJECTED"] },
+    "evidence_state": { "type": "string", "enum": ["OBSERVED", "CANDIDATE", "SOURCE_SUPPORTED", "CROSS_SOURCE_SUPPORTED", "VALIDATED", "ESTABLISHED", "REJECTED", "UNRESOLVED"] },
+    "analysis_status": { "type": "string", "enum": ["PENDING_HUMAN_REVIEW", "IN_REVIEW", "VALIDATED", "REJECTED", "UNRESOLVED"] },
+    "machine_suggestion": { "type": ["object", "null"] },
+    "reviewer_decision": { "type": ["object", "null"] },
+    "status": { "type": "string", "enum": ["pending", "adjudicated", "disputed"] },
+    "assigned_lemma": { "type": ["string", "null"] },
+    "assigned_category": { "type": ["string", "null"] },
+    "assigned_meaning": { "type": ["string", "null"] },
+    "adjudicator": { "type": ["string", "null"], "enum": ["human", "rule-assisted-human", "machine-only", "auto-evidence", null] },
+    "adjudication_note": { "type": ["string", "null"] },
+    "flagged_by": { "type": ["string", "null"], "enum": ["machine-only", null] },
+    "auto_evidence": {
+      "type": ["object", "null"],
+      "properties": {
+        "rule_ids": { "type": "array", "items": { "type": "string" } },
+        "supporting_record_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+        "supporting_work_references": { "type": "array", "uniqueItems": true, "items": { "type": "string" } }
+      },
+      "required": ["rule_ids", "supporting_record_ids", "supporting_work_references"],
+      "additionalProperties": false
+    },
+    "adjudication_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": { "type": "string", "enum": ["auto-adjudicated", "human-reverted"] },
+          "adjudicator": { "type": "string" },
+          "assigned_lemma": { "type": ["string", "null"] },
+          "assigned_category": { "type": ["string", "null"] },
+          "assigned_meaning": { "type": ["string", "null"] },
+          "note": { "type": "string" },
+          "rule_ids": { "type": "array", "items": { "type": "string" } },
+          "supporting_record_ids": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["action", "adjudicator", "assigned_lemma", "assigned_category", "assigned_meaning", "note", "rule_ids", "supporting_record_ids"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["task_id", "surface_form", "observed_surface_forms", "lemma", "lexical_category", "source_occurrence_count", "source_record_ids", "evidence_state", "analysis_status", "status", "assigned_lemma", "assigned_category", "assigned_meaning", "adjudicator", "adjudication_note", "flagged_by", "auto_evidence", "adjudication_history"],
+  "additionalProperties": false
+}

@@ -106,6 +106,8 @@ class TrainingConfig:
     train_split: float = 0.8
     val_split: float = 0.15
     test_split: float = 0.05     # kept for completeness; evaluation uses val
+    preserve_line_breaks: bool = False
+    predefined_splits: bool = False
 
     # ── Checkpointing & early stopping ───────────────────────────────────────
     save_every_n_epochs: int = 5
@@ -252,4 +254,3 @@ def validate_checkpoint(ckpt: Dict[str, Any]) -> None:
             f"Vocabulary size mismatch: model config says {model_vocab}, "
             f"but tokenizer has {tok_vocab} tokens."
         )
-

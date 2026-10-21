@@ -1,0 +1,123 @@
+{
+  "layers": [
+    {
+      "coverage_status": "OBSERVATIONS_AND_CANDIDATES_ONLY",
+      "layer": "ORTHOGRAPHIC_TOKEN_STRUCTURE",
+      "limitations": [
+        "No corpus-wide grammatical counterexample annotations.",
+        "No generalization promoted to SUPPORTED."
+      ],
+      "linked_candidate_item_count": 0,
+      "linked_observation_count": 384,
+      "supported_grammar_rule_count": 0
+    },
+    {
+      "coverage_status": "OBSERVATIONS_AND_CANDIDATES_ONLY",
+      "layer": "MORPHOLOGY",
+      "limitations": [
+        "No corpus-wide grammatical counterexample annotations.",
+        "No generalization promoted to SUPPORTED."
+      ],
+      "linked_candidate_item_count": 1386,
+      "linked_observation_count": 18,
+      "supported_grammar_rule_count": 0
+    },
+    {
+      "coverage_status": "OBSERVATIONS_AND_CANDIDATES_ONLY",
+      "layer": "LEXICAL_CATEGORIES",
+      "limitations": [
+        "No corpus-wide grammatical counterexample annotations.",
+        "No generalization promoted to SUPPORTED."
+      ],
+      "linked_candidate_item_count": 26,
+      "linked_observation_count": 26,
+      "supported_grammar_rule_count": 0
+    },
+    {
+      "coverage_status": "OBSERVATIONS_AND_CANDIDATES_ONLY",
+      "layer": "AGREEMENT_CONCORD",
+      "limitations": [
+        "No corpus-wide grammatical counterexample annotations.",
+        "No generalization promoted to SUPPORTED."
+      ],
+      "linked_candidate_item_count": 16,
+      "linked_observation_count": 10,
+      "supported_grammar_rule_count": 0
+    },
+    {
+      "coverage_status": "OBSERVATIONS_AND_CANDIDATES_ONLY",
+      "layer": "NOUN_CLASS_LIKE_SYSTEMS",
+      "limitations": [
+        "No corpus-wide grammatical counterexample annotations.",
+        "No generalization promoted to SUPPORTED."
+      ],
+      "linked_candidate_item_count": 7,
+      "linked_observation_count": 0,
+      "supported_grammar_rule_count": 0
+    },
+    {
+      "coverage_status": "OBSERVATIONS_AND_CANDIDATES_ONLY",
+      "layer": "VERB_STRUCTURE",
+      "limitations": [
+        "No corpus-wide grammatical counterexample annotations.",
+        "No generalization promoted to SUPPORTED."
+      ],
+      "linked_candidate_item_count": 1382,
+      "linked_observation_count": 18,
+      "supported_grammar_rule_count": 0
+    },
+    {
+      "coverage_status": "OBSERVATIONS_AND_CANDIDATES_ONLY",
+      "layer": "PHRASE_STRUCTURE",
+      "limitations": [
+        "No corpus-wide grammatical counterexample annotations.",
+        "No generalization promoted to SUPPORTED."
+      ],
+      "linked_candidate_item_count": 78,
+      "linked_observation_count": 82,
+      "supported_grammar_rule_count": 0
+    },
+    {
+      "coverage_status": "OBSERVATIONS_AND_CANDIDATES_ONLY",
+      "layer": "CLAUSE_STRUCTURE",
+      "limitations": [
+        "No corpus-wide grammatical counterexample annotations.",
+        "No generalization promoted to SUPPORTED."
+      ],
+      "linked_candidate_item_count": 78,
+      "linked_observation_count": 82,
+      "supported_grammar_rule_count": 0
+    },
+    {
+      "coverage_status": "OBSERVATIONS_AND_CANDIDATES_ONLY",
+      "layer": "SENTENCE_CONSTRUCTION",
+      "limitations": [
+        "No corpus-wide grammatical counterexample annotations.",
+        "No generalization promoted to SUPPORTED."
+      ],
+      "linked_candidate_item_count": 78,
+      "linked_observation_count": 82,
+      "supported_grammar_rule_count": 0
+    }
+  ],
+  "observation_count": 153,
+  "report_id": "XNLP_GRAMMAR_COVERAGE_V1",
+  "rule_item_count": 1515,
+  "rule_item_counts_by_domain": {
+    "AGREEMENT_CONCORD": 13,
+    "DATA_GOVERNANCE": 1,
+    "MORPHOLOGY": 716,
+    "SEMANTIC_FUNCTIONAL": 26,
+    "SYNTACTIC_STRUCTURE": 78,
+    "UNKNOWN_UNRESOLVED": 1,
+    "agreement": 3,
+    "derivational_morphology": 4,
+    "noun_class": 7,
+    "verb_morphology": 666
+  },
+  "rule_item_counts_by_status": {
+    "CANDIDATE": 1513,
+    "UNKNOWN": 2
+  },
+  "supported_grammar_rule_count": 0
+}

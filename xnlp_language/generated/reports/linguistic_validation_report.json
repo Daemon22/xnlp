@@ -1,0 +1,365 @@
+{
+  "candidate": [
+    "Grammar observations, noun-class and agreement interpretations, and verb segmentations not explicitly human-validated.",
+    "Lexical queue adjudication progress: 29963 pending, 29 adjudicated, 25 disputed.",
+    "30017 lexical tasks still need some human attention; auto-evidence rows have only a category assignment, with lemma and meaning left unassigned.",
+    "Auto-evidence lexical decisions are reversible and retain their rule IDs and supporting record IDs in an audit trail; rule histogram: {'AUTO_PROPER_NOUN_CAPITALIZED_MULTIWORK_V1': 29}."
+  ],
+  "evidence_state_totals": {
+    "CANDIDATE": 823,
+    "CROSS_SOURCE_SUPPORTED": 0,
+    "ESTABLISHED": 0,
+    "OBSERVED": 1,
+    "REJECTED": 0,
+    "SOURCE_SUPPORTED": 10,
+    "UNRESOLVED": 0,
+    "VALIDATED": 0
+  },
+  "gold_evaluation": {
+    "candidate_pool_path": "xnlp_language/generated/evaluation/gold_candidate_pool.jsonl",
+    "candidate_records": 539,
+    "eligible_for_future_models_using_reserved_work_isolated_training": true,
+    "gold_set_populated": false,
+    "overlaps_work_isolated_training_works": false,
+    "prior_checkpoint_contamination_warning": "Do not use this pool to evaluate models trained with historical splits or other data containing this source work. The pool contains no gold labels yet.",
+    "source_work": "Inzuzo",
+    "validated_gold_annotations": 0,
+    "work_isolated_from_current_training": true
+  },
+  "grammar_claims_by_domain": {
+    "agreement": {
+      "by_evidence_state": {
+        "CANDIDATE": 10,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 3,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 13
+    },
+    "data_governance": {
+      "by_evidence_state": {
+        "CANDIDATE": 0,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 1,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 1
+    },
+    "derivational_morphology": {
+      "by_evidence_state": {
+        "CANDIDATE": 4,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 4
+    },
+    "function_word": {
+      "by_evidence_state": {
+        "CANDIDATE": 26,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 26
+    },
+    "modifier": {
+      "by_evidence_state": {
+        "CANDIDATE": 2,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 2
+    },
+    "morphology": {
+      "by_evidence_state": {
+        "CANDIDATE": 666,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 666
+    },
+    "negation": {
+      "by_evidence_state": {
+        "CANDIDATE": 2,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 2
+    },
+    "noun_class": {
+      "by_evidence_state": {
+        "CANDIDATE": 14,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 14
+    },
+    "noun_classes": {
+      "by_evidence_state": {
+        "CANDIDATE": 0,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 7,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 7
+    },
+    "syntax": {
+      "by_evidence_state": {
+        "CANDIDATE": 74,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 74
+    },
+    "tam": {
+      "by_evidence_state": {
+        "CANDIDATE": 7,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 7
+    },
+    "verb_morphology": {
+      "by_evidence_state": {
+        "CANDIDATE": 13,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 13
+    },
+    "word_formation": {
+      "by_evidence_state": {
+        "CANDIDATE": 5,
+        "CROSS_SOURCE_SUPPORTED": 0,
+        "ESTABLISHED": 0,
+        "OBSERVED": 0,
+        "REJECTED": 0,
+        "SOURCE_SUPPORTED": 0,
+        "UNRESOLVED": 0,
+        "VALIDATED": 0
+      },
+      "total": 5
+    }
+  },
+  "human_report_path": "xnlp_language/generated/reports/linguistic_validation_report.md",
+  "input_sha256": {
+    "artifacts/xnlp_prose_pilot_work_isolated/development_corpus/test/test_provenance.jsonl": "0590b65eac835f3cdc2a57df73431f26cadb138bb7614815b970f5ca40e5cc82",
+    "artifacts/xnlp_prose_pilot_work_isolated/development_corpus/train/train_provenance.jsonl": "aa27bc4966d735d6f1921dc4620bafcfbc6d8a6998609f9807dfc8f01a9330c5",
+    "artifacts/xnlp_prose_pilot_work_isolated/development_corpus/val/val_provenance.jsonl": "e6a86952d0199ce5a5e7e2420dd0c88c0029b1879e3536a582736c3110cf3bed",
+    "artifacts/xnlp_prose_pilot_work_isolated/training_report.json": "258107d3e0ba4ad7a4deb2cf22e7c50b82a1f65f942101f45359724808dd7a73",
+    "corpus/mqhayi_complete.txt": "449d38be49271d7789a3b55b1dfdc8bf599f32ed71b4885ed4b3d0d0ad4b7a05",
+    "data/processed/v2/splits/split_summary.json": "71dd9a991f10ad06b73f85af53ec548f631130b6bc25dde65e8a2177c387b970",
+    "data/processed/v2/splits/test_provenance.jsonl": "e58a87a3a98d7a42a7d0d023ffa5baaf12570985c7fc60b15c25611a23dfe6a2",
+    "data/processed/v2/splits/train_provenance.jsonl": "030057967b2ff18b01e1ed8e46d2831e449092f18152f77f1093cbbeba050bb4",
+    "data/processed/v2/splits/val_provenance.jsonl": "2ea5869de60165bf1264b7a668056be4cd04669ffb27be86ea6fdcc642dbb19b",
+    "data/processed/v2/training_corpus_provenance.jsonl": "83fafd592a1a1c865065dd93cde0c5a6ad687310f11f59eb765c7c72c10781ab",
+    "xnlp_language/build_foundation.py": "ade64181380e5f84828ca5493b181576f965313f99a1cb61da2b91891a3b961b",
+    "xnlp_language/generated/annotation/discourse_review_queue.jsonl": "49e60305d6a7b62da44868ac8b384dc97deb153ea6da9cb1c11b1c5d11a6aba5",
+    "xnlp_language/generated/annotation/lexical_analysis_queue.jsonl": "bcf261df0e3c124a92d29ab4ef5d66d20328e552d374121d5dba4286514febf4",
+    "xnlp_language/generated/annotation/semantic_review_queue.jsonl": "84ca0900452525b07e6b3979a4b07cac1f2722f254b00e92dfd58a2f5184079e",
+    "xnlp_language/generated/evidence/corpus_records.jsonl": "4be16b809510c232f2df4de3c44e5ef0e7091b330ed68807396158753148e705",
+    "xnlp_language/generated/evidence/source_provenance.json": "5aaed72f39c5e6f9c85667650101497f53d77a196b2089f0aaea7562300cba65",
+    "xnlp_language/generated/grammar/agreement_observations.jsonl": "0599c3783d1c33fe1eb4d1a02d1050cbbfe04d78d3f01012fcd5ec1c9823fb19",
+    "xnlp_language/generated/grammar/function_word_observations.jsonl": "982b680385016e80ac6f71647f15595f43a3a37244b7c01418ef0bd778b0488f",
+    "xnlp_language/generated/grammar/modifier_observations.jsonl": "219498fa58819472135bf58f5a399605e9109c97d9399b12a62b62863b67948b",
+    "xnlp_language/generated/grammar/negation_observations.jsonl": "8bb0a32f9e0542f4517eadedef8e1d2b8d8d450c7b53bd6aea5d34dcf08a3d0a",
+    "xnlp_language/generated/grammar/noun_class_observations.jsonl": "b8d9ca33278c3e43ea3684b7e18f0a41e36fe3d30c23b076ae3b959e2fde2aac",
+    "xnlp_language/generated/grammar/syntax_observations.jsonl": "5ad69956d79f9758835f0aab496a882a5e4e29c351c122741026d8ae94884c47",
+    "xnlp_language/generated/grammar/tam_observations.jsonl": "e40e81403548c8f82572fbad6f1718b74cc71698b315b3370311d40cf2148204",
+    "xnlp_language/generated/grammar/verb_morphology_observations.jsonl": "18fbba3fdc4ca1ebc121564c42eeec3d49bb3c066916de8d76a1406a9fb177b4",
+    "xnlp_language/generated/grammar/word_formation_observations.jsonl": "58a6f5c7829c81f2109c7276a9cf9244bc23ce4a5ab0bffa8da3b3c7d75ea413",
+    "xnlp_language/generated/lexicon/lexicon_observed.jsonl": "6a67e5c7f33f8c4d7d60f11a814025c5cbf9c47f48f239d37c0213daa7667d39",
+    "xnlp_language/source_provenance.json": "e94b7598981486151e390b45e31c5e44d419f1b1f40d9abe67edffcce35dab9f",
+    "xnlp_language/validation/linguistic_layer.py": "9c5a3793898758c357143e7d54d422d0ca8b1a0fb2f5bfa8ab20ddc5ed7cb7f7"
+  },
+  "legacy_supported_claims": 10,
+  "lexical_adjudication_counts": {
+    "adjudicated": 29,
+    "disputed": 25,
+    "pending": 29963
+  },
+  "lexical_auto_evidence_rule_histogram": {
+    "AUTO_PROPER_NOUN_CAPITALIZED_MULTIWORK_V1": 29
+  },
+  "lexical_tasks_requiring_human_attention": 30017,
+  "lexical_unassigned_dimensions": {
+    "assigned_category": 29988,
+    "assigned_lemma": 30017,
+    "assigned_meaning": 30017
+  },
+  "limitations": [
+    "Source-work isolation does not imply author or source isolation.",
+    "Machine/model suggestions are not promoted to human/source validation.",
+    "No training run was performed by this validation-layer builder."
+  ],
+  "professional_grade_blockers": [
+    "Human-reviewed and independently adjudicated linguistic claims.",
+    "Validated lexical, semantic, discourse, morphology, and syntax annotations.",
+    "An appropriately diverse, work-isolated gold set with validated labels.",
+    "Author/source generalization and professional-quality generation evaluation."
+  ],
+  "report_id": "XNLP_LINGUISTIC_VALIDATION_REPORT_V1",
+  "source_provenance": {
+    "derived_record_counts": {
+      "attested": 5839
+    },
+    "distinct_source_works": 19,
+    "records_by_source_work": {
+      "Abantu besizwe": 2,
+      "General Mqhayi": 61,
+      "Imibongo": 1,
+      "Imihobe Nemibongo": 433,
+      "Imihobe nemibongo": 3,
+      "Inzuzo": 559,
+      "Ityala Lamawele": 1770,
+      "Izibongo zoogxa": 1,
+      "Iziganeko zesizwe": 2,
+      "Izwe": 2,
+      "Masikhanyise": 38,
+      "Masikhanyise isiXhosa Home Language textbook series": 127,
+      "Mqhayi - Various works (original corpus)": 86,
+      "U John Knox Bokwe (Biography)": 662,
+      "U-Don Jadu": 1184,
+      "UMqhayi waseNtabozuko": 800,
+      "Umhlekazi u Hintsa": 71,
+      "Unknown Mqhayi": 36,
+      "Usapho": 1
+    },
+    "unregistered_record_ids": [],
+    "work_attribution_counts": {
+      "by_basis": {
+        "internal_heading": 106,
+        "not_applicable": 5717,
+        "unattributed_compilation_record": 16
+      },
+      "by_work": {
+        "Imihobe Nemibongo": 1,
+        "Inzuzo": 1,
+        "Ityala Lamawele": 7,
+        "Iziganeko zesizwe": 1,
+        "U John Knox Bokwe (Biography)": 91,
+        "U-Don Jadu": 1,
+        "U-Samson": 3,
+        "UMqhayi waseNtabozuko": 1
+      },
+      "compilation_records_by_source_title": {
+        "Mqhayi - Various works (original corpus)": {
+          "internal_heading": 77,
+          "unattributed_compilation_record": 9
+        },
+        "Unknown Mqhayi": {
+          "internal_heading": 29,
+          "unattributed_compilation_record": 7
+        }
+      }
+    }
+  },
+  "source_support_violations": [],
+  "sparse_domains": [
+    "Validated semantic and discourse annotations: none yet.",
+    "Validated syntax and generation/comprehension gold examples: none yet."
+  ],
+  "strongly_supported": [
+    "The existence of cited source forms and contexts.",
+    "10 structured noun-class/agreement claims carry legacy SUPPORTED labels and direct source links; these are source-supported, not project-validated."
+  ],
+  "unresolved": [
+    "Lexical lemmas, categories, semantic senses, and contextual meanings pending review.",
+    "Discourse functions, references, and relations pending review.",
+    "No claim currently meets the project's explicit VALIDATED or ESTABLISHED standard."
+  ],
+  "unresolved_analysis_totals": {
+    "discourse_annotations": 5719,
+    "lexical_analysis_tasks": 30017,
+    "linguistic_claims": 0,
+    "semantic_annotations": 5719
+  },
+  "useful_evidence_domains": [
+    "Observed lexicon and corpus-backed noun-class/agreement/morphology candidates.",
+    "Source-linked syntax, TAM, negation, function-word, modifier, and word-formation observations."
+  ],
+  "verified": {
+    "corpus_records_preserved": 5839,
+    "discourse_tasks_pending": 5719,
+    "distinct_source_works": 19,
+    "established_claims": 0,
+    "gold_candidate_records": 539,
+    "gold_validated_annotations": 0,
+    "historical_split_work_isolated": null,
+    "lexical_adjudication_status_counts": {
+      "adjudicated": 29,
+      "disputed": 25,
+      "pending": 29963
+    },
+    "lexical_analysis_tasks": 30017,
+    "lexical_tasks_requiring_human_attention": 30017,
+    "orphan_claims": 0,
+    "semantic_tasks_pending": 5719,
+    "source_traceable_claims": 834,
+    "unregistered_source_records": 0,
+    "unresolved_claims": 0,
+    "validated_claims": 0,
+    "work_isolated_candidate_pool_separated_from_training_works": true
+  },
+  "what_we_know": [
+    "The preserved corpus contains source-linked isiXhosa text records.",
+    "Lexical artifacts establish surface-form occurrence, not lemma, part of speech, or sense.",
+    "Structured morphology includes proposed analyses with source evidence; most remain candidates."
+  ]
+}

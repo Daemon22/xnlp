@@ -108,7 +108,7 @@ Total derivational entries: **4**
 
 All automated analyses are marked as OBSERVED, UNDER_REVIEW, or SUPPORTED.
 No entry is ESTABLISHED without human peer review.
-- Model training: FROZEN
+- Model training: UNFROZEN_EXPERIMENTAL (experimental training is allowed; generated models are not thereby validated for release)
 - Decision: FOUNDATION INCOMPLETE — CONTINUE STRUCTURAL ANALYSIS
 
 ## 7. Uncertainty and Limitations

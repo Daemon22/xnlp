@@ -8,6 +8,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
 from .grammar import analyze_text
+from .understanding import comprehend, understand
 
 API_VERSION = "v1"
 MAX_REQUEST_BYTES = 1_048_576
@@ -28,7 +29,7 @@ class _RequestHandler(BaseHTTPRequestHandler):
         })
 
     def do_POST(self) -> None:
-        if self.path != "/v1/analyze":
+        if self.path not in {"/v1/analyze", "/v1/understand", "/v1/comprehend"}:
             self._send_json(HTTPStatus.NOT_FOUND, {"error": "not_found"})
             return
 
@@ -51,18 +52,33 @@ class _RequestHandler(BaseHTTPRequestHandler):
             self._send_json(HTTPStatus.BAD_REQUEST, {"error": "invalid_json"})
             return
 
-        if not isinstance(payload, dict) or not isinstance(payload.get("text"), str):
+        if not isinstance(payload, dict):
             self._send_json(HTTPStatus.BAD_REQUEST, {
                 "error": "invalid_request",
-                "details": "Expected a JSON object with a string field named 'text'.",
+                "details": "Expected a JSON object.",
             })
             return
 
+        if self.path == "/v1/understand":
+            if not isinstance(payload.get("text"), str):
+                self._send_json(HTTPStatus.BAD_REQUEST, {"error": "Expected a text string."})
+                return
+            result = understand(payload["text"])
+        elif self.path == "/v1/comprehend":
+            if not isinstance(payload.get("context"), str) or not isinstance(payload.get("question"), str):
+                self._send_json(HTTPStatus.BAD_REQUEST, {"error": "Expected context and question strings."})
+                return
+            result = comprehend(payload["context"], payload["question"])
+        else:
+            if not isinstance(payload.get("text"), str):
+                self._send_json(HTTPStatus.BAD_REQUEST, {"error": "Expected a text string."})
+                return
+            result = analyze_text(payload["text"])
         self._send_json(HTTPStatus.OK, {
             "api_version": API_VERSION,
             "language": "isiXhosa",
             "processor": "deterministic-evidence-bound-analyzer",
-            "result": analyze_text(payload["text"]),
+            "result": result,
         })
 
     def _send_json(self, status: HTTPStatus, body: dict[str, Any]) -> None:

@@ -3,6 +3,7 @@ import sys
 import json
 import hashlib
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import pytest
 
@@ -19,9 +20,37 @@ def rows(path):
 
 @pytest.fixture(scope="module", autouse=True)
 def build_once():
-    """Run the deterministic build once before all tests in this module."""
-    subprocess.run([sys.executable, "xnlp_language/build_foundation.py"], cwd=ROOT, check=True)
-    return True
+    """Build and validate a disposable foundation without touching generated/."""
+    global GENERATED
+    previous_generated = GENERATED
+    with TemporaryDirectory(prefix="xnlp-foundation-tests-") as temporary:
+        GENERATED = Path(temporary) / "generated"
+        subprocess.run(
+            [
+                sys.executable,
+                "xnlp_language/build_foundation.py",
+                "--output",
+                str(GENERATED),
+            ],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        subprocess.run(
+            [
+                sys.executable,
+                "xnlp_language/validation/validate_foundation.py",
+                "--generated",
+                str(GENERATED),
+            ],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        yield
+    GENERATED = previous_generated
 
 
 def test_preservation_layer_immutable():
@@ -44,18 +73,37 @@ def test_preservation_layer_immutable():
 
 def test_build_is_reproducible_and_valid():
     """Build twice → identical manifest SHA-256 (deterministic), then validation passes."""
-    subprocess.run([sys.executable, "xnlp_language/build_foundation.py"], cwd=ROOT, check=True)
-    first = (ROOT / "xnlp_language" / "generated" / "foundation_manifest.json").read_bytes()
-    subprocess.run([sys.executable, "xnlp_language/build_foundation.py"], cwd=ROOT, check=True)
-    second = (ROOT / "xnlp_language" / "generated" / "foundation_manifest.json").read_bytes()
+    with TemporaryDirectory(prefix="xnlp-foundation-repro-") as temporary:
+        destination = Path(temporary) / "generated"
+        command = [
+            sys.executable,
+            "xnlp_language/build_foundation.py",
+            "--output",
+            str(destination),
+        ]
+        subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True)
+        first = (destination / "foundation_manifest.json").read_bytes()
+        subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True)
+        second = (destination / "foundation_manifest.json").read_bytes()
+        subprocess.run(
+            [
+                sys.executable,
+                "xnlp_language/validation/validate_foundation.py",
+                "--generated",
+                str(destination),
+            ],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
     assert hashlib.sha256(first).hexdigest() == hashlib.sha256(second).hexdigest()
-    subprocess.run([sys.executable, "xnlp_language/validation/validate_foundation.py"], cwd=ROOT, check=True)
 
 
-def test_manifest_freeze_and_decision():
-    """Manifest must have model_training FROZEN and decision starting with FOUNDATION INCOMPLETE."""
+def test_manifest_experimental_training_and_incomplete_foundation():
+    """Experimental training is allowed; foundation completion still requires review."""
     manifest = json.loads((GENERATED / "foundation_manifest.json").read_text(encoding="utf-8"))
-    assert manifest["model_training"] == "FROZEN"
+    assert manifest["model_training"] == "UNFROZEN_EXPERIMENTAL"
     assert manifest["decision"].startswith("FOUNDATION INCOMPLETE")
     assert manifest["corpus_sha256"] == "3fcec2c0c9dac47942fe164889601423d69226e9456108f4156f6ec3231f752c"
     assert manifest["authoritative_records"] == 5839
@@ -246,6 +294,40 @@ def test_coverage_report_per_domain():
         assert info["entries"] >= 0
         assert info["coverage_status"]
         assert info["confidence"]
+
+
+def test_semantic_and_discourse_queues_are_evidence_only():
+    records = {
+        record["record_id"]: record
+        for record in rows(GENERATED / "evidence" / "corpus_records.jsonl")
+        if record["language_class"] == "TARGET_LANGUAGE"
+    }
+    manifest = json.loads((GENERATED / "foundation_manifest.json").read_text(encoding="utf-8"))
+    expected = {
+        "semantic": ("SEMANTIC_FRAME_ANNOTATION", "semantic_frame_schema.json"),
+        "discourse": ("DISCOURSE_ANNOTATION", "discourse_annotation_schema.json"),
+    }
+
+    for domain, (task_type, schema_name) in expected.items():
+        tasks = rows(GENERATED / "annotation" / f"{domain}_review_queue.jsonl")
+        assert {task["source_record_id"] for task in tasks} == set(records)
+        assert len(tasks) == len(records)
+        for task in tasks:
+            source = records[task["source_record_id"]]
+            assert task["task_type"] == task_type
+            assert task["annotation_schema"] == schema_name
+            assert task["source_text"] == source["text"]
+            assert task["status"] == "PENDING_HUMAN_REVIEW"
+            assert task["proposed_analysis"] is None
+            assert task["confidence"] == "INSUFFICIENT_EVIDENCE"
+        assert manifest[f"{domain}_review_tasks"] == len(records)
+
+    coverage = json.loads((GENERATED / "reports" / "structural_coverage.json").read_text(encoding="utf-8"))
+    domains = {item["domain"]: item for item in coverage["domains"]}
+    assert domains["semantics"]["entries"] == 0
+    assert domains["discourse"]["entries"] == 0
+    assert domains["semantics"]["review_tasks"] == len(records)
+    assert domains["discourse"]["review_tasks"] == len(records)
 
 
 def test_unknown_analysis_is_safe():

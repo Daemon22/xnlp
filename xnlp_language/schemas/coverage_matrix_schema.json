@@ -34,6 +34,11 @@
       "type": "integer",
       "description": "Number of corpus evidence records"
     },
+    "review_tasks": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unreviewed annotation work items; not established entries"
+    },
     "coverage_percentage": {
       "type": "number",
       "description": "Estimated coverage of domain"

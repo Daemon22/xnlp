@@ -37,7 +37,7 @@ The following structural observations have been produced from the corpus:
 - **word_formation**: 5 observations, 10 review tasks
 
 **Total**: 153 structural observations across 9 domains.
-**Total**: 2468 review tasks pending human validation.
+**Total**: 13906 review tasks pending human validation.
 
 ## 4. Confidence Mapping (Observation Layer)
 
@@ -79,11 +79,14 @@ This makes every claim's evidentiary chain auditable.
 
 ## 8. Review Queue
 
-The review queue contains 2468 human-review tasks. Each task:
+The review queue contains 13906 human-review tasks. Each task:
 - Points to specific corpus record IDs
 - Carries `proposed_analysis: null` (no automated claim)
 - Carries `confidence: INSUFFICIENT_EVIDENCE`
 - Carries an instruction to mark uncertainty explicitly
+
+Separate semantic and discourse queues contain 5719 and 5719 source-linked annotation tasks, respectively. These are work items, not analyses.
+Their schemas permit explicit ambiguity and do not define a closed inventory of semantic roles or discourse relations.
 
 ## 9. Contradictions and Conflicts
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Dependency-free integrity and provenance checks for generated foundation data."""
 from __future__ import annotations
+import argparse
 import json
 from pathlib import Path
 
@@ -10,18 +11,18 @@ GENERATED = ROOT / "xnlp_language" / "generated"
 def rows(path: Path):
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
-def main() -> None:
+def main(generated: Path = GENERATED) -> None:
     schema_paths = sorted((ROOT / "xnlp_language" / "schemas").glob("*.json"))
     assert schema_paths, "no schema assets"
     for schema_path in schema_paths:
         assert isinstance(json.loads(schema_path.read_text(encoding="utf-8")), dict), f"invalid schema: {schema_path.name}"
-    records = rows(GENERATED / "evidence" / "corpus_records.jsonl")
+    records = rows(generated / "evidence" / "corpus_records.jsonl")
     record_ids = {r["record_id"] for r in records}
     assert records, "no corpus records"
     assert all(r["source"] in {"mqhayi", "masikhanyise"} for r in records), "non-principal source"
     assert all(r["provenance_type"] == r["validation_status"] == "authoritative" for r in records), "unverified record"
     assert len(record_ids) == len(records), "duplicate record ID"
-    registry = json.loads((GENERATED / "validation" / "language_integrity_registry.json").read_text(encoding="utf-8"))
+    registry = json.loads((generated / "validation" / "language_integrity_registry.json").read_text(encoding="utf-8"))
     assert len(registry) == len(records), "language-integrity registry does not preserve every record"
     source_by_id = {record["record_id"]: record for record in records}
     for item in registry:
@@ -32,33 +33,65 @@ def main() -> None:
         assert item["preservation_action"] == "RETAIN_UNCHANGED"
         assert (item["automated_linguistic_analysis"] == "INCLUDED") == (item["language_class"] == "TARGET_LANGUAGE")
     analysis_ids = {item["record_id"] for item in registry if item["automated_linguistic_analysis"] == "INCLUDED"}
-    lexicon = rows(GENERATED / "lexicon" / "lexicon_observed.jsonl")
+    lexicon = rows(generated / "lexicon" / "lexicon_observed.jsonl")
     for entry in lexicon:
         assert entry["analysis_status"] == "UNANALYZED"
         assert entry["evidence"] and all(e["record_id"] in analysis_ids for e in entry["evidence"])
-    noun = json.loads((GENERATED / "foundation" / "noun_class_observations.json").read_text(encoding="utf-8"))
+    noun = json.loads((generated / "foundation" / "noun_class_observations.json").read_text(encoding="utf-8"))
     for entry in noun:
         assert entry["analysis_status"] == "PROVISIONAL"
         assert entry["evidence"] and all(e["record_id"] in analysis_ids for e in entry["evidence"])
-    review_tasks = rows(GENERATED / "annotation" / "linguistic_review_queue.jsonl")
+    review_tasks = rows(generated / "annotation" / "linguistic_review_queue.jsonl")
     assert review_tasks, "no linguistic review tasks"
     for task in review_tasks:
         assert task["status"] == "PENDING_HUMAN_REVIEW"
         assert task["proposed_analysis"] is None
         assert task["confidence"] == "INSUFFICIENT_EVIDENCE"
         assert task["source_record_ids"] and set(task["source_record_ids"]).issubset(analysis_ids)
-    contradictions = json.loads((GENERATED / "validation" / "contradictions.json").read_text(encoding="utf-8"))
+    analysis_records = {record_id: record for record_id, record in source_by_id.items()
+                        if record_id in analysis_ids}
+    for domain, schema_name in (
+        ("semantic", "semantic_frame_schema.json"),
+        ("discourse", "discourse_annotation_schema.json"),
+    ):
+        tasks = rows(generated / "annotation" / f"{domain}_review_queue.jsonl")
+        assert {task["source_record_id"] for task in tasks} == analysis_ids, \
+            f"{domain} queue does not cover every eligible source record exactly once"
+        assert len({task["task_id"] for task in tasks}) == len(tasks), \
+            f"duplicate {domain} review task ID"
+        for task in tasks:
+            source = analysis_records[task["source_record_id"]]
+            assert task["task_type"] == (
+                "SEMANTIC_FRAME_ANNOTATION" if domain == "semantic" else "DISCOURSE_ANNOTATION"
+            )
+            assert task["annotation_schema"] == schema_name
+            assert task["source_text"] == source["text"]
+            assert task["status"] == "PENDING_HUMAN_REVIEW"
+            assert task["proposed_analysis"] is None
+            assert task["confidence"] == "INSUFFICIENT_EVIDENCE"
+    contradictions = json.loads((generated / "validation" / "contradictions.json").read_text(encoding="utf-8"))
     conflict_items = contradictions.get("items", contradictions.get("conflicts", []))
     for item in conflict_items:
         assert item["status"] == "OPEN"
         assert all(record_id in record_ids for record_id in item["record_ids"])
-    manifest = json.loads((GENERATED / "foundation_manifest.json").read_text(encoding="utf-8"))
-    assert manifest["model_training"] == "FROZEN"
+    manifest = json.loads((generated / "foundation_manifest.json").read_text(encoding="utf-8"))
+    assert manifest["model_training"] == "UNFROZEN_EXPERIMENTAL"
     assert manifest["analysis_records"] == len(analysis_ids)
     assert manifest["decision"].startswith("FOUNDATION INCOMPLETE")
+    assert manifest["semantic_review_tasks"] == len(analysis_ids)
+    assert manifest["discourse_review_tasks"] == len(analysis_ids)
+    assert manifest["review_tasks_total"] == (
+        len(review_tasks) + 2 * len(analysis_ids)
+    )
+    coverage = json.loads((generated / "reports" / "structural_coverage.json").read_text(encoding="utf-8"))
+    coverage_by_domain = {item["domain"]: item for item in coverage["domains"]}
+    for domain, count in (("semantics", len(analysis_ids)), ("discourse", len(analysis_ids))):
+        assert coverage_by_domain[domain]["entries"] == 0
+        assert coverage_by_domain[domain]["review_tasks"] == count
+        assert coverage_by_domain[domain]["coverage_status"] == "INSUFFICIENT_EVIDENCE"
 
     # Validate structured grammatical system artifacts
-    nc_classes = rows(GENERATED / "grammar" / "noun_classes.jsonl")
+    nc_classes = rows(generated / "grammar" / "noun_classes.jsonl")
     assert nc_classes, "no structured noun-class entries"
     for entry in nc_classes:
         assert entry["review_status"] in {"OBSERVED", "UNDER_REVIEW", "SUPPORTED", "CONTESTED", "REJECTED"}
@@ -67,34 +100,34 @@ def main() -> None:
         assert entry["review_status"] != "ESTABLISHED" or entry["observation_ids"]
         assert entry["evidence_records"]
 
-    ag_entries = rows(GENERATED / "grammar" / "agreement_system.jsonl")
+    ag_entries = rows(generated / "grammar" / "agreement_system.jsonl")
     assert ag_entries, "no structured agreement entries"
     assert all(e["evidence_records"] for e in ag_entries)
 
-    vm_entries = rows(GENERATED / "grammar" / "verb_morphology.jsonl")
+    vm_entries = rows(generated / "grammar" / "verb_morphology.jsonl")
     assert vm_entries, "no structured verb morphology entries"
     for entry in vm_entries:
         assert entry["candidate_segments"]
         assert entry["supporting_evidence"]
 
-    der_entries = rows(GENERATED / "grammar" / "derivational_morphology.jsonl")
+    der_entries = rows(generated / "grammar" / "derivational_morphology.jsonl")
     assert der_entries, "no structured derivational morphology entries"
 
-    nc_review = rows(GENERATED / "grammar" / "noun_class_review_queue.jsonl")
+    nc_review = rows(generated / "grammar" / "noun_class_review_queue.jsonl")
     assert nc_review, "no noun-class review tasks"
 
-    ag_review = rows(GENERATED / "grammar" / "agreement_review_queue.jsonl")
+    ag_review = rows(generated / "grammar" / "agreement_review_queue.jsonl")
     assert ag_review, "no agreement review tasks"
 
-    vm_queue = rows(GENERATED / "grammar" / "verb_analysis_queue.jsonl")
+    vm_queue = rows(generated / "grammar" / "verb_analysis_queue.jsonl")
     assert vm_queue, "no verb analysis queue tasks"
 
-    assert (GENERATED / "grammar" / "evidence_graph.json").exists(), "no evidence graph"
-    assert (GENERATED / "grammar" / "linguistic_conflicts.jsonl").exists(), "no linguistic conflicts"
-    assert (GENERATED / "reports" / "structural_coverage.json").exists(), "no coverage report"
-    assert (GENERATED / "foundation" / "isiXhosa_grammar_state.md").exists(), "no grammar report"
-    assert (GENERATED / "reports" / "structural_gate_report.md").exists(), "no structural gate report"
-    gate_report = (GENERATED / "reports" / "structural_gate_report.md").read_text(encoding="utf-8")
+    assert (generated / "grammar" / "evidence_graph.json").exists(), "no evidence graph"
+    assert (generated / "grammar" / "linguistic_conflicts.jsonl").exists(), "no linguistic conflicts"
+    assert (generated / "reports" / "structural_coverage.json").exists(), "no coverage report"
+    assert (generated / "foundation" / "isiXhosa_grammar_state.md").exists(), "no grammar report"
+    assert (generated / "reports" / "structural_gate_report.md").exists(), "no structural gate report"
+    gate_report = (generated / "reports" / "structural_gate_report.md").read_text(encoding="utf-8")
     assert gate_report.rstrip().endswith("FOUNDATION INSUFFICIENT — CONTINUE STRUCTURAL ANALYSIS"), \
         "structural gate must end with the required decision string"
 
@@ -105,6 +138,10 @@ def main() -> None:
     print(f"PASS: {len(records)} authoritative records; {len(lexicon)} lexical observations; "
           f"{len(noun)} prefix observations; {len(nc_classes)} noun classes; "
           f"{len(ag_entries)} agreement entries; {len(vm_entries)} verb entries; "
-          f"{len(der_entries)} derivational entries; {len(schema_paths)} schema assets parsed")
+          f"{len(der_entries)} derivational entries; {len(analysis_ids)} semantic and discourse "
+          f"review tasks each; {len(schema_paths)} schema assets parsed")
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--generated", type=Path, default=GENERATED)
+    main(parser.parse_args().generated)

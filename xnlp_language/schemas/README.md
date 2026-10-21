@@ -16,13 +16,17 @@ This directory contains JSON schemas for the XNLP IsiXhosa Language Foundation. 
 
 ### Lexical and Semantic Schemas
 - `lexicon_schema.json` - Lexical database entries
+- `lexical_analysis_task_schema.json` - Evidence-linked lexical review tasks with unassigned lemma/category fields
 - `semantic_relations_schema.json` - Semantic relationships
+- `semantic_frame_schema.json` - Evidence-linked predicate/argument meaning annotations and review decisions
 - `function_words_schema.json` - Function words (pronouns, demonstratives, etc.)
 
 ### Structural and Discourse Schemas
 - `syntax_schema.json` - Syntactic structures
 - `word_formation_schema.json` - Word formation patterns
 - `discourse_schema.json` - Discourse-level structures
+- `discourse_annotation_schema.json` - Evidence-linked discourse components and relations
+- `linguistic_claim_schema.json` - Traceable linguistic claims with explicit evidence states
 
 ### Meta-Schemas
 - `linguistic_evidence_schema.json` - Evidence linking rules to corpus
@@ -34,10 +38,23 @@ This directory contains JSON schemas for the XNLP IsiXhosa Language Foundation. 
 All schemas follow these principles:
 
 1. **Evidence-First**: Every linguistic assertion must link to corpus evidence
-2. **Confidence Levels**: All entries must include confidence levels (OBSERVED, HIGH_CONFIDENCE, SUPPORTED, PROVISIONAL, INSUFFICIENT_EVIDENCE, CONFLICTING_EVIDENCE)
+2. **Separate Evidence and Confidence**: Evidence state (OBSERVED, CANDIDATE, SOURCE_SUPPORTED, CROSS_SOURCE_SUPPORTED, VALIDATED, ESTABLISHED, REJECTED, UNRESOLVED) is independent of confidence
 3. **Historical Distinction**: Entries track historical vs modern forms
 4. **Machine-Readable**: Structured JSON for computational processing
 5. **Traceability**: All rules traceable to source corpus records
+
+Semantic and discourse schemas define annotation formats, not grammatical claims.
+Generated semantic and discourse queues carry source text and provenance but leave
+the proposed analysis empty until qualified human review. Span offsets are zero-based,
+end-exclusive Python string offsets into the cited, unchanged `source_text`.
+Machine suggestions remain candidates; explicit reviewer identity, protocol, and
+evidence are required for validation. A rejected analysis remains traceable rather
+than being deleted. `ESTABLISHED` requires a prior explicit `VALIDATED` decision.
+
+The lexical adjudication utility, `xnlp_language.annotation.adjudicate_lexical`,
+applies imported JSONL decisions only to the requested front-of-queue batch.
+Machine-only rows require `--machine-assisted`; its conservative disputed-batch
+mode does not assign a lemma, category, or meaning.
 
 ## Usage
 

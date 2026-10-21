@@ -5,6 +5,11 @@
   "corpus": "data\\authoritative\\v2_authoritative_all.jsonl",
   "corpus_sha256": "3fcec2c0c9dac47942fe164889601423d69226e9456108f4156f6ec3231f752c",
   "decision": "FOUNDATION INCOMPLETE — CONTINUE STRUCTURAL ANALYSIS",
+  "derived_provenance_counts": {
+    "attested": 5839
+  },
+  "discourse_review_tasks": 5719,
+  "distinct_source_work_count": 19,
   "foundation_release": "XNLP_ISIXHOSA_FOUNDATION_V1",
   "generation_mode": "deterministic_from_corpus_hash",
   "generator": "xnlp_language.build_foundation",
@@ -14,9 +19,31 @@
     "TARGET_LANGUAGE": 5719,
     "UNCERTAIN": 91
   },
-  "model_training": "FROZEN",
+  "model_training": "UNFROZEN_EXPERIMENTAL",
   "observation_count": 153,
-  "review_tasks_total": 1544,
+  "review_tasks_total": 12982,
+  "semantic_review_tasks": 5719,
+  "source_record_counts": {
+    "Abantu besizwe": 2,
+    "General Mqhayi": 61,
+    "Imibongo": 1,
+    "Imihobe Nemibongo": 433,
+    "Imihobe nemibongo": 3,
+    "Inzuzo": 559,
+    "Ityala Lamawele": 1770,
+    "Izibongo zoogxa": 1,
+    "Iziganeko zesizwe": 2,
+    "Izwe": 2,
+    "Masikhanyise": 38,
+    "Masikhanyise isiXhosa Home Language textbook series": 127,
+    "Mqhayi - Various works (original corpus)": 86,
+    "U John Knox Bokwe (Biography)": 662,
+    "U-Don Jadu": 1184,
+    "UMqhayi waseNtabozuko": 800,
+    "Umhlekazi u Hintsa": 71,
+    "Unknown Mqhayi": 36,
+    "Usapho": 1
+  },
   "sources": [
     "masikhanyise",
     "mqhayi"
@@ -26,5 +53,33 @@
     "derivational": 4,
     "noun_classes": 7,
     "verbs": 666
+  },
+  "unregistered_source_record_count": 0,
+  "work_attribution_counts": {
+    "by_basis": {
+      "internal_heading": 106,
+      "not_applicable": 5717,
+      "unattributed_compilation_record": 16
+    },
+    "by_work": {
+      "Imihobe Nemibongo": 1,
+      "Inzuzo": 1,
+      "Ityala Lamawele": 7,
+      "Iziganeko zesizwe": 1,
+      "U John Knox Bokwe (Biography)": 91,
+      "U-Don Jadu": 1,
+      "U-Samson": 3,
+      "UMqhayi waseNtabozuko": 1
+    },
+    "compilation_records_by_source_title": {
+      "Mqhayi - Various works (original corpus)": {
+        "internal_heading": 77,
+        "unattributed_compilation_record": 9
+      },
+      "Unknown Mqhayi": {
+        "internal_heading": 29,
+        "unattributed_compilation_record": 7
+      }
+    }
   }
 }

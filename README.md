@@ -10,7 +10,7 @@ Every model artifact is a **single self-contained `.pt` file** — model weights
 
 ## Current Foundation Gate
 
-**Model training, tokenizer benchmarking, scaling, and generation optimization are frozen.** XNLP now establishes an evidence-first isiXhosa linguistic foundation before progressing to the neural-model layer.
+**Experimental model training is unfrozen.** Training runs are permitted for research and iteration, while the evidence-first isiXhosa foundation and professional-generation release gate remain incomplete. A training run does not establish grammar or certify generated text as professional quality.
 
 The foundation is built reproducibly from reconciled authoritative Mqhayi and Masikhanyise records. It preserves historical and modern source forms, links every generated observation to record-level provenance, and distinguishes `OBSERVED`, `SUPPORTED`, `PROVISIONAL`, and `INSUFFICIENT_EVIDENCE` rather than treating corpus absence as a linguistic rule.
 
@@ -23,7 +23,19 @@ python xnlp_language/build_foundation.py
 python xnlp_language/validation/validate_foundation.py
 ```
 
-Generated artifacts and the release-gate report are under `xnlp_language/generated/`. The present gate decision is intentionally **FOUNDATION INCOMPLETE — CONTINUE LINGUISTIC ANALYSIS**: corpus text provides reliable orthographic and lexical observations, but reviewed corpus annotation is still required before asserting structural analyses of agreement, morphology, verbs, syntax, and related domains.
+Generated artifacts and the release-gate report are under `xnlp_language/generated/`. The present gate decision is intentionally **FOUNDATION INCOMPLETE — CONTINUE LINGUISTIC ANALYSIS**: corpus text provides reliable orthographic and lexical observations, but reviewed corpus annotation is still required before asserting structural analyses of agreement, morphology, verbs, syntax, semantics, discourse, and related domains. Human-review worklists and evidence-linked semantic/discourse annotation formats are provided; they are not treated as validated analyses. Use the corpus and existing validation/evaluation pipeline for experimental runs, and do not interpret training loss or a generated sample as linguistic verification.
+
+Create a single entry point that connects source-preserved evidence, the observed lexicon, structured grammar proposals, annotation queues, validation, and prose-model experiments:
+
+```powershell
+python -m xnlp_language.build_bundle
+```
+
+The generated [foundation bundle](./xnlp_language/generated/foundation_bundle.json) contains compact grammar/observation data and checksummed references to the larger corpus, lexical-review, and claim artifacts. It exposes explicit evidence states, pending semantic/discourse/lexical work, split leakage audits, and an unannotated work-isolated gold-candidate pool. That pool is not a validated gold set; historical splits remain diagnostic, and the bundle does not certify professional isiXhosa generation.
+
+### Experimental prose pilot
+
+`train_prose_pilot.py` can retain source line breaks and pack consecutive rows into context windows. For a stricter generalization test, use `--work-isolated`: this reserves the entire `Inzuzo` work for Mqhayi testing and `U John Knox Bokwe (Biography)` for validation, with no work shared across the three partitions. Example: `python train_prose_pilot.py --epochs 5 --preset tiny --sample-size 128 --work-isolated --artifact-dir artifacts/xnlp_prose_pilot_work_isolated`. Compare against the baseline on the same held-out records with `python compare_mqhayi_checkpoints.py --test-provenance artifacts/xnlp_prose_pilot_work_isolated/development_corpus/test_provenance.jsonl --pilot-checkpoint artifacts/xnlp_prose_pilot_work_isolated/model/best_model.pt --pilot-training-text artifacts/xnlp_prose_pilot_work_isolated/development_corpus/train/train.txt --output data/reports/mqhayi_work_isolated_comparison.json`. Token-level loss remains affected by each checkpoint's tokenizer and does not establish linguistic quality.
 
 ## Package Architecture
 

@@ -31,6 +31,7 @@ import hashlib
 import json
 import re
 import shutil
+import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -172,6 +173,108 @@ def confidence(count: int) -> str:
 def source_hash(text: str) -> str:
     """Fingerprint original text without changing a character."""
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _normalized_source_text(text: str) -> str:
+    return " ".join(unicodedata.normalize("NFKC", text).casefold().split())
+
+
+def _work_sections(path: Path) -> list[tuple[str, str]]:
+    headings = {
+        "UMBALI KA SAMSON": "U-Samson",
+        "ITYALA LAMAWELE": "Ityala Lamawele",
+        "U-DON JADU": "U-Don Jadu",
+        "IMIHOBE NEMIBONGO": "Imihobe Nemibongo",
+        "INZUZO": "Inzuzo",
+        "IZIBONGO ZOOGRXA": "Izibongo zoogxa",
+        "IZIGANEKO ZESIZWE": "Iziganeko zesizwe",
+        "ABANTU BESIZWE": "Abantu besizwe",
+        "UMQHAYI WASENTAB'OZUKO": "UMqhayi waseNtabozuko",
+        "UBOMBU MFUNDISI UJOHN KNOX BOKWE": "U John Knox Bokwe (Biography)",
+    }
+    sections: list[tuple[str, list[str]]] = []
+    current_name = None
+    current_lines: list[str] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        heading = line.strip().strip(".").upper()
+        if heading in headings:
+            if current_name is not None:
+                sections.append((current_name, current_lines))
+            current_name = headings[heading]
+            current_lines = []
+        elif current_name is not None:
+            current_lines.append(line)
+    if current_name is not None:
+        sections.append((current_name, current_lines))
+    return [
+        (name, _normalized_source_text(" ".join(lines)))
+        for name, lines in sections
+    ]
+
+
+def _record_work_attribution(
+    records: list[dict[str, Any]], compilation_path: Path
+) -> dict[str, Any]:
+    sections = _work_sections(compilation_path)
+    basis_counts: collections.Counter[str] = collections.Counter()
+    work_counts: collections.Counter[str] = collections.Counter()
+    source_counts: dict[str, collections.Counter[str]] = collections.defaultdict(
+        collections.Counter
+    )
+    compilation_labels = {
+        "Mqhayi - Various works (original corpus)",
+        "Unknown Mqhayi",
+    }
+    for record in records:
+        title = str(record.get("source_title", ""))
+        attribution = None
+        if title in compilation_labels:
+            normalized_text = _normalized_source_text(str(record.get("text", "")))
+            matches = {
+                work for work, section_text in sections
+                if normalized_text and normalized_text in section_text
+            }
+            if len(matches) == 1:
+                attribution = {
+                    "work": next(iter(matches)),
+                    "basis": "internal_heading",
+                }
+            basis = "internal_heading" if attribution else "unattributed_compilation_record"
+            source_counts[title][basis] += 1
+        else:
+            basis = "not_applicable"
+        record["work_attribution"] = attribution
+        if attribution:
+            basis_counts[attribution["basis"]] += 1
+            work_counts[attribution["work"]] += 1
+        else:
+            basis_counts[basis] += 1
+    return {
+        "by_basis": dict(sorted(basis_counts.items())),
+        "by_work": dict(sorted(work_counts.items())),
+        "compilation_records_by_source_title": {
+            title: dict(sorted(counts.items()))
+            for title, counts in sorted(source_counts.items())
+        },
+    }
+
+
+def _derive_record_provenance(
+    record: dict[str, Any], registry_sources: dict[str, dict[str, Any]]
+) -> str:
+    provenance_type = str(record.get("provenance_type", "")).casefold()
+    generator = record.get("generator")
+    if provenance_type in {"synthetic", "generated", "derived"} or generator:
+        return "synthetic"
+    source = registry_sources.get(str(record.get("source_title", "")))
+    if (
+        source
+        and source.get("foundation_attested") is True
+        and provenance_type == "authoritative"
+        and not generator
+    ):
+        return "attested"
+    return "unknown"
 
 
 def _match_prefix(word: str) -> str | None:
@@ -1413,6 +1516,7 @@ def _build_coverage_report(
             "confidence": confidence,
             "observation_ids": info.get("observation_ids", []),
             "notes": info.get("notes", ""),
+            "review_tasks": info.get("review_tasks", 0),
         })
 
     report = {
@@ -1568,7 +1672,8 @@ def _build_grammar_report(
         "",
         "All automated analyses are marked as OBSERVED, UNDER_REVIEW, or SUPPORTED.",
         "No entry is ESTABLISHED without human peer review.",
-        f"- Model training: {manifest.get('model_training', 'UNKNOWN')}",
+        f"- Model training: {manifest.get('model_training', 'UNKNOWN')} "
+        "(experimental training is allowed; generated models are not thereby validated for release)",
         f"- Decision: {manifest.get('decision', 'UNKNOWN')}",
         "",
         "## 7. Uncertainty and Limitations",
@@ -1680,6 +1785,12 @@ def _build_structural_gate(
         "- Carries `proposed_analysis: null` (no automated claim)",
         "- Carries `confidence: INSUFFICIENT_EVIDENCE`",
         "- Carries an instruction to mark uncertainty explicitly",
+        "",
+        f"Separate semantic and discourse queues contain "
+        f"{review_counts.get('semantics', 0)} and {review_counts.get('discourse', 0)} "
+        "source-linked annotation tasks, respectively. These are work items, not analyses.",
+        "Their schemas permit explicit ambiguity and do not define a closed inventory of "
+        "semantic roles or discourse relations.",
         "",
         "## 9. Contradictions and Conflicts",
         "",
@@ -1978,6 +2089,33 @@ def build(corpus: Path, destination: Path) -> dict:
     records = read_records(corpus)
     if not records:
         raise ValueError("No authoritative Mqhayi/Masikhanyise records found")
+    provenance_path = ROOT / "xnlp_language" / "source_provenance.json"
+    provenance_registry = json.loads(provenance_path.read_text(encoding="utf-8"))
+    registry_sources = provenance_registry.get("sources", {})
+    if not isinstance(registry_sources, dict):
+        raise ValueError(f"Source provenance registry has no sources object: {provenance_path}")
+    for title, entry in registry_sources.items():
+        if (
+            not isinstance(entry, dict)
+            or not isinstance(entry.get("foundation_attested"), bool)
+            or not isinstance(entry.get("vetted_by"), str)
+            or not isinstance(entry.get("vetting_note"), str)
+        ):
+            raise ValueError(f"Invalid source provenance registry entry: {title}")
+    work_attribution_counts = _record_work_attribution(
+        records, ROOT / "corpus" / "mqhayi_complete.txt"
+    )
+    provenance_counts: collections.Counter[str] = collections.Counter()
+    source_record_counts = collections.Counter(
+        str(record.get("source_title", "")) for record in records
+    )
+    unregistered_records = []
+    for record in records:
+        title = str(record.get("source_title", ""))
+        if title not in registry_sources:
+            unregistered_records.append(record["record_id"])
+        record["provenance_class"] = _derive_record_provenance(record, registry_sources)
+        provenance_counts[record["provenance_class"]] += 1
     if destination.exists():
         shutil.rmtree(destination)
     destination.mkdir(parents=True)
@@ -2024,8 +2162,64 @@ def build(corpus: Path, destination: Path) -> dict:
         "confidence": "HIGH_CONFIDENCE",
     })
 
+    generated_registry = {
+        **provenance_registry,
+        "source_record_counts": dict(sorted(source_record_counts.items())),
+        "distinct_source_work_count": len(source_record_counts),
+        "unregistered_record_ids": sorted(unregistered_records),
+        "derived_provenance_counts": dict(sorted(provenance_counts.items())),
+        "work_attribution_counts": work_attribution_counts,
+    }
+    write_json(destination / "evidence" / "source_provenance.json", generated_registry)
+
     # Preserve all authoritative records
     write_jsonl(destination / "evidence" / "corpus_records.jsonl", records)
+
+    # These are annotation worklists, not semantic or discourse analyses.
+    # Keep their source text exact and leave every proposed analysis empty.
+    semantic_review_tasks = []
+    discourse_review_tasks = []
+    for record in analysis_records:
+        shared = {
+            "source_record_id": record["record_id"],
+            "source_text": record["text"],
+            "source_work": record.get("source_title", record["source"]),
+            "source_section": record.get("source_section", ""),
+            "status": "PENDING_HUMAN_REVIEW",
+            "proposed_analysis": None,
+            "confidence": "INSUFFICIENT_EVIDENCE",
+        }
+        semantic_review_tasks.append({
+            **shared,
+            "task_id": f"SEM_{record['record_id']}",
+            "task_type": "SEMANTIC_FRAME_ANNOTATION",
+            "annotation_schema": "semantic_frame_schema.json",
+            "instruction": (
+                "Annotate only meanings and predicate-argument relations supported by this "
+                "source context. Preserve the exact isiXhosa text; cite character spans; "
+                "record competing readings and uncertainty rather than guessing. Do not "
+                "treat an unexpressed role, tense, or meaning as certain."
+            ),
+        })
+        discourse_review_tasks.append({
+            **shared,
+            "task_id": f"DIS_{record['record_id']}",
+            "task_type": "DISCOURSE_ANNOTATION",
+            "annotation_schema": "discourse_annotation_schema.json",
+            "instruction": (
+                "Annotate discourse components or relations only when supported by cited "
+                "source context. Do not assume adjacent corpus records are continuous text; "
+                "cite every record and span used, and mark unresolved links or interpretations."
+            ),
+        })
+    write_jsonl(
+        destination / "annotation" / "semantic_review_queue.jsonl",
+        semantic_review_tasks,
+    )
+    write_jsonl(
+        destination / "annotation" / "discourse_review_queue.jsonl",
+        discourse_review_tasks,
+    )
 
     # --- Phase 2: Observations ---
     token_occurrences: dict[str, list[dict]] = collections.defaultdict(list)
@@ -2231,9 +2425,11 @@ def build(corpus: Path, destination: Path) -> dict:
                    "observation_ids": [obs["observation_id"] for obs in syn_obs], "notes": "Syntactic patterns observed."},
         "word_formation": {"entries": len(der_entries), "coverage_status": "UNDER_REVIEW", "confidence": "SUPPORTED",
                            "observation_ids": [obs["observation_id"] for obs in wf_obs], "notes": "Derivational patterns from corpus evidence."},
-        "semantics": {"entries": 0, "coverage_status": "INSUFFICIENT_EVIDENCE", "confidence": "INSUFFICIENT_EVIDENCE",
+        "semantics": {"entries": 0, "review_tasks": len(semantic_review_tasks),
+                      "coverage_status": "INSUFFICIENT_EVIDENCE", "confidence": "INSUFFICIENT_EVIDENCE",
                       "observation_ids": [], "notes": "No automated semantic claims; requires human review."},
-        "discourse": {"entries": 0, "coverage_status": "INSUFFICIENT_EVIDENCE", "confidence": "INSUFFICIENT_EVIDENCE",
+        "discourse": {"entries": 0, "review_tasks": len(discourse_review_tasks),
+                      "coverage_status": "INSUFFICIENT_EVIDENCE", "confidence": "INSUFFICIENT_EVIDENCE",
                       "observation_ids": [], "notes": "No automated discourse claims; requires human review."},
     }
     coverage = _build_coverage_report(destination, domain_data)
@@ -2247,7 +2443,7 @@ def build(corpus: Path, destination: Path) -> dict:
                                         "generation_mode": "deterministic_from_corpus_hash",
                                         "authoritative_records": len(records),
                                         "analysis_records": len(analysis_records),
-                                        "model_training": "FROZEN",
+                                        "model_training": "UNFROZEN_EXPERIMENTAL",
                                         "decision": "FOUNDATION INCOMPLETE — CONTINUE STRUCTURAL ANALYSIS"},
                          nc_classes, ag_system, verb_entries, der_entries, coverage)
 
@@ -2263,6 +2459,8 @@ def build(corpus: Path, destination: Path) -> dict:
         "word_formation": len(wf_obs) + len(wf_reviews),
         "negation": len(neg_obs) + len(neg_reviews),
         "lexicon": len(review_tasks),
+        "semantics": len(semantic_review_tasks),
+        "discourse": len(discourse_review_tasks),
     }
 
     # --- Grammar rules (observation-layer rule for preservation) ---
@@ -2297,8 +2495,13 @@ def build(corpus: Path, destination: Path) -> dict:
         "authoritative_records": len(records),
         "analysis_records": len(analysis_records),
         "language_integrity_counts": dict(sorted(purity_counts.items())),
+        "distinct_source_work_count": len(source_record_counts),
+        "source_record_counts": dict(sorted(source_record_counts.items())),
+        "unregistered_source_record_count": len(unregistered_records),
+        "derived_provenance_counts": dict(sorted(provenance_counts.items())),
+        "work_attribution_counts": work_attribution_counts,
         "sources": sorted({r["source"] for r in records}),
-        "model_training": "FROZEN",
+        "model_training": "UNFROZEN_EXPERIMENTAL",
         "decision": "FOUNDATION INCOMPLETE — CONTINUE STRUCTURAL ANALYSIS",
         "structured_entries": {
             "noun_classes": len(nc_classes),
@@ -2306,7 +2509,11 @@ def build(corpus: Path, destination: Path) -> dict:
             "verbs": len(verb_entries),
             "derivational": len(der_entries),
         },
-        "review_tasks_total": len(review_tasks),
+        "review_tasks_total": (
+            len(review_tasks) + len(semantic_review_tasks) + len(discourse_review_tasks)
+        ),
+        "semantic_review_tasks": len(semantic_review_tasks),
+        "discourse_review_tasks": len(discourse_review_tasks),
         "conflicts_open": len(conflict_list),
         "observation_count": len(all_observations),
     }

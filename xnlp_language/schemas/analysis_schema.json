@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xnlp://schemas/isixhosa-analysis-v1",
+  "title": "Canonical isiXhosa sentence analysis",
+  "type": "object",
+  "required": ["schema_version", "original_text", "language", "tokens", "sentence_type", "clauses", "grammatical_relations", "meaning", "ambiguities", "evidence", "provenance", "confidence"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "original_text": {"type": "string"},
+    "language": {"const": "isiXhosa"},
+    "tokens": {"type": "array"},
+    "sentence_type": {"type": "string"},
+    "clauses": {"type": "array"},
+    "grammatical_relations": {"type": "array"},
+    "meaning": {"type": "object"},
+    "ambiguities": {"type": "array"},
+    "evidence": {"type": "array"},
+    "provenance": {"type": "object"},
+    "confidence": {"type": "string"}
+  }
+}

@@ -23,7 +23,8 @@
         "AGR_SUBJ_CONCORD_CLASS_1_SINGULAR_VOWEL_ALLOMORPH_W",
         "AGR_SUBJ_CONCORD_CLASS_2_PLURAL_BA",
         "AGR_SUBJ_CONCORD_CLASS_6_OR_NEGATIVE_A"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "INSUFFICIENT_EVIDENCE",
@@ -31,7 +32,8 @@
       "domain": "discourse",
       "entries": 0,
       "notes": "No automated discourse claims; requires human review.",
-      "observation_ids": []
+      "observation_ids": [],
+      "review_tasks": 5719
     },
     {
       "confidence": "HIGH_CONFIDENCE",
@@ -60,7 +62,8 @@
         "LEX_OBS_000018",
         "LEX_OBS_000019",
         "LEX_OBS_000020"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "OBSERVED",
@@ -71,7 +74,8 @@
       "observation_ids": [
         "MOD_RELATIVE_MARKER_CANDIDATE",
         "MOD_ADJECTIVE_AGREEMENT"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "HIGH_CONFIDENCE",
@@ -94,7 +98,8 @@
         "NC_PREFIX_I",
         "NC_PREFIX_U",
         "NC_PAIRINGS"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "HIGH_CONFIDENCE",
@@ -105,7 +110,8 @@
       "observation_ids": [
         "NEG_NEG_PREFIX_A",
         "NEG_NEG_PREFIX_HA"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "HIGH_CONFIDENCE",
@@ -164,7 +170,8 @@
         "FW_KUBA",
         "FW_KUPHI",
         "FW_KWAYE"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "HIGH_CONFIDENCE",
@@ -174,7 +181,8 @@
       "notes": "Character inventory and normalization observed from corpus.",
       "observation_ids": [
         "ORTHOGRAPHY_OBSERVED_V1"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "SUPPORTED",
@@ -189,7 +197,8 @@
         "FW_THINA",
         "FW_WENA",
         "FW_YENA"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "INSUFFICIENT_EVIDENCE",
@@ -197,7 +206,8 @@
       "domain": "semantics",
       "entries": 0,
       "notes": "No automated semantic claims; requires human review.",
-      "observation_ids": []
+      "observation_ids": [],
+      "review_tasks": 5719
     },
     {
       "confidence": "OBSERVED",
@@ -280,7 +290,8 @@
         "SYN_SV_PATTERN_OO_E",
         "SYN_SV_PATTERN_IIN_BA",
         "SYN_COPULA_NGU_NOUN_AMA"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "HIGH_CONFIDENCE",
@@ -296,7 +307,8 @@
         "TAM_NEG_ANG",
         "TAM_NEG_HA",
         "TAM_NEG_ANK"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "SUPPORTED",
@@ -318,7 +330,8 @@
         "VM_VERB_SUBJ_CLASS_6_OR_NEGATIVE_A",
         "VM_VERB_TAM_PAST_RELATIVE_SE",
         "VM_VERB_TAM_PRESENT_HABITUAL_NGA"
-      ]
+      ],
+      "review_tasks": 0
     },
     {
       "confidence": "SUPPORTED",
@@ -332,7 +345,8 @@
         "WF_DERIVATION_CAUSATIVE_ISA",
         "WF_DERIVATION_PASSIVE_ELWA",
         "WF_DERIVATION_PASSIVE_ISWA"
-      ]
+      ],
+      "review_tasks": 0
     }
   ],
   "notes": "Coverage is measured against corpus evidence and hand-curated foundation entries. No domain is marked ESTABLISHED without human review.",

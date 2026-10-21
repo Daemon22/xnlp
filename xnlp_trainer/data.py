@@ -27,6 +27,7 @@ __all__ = [
     "corpus_fingerprint",
     "train_tokenizer",
     "tokenize_texts",
+    "tokenize_text_streams",
     "build_split_indices",
     "XhosaTextDataset",
     "make_collate_fn",
@@ -39,8 +40,8 @@ __all__ = [
 # ─── Corpus loading ─────────────────────────────────────────────────────────
 
 
-def load_corpus(corpus_dir: str) -> List[str]:
-    """Load every ``.txt`` file in *corpus_dir* and return non-empty lines."""
+def load_corpus(corpus_dir: str, preserve_line_breaks: bool = False) -> List[str]:
+    """Load non-empty lines, optionally retaining each line's boundary."""
     corpus_path = Path(corpus_dir)
     if not corpus_path.exists():
         raise FileNotFoundError(f"Corpus directory not found: {corpus_dir}")
@@ -49,12 +50,18 @@ def load_corpus(corpus_dir: str) -> List[str]:
     for txt_file in sorted(corpus_path.glob("*.txt")):
         with open(txt_file, "r", encoding="utf-8") as f:
             text = f.read()
-        for line in text.splitlines():
-            s = line.strip()
-            if s:
-                all_sentences.append(s)
+        if preserve_line_breaks:
+            for line in text.splitlines():
+                all_sentences.append(line + "\n" if line.strip() else "\n")
+        else:
+            all_sentences.extend(
+                line.strip() for line in text.splitlines() if line.strip()
+            )
 
     # De-duplicate while preserving order
+    if preserve_line_breaks:
+        return all_sentences
+
     seen: set = set()
     unique: List[str] = []
     for s in all_sentences:
@@ -77,9 +84,9 @@ def corpus_fingerprint(corpus_dir: str) -> str:
         raise FileNotFoundError(f"Corpus directory not found: {corpus_dir}")
 
     digest = hashlib.sha256()
-    files = sorted(corpus_path.glob("*.txt"))
+    files = sorted(corpus_path.rglob("*.txt"))
     for path in files:
-        digest.update(path.name.encode("utf-8"))
+        digest.update(path.relative_to(corpus_path).as_posix().encode("utf-8"))
         digest.update(b"\0")
         digest.update(path.read_bytes())
         digest.update(b"\0")
@@ -183,6 +190,33 @@ def tokenize_texts(
     ]
 
 
+def tokenize_text_streams(
+    sentences: List[str],
+    tokenizer: XNLPTokenizer,
+    max_len: int,
+) -> List[List[int]]:
+    """Pack ordered text rows into newline-preserving, context-rich sequences."""
+    if max_len < 3:
+        raise ValueError("max_len must be at least 3")
+    token_ids = [
+        token_id
+        for sentence in sentences
+        for token_id in tokenizer.encode(sentence, add_special_tokens=False)
+    ]
+    if not token_ids:
+        return []
+
+    content_width = max_len - 2
+    sequences = []
+    for start in range(0, len(token_ids), content_width):
+        chunk = token_ids[start:start + content_width]
+        sequence = [tokenizer.bos_token_id, *chunk]
+        if start + content_width >= len(token_ids):
+            sequence.append(tokenizer.eos_token_id)
+        sequences.append(sequence)
+    return sequences
+
+
 def build_split_indices(
     n: int,
     train_split: float,
@@ -281,21 +315,54 @@ def prepare_data(
     else:
         cfg = config
 
+    preserve_line_breaks = getattr(cfg, "preserve_line_breaks", False)
+    predefined_splits = getattr(cfg, "predefined_splits", False)
+    corpus_path = Path(cfg.corpus_dir)
     if verbose:
         print(f"[data] Loading corpus from '{cfg.corpus_dir}' ...")
-    sentences = load_corpus(cfg.corpus_dir)
-    if not sentences:
-        raise RuntimeError(f"No sentences found in {cfg.corpus_dir}")
-    if verbose:
-        print(f"[data] {len(sentences)} unique sentences loaded")
 
-    # ── Tokeniser ──────────────────────────────────────────────────────
-    if tokenizer is None:
+    if predefined_splits:
+        split_dirs = {
+            name: corpus_path / name
+            for name in ("train", "val", "test")
+        }
+        missing = [path for path in split_dirs.values() if not path.is_dir()]
+        if missing:
+            raise FileNotFoundError(
+                "Predefined split directories are missing: "
+                + ", ".join(str(path) for path in missing)
+            )
+        train_sents, val_sents, test_sents = (
+            load_corpus(str(split_dirs[name]), preserve_line_breaks)
+            for name in ("train", "val", "test")
+        )
+        if not train_sents:
+            raise RuntimeError(f"No training text found in {split_dirs['train']}")
+        if not val_sents:
+            raise RuntimeError(f"No validation text found in {split_dirs['val']}")
+        if not test_sents:
+            raise RuntimeError(f"No test text found in {split_dirs['test']}")
+        sentences = train_sents + val_sents + test_sents
+    else:
+        sentences = load_corpus(
+            cfg.corpus_dir,
+            preserve_line_breaks=preserve_line_breaks,
+        )
+        if not sentences:
+            raise RuntimeError(f"No sentences found in {cfg.corpus_dir}")
         train_idx, _, _ = build_split_indices(
             len(sentences), cfg.train_split, cfg.val_split, cfg.seed,
         )
+        train_sents = [sentences[i] for i in train_idx]
+        val_sents = []
+        test_sents = []
+    if verbose:
+        print(f"[data] {len(sentences)} corpus rows loaded")
+
+    # ── Tokeniser ──────────────────────────────────────────────────────
+    if tokenizer is None:
         tokenizer = train_tokenizer(
-            [sentences[i] for i in train_idx],
+            train_sents,
             vocab_size=cfg.vocab_size,
             min_frequency=cfg.tokenizer_min_freq,
             verbose=verbose,
@@ -308,19 +375,35 @@ def prepare_data(
     pad_id = tokenizer.pad_token_id
 
     # ── Split sentences ────────────────────────────────────────────────
-    train_idx, val_idx, test_idx = build_split_indices(
-        len(sentences), cfg.train_split, cfg.val_split, cfg.seed,
-    )
-    train_sents = [sentences[i] for i in train_idx]
-    val_sents = [sentences[i] for i in val_idx]
-    test_sents = [sentences[i] for i in test_idx]
+    if not predefined_splits:
+        train_idx, val_idx, test_idx = build_split_indices(
+            len(sentences), cfg.train_split, cfg.val_split, cfg.seed,
+        )
+        train_sents = [sentences[i] for i in train_idx]
+        val_sents = [sentences[i] for i in val_idx]
+        test_sents = [sentences[i] for i in test_idx]
 
     # ── Tokenise ───────────────────────────────────────────────────────
     if verbose:
         print("[data] Tokenising splits ...")
-    train_ids = tokenize_texts(train_sents, tokenizer, cfg.max_seq_len)
-    val_ids = tokenize_texts(val_sents, tokenizer, cfg.max_seq_len)
-    test_ids = tokenize_texts(test_sents, tokenizer, cfg.max_seq_len)
+    if predefined_splits and preserve_line_breaks:
+        train_ids = tokenize_text_streams(train_sents, tokenizer, cfg.max_seq_len)
+        val_ids = tokenize_text_streams(val_sents, tokenizer, cfg.max_seq_len)
+        test_ids = tokenize_text_streams(test_sents, tokenizer, cfg.max_seq_len)
+    elif preserve_line_breaks:
+        train_ids = tokenize_text_streams(
+            [sentences[i] for i in sorted(train_idx)], tokenizer, cfg.max_seq_len
+        )
+        val_ids = tokenize_text_streams(
+            [sentences[i] for i in sorted(val_idx)], tokenizer, cfg.max_seq_len
+        )
+        test_ids = tokenize_text_streams(
+            [sentences[i] for i in sorted(test_idx)], tokenizer, cfg.max_seq_len
+        )
+    else:
+        train_ids = tokenize_texts(train_sents, tokenizer, cfg.max_seq_len)
+        val_ids = tokenize_texts(val_sents, tokenizer, cfg.max_seq_len)
+        test_ids = tokenize_texts(test_sents, tokenizer, cfg.max_seq_len)
 
     # ── Datasets ───────────────────────────────────────────────────────
     train_ds = XhosaTextDataset(train_ids, cfg.max_seq_len)

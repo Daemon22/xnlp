@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Evidence-Linked Semantic Frame",
+  "description": "Human annotation format for predicate-argument meaning; it does not infer meaning from corpus frequency.",
+  "type": "object",
+  "definitions": {
+    "span": {
+      "type": "object",
+      "properties": {
+        "record_id": { "type": "string", "minLength": 1 },
+        "start": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 1 },
+        "surface": { "type": "string", "minLength": 1 }
+      },
+      "required": ["record_id", "start", "end", "surface"],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "record_id": { "type": "string", "minLength": 1 },
+        "source_work": { "type": "string" },
+        "source_section": { "type": "string" },
+        "source_text": { "type": "string", "minLength": 1 }
+      },
+      "required": ["record_id", "source_text"],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "annotation_id": { "type": "string", "minLength": 1 },
+    "annotation_status": {
+      "type": "string",
+      "enum": ["UNREVIEWED", "IN_REVIEW", "REVIEWED", "ESTABLISHED", "CONTESTED", "REJECTED"]
+    },
+    "status": { "type": "string", "enum": ["pending", "adjudicated", "disputed"] },
+    "assigned_lemma": { "type": ["string", "null"] },
+    "assigned_category": { "type": ["string", "null"] },
+    "assigned_meaning": { "type": ["string", "null"] },
+    "adjudicator": { "type": ["string", "null"], "enum": ["human", "rule-assisted-human", "machine-only", "auto-evidence", null] },
+    "adjudication_note": { "type": ["string", "null"] },
+    "flagged_by": { "type": ["string", "null"], "enum": ["machine-only", null] },
+    "auto_evidence": { "type": ["object", "null"] },
+    "adjudication_history": { "type": "array", "items": { "type": "object" } },
+    "evidence_state": {
+      "type": "string",
+      "enum": ["OBSERVED", "CANDIDATE", "SOURCE_SUPPORTED", "CROSS_SOURCE_SUPPORTED", "VALIDATED", "ESTABLISHED", "REJECTED", "UNRESOLVED"],
+      "description": "Claim evidence state; independent of confidence and human workflow status."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["OBSERVED", "SUPPORTED", "HIGH_CONFIDENCE", "PROVISIONAL", "INSUFFICIENT_EVIDENCE", "CONFLICTING_EVIDENCE"]
+    },
+    "lexical_concept": { "type": "string" },
+    "contextual_meaning": { "type": "string" },
+    "semantic_category": { "type": "string" },
+    "ambiguity": { "type": "array", "items": { "type": "string" } },
+    "contextual_disambiguation": { "type": "string" },
+    "machine_suggestion": {
+      "type": ["object", "null"],
+      "properties": {
+        "suggestion": { "type": "string" },
+        "producer": { "type": "string" },
+        "evidence_state": { "type": "string", "enum": ["CANDIDATE", "UNRESOLVED"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "required": ["suggestion", "producer", "evidence_state"],
+      "additionalProperties": false
+    },
+    "reviewer_decision": {
+      "type": ["object", "null"],
+      "properties": {
+        "decision": { "type": "string", "enum": ["ACCEPT", "REJECT", "UNRESOLVED"] },
+        "reviewer_id": { "type": "string", "minLength": 1 },
+        "protocol_id": { "type": "string", "minLength": 1 },
+        "evidence_record_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      },
+      "required": ["decision", "reviewer_id", "protocol_id", "evidence_record_ids"],
+      "additionalProperties": false
+    },
+    "source_evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/evidence" }
+    },
+    "frames": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "predicate": { "$ref": "#/definitions/span" },
+          "sense_gloss": { "type": "string", "minLength": 1 },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mention": { "$ref": "#/definitions/span" },
+                "semantic_role": { "type": "string", "minLength": 1 },
+                "entity_reference": { "type": "string" },
+                "interpretation_notes": { "type": "string" }
+              },
+              "required": ["mention", "semantic_role"],
+              "additionalProperties": false
+            }
+          },
+          "polarity": {
+            "type": "string",
+            "enum": ["affirmative", "negative", "uncertain", "not_annotated"]
+          },
+          "tense_aspect_mood": { "type": "string" },
+          "uncertainties": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["predicate", "sense_gloss", "arguments"],
+        "additionalProperties": false
+      }
+    },
+    "unresolved_questions": { "type": "array", "items": { "type": "string" } },
+    "uncertainties": { "type": "array", "items": { "type": "string" } },
+    "validated_by": { "type": "array", "items": { "type": "string" } },
+    "reviewer_notes": { "type": "string" }
+  },
+  "required": ["annotation_id", "annotation_status", "confidence", "source_evidence", "frames"],
+  "additionalProperties": false
+}

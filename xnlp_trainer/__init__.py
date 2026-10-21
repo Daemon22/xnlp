@@ -53,6 +53,7 @@ from .data import (
     tokenizer_to_state_dict,
     tokenizer_from_state_dict,
     tokenize_texts,
+    tokenize_text_streams,
     build_split_indices,
 )
 from .trainer import XNLPTrainer
@@ -76,6 +77,7 @@ __all__ = [
     "tokenizer_to_state_dict",
     "tokenizer_from_state_dict",
     "tokenize_texts",
+    "tokenize_text_streams",
     "build_split_indices",
     "evaluate",
     "compute_perplexity",

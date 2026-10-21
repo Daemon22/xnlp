@@ -1,0 +1,184 @@
+{
+  "derived_provenance_counts": {
+    "attested": 5839
+  },
+  "distinct_source_work_count": 19,
+  "schema_version": "1.0.0",
+  "source_record_counts": {
+    "Abantu besizwe": 2,
+    "General Mqhayi": 61,
+    "Imibongo": 1,
+    "Imihobe Nemibongo": 433,
+    "Imihobe nemibongo": 3,
+    "Inzuzo": 559,
+    "Ityala Lamawele": 1770,
+    "Izibongo zoogxa": 1,
+    "Iziganeko zesizwe": 2,
+    "Izwe": 2,
+    "Masikhanyise": 38,
+    "Masikhanyise isiXhosa Home Language textbook series": 127,
+    "Mqhayi - Various works (original corpus)": 86,
+    "U John Knox Bokwe (Biography)": 662,
+    "U-Don Jadu": 1184,
+    "UMqhayi waseNtabozuko": 800,
+    "Umhlekazi u Hintsa": 71,
+    "Unknown Mqhayi": 36,
+    "Usapho": 1
+  },
+  "sources": {
+    "Abantu besizwe": {
+      "foundation_attested": true,
+      "independence_group": "Abantu besizwe",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "General Mqhayi": {
+      "foundation_attested": true,
+      "independence_group": "General Mqhayi",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Imibongo": {
+      "foundation_attested": true,
+      "independence_group": "Imibongo",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Imihobe Nemibongo": {
+      "foundation_attested": true,
+      "independence_group": "Imihobe Nemibongo",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Imihobe nemibongo": {
+      "foundation_attested": true,
+      "independence_group": "Imihobe Nemibongo",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Inzuzo": {
+      "foundation_attested": true,
+      "independence_group": "Inzuzo",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Ityala Lamawele": {
+      "foundation_attested": true,
+      "independence_group": "Ityala Lamawele",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Izibongo zoogxa": {
+      "foundation_attested": true,
+      "independence_group": "Izibongo zoogxa",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Iziganeko zesizwe": {
+      "foundation_attested": true,
+      "independence_group": "Iziganeko zesizwe",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Izwe": {
+      "foundation_attested": true,
+      "independence_group": "Izwe",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Masikhanyise": {
+      "foundation_attested": true,
+      "independence_group": "Masikhanyise",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Masikhanyise isiXhosa Home Language textbook series": {
+      "foundation_attested": true,
+      "independence_group": "Masikhanyise isiXhosa Home Language textbook series",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Mqhayi - Various works (original corpus)": {
+      "corroboration": {
+        "basis": "internal_heading",
+        "edition_attribution": false,
+        "note": "The internal heading UMBALI KA SAMSON is consistent with U-Samson; owner-provided Britannica corroboration identifies U-Samson as Mqhayi's first published book. This is corroboration, not edition attribution.",
+        "source": "Britannica (owner-provided corroboration)"
+      },
+      "foundation_attested": true,
+      "independence_group": "mqhayi_complete.txt",
+      "vetted_by": "owner",
+      "vetting_note": "Owner-vouched compilation of Mqhayi's works; authorship and language attested by owner knowledge. Transcription/edition fidelity of the digital text is a separate open review dimension, not a blocker."
+    },
+    "U John Knox Bokwe (Biography)": {
+      "foundation_attested": true,
+      "independence_group": "U John Knox Bokwe (Biography)",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "U-Don Jadu": {
+      "foundation_attested": true,
+      "independence_group": "U-Don Jadu",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "UMqhayi waseNtabozuko": {
+      "foundation_attested": true,
+      "independence_group": "UMqhayi waseNtabozuko",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Umhlekazi u Hintsa": {
+      "foundation_attested": true,
+      "independence_group": "Umhlekazi u Hintsa",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    },
+    "Unknown Mqhayi": {
+      "corroboration": {
+        "basis": "internal_heading",
+        "edition_attribution": false,
+        "note": "The internal heading UMBALI KA SAMSON is consistent with U-Samson; owner-provided Britannica corroboration identifies U-Samson as Mqhayi's first published book. This is corroboration, not edition attribution.",
+        "source": "Britannica (owner-provided corroboration)"
+      },
+      "foundation_attested": true,
+      "independence_group": "mqhayi_complete.txt",
+      "vetted_by": "owner",
+      "vetting_note": "Owner-vouched compilation of Mqhayi's works; authorship and language attested by owner knowledge. Transcription/edition fidelity of the digital text is a separate open review dimension, not a blocker."
+    },
+    "Usapho": {
+      "foundation_attested": true,
+      "independence_group": "Usapho",
+      "vetted_by": "owner",
+      "vetting_note": "Owner confirmed the foundation corpus was assembled from personally vetted legitimate sources. The corpus title is retained as represented in the source metadata; edition-level transcription fidelity remains a separate review dimension."
+    }
+  },
+  "unregistered_record_ids": [],
+  "work_attribution_counts": {
+    "by_basis": {
+      "internal_heading": 106,
+      "not_applicable": 5717,
+      "unattributed_compilation_record": 16
+    },
+    "by_work": {
+      "Imihobe Nemibongo": 1,
+      "Inzuzo": 1,
+      "Ityala Lamawele": 7,
+      "Iziganeko zesizwe": 1,
+      "U John Knox Bokwe (Biography)": 91,
+      "U-Don Jadu": 1,
+      "U-Samson": 3,
+      "UMqhayi waseNtabozuko": 1
+    },
+    "compilation_records_by_source_title": {
+      "Mqhayi - Various works (original corpus)": {
+        "internal_heading": 77,
+        "unattributed_compilation_record": 9
+      },
+      "Unknown Mqhayi": {
+        "internal_heading": 29,
+        "unattributed_compilation_record": 7
+      }
+    }
+  }
+}

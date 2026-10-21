@@ -12,6 +12,14 @@
       "type": "string",
       "description": "The actual orthographic word as it appears"
     },
+    "evidence_state": {
+      "type": "string",
+      "enum": ["OBSERVED", "CANDIDATE", "SOURCE_SUPPORTED", "CROSS_SOURCE_SUPPORTED", "VALIDATED", "ESTABLISHED", "REJECTED", "UNRESOLVED"]
+    },
+    "analysis_status": {
+      "type": "string",
+      "enum": ["PENDING_HUMAN_REVIEW", "IN_REVIEW", "VALIDATED", "REJECTED", "UNRESOLVED"]
+    },
     "morphological_segments": {
       "type": "array",
       "items": {
@@ -95,9 +103,17 @@
       "type": "string",
       "description": "Dictionary form or citation form"
     },
+    "proposed_lemma": {
+      "type": ["string", "null"],
+      "description": "A provisional lemma proposal; null means no lemma is assigned."
+    },
     "root": {
       "type": "string",
       "description": "Underlying root"
+    },
+    "proposed_root": {
+      "type": ["string", "null"],
+      "description": "A provisional root proposal; null means no root is assigned."
     },
     "derivational_history": {
       "type": "array",
@@ -182,6 +198,21 @@
         "INSUFFICIENT_EVIDENCE",
         "CONFLICTING_EVIDENCE"
       ]
+    },
+    "validated_by": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reviewer_decision": {
+      "type": ["object", "null"],
+      "properties": {
+        "decision": { "type": "string", "enum": ["ACCEPT", "REJECT", "UNRESOLVED"] },
+        "reviewer_id": { "type": "string", "minLength": 1 },
+        "protocol_id": { "type": "string", "minLength": 1 },
+        "evidence_record_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      },
+      "required": ["decision", "reviewer_id", "protocol_id", "evidence_record_ids"],
+      "additionalProperties": false
     },
     "analysis_method": {
       "type": "string",

@@ -1,0 +1,23 @@
+{
+  "specification_id": "XNLP_ISIXHOSA_CURRICULUM_V1",
+  "version": "1.0.0",
+  "language": "isiXhosa",
+  "levels": [
+    {"id": "A", "name": "orthography", "status": "PARTIAL", "implemented": ["token boundaries", "punctuation preservation", "click-letter surface preservation"]},
+    {"id": "B", "name": "lexicon", "status": "PARTIAL", "implemented": ["observed word forms", "unknown-word abstention"]},
+    {"id": "C", "name": "morphology", "status": "CANDIDATE", "implemented": ["evidence-bound noun-prefix and verb-pattern analyses"]},
+    {"id": "D", "name": "syntax", "status": "CANDIDATE", "implemented": ["clause boundaries", "candidate subject/predicate/object slots"]},
+    {"id": "E", "name": "semantics", "status": "UNRESOLVED", "implemented": ["explicit semantic abstention"]},
+    {"id": "F", "name": "discourse", "status": "UNRESOLVED", "implemented": ["context window contract"]},
+    {"id": "G", "name": "reading_comprehension", "status": "PARTIAL", "implemented": ["extractive evidence-grounded QA", "abstention"]},
+    {"id": "H", "name": "generation", "status": "PARTIAL", "implemented": ["checkpoint sampling", "candidate generation", "held-out evaluation"]}
+  ],
+  "evidence_policy": {
+    "verified": "authoritative or expert-reviewed",
+    "corpus_derived": "directly sourced or deterministically derived from source text",
+    "synthetic_candidate": "automatically generated and excluded from authoritative gold evaluation",
+    "disputed": "competing or insufficiently supported analysis"
+  },
+  "current_training_tasks": ["STRUCTURE", "GRAMMAR", "QUESTION_ANSWER", "CONTINUATION"],
+  "next_required": ["expert morphological gold", "sentence-level QA gold", "document-level discourse annotations", "native-speaker generation review"]
+}

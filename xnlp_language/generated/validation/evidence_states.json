@@ -1,0 +1,15 @@
+{
+  "automatic_promotion": false,
+  "confidence_is_independent": true,
+  "established_claims_count": 0,
+  "states": {
+    "CANDIDATE": "An interpretation has been proposed but is not established.",
+    "CROSS_SOURCE_SUPPORTED": "Relevant support spans independent source works; this requires explicit review.",
+    "ESTABLISHED": "A strongly evidenced claim explicitly validated and approved; never assigned automatically.",
+    "OBSERVED": "A source form or directly observable evidence exists.",
+    "REJECTED": "A disproven interpretation retained with its evidence and review history.",
+    "SOURCE_SUPPORTED": "Identifiable attested-source evidence directly supports the interpretation.",
+    "UNRESOLVED": "Evidence or interpretation is insufficient or ambiguous.",
+    "VALIDATED": "A claim passed a documented project validation protocol and human decision."
+  }
+}

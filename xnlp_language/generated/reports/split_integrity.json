@@ -1,0 +1,580 @@
+{
+  "gold_evaluation": {
+    "candidate_pool_path": "xnlp_language/generated/evaluation/gold_candidate_pool.jsonl",
+    "candidate_records": 539,
+    "eligible_for_future_models_using_reserved_work_isolated_training": true,
+    "gold_set_populated": false,
+    "overlaps_work_isolated_training_works": false,
+    "prior_checkpoint_contamination_warning": "Do not use this pool to evaluate models trained with historical splits or other data containing this source work. The pool contains no gold labels yet.",
+    "source_work": "Inzuzo",
+    "validated_gold_annotations": 0,
+    "work_isolated_from_current_training": true
+  },
+  "historical_split": {
+    "audit": {
+      "author_metadata_available": {
+        "test_train": false,
+        "test_val": false,
+        "train_val": false
+      },
+      "author_overlaps": {
+        "test_train": [],
+        "test_val": [],
+        "train_val": []
+      },
+      "exact_text_overlap_counts": {
+        "test_train": 0,
+        "test_val": 0,
+        "train_val": 0
+      },
+      "near_duplicate_pairs": {
+        "test_train": [
+          {
+            "left_record_id": "mqhayi_v2_Ity_000008_56ca7df9",
+            "right_record_id": "mqhayi_v2_Ity_000008_61da55fa",
+            "shingle_jaccard": 0.944056
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000021_a4e16eb4",
+            "right_record_id": "mqhayi_v2_Ity_000027_cea550ac",
+            "shingle_jaccard": 0.971014
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000060_42c98c9f",
+            "right_record_id": "mqhayi_v2_Ity_000054_f774b747",
+            "shingle_jaccard": 0.915966
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000074_8db1dfbc",
+            "right_record_id": "mqhayi_v2_Ity_000068_2dd14e3c",
+            "shingle_jaccard": 0.90566
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000093_aa3caf8f",
+            "right_record_id": "mqhayi_v2_Ity_000096_d982dd70",
+            "shingle_jaccard": 0.911765
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000098_6406259c",
+            "right_record_id": "mqhayi_v2_Ity_000095_e2912e5f",
+            "shingle_jaccard": 0.955399
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000120_b46263e5",
+            "right_record_id": "mqhayi_v2_Ity_000117_3b5c583a",
+            "shingle_jaccard": 0.936709
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000155_d46bf57b",
+            "right_record_id": "mqhayi_v2_Ity_000158_345f1ed8",
+            "shingle_jaccard": 0.90228
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000179_f3e894af",
+            "right_record_id": "mqhayi_v2_Ity_000183_3ccea54e",
+            "shingle_jaccard": 0.927273
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000200_7a3cdc17",
+            "right_record_id": "mqhayi_v2_Ity_000194_8db2a18d",
+            "shingle_jaccard": 0.901961
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000236_4e4a7e97",
+            "right_record_id": "mqhayi_v2_Ity_000232_1f005bb3",
+            "shingle_jaccard": 0.912329
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000240_ea331826",
+            "right_record_id": "mqhayi_v2_Ity_000244_885fbe94",
+            "shingle_jaccard": 0.927928
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000250_faa4215c",
+            "right_record_id": "mqhayi_v2_Ity_000246_917b42b7",
+            "shingle_jaccard": 0.942529
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000344_b2272ddb",
+            "right_record_id": "mqhayi_v2_Ity_000334_c1e2cad3",
+            "shingle_jaccard": 0.909091
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000446_fe4157fc",
+            "right_record_id": "mqhayi_v2_Ity_000437_3dd65053",
+            "shingle_jaccard": 0.92126
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000656_5c59fae9",
+            "right_record_id": "mqhayi_v2_Ity_000502_5845d6d7",
+            "shingle_jaccard": 0.911504
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000805_03d4f752",
+            "right_record_id": "mqhayi_v2_Ity_000540_78079970",
+            "shingle_jaccard": 0.955882
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000029_6c237d6d",
+            "right_record_id": "mqhayi_v2_UMq_000030_31e30994",
+            "shingle_jaccard": 0.951327
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000035_43aeaa7f",
+            "right_record_id": "mqhayi_v2_UMq_000034_f98173c3",
+            "shingle_jaccard": 0.901961
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000073_326a212f",
+            "right_record_id": "mqhayi_v2_UMq_000073_2fd6746f",
+            "shingle_jaccard": 0.90303
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000077_3ef348c7",
+            "right_record_id": "mqhayi_v2_UMq_000077_cce170f6",
+            "shingle_jaccard": 0.970199
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000078_084c886f",
+            "right_record_id": "mqhayi_v2_UMq_000078_0d2d8f8d",
+            "shingle_jaccard": 0.935065
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000099_5ded9c75",
+            "right_record_id": "mqhayi_v2_UMq_000099_90504063",
+            "shingle_jaccard": 0.939516
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000147_4d1b9c0f",
+            "right_record_id": "mqhayi_v2_UMq_000147_c5d2e1d6",
+            "shingle_jaccard": 0.933735
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000173_0f899c25",
+            "right_record_id": "mqhayi_v2_UMq_000173_c04ce6d7",
+            "shingle_jaccard": 0.965174
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000191_b6344913",
+            "right_record_id": "mqhayi_v2_UMq_000191_246d8639",
+            "shingle_jaccard": 0.958525
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000192_a4eaccde",
+            "right_record_id": "mqhayi_v2_UMq_000192_4d658041",
+            "shingle_jaccard": 0.933962
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000209_684c2e30",
+            "right_record_id": "mqhayi_v2_UMq_000210_dfd9e900",
+            "shingle_jaccard": 0.935484
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000266_765e7768",
+            "right_record_id": "mqhayi_v2_UMq_000266_1444341a",
+            "shingle_jaccard": 0.927273
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000279_f3212455",
+            "right_record_id": "mqhayi_v2_UMq_000279_12a6ef96",
+            "shingle_jaccard": 0.953488
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000303_1c9eaaa8",
+            "right_record_id": "mqhayi_v2_UMq_000303_69587532",
+            "shingle_jaccard": 0.974299
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000351_d75a1ef1",
+            "right_record_id": "mqhayi_v2_UMq_000351_5ef8fbe8",
+            "shingle_jaccard": 0.939189
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000355_3ba03ff7",
+            "right_record_id": "mqhayi_v2_UMq_000355_c432b434",
+            "shingle_jaccard": 0.930599
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000356_6873e2fc",
+            "right_record_id": "mqhayi_v2_UMq_000356_1b64b8d4",
+            "shingle_jaccard": 0.967273
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000369_f72901ea",
+            "right_record_id": "mqhayi_v2_UMq_000369_25ce75f7",
+            "shingle_jaccard": 0.95
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000376_8f5e0654",
+            "right_record_id": "mqhayi_v2_UMq_000376_03a2dfad",
+            "shingle_jaccard": 0.928803
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000401_bb3ad715",
+            "right_record_id": "mqhayi_v2_UMq_000401_1a0c9309",
+            "shingle_jaccard": 0.944099
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000410_cf300f3a",
+            "right_record_id": "mqhayi_v2_UMq_000410_38eac89a",
+            "shingle_jaccard": 0.914286
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000463_8184a070",
+            "right_record_id": "mqhayi_v2_UMq_000463_18a159ea",
+            "shingle_jaccard": 0.91133
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000519_60c477e5",
+            "right_record_id": "mqhayi_v2_UMq_000518_1d3dec19",
+            "shingle_jaccard": 0.946078
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000542_f038dd24",
+            "right_record_id": "mqhayi_v2_UMq_000543_87c79b07",
+            "shingle_jaccard": 0.982353
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000544_b0d72828",
+            "right_record_id": "mqhayi_v2_UMq_000545_30538d4c",
+            "shingle_jaccard": 0.952899
+          }
+        ],
+        "test_val": [
+          {
+            "left_record_id": "mqhayi_000000_6b8c962a",
+            "right_record_id": "masik_v2_000036_e583c513",
+            "shingle_jaccard": 0.905263
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000004_ba5a35d7",
+            "right_record_id": "mqhayi_v2_Ity_000004_e89414cc",
+            "shingle_jaccard": 0.939394
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000287_55fab82e",
+            "right_record_id": "mqhayi_v2_Ity_000280_ff49a2a6",
+            "shingle_jaccard": 0.91866
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000011_00672152",
+            "right_record_id": "mqhayi_v2_UMq_000012_30d4873d",
+            "shingle_jaccard": 0.949541
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000012_552c8592",
+            "right_record_id": "mqhayi_v2_UMq_000013_213942f1",
+            "shingle_jaccard": 0.935252
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000163_5376cb6c",
+            "right_record_id": "mqhayi_v2_UMq_000163_bdf9201e",
+            "shingle_jaccard": 0.953271
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000254_5deb8588",
+            "right_record_id": "mqhayi_v2_UMq_000254_a65eb0e8",
+            "shingle_jaccard": 0.905303
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000306_720ff572",
+            "right_record_id": "mqhayi_v2_UMq_000306_2a0b788a",
+            "shingle_jaccard": 0.929688
+          }
+        ],
+        "train_val": [
+          {
+            "left_record_id": "mqhayi_v2_Ity_000062_bd805647",
+            "right_record_id": "mqhayi_v2_Ity_000068_0c689500",
+            "shingle_jaccard": 0.947826
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000102_748f31cb",
+            "right_record_id": "mqhayi_v2_Ity_000099_e0e9b821",
+            "shingle_jaccard": 0.930314
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000102_e0c987d5",
+            "right_record_id": "mqhayi_v2_Ity_000105_0e3c714a",
+            "shingle_jaccard": 0.937107
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000149_94bdcfa3",
+            "right_record_id": "mqhayi_v2_Ity_000146_6579df01",
+            "shingle_jaccard": 0.916279
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000173_8779d496",
+            "right_record_id": "mqhayi_v2_Ity_000169_c4aaf75f",
+            "shingle_jaccard": 0.916923
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000207_79b090da",
+            "right_record_id": "mqhayi_v2_Ity_000214_83e09ffc",
+            "shingle_jaccard": 0.910714
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000290_a0e1796c",
+            "right_record_id": "mqhayi_v2_Ity_000283_09f868b9",
+            "shingle_jaccard": 0.906542
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000318_11bece99",
+            "right_record_id": "mqhayi_v2_Ity_000327_1febe5c7",
+            "shingle_jaccard": 0.901961
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000376_11dcda1d",
+            "right_record_id": "mqhayi_v2_Ity_000366_02416d25",
+            "shingle_jaccard": 0.955446
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000416_b481e94f",
+            "right_record_id": "mqhayi_v2_Ity_000426_acf4fced",
+            "shingle_jaccard": 0.923077
+          },
+          {
+            "left_record_id": "mqhayi_v2_Ity_000430_68a565e9",
+            "right_record_id": "mqhayi_v2_Ity_000439_ae86bee9",
+            "shingle_jaccard": 0.913462
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000019_a9b45006",
+            "right_record_id": "mqhayi_v2_UMq_000018_cdd59f64",
+            "shingle_jaccard": 0.955665
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000059_adf29d57",
+            "right_record_id": "mqhayi_v2_UMq_000060_03f0b9c7",
+            "shingle_jaccard": 0.910891
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000110_90693bea",
+            "right_record_id": "mqhayi_v2_UMq_000110_65a068bf",
+            "shingle_jaccard": 0.93125
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000290_12fd7730",
+            "right_record_id": "mqhayi_v2_UMq_000290_df5ad879",
+            "shingle_jaccard": 0.903553
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000300_51bd9cc2",
+            "right_record_id": "mqhayi_v2_UMq_000300_fa408f72",
+            "shingle_jaccard": 0.951613
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000392_a650a139",
+            "right_record_id": "mqhayi_v2_UMq_000392_6c896cb5",
+            "shingle_jaccard": 0.90137
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000412_d17629aa",
+            "right_record_id": "mqhayi_v2_UMq_000412_504dbbd1",
+            "shingle_jaccard": 0.930233
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000464_67340caa",
+            "right_record_id": "mqhayi_v2_UMq_000464_989172be",
+            "shingle_jaccard": 0.973615
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000474_fff3ca46",
+            "right_record_id": "mqhayi_v2_UMq_000474_79a22997",
+            "shingle_jaccard": 0.941176
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000496_7702eefe",
+            "right_record_id": "mqhayi_v2_UMq_000496_c9028243",
+            "shingle_jaccard": 0.969178
+          },
+          {
+            "left_record_id": "mqhayi_v2_UMq_000515_137609d1",
+            "right_record_id": "mqhayi_v2_UMq_000516_8efbec7f",
+            "shingle_jaccard": 0.93012
+          }
+        ]
+      },
+      "record_overlaps": {
+        "test_train": 0,
+        "test_val": 0,
+        "train_val": 0
+      },
+      "source_overlaps": {
+        "test_train": [
+          "masikhanyise",
+          "mqhayi"
+        ],
+        "test_val": [
+          "masikhanyise",
+          "mqhayi"
+        ],
+        "train_val": [
+          "masikhanyise",
+          "mqhayi"
+        ]
+      },
+      "source_work_overlaps": {
+        "test_train": [
+          "General Mqhayi",
+          "Imihobe Nemibongo",
+          "Imihobe nemibongo",
+          "Inzuzo",
+          "Ityala Lamawele",
+          "Izwe",
+          "Masikhanyise",
+          "Masikhanyise isiXhosa Home Language textbook series",
+          "Mqhayi - Various works (original corpus)",
+          "U John Knox Bokwe (Biography)",
+          "U-Don Jadu",
+          "UMqhayi waseNtabozuko",
+          "Umhlekazi u Hintsa",
+          "Unknown Mqhayi"
+        ],
+        "test_val": [
+          "General Mqhayi",
+          "Imihobe Nemibongo",
+          "Inzuzo",
+          "Ityala Lamawele",
+          "Masikhanyise",
+          "Masikhanyise isiXhosa Home Language textbook series",
+          "Mqhayi - Various works (original corpus)",
+          "U John Knox Bokwe (Biography)",
+          "U-Don Jadu",
+          "UMqhayi waseNtabozuko",
+          "Umhlekazi u Hintsa",
+          "Unknown Mqhayi"
+        ],
+        "train_val": [
+          "General Mqhayi",
+          "Imihobe Nemibongo",
+          "Inzuzo",
+          "Ityala Lamawele",
+          "Masikhanyise",
+          "Masikhanyise isiXhosa Home Language textbook series",
+          "Mqhayi - Various works (original corpus)",
+          "U John Knox Bokwe (Biography)",
+          "U-Don Jadu",
+          "UMqhayi waseNtabozuko",
+          "Umhlekazi u Hintsa",
+          "Unknown Mqhayi"
+        ]
+      }
+    },
+    "derived_generated_data_contamination": {
+      "limitation": "Detects declared generated/derived provenance and unclassified origins; unmarked synthetic content cannot be ruled out by metadata alone.",
+      "marker_check_passed": true,
+      "partitions": {
+        "test": {
+          "generated_or_derived_marked_records": 0,
+          "provenance_types": {
+            "authoritative": 588
+          },
+          "records": 588,
+          "unknown_origin_records": 0
+        },
+        "train": {
+          "generated_or_derived_marked_records": 0,
+          "provenance_types": {
+            "authoritative": 4566
+          },
+          "records": 4566,
+          "unknown_origin_records": 0
+        },
+        "val": {
+          "generated_or_derived_marked_records": 0,
+          "provenance_types": {
+            "authoritative": 565
+          },
+          "records": 565,
+          "unknown_origin_records": 0
+        }
+      }
+    },
+    "label": "DIAGNOSTIC_ONLY_NOT_GENERALIZATION_EVIDENCE",
+    "reported_split_method": "Work-level isolation + record-level shuffle",
+    "sampling_limitation_note": "Legacy near-duplicate sample results are retained as historical diagnostics; the audit above compares all cross-partition records."
+  },
+  "work_isolated_split": {
+    "audit": {
+      "author_metadata_available": {
+        "test_train": false,
+        "test_val": false,
+        "train_val": false
+      },
+      "author_overlaps": {
+        "test_train": [],
+        "test_val": [],
+        "train_val": []
+      },
+      "exact_text_overlap_counts": {
+        "test_train": 0,
+        "test_val": 0,
+        "train_val": 0
+      },
+      "near_duplicate_pairs": {
+        "test_train": [],
+        "test_val": [],
+        "train_val": []
+      },
+      "record_overlaps": {
+        "test_train": 0,
+        "test_val": 0,
+        "train_val": 0
+      },
+      "source_overlaps": {
+        "test_train": [
+          "mqhayi"
+        ],
+        "test_val": [
+          "mqhayi"
+        ],
+        "train_val": [
+          "mqhayi"
+        ]
+      },
+      "source_work_overlaps": {
+        "test_train": [],
+        "test_val": [],
+        "train_val": []
+      }
+    },
+    "author_isolated": null,
+    "author_metadata_available": false,
+    "derived_generated_data_contamination": {
+      "limitation": "Detects declared generated/derived provenance and unclassified origins; unmarked synthetic content cannot be ruled out by metadata alone.",
+      "marker_check_passed": true,
+      "partitions": {
+        "test": {
+          "generated_or_derived_marked_records": 0,
+          "provenance_types": {
+            "authoritative": 539
+          },
+          "records": 539,
+          "unknown_origin_records": 0
+        },
+        "train": {
+          "generated_or_derived_marked_records": 0,
+          "provenance_types": {
+            "authoritative": 4532
+          },
+          "records": 4532,
+          "unknown_origin_records": 0
+        },
+        "val": {
+          "generated_or_derived_marked_records": 0,
+          "provenance_types": {
+            "authoritative": 648
+          },
+          "records": 648,
+          "unknown_origin_records": 0
+        }
+      }
+    },
+    "label": "PRIMARY_WORK_ISOLATED_EXPERIMENT",
+    "near_duplicate_method": "Exhaustive cross-partition candidate comparison by character 5-gram Jaccard similarity.",
+    "near_duplicate_threshold": 0.9,
+    "source_isolated": false,
+    "test_work": "Inzuzo"
+  }
+}

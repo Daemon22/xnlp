@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XNLP Evidence-Linked Linguistic Claim",
+  "description": "A linguistic interpretation with explicit evidence state and corpus provenance.",
+  "type": "object",
+  "definitions": {
+    "legacy_label_migration": {
+      "type": "string",
+      "const": "The legacy SUPPORTED label came from review_status in the source artifact. It is retained for migration traceability and does not mean the claim passed project validation."
+    }
+  },
+  "properties": {
+    "claim_id": { "type": "string", "minLength": 1 },
+    "domain": { "type": "string", "minLength": 1 },
+    "claim": { "type": "string", "minLength": 1 },
+    "confidence": {
+      "type": "string",
+      "enum": ["OBSERVED", "HIGH_CONFIDENCE", "SUPPORTED", "PROVISIONAL", "INSUFFICIENT_EVIDENCE", "CONFLICTING_EVIDENCE"]
+    },
+    "legacy_confidence_label": {
+      "type": ["string", "null"],
+      "enum": ["SUPPORTED", null],
+      "description": "Present only on migrated entries whose legacy review_status was SUPPORTED; not a current confidence or validation decision."
+    },
+    "legacy_label_migration_note": {
+      "type": ["string", "null"],
+      "description": "Pointer to the migration explanation in definitions.legacy_label_migration."
+    },
+    "provenance_summary": {
+      "type": "object",
+      "properties": {
+        "attested": { "type": "integer", "minimum": 0 },
+        "synthetic": { "type": "integer", "minimum": 0 },
+        "unknown": { "type": "integer", "minimum": 0 }
+      },
+      "required": ["attested", "synthetic", "unknown"],
+      "additionalProperties": false,
+      "description": "Counts evidence records by derived source-registry attestation, provenance_type, and generator fields."
+    },
+    "evidence_state": {
+      "type": "string",
+      "enum": ["OBSERVED", "CANDIDATE", "SOURCE_SUPPORTED", "CROSS_SOURCE_SUPPORTED", "VALIDATED", "ESTABLISHED", "REJECTED", "UNRESOLVED"]
+    },
+    "evidence_record_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "source_works": { "type": "array", "items": { "type": "string" } },
+    "source_collections": { "type": "array", "items": { "type": "string" } },
+    "examples": { "type": "array", "items": { "type": "object" } },
+    "counterexamples": { "type": "array", "items": { "type": "object" } },
+    "analysis": {},
+    "review_required": { "type": "boolean" },
+    "review_notes": { "type": "array", "items": { "type": "string" } },
+    "created_from": { "type": "object" },
+    "validated_by": { "type": "array", "items": { "type": "string" } },
+    "review_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": { "type": "string", "enum": ["OBSERVED", "CANDIDATE", "SOURCE_SUPPORTED", "CROSS_SOURCE_SUPPORTED", "VALIDATED", "ESTABLISHED", "REJECTED", "UNRESOLVED"] },
+          "to": { "type": "string", "enum": ["OBSERVED", "CANDIDATE", "SOURCE_SUPPORTED", "CROSS_SOURCE_SUPPORTED", "VALIDATED", "ESTABLISHED", "REJECTED", "UNRESOLVED"] },
+          "reviewer_id": { "type": "string", "minLength": 1 },
+          "protocol_id": { "type": "string", "minLength": 1 },
+          "establishment_basis": { "type": "string", "minLength": 1 }
+        },
+        "required": ["from", "to", "reviewer_id", "protocol_id"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["claim_id", "domain", "claim", "evidence_state", "evidence_record_ids", "provenance_summary", "review_required", "validated_by", "review_history"],
+  "additionalProperties": false
+}
